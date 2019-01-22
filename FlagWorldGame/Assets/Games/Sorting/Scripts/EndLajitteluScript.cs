@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class EndLajitteluScript : MonoBehaviour {
 
@@ -16,30 +17,18 @@ public class EndLajitteluScript : MonoBehaviour {
     void Start() {
         EndScore = GameObject.Find("EndScore");
         Spawner = GameObject.Find("Spawner");
-        //ContinueB = GameObject.Find("ContinueButton").GetComponent<Button>();
-        //NewGameB = GameObject.Find("NewGame").GetComponent<Button>();
     }
 
     public void SetEnd()
     {
         Points = Spawner.GetComponent<LajitteluSpawner>().GetPoints();
-        EndScore.GetComponent<Text>().text = "You scored " + Points.ToString() + " FP";
+        EndScore.GetComponent<TMP_Text>().text = "You scored " + Points.ToString() + " FP";
     }
 
 
     public void ClickContinue()
     {
-        int OverallP = PlayerPrefs.GetInt("Points");
-        OverallP += Points;
-        PlayerPrefs.SetInt("Points", OverallP);
-        if (PlayerPrefs.GetInt("Playmode") == 1)
-        {
-            SceneManager.LoadScene("TourMenu", LoadSceneMode.Single);
-        }
-        else
-        {
-            SceneManager.LoadScene("Menu", LoadSceneMode.Single);
-        }
+        SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
     }
 
     public void NewGame()

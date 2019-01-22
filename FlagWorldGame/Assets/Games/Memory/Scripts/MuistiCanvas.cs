@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class MuistiCanvas : MonoBehaviour {
 
@@ -33,7 +34,7 @@ public class MuistiCanvas : MonoBehaviour {
                 }
             }
 
-            GameObject.Find("Points").GetComponent<Text>().text = "You made " + moves.ToString() + " moves\nYou scored " + points.ToString() + " MP";
+            GameObject.Find("Points").GetComponent<TMP_Text>().text = "You made " + moves.ToString() + " moves\nYou scored " + points.ToString() + " MP";
 
         }
         else
@@ -48,7 +49,7 @@ public class MuistiCanvas : MonoBehaviour {
                 points = 0;
             }
 
-            GameObject.Find("Points").GetComponent<Text>().text = "You opened " + pairs.ToString() + " pairs in " + moves.ToString() + " moves\nYou scored " + points.ToString() + " MP";
+            GameObject.Find("Points").GetComponent<TMP_Text>().text = "You opened " + pairs.ToString() + " pairs in " + moves.ToString() + " moves\nYou scored " + points.ToString() + " MP";
         }
         HUD.enabled = false;
         End.enabled = true;
@@ -63,16 +64,7 @@ public class MuistiCanvas : MonoBehaviour {
 
     public void ClickContinue()
     {
-        int P = PlayerPrefs.GetInt("Points");
-        PlayerPrefs.SetInt("Points", P + PlayerPrefs.GetInt(CurrentGameHigh));
-        if (PlayerPrefs.GetInt("Playmode") == 1)
-        {
-            SceneManager.LoadScene("TourMenu", LoadSceneMode.Single);
-        }
-        else
-        {
-            SceneManager.LoadScene("Menu", LoadSceneMode.Single);
-        }
+        SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
     }
 
     public void ClickNewGame()
