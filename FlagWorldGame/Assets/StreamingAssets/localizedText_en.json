@@ -1,6 +1,7 @@
 {
     "items": [
-        {"key":"game_title","value":"Maretarium Game"},
-        {"key":"start_button","value":"Start"}
+        {"key":"game_title","value":"Flag world Game"},
+        {"key":"start_button","value":"Start"},
+        {"key":"quit_button","value":"Exit"}
     ]
 }

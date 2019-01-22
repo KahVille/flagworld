@@ -1,6 +1,7 @@
 {
     "items": [
-        {"key":"game_title","value":"Maretarium Peli"},
-        {"key":"start_button","value":"Aloita kierros"}
+        {"key":"game_title","value":"Lippumaailma Peli"},
+        {"key":"start_button","value":"Aloita"},
+        {"key":"quit_button","value":"Lopeta"}
     ]
 }
