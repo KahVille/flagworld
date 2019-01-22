@@ -8,6 +8,9 @@ Assets/AssetStoreTools*
 # Visual Studio cache directory
 .vs/
 
+# Android Gradle files
+.gradle/
+
 ### macOS ###
 # General
 .DS_Store
@@ -65,3 +68,4 @@ sysinfo.txt
 # Builds
 *.apk
 *.unitypackage
+
