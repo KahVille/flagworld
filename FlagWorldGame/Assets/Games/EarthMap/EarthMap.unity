@@ -143,6 +143,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   earth: {fileID: 1052717302}
   rotSpeed: 0.02
+  minZoom: -35
+  maxZoom: -13
 --- !u!4 &599367684
 Transform:
   m_ObjectHideFlags: 0

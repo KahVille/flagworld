@@ -8,6 +8,8 @@ public class RotatePlanet : MonoBehaviour
     public GameObject earth;
     Camera mainCam;
     public float rotSpeed;
+    public float minZoom;
+    public float maxZoom;
     Vector2 touchStartPos;
     Vector2 touchDirection;
     float touchAngle;
@@ -25,6 +27,7 @@ public class RotatePlanet : MonoBehaviour
         {
             Application.Quit();
         }
+        Debug.Log(mainCam.transform.localPosition);
     }
 
     void TouchInput()
@@ -61,7 +64,7 @@ public class RotatePlanet : MonoBehaviour
             }
 
             touchDirection = touch.position - touchStartPos;
-            earth.transform.Rotate(touchDirection.y * rotSpeed, touchDirection.x * rotSpeed, 0f, Space.World);
+            earth.transform.Rotate(touchDirection.y * rotSpeed, -touchDirection.x * rotSpeed, 0f, Space.World);
             
             // if(touch.position.x > touchStartPos.x)
             // {
@@ -97,10 +100,18 @@ public class RotatePlanet : MonoBehaviour
             // Find the difference in the distances between each frame.
             float deltaMagnitudeDiff = prevTouchDeltaMag - touchDeltaMag;
 
-            if(mainCam.transform.localPosition.z > -20f && mainCam.transform.localPosition.z < -8.2f)
+            if(deltaMagnitudeDiff > 0f && mainCam.transform.localPosition.z > maxZoom)
             {
-                mainCam.transform.position += mainCam.transform.forward * Time.deltaTime * deltaMagnitudeDiff;
+
             }
+            else if(deltaMagnitudeDiff < 0f && mainCam.transform.localPosition.z < minZoom)
+            {
+
+            }
+            else
+            {
+                mainCam.transform.Translate(Vector3.forward * Time.deltaTime * deltaMagnitudeDiff);
+            }   
         }
         
         #endif
