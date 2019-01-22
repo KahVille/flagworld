@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class InputLajittelu : MonoBehaviour {
 
+    private GameObject SO;
     private Swipe SW;
     public float Speed = 25;
 
@@ -16,19 +17,28 @@ public class InputLajittelu : MonoBehaviour {
 	void Update () {
         if (SW.SwipeLeft)
         {
-            GameObject.FindGameObjectWithTag("Sortable").GetComponent<Rigidbody2D>().velocity = new Vector2(-Speed, 0);
+            Debug.Log("Left");
+            SO.GetComponent<Rigidbody2D>().velocity = new Vector2(-Speed, 0);
         }
         else if (SW.SwipeRight)
         {
-            GameObject.FindGameObjectWithTag("Sortable").GetComponent<Rigidbody2D>().velocity = new Vector2(Speed, 0);
+            Debug.Log("Right");
+            SO.GetComponent<Rigidbody2D>().velocity = new Vector2(Speed, 0);
         }
         else if (SW.SwipeUp)
         {
-            GameObject.FindGameObjectWithTag("Sortable").GetComponent<Rigidbody2D>().velocity = new Vector2(0, Speed + 5);
+            Debug.Log("Up");
+            SO.GetComponent<Rigidbody2D>().velocity = new Vector2(0, Speed + 5);
         }
         else if (SW.SwipeDown)
         {
-            GameObject.FindGameObjectWithTag("Sortable").GetComponent<Rigidbody2D>().velocity = new Vector2(0, -Speed - 5);
+            Debug.Log("Down");
+            SO.GetComponent<Rigidbody2D>().velocity = new Vector2(0, -Speed - 5);
         }
 	}
+
+    public void SetSortable(GameObject s)
+    {
+        SO = s;
+    }
 }

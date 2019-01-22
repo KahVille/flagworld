@@ -11,7 +11,7 @@ public class Swipe : MonoBehaviour {
     private void Update()
     {
         tap = swipeLeft = swipeRight = swipeUp = swipeDown = false;
-        // Editor Input
+#if UNITY_EDITOR
         if (Input.GetMouseButtonDown(0))
         {
             tap = true;
@@ -23,6 +23,7 @@ public class Swipe : MonoBehaviour {
             isDragging = false;
             Reset();
         }
+#endif
         // Mobile Input
         if(Input.touches.Length > 0)
         {

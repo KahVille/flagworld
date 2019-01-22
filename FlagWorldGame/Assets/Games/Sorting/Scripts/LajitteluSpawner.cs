@@ -19,6 +19,7 @@ public class LajitteluSpawner : MonoBehaviour
     private string timeText = "Aika: ";
 
     private int P = 0, WP = 0;
+    private InputLajittelu IL;
 
     // Use this for initialization
     void Start()
@@ -27,6 +28,7 @@ public class LajitteluSpawner : MonoBehaviour
         End = GameObject.Find("EndCanvas");
         Points = GameObject.Find("PointsText").GetComponent<Text>();
         Timer = GameObject.Find("TimerText").GetComponent<Text>();
+        IL = GetComponent<InputLajittelu>();
         SetText();
     }
 
@@ -63,80 +65,19 @@ public class LajitteluSpawner : MonoBehaviour
         }
         Spawn = false;
 
-        Instantiate(Thing, new Vector3(0, 0, -1), Quaternion.identity);
+        IL.SetSortable(Instantiate(Thing, new Vector3(0, 0, -1), Quaternion.identity));
 
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
+    public void RightDir()
     {
-        if (Mathf.Abs(collision.transform.position.x) >= GameObject.Find("Background").transform.localScale.x / 2)
-        {
-            if (collision.transform.position.x > 0)
-            {
-                if (collision.GetComponent<ObjectS>().ShaderNum == 0)
-                {
-                    Points.color = new Color32(4, 191, 4, 255);
-                    P++;
-                    SetPoints();
-                    ShowFeed();
-                }
-                else
-                {
-                    WrongDir();
-                }
-            }
-            else
-            {
-                if (collision.GetComponent<ObjectS>().ShaderNum == 1)
-                {
-                    Points.color = new Color32(4, 191, 4, 255);
-                    P++;
-                    SetPoints();
-                    ShowFeed();
-                }
-                else
-                {
-                    WrongDir();
-                }
-            }
-        }
-        else
-        {
-            if (collision.transform.position.y > 0)
-            {
-                if (collision.GetComponent<ObjectS>().ShaderNum == 2)
-                {
-                    Points.color = new Color32(4, 191, 4, 255);
-                    P++;
-                    SetPoints();
-                    ShowFeed();
-                }
-                else
-                {
-                    WrongDir();
-                }
-            }
-            else
-            {
-                if (collision.GetComponent<ObjectS>().ShaderNum == 3)
-                {
-                    Points.color = new Color32(4, 191, 4, 255);
-                    P++;
-                    SetPoints();
-                    ShowFeed();
-                }
-                else
-                {
-                    WrongDir();
-                }
-            }
-        }
+        Points.color = new Color32(4, 191, 4, 255);
+        P++;
+        SetPoints();
         StartCoroutine(ShowFeed());
-        Destroy(collision.gameObject);
-        Spawn = true;
     }
 
-    private void WrongDir()
+    public void WrongDir()
     {
         Points.color = new Color32(219, 5, 0, 255);
         WP++;
@@ -150,7 +91,7 @@ public class LajitteluSpawner : MonoBehaviour
             P = 0;
         }
         SetPoints();
-        ShowFeed();
+        StartCoroutine(ShowFeed());
     }
 
     private IEnumerator ShowFeed()
@@ -171,4 +112,10 @@ public class LajitteluSpawner : MonoBehaviour
     {
         return P;
     }
+
+    public void SetSpawn()
+    {
+        Spawn = !Spawn;
+    }
+
 }

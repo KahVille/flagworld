@@ -4,38 +4,42 @@ using UnityEngine;
 
 public class ObjectS : MonoBehaviour {
 
-    private MeshRenderer MeshR;
+    private SpriteRenderer SpriR;
 
     public int ShaderNum;
-    public Texture[] Right;
-    public Texture[] Left;
-    public Texture[] Up;
-    public Texture[] Down;
+    public Sprite[] Right;
+    public Sprite[] Left;
+    public Sprite[] Up;
+    public Sprite[] Down;
 
     private void Awake()
     {
-        MeshR = GetComponent<MeshRenderer>();
+        SpriR = GetComponent<SpriteRenderer>();
         ShaderNum = Random.Range(0, 4);
 
         if (ShaderNum == 0) {
             int r = Random.Range(0, Right.Length);
-            MeshR.material.mainTexture = Right[r];
+            SpriR.sprite = Right[r];
         }
         else if(ShaderNum == 1)
         {
             int r = Random.Range(0, Left.Length);
-            MeshR.material.mainTexture = Left[r];
+            SpriR.sprite = Left[r];
         }
         else if(ShaderNum == 2)
         {
             int r = Random.Range(0, Up.Length);
-            MeshR.material.mainTexture = Up[r];
+            SpriR.sprite = Up[r];
         }
         else
         {
             int r = Random.Range(0, Down.Length);
-            MeshR.material.mainTexture = Down[r];
+            SpriR.sprite = Down[r];
         }
     }
 
+    //private void Update()
+    //{
+       
+    //}
 }

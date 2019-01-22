@@ -16,44 +16,14 @@ public class EndLajitteluScript : MonoBehaviour {
     void Start() {
         EndScore = GameObject.Find("EndScore");
         Spawner = GameObject.Find("Spawner");
-        ContinueB = GameObject.Find("ContinueButton").GetComponent<Button>();
-        NewGameB = GameObject.Find("NewGame").GetComponent<Button>();
+        //ContinueB = GameObject.Find("ContinueButton").GetComponent<Button>();
+        //NewGameB = GameObject.Find("NewGame").GetComponent<Button>();
     }
 
     public void SetEnd()
     {
         Points = Spawner.GetComponent<LajitteluSpawner>().GetPoints();
-        if (PlayerPrefs.GetInt(LanguageID) == 1)
-        {
-            EndScore.GetComponent<Text>().text = "You scored " + Points.ToString() + " MP";
-        }
-        else
-        {
-            EndScore.GetComponent<Text>().text = "Sait " + Points.ToString() + " MP";
-            ContinueB.GetComponentInChildren<Text>().text = "Palaa valikkoon";
-            NewGameB.GetComponentInChildren<Text>().text = "Uusi yritys";
-        }
-
-        if (PlayerPrefs.GetInt("Playmode") == 1)
-        {
-            if (PlayerPrefs.GetInt(LanguageID) != 1)
-            {
-                ContinueB.GetComponentInChildren<Text>().text = "Jatka kierrosta";
-            }
-            else
-            {
-                ContinueB.GetComponentInChildren<Text>().text = "Continue tour";
-            }
-        }
-
-        if (Points > PlayerPrefs.GetInt(CurrentGameHigh))
-        {
-            PlayerPrefs.SetInt(CurrentGameHigh, Points);
-        }
-        else
-        {
-            Points = PlayerPrefs.GetInt(CurrentGameHigh);
-        }
+        EndScore.GetComponent<Text>().text = "You scored " + Points.ToString() + " FP";
     }
 
 
