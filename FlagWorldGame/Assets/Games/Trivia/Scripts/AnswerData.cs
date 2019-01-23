@@ -5,5 +5,6 @@ using System.Collections;
 public class AnswerData 
 {
     public string answerText;
-    public bool isCorrect;   
+    public bool isCorrect;
+   
 }

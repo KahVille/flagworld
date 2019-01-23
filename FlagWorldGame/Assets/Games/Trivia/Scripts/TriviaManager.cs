@@ -13,27 +13,28 @@ public class TriviaManager : MonoBehaviour
     }
 
     public QuestionData[] LoadRoundQuestions(int roundID) {
+
+        //set up dummy objects
         QuestionData dummyQuestion = new QuestionData();
         AnswerData answerDataDummy = new AnswerData();
 
-        
+        //fill dummy answer data
         answerDataDummy.answerText = "YES";
         answerDataDummy.isCorrect = true;
+
+        //assign answer data to answer array
         AnswerData[] dummyAnswers = new AnswerData[1];
         dummyAnswers[0] = answerDataDummy;
 
+
+        //fill dummy question data
         dummyQuestion.questionText = "Test Question 1";
         dummyQuestion.answers = dummyAnswers;
 
-
-
+        //assign roundData
         QuestionData[] roundData = new QuestionData[1];
         roundData[0] = dummyQuestion;
 
-        //roundData[1].questionText = "Test Question 2?";
-        //roundData[1].answers = dummyAnswers;
-        //roundData[2].questionText = "Test Question 3?";
-        //roundData[3].answers = dummyAnswers;
         return roundData;
     }
 
