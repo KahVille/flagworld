@@ -28,7 +28,6 @@ public class TriviaManager : MonoBehaviour
 
     int roundScore = 0;
 
-
     void Start()
     {
         roundScore = 0;
@@ -122,16 +121,13 @@ public class TriviaManager : MonoBehaviour
         AnswerData[] dummyAnswers = new AnswerData[4] { dummyAnswerData1, dummyAnswerData2, dummyAnswerData3, dummyAnswerData4 };
         dummyQuestionData1.answers = dummyAnswers;
 
-
         dummyQuestionData2.questionText = "What is the capital city of Sweden";
-
         dummyAnswerData1 = SetAnswerData("Malmö");
         dummyAnswerData2 = SetAnswerData("Stockholm", true);
         dummyAnswerData3 = SetAnswerData("Lund");
         dummyAnswerData4 = SetAnswerData("Motala");
         dummyAnswers = new AnswerData[4] { dummyAnswerData1, dummyAnswerData2, dummyAnswerData3, dummyAnswerData4 };
         dummyQuestionData2.answers = dummyAnswers;
-
 
         dummyQuestionData3.questionText = "What is the capital city of Norway";
         dummyAnswerData1 = SetAnswerData("Mysen");
