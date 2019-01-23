@@ -45,6 +45,11 @@ public class GamesScript : MonoBehaviour
         SceneManager.LoadScene("Sorting", LoadSceneMode.Single);
     }
 
+    public void ClickTrivia() 
+    {
+        SceneManager.LoadScene("Trivia", LoadSceneMode.Single);
+    } 
+
     public void ClickBack()
     {
         GetComponent<Canvas>().enabled = false;

@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Menu/MainMenu.unity
+    guid: 018d76dbd20df78458f81f6947242c7e
+  - enabled: 1
     path: Assets/Games/Trivia/Trivia.unity
     guid: bfd7c047147324d47a55999b3ecb6b4f
   - enabled: 1
@@ -17,7 +20,4 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Games/Sorting/Sorting.unity
     guid: 6f2465500e9503149ab9614865a65957
-  - enabled: 1
-    path: Assets/Menu/MainMenu.unity
-    guid: 018d76dbd20df78458f81f6947242c7e
   m_configObjects: {}
