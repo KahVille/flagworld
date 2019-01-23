@@ -8,7 +8,15 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Games/Trivia/Trivia.unity
     guid: bfd7c047147324d47a55999b3ecb6b4f
+    path: Assets/Menu/MainMenu.unity
+    guid: 018d76dbd20df78458f81f6947242c7e
   - enabled: 1
     path: Assets/Games/EarthMap/EarthMap.unity
     guid: 714ce1c5eb4fe46d496e807891cd4cbb
+  - enabled: 1
+    path: Assets/Games/Memory/Memory.unity
+    guid: 8225c966e01f7b44aacc7a6ada1a199d
+  - enabled: 1
+    path: Assets/Games/Sorting/Sorting.unity
+    guid: 6f2465500e9503149ab9614865a65957
   m_configObjects: {}
