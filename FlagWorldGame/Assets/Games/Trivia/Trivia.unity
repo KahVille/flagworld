@@ -292,7 +292,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 565718281}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1510297493}
+        m_MethodName: OnAnswerButtonPressed
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &565718281
@@ -343,6 +354,7 @@ GameObject:
   - component: {fileID: 670735724}
   - component: {fileID: 670735726}
   - component: {fileID: 670735725}
+  - component: {fileID: 670735727}
   m_Layer: 5
   m_Name: QuestionText
   m_TagString: Untagged
@@ -492,6 +504,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 670735723}
   m_CullTransparentMesh: 0
+--- !u!114 &670735727
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 670735723}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e0643344d0184f17bc06cae867c34a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &929608760
 GameObject:
   m_ObjectHideFlags: 0
@@ -503,6 +527,7 @@ GameObject:
   - component: {fileID: 929608761}
   - component: {fileID: 929608763}
   - component: {fileID: 929608762}
+  - component: {fileID: 929608764}
   m_Layer: 5
   m_Name: TextMeshPro Text
   m_TagString: Untagged
@@ -652,6 +677,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 929608760}
   m_CullTransparentMesh: 0
+--- !u!114 &929608764
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 929608760}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f852a452ad94d48a28c927b1082dafc2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &975843733
 GameObject:
   m_ObjectHideFlags: 0
@@ -745,6 +782,7 @@ GameObject:
   - component: {fileID: 1105637481}
   - component: {fileID: 1105637483}
   - component: {fileID: 1105637482}
+  - component: {fileID: 1105637484}
   m_Layer: 5
   m_Name: TextMeshPro Text (1)
   m_TagString: Untagged
@@ -894,6 +932,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1105637480}
   m_CullTransparentMesh: 0
+--- !u!114 &1105637484
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1105637480}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f852a452ad94d48a28c927b1082dafc2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1207117645
 GameObject:
   m_ObjectHideFlags: 0
@@ -972,7 +1022,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1207117648}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1510297493}
+        m_MethodName: OnAnswerButtonPressed
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 3
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1207117648
@@ -1023,6 +1084,7 @@ GameObject:
   - component: {fileID: 1288787701}
   - component: {fileID: 1288787703}
   - component: {fileID: 1288787702}
+  - component: {fileID: 1288787704}
   m_Layer: 5
   m_Name: TextMeshPro Text (2)
   m_TagString: Untagged
@@ -1174,6 +1236,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1288787700}
   m_CullTransparentMesh: 0
+--- !u!114 &1288787704
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1288787700}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f852a452ad94d48a28c927b1082dafc2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1333560028
 GameObject:
   m_ObjectHideFlags: 0
@@ -1185,6 +1259,7 @@ GameObject:
   - component: {fileID: 1333560029}
   - component: {fileID: 1333560031}
   - component: {fileID: 1333560030}
+  - component: {fileID: 1333560032}
   m_Layer: 5
   m_Name: TextMeshPro Text (3)
   m_TagString: Untagged
@@ -1334,6 +1409,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1333560028}
   m_CullTransparentMesh: 0
+--- !u!114 &1333560032
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1333560028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f852a452ad94d48a28c927b1082dafc2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1339976597
 GameObject:
   m_ObjectHideFlags: 0
@@ -1429,7 +1516,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1dabe771c49f54b9ebe358e9ad9c77ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  roundQuestions: []
+  currentRoundQuestions: []
+  AnswerTexts:
+  - {fileID: 929608764}
+  - {fileID: 1105637484}
+  - {fileID: 1288787704}
+  - {fileID: 1333560032}
+  questionTextUI: {fileID: 670735727}
 --- !u!4 &1510297494
 Transform:
   m_ObjectHideFlags: 0
@@ -1622,7 +1715,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1925596545}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1510297493}
+        m_MethodName: OnAnswerButtonPressed
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1925596545
@@ -1740,7 +1844,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2064677442}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1510297493}
+        m_MethodName: OnAnswerButtonPressed
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &2064677442
