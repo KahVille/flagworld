@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-
 public class TriviaManager : MonoBehaviour
 {
     //contains questions for current round. 
@@ -15,10 +14,8 @@ public class TriviaManager : MonoBehaviour
     [SerializeField]
     private UIAnswerText[] AnswerTexts = new UIAnswerText[4];
     [SerializeField]
-    private UIQuestionText questionTextUI;
+    private UIQuestionText questionTextUI = null;
 
-
-    
 
     void Start()
     {
