@@ -90,14 +90,6 @@ public class TriviaManager : MonoBehaviour
 
     }
 
-    private AnswerData SetAnswerData(string text = null, bool correct = false)
-    {
-        AnswerData answer = new AnswerData();
-        answer.answerText = text;
-        answer.isCorrect = correct;
-        return answer;
-    }
-
     public QuestionData[] LoadRoundQuestions(int roundID)
     {
         //assign roundData
@@ -112,33 +104,38 @@ public class TriviaManager : MonoBehaviour
         QuestionData dummyQuestionData2 = new QuestionData();
         QuestionData dummyQuestionData3 = new QuestionData();
 
-
-        dummyQuestionData1.questionText = "What is the capital city of Finland";
-        AnswerData dummyAnswerData1 = SetAnswerData("Helsinki", true);
-        AnswerData dummyAnswerData2 = SetAnswerData("Oulu");
-        AnswerData dummyAnswerData3 = SetAnswerData("Turku");
-        AnswerData dummyAnswerData4 = SetAnswerData("Kotka");
-        AnswerData[] dummyAnswers = new AnswerData[4] { dummyAnswerData1, dummyAnswerData2, dummyAnswerData3, dummyAnswerData4 };
-        dummyQuestionData1.answers = dummyAnswers;
-
-        dummyQuestionData2.questionText = "What is the capital city of Sweden";
-        dummyAnswerData1 = SetAnswerData("Malmö");
-        dummyAnswerData2 = SetAnswerData("Stockholm", true);
-        dummyAnswerData3 = SetAnswerData("Lund");
-        dummyAnswerData4 = SetAnswerData("Motala");
-        dummyAnswers = new AnswerData[4] { dummyAnswerData1, dummyAnswerData2, dummyAnswerData3, dummyAnswerData4 };
-        dummyQuestionData2.answers = dummyAnswers;
-
-        dummyQuestionData3.questionText = "What is the capital city of Norway";
-        dummyAnswerData1 = SetAnswerData("Mysen");
-        dummyAnswerData2 = SetAnswerData("Kopervik");
-        dummyAnswerData3 = SetAnswerData("Oslo", true);
-        dummyAnswerData4 = SetAnswerData("Odda");
-        dummyAnswers = new AnswerData[4] { dummyAnswerData1, dummyAnswerData2, dummyAnswerData3, dummyAnswerData4 };
-        dummyQuestionData3.answers = dummyAnswers;
+        dummyQuestionData1 = SetQuestionData("What is the capital city of Finland", QuestionData.QuestionType.Textonly,("Helsinki", true), ("Oulu", false), ("Kuopio", false), ("Kotka", false));
+        dummyQuestionData2 = SetQuestionData("What is the capital city of Sweden", QuestionData.QuestionType.Textonly,("Malmö", false), ("Stockholm", true), ("Lund", false), ("Motala",false));
+        dummyQuestionData3 = SetQuestionData("What is the capital city of Norway", QuestionData.QuestionType.Textonly,("Mysen", false), ("Kopervik", false), ("Oslo", true), ("Odda",false));
 
         return new QuestionData[3] { dummyQuestionData1, dummyQuestionData2, dummyQuestionData3 };
+    }
+    private AnswerData SetAnswerData(string text = null, bool correct = false)
+    {
+        AnswerData answer = new AnswerData();
+        answer.answerText = text;
+        answer.isCorrect = correct;
+        return answer;
+    }
 
+    private QuestionData SetQuestionData(string questionText = null, QuestionData.QuestionType questionType =0, params (string answerText, bool isCorrect)[] answerPairs)
+    {
+        QuestionData questionData = new QuestionData();
+        AnswerData[] answersData = new AnswerData[answerPairs.Length];
+
+        questionData.questionText = questionText;
+        questionData.type = questionType;
+
+        //cycle answers pairs and assign them to question
+        for (int i = 0; i < answerPairs.Length; i++)
+        {
+            (string answerText, bool isCorrect) pair = answerPairs[i];
+            answersData[i] = SetAnswerData(pair.answerText,pair.isCorrect);
+        }
+
+        questionData.answers = answersData;
+
+        return questionData;
     }
 
 }
