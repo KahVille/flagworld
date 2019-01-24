@@ -1930,15 +1930,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentRoundQuestions: []
+  questionTextUI: {fileID: 670735727}
+  scoreTextUI: {fileID: 1879583179}
+  answerButtonsCanvas: {fileID: 427370032}
+  contiueAndRestartCanvas: {fileID: 700711999}
+  dummyFlagSprites:
+  - {fileID: 21300000, guid: 574d5e1b10ffb4712941a8b40a2234fe, type: 3}
+  - {fileID: 21300000, guid: f869e592e580a422391652819474dcaa, type: 3}
+  - {fileID: 21300000, guid: 3d9f12e5fa96d465c9b1173922903808, type: 3}
+  - {fileID: 21300000, guid: 4f89163cba2174c01bcd3696478a29b5, type: 3}
+  defaultSprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
   AnswerTexts:
   - {fileID: 929608764}
   - {fileID: 1105637484}
   - {fileID: 1288787704}
   - {fileID: 1333560032}
-  questionTextUI: {fileID: 670735727}
-  scoreTextUI: {fileID: 1879583179}
-  answerButtonsCanvas: {fileID: 427370032}
-  contiueAndRestartCanvas: {fileID: 700711999}
 --- !u!4 &1510297494
 Transform:
   m_ObjectHideFlags: 0
