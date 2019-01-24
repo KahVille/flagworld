@@ -6,14 +6,19 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 public class TriviaManager : MonoBehaviour
 {
+
+    [Header("Question Data")]
+
     //contains questions for current round. 
     [SerializeField]
     private QuestionData[] currentRoundQuestions;
     int currentQuestionNumber = 0;
 
     QuestionData currentQuestion;
-    [SerializeField]
-    private UIAnswerText[] AnswerTexts = new UIAnswerText[4];
+
+
+    [Header("Question UI")]
+
     [SerializeField]
     private UIQuestionText questionTextUI = null;
 
@@ -25,6 +30,17 @@ public class TriviaManager : MonoBehaviour
 
     [SerializeField]
     private Canvas contiueAndRestartCanvas = null;
+
+
+    [Header("Dummy Settings")]
+    [SerializeField]
+    private Sprite[] dummyFlagSprites = null;
+
+    [SerializeField]
+    private Sprite defaultSprite = null;
+    [SerializeField]
+    private UIAnswerText[] AnswerTexts = new UIAnswerText[4];
+
 
     int roundScore = 0;
 
@@ -41,16 +57,36 @@ public class TriviaManager : MonoBehaviour
 
         foreach (var item in AnswerTexts)
         {
-           item.gameObject.transform.parent.gameObject.SetActive(false); 
+            item.gameObject.transform.parent.gameObject.GetComponent<Image>().sprite = defaultSprite;
+            item.gameObject.transform.parent.gameObject.SetActive(false);
         }
 
-
-        for (int i = 0; i <= question.answers.Length - 1; i++)
+        if (question.type != QuestionData.QuestionType.Images && question.type != QuestionData.QuestionType.TrueFalseImage)
         {
-            AnswerTexts[i].gameObject.transform.parent.gameObject.SetActive(true);
-            AnswerTexts[i].OnQuestionChange(question.answers[i].answerText);
+
+            for (int i = 0; i <= question.answers.Length - 1; i++)
+            {
+                AnswerTexts[i].gameObject.transform.parent.gameObject.SetActive(true);
+                AnswerTexts[i].OnQuestionChange(question.answers[i].answerText);
+            }
+
         }
-        
+        else
+        {
+            //set up images to button sprites based on the inputted text from question answertext
+
+            //hacky solution
+            for (int i = 0; i < question.answers.Length; i++)
+            {
+                int index = Array.FindIndex(dummyFlagSprites, sprite => sprite.name == question.answers[i].answerText);
+                AnswerTexts[i].gameObject.transform.parent.gameObject.SetActive(true);
+                AnswerTexts[i].gameObject.transform.parent.gameObject.GetComponent<Image>().sprite = dummyFlagSprites[index];
+                AnswerTexts[i].OnQuestionChange(question.answers[i].answerText);
+
+            }
+
+        }
+
         questionTextUI.SetQuestionText(question.questionText + "?");
     }
 
@@ -112,12 +148,14 @@ public class TriviaManager : MonoBehaviour
         QuestionData dummyQuestionData1 = new QuestionData();
         QuestionData dummyQuestionData2 = new QuestionData();
         QuestionData dummyQuestionData3 = new QuestionData();
+        QuestionData dummyQuestionData4 = new QuestionData();
 
-        dummyQuestionData1 = SetQuestionData("What is the capital city of Finland", QuestionData.QuestionType.Textonly,("Helsinki", true), ("Oulu", false), ("Kuopio", false), ("Kotka", false));
-        dummyQuestionData2 = SetQuestionData("What is the capital city of Sweden", QuestionData.QuestionType.TrueFalse,("FALSE", false), ("TRUE", true));
-        dummyQuestionData3 = SetQuestionData("What is the capital city of Norway", QuestionData.QuestionType.Textonly,("Mysen", false), ("Kopervik", false), ("Oslo", true), ("Odda",false));
+        dummyQuestionData1 = SetQuestionData("What is the capital city of Finland", QuestionData.QuestionType.Textonly, ("Helsinki", true), ("Oulu", false), ("Kuopio", false), ("Kotka", false));
+        dummyQuestionData3 = SetQuestionData("Does Denmark belong to Nordic Countries", QuestionData.QuestionType.TrueFalse, ("FALSE", false), ("TRUE", true));
+        dummyQuestionData2 = SetQuestionData("Press the flag of Finland", QuestionData.QuestionType.Images, ("Finland", true), ("Sweden", false), ("Norway", false), ("Russia", false));
+        dummyQuestionData4 = SetQuestionData("Press the flag of Sweden", QuestionData.QuestionType.TrueFalseImage, ("Finland", false), ("Sweden", true));
 
-        return new QuestionData[3] { dummyQuestionData1, dummyQuestionData2, dummyQuestionData3 };
+        return new QuestionData[4] { dummyQuestionData1, dummyQuestionData2, dummyQuestionData3, dummyQuestionData4 };
     }
     private AnswerData SetAnswerData(string text = null, bool correct = false)
     {
@@ -127,7 +165,7 @@ public class TriviaManager : MonoBehaviour
         return answer;
     }
 
-    private QuestionData SetQuestionData(string questionText = null, QuestionData.QuestionType questionType =0, params (string answerText, bool isCorrect)[] answerPairs)
+    private QuestionData SetQuestionData(string questionText = null, QuestionData.QuestionType questionType = 0, params (string answerText, bool isCorrect)[] answerPairs)
     {
         QuestionData questionData = new QuestionData();
         AnswerData[] answersData = new AnswerData[answerPairs.Length];
