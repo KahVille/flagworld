@@ -39,8 +39,15 @@ public class TriviaManager : MonoBehaviour
     void setNewQuestionUI(QuestionData question)
     {
 
+        foreach (var item in AnswerTexts)
+        {
+           item.gameObject.transform.parent.gameObject.SetActive(false); 
+        }
+
+
         for (int i = 0; i <= question.answers.Length - 1; i++)
         {
+            AnswerTexts[i].gameObject.transform.parent.gameObject.SetActive(true);
             AnswerTexts[i].OnQuestionChange(question.answers[i].answerText);
         }
         
@@ -107,7 +114,7 @@ public class TriviaManager : MonoBehaviour
         QuestionData dummyQuestionData3 = new QuestionData();
 
         dummyQuestionData1 = SetQuestionData("What is the capital city of Finland", QuestionData.QuestionType.Textonly,("Helsinki", true), ("Oulu", false), ("Kuopio", false), ("Kotka", false));
-        dummyQuestionData2 = SetQuestionData("What is the capital city of Sweden", QuestionData.QuestionType.Textonly,("Malmö", false), ("Stockholm", true), ("Lund", false), ("Motala",false));
+        dummyQuestionData2 = SetQuestionData("What is the capital city of Sweden", QuestionData.QuestionType.TrueFalse,("FALSE", false), ("TRUE", true));
         dummyQuestionData3 = SetQuestionData("What is the capital city of Norway", QuestionData.QuestionType.Textonly,("Mysen", false), ("Kopervik", false), ("Oslo", true), ("Odda",false));
 
         return new QuestionData[3] { dummyQuestionData1, dummyQuestionData2, dummyQuestionData3 };
