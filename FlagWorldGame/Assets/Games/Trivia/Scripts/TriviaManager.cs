@@ -38,10 +38,12 @@ public class TriviaManager : MonoBehaviour
 
     void setNewQuestionUI(QuestionData question)
     {
+
         for (int i = 0; i <= question.answers.Length - 1; i++)
         {
             AnswerTexts[i].OnQuestionChange(question.answers[i].answerText);
         }
+        
         questionTextUI.SetQuestionText(question.questionText + "?");
     }
 
@@ -130,12 +132,23 @@ public class TriviaManager : MonoBehaviour
         for (int i = 0; i < answerPairs.Length; i++)
         {
             (string answerText, bool isCorrect) pair = answerPairs[i];
-            answersData[i] = SetAnswerData(pair.answerText,pair.isCorrect);
+            answersData[i] = SetAnswerData(pair.answerText, pair.isCorrect);
         }
+        SuffleAnswerOrder(ref answersData);
 
         questionData.answers = answersData;
 
         return questionData;
     }
 
+    private static void SuffleAnswerOrder(ref AnswerData[] answerData)
+    {
+        for (int t = 0; t < answerData.Length; t++) // Randomize the order of answers
+        {
+            AnswerData tmp = answerData[t];
+            int rand = UnityEngine.Random.Range(t, answerData.Length);
+            answerData[t] = answerData[rand];
+            answerData[rand] = tmp;
+        }
+    }
 }
