@@ -37,10 +37,7 @@ public class TriviaManager : MonoBehaviour
     private Sprite[] dummyFlagSprites = null;
 
     [SerializeField]
-    private Sprite defaultSprite = null;
-    [SerializeField]
     private UIAnswerText[] AnswerTexts = new UIAnswerText[4];
-
 
     int roundScore = 0;
 
@@ -54,40 +51,59 @@ public class TriviaManager : MonoBehaviour
 
     void setNewQuestionUI(QuestionData question)
     {
+        ClearAnswerButtons();
 
-        foreach (var item in AnswerTexts)
+        //set answer buttons by question type
+        if (IsImageQuestion(question))
         {
-            item.gameObject.transform.parent.gameObject.GetComponent<Image>().sprite = defaultSprite;
-            item.gameObject.transform.parent.gameObject.SetActive(false);
-        }
-
-        if (question.type != QuestionData.QuestionType.Images && question.type != QuestionData.QuestionType.TrueFalseImage)
-        {
-
-            for (int i = 0; i <= question.answers.Length - 1; i++)
-            {
-                AnswerTexts[i].gameObject.transform.parent.gameObject.SetActive(true);
-                AnswerTexts[i].OnQuestionChange(question.answers[i].answerText);
-            }
-
+            //set up images to button sprites based on the inputted text from question answertext
+            EnableAndSetImageQuestion(question);
         }
         else
         {
-            //set up images to button sprites based on the inputted text from question answertext
-
-            //hacky solution
-            for (int i = 0; i < question.answers.Length; i++)
-            {
-                int index = Array.FindIndex(dummyFlagSprites, sprite => sprite.name == question.answers[i].answerText);
-                AnswerTexts[i].gameObject.transform.parent.gameObject.SetActive(true);
-                AnswerTexts[i].gameObject.transform.parent.gameObject.GetComponent<Image>().sprite = dummyFlagSprites[index];
-                AnswerTexts[i].OnQuestionChange(question.answers[i].answerText);
-
-            }
-
+            //set Text only Question
+            EnableButtonAndSetQuestionText(question);
         }
 
         questionTextUI.SetQuestionText(question.questionText + "?");
+    }
+
+        private bool IsImageQuestion(QuestionData question) {
+        if (question.type == QuestionData.QuestionType.Images || question.type == QuestionData.QuestionType.TrueFalseImage) 
+        {
+            return true;
+        }
+        else 
+        {
+            return false;
+        }
+    }
+
+    private void EnableAndSetImageQuestion(QuestionData question)
+    {
+        //hacky solution
+        for (int i = 0; i < question.answers.Length; i++)
+        {
+            int index = Array.FindIndex(dummyFlagSprites, sprite => sprite.name == question.answers[i].answerText);
+            AnswerTexts[i].OnQuestionChange(question.answers[i],dummyFlagSprites[index]);
+        }
+    }
+
+    private void EnableButtonAndSetQuestionText(QuestionData question)
+    {
+        for (int i = 0; i <= question.answers.Length - 1; i++)
+        {
+            AnswerTexts[i].OnQuestionChange(question.answers[i]);
+        }
+    }
+
+    private void ClearAnswerButtons()
+    {
+        //empty answer array 
+        foreach (var item in AnswerTexts)
+        {
+            item.ClearButtonData();
+        }
     }
 
     public void OnAnswerButtonPressed(int option)
@@ -105,7 +121,6 @@ public class TriviaManager : MonoBehaviour
             questionTextUI.SetQuestionText("Round Ended, You scored:");
             HideAnswerButtons();
             ShowContiueAndRestartCanvas();
-
         }
     }
 
@@ -125,6 +140,7 @@ public class TriviaManager : MonoBehaviour
         {
             currentQuestionNumber += 1;
             currentQuestion = currentRoundQuestions[currentQuestionNumber];
+            //move this somewhere else
             setNewQuestionUI(currentQuestion);
             return true;
         }
@@ -173,17 +189,22 @@ public class TriviaManager : MonoBehaviour
         questionData.questionText = questionText;
         questionData.type = questionType;
 
+        AssignAnswerData(answerPairs, answersData);
+        SuffleAnswerOrder(ref answersData);
+
+        questionData.answers = answersData;
+
+        return questionData;
+    }
+
+    private void AssignAnswerData((string answerText, bool isCorrect)[] answerPairs, AnswerData[] answersData)
+    {
         //cycle answers pairs and assign them to question
         for (int i = 0; i < answerPairs.Length; i++)
         {
             (string answerText, bool isCorrect) pair = answerPairs[i];
             answersData[i] = SetAnswerData(pair.answerText, pair.isCorrect);
         }
-        SuffleAnswerOrder(ref answersData);
-
-        questionData.answers = answersData;
-
-        return questionData;
     }
 
     private static void SuffleAnswerOrder(ref AnswerData[] answerData)
