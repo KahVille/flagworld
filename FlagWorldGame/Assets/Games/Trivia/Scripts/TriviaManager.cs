@@ -31,7 +31,7 @@ public class TriviaManager : MonoBehaviour
     private Canvas contiueAndRestartCanvas = null;
 
     [SerializeField]
-    private UIQuestionCanvas questionCanvas=null;
+    private UIQuestionCanvas questionCanvas = null;
 
     int roundScore = 0;
 
@@ -45,12 +45,21 @@ public class TriviaManager : MonoBehaviour
 
     public void OnAnswerButtonPressed(int option)
     {
+        questionCanvas.OnUIAnswerButtonPressed(option, currentQuestion.answers);
         if (currentQuestion.answers[option].isCorrect == true)
         {
             Debug.Log("Correct Answer, give points");
             roundScore += 10;
             scoreTextUI.SetTextToDisplay(roundScore.ToString() + " FP");
+            //set Button with option, Color To Green
         }
+
+
+    }
+
+
+    //called on button animation finnished
+    public void MoveToNextQuestion() {
         if (!LoadNewQuestion())
         {
             Debug.Log("end of round");
@@ -70,13 +79,14 @@ public class TriviaManager : MonoBehaviour
         questionCanvas.gameObject.SetActive(false);
     }
 
+
+    //load the next question from the question pool
     private bool LoadNewQuestion()
     {
         if (currentQuestionNumber < currentRoundQuestions.Length - 1)
         {
             currentQuestionNumber += 1;
             currentQuestion = currentRoundQuestions[currentQuestionNumber];
-            //move this somewhere else
             questionCanvas.setNewQuestionUI(currentQuestion);
             return true;
         }
