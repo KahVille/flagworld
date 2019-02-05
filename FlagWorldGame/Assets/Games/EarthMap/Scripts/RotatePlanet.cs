@@ -8,13 +8,36 @@ public class RotatePlanet : MonoBehaviour
     public GameObject earth;
     Camera mainCam;
     public float rotSpeed;
+    public float minZoom;
+    public float maxZoom;
     Vector2 touchStartPos;
     Vector2 touchDirection;
     float touchAngle;
+    float timer = 0f;
+    public bool CanTouch
+    {
+        get
+        {
+            return canTouch;
+        }
+        set
+        {
+            canTouch = value;
+        }
+    }
+    bool canTouch = true;
+
+    EarthMapGameManager emGM;
+
+    Quaternion earthStartRot;
+    Vector3 cameraStartPos;
 
     void Start() 
     {
         mainCam = Camera.main;    
+        cameraStartPos = mainCam.transform.position;
+        earthStartRot = earth.transform.rotation;
+        emGM = FindObjectOfType<EarthMapGameManager>();
     }
 
     // Update is called once per frame
@@ -25,6 +48,12 @@ public class RotatePlanet : MonoBehaviour
         {
             Application.Quit();
         }
+    }
+    
+    public void ResetPoSLoc()
+    {
+        mainCam.transform.position = cameraStartPos;
+        earth.transform.rotation = earthStartRot;
     }
 
     void TouchInput()
@@ -58,27 +87,27 @@ public class RotatePlanet : MonoBehaviour
             if(touch.phase == TouchPhase.Began)
             {
                 touchStartPos = touch.position;
+                timer = 0f;
+            }
+
+            // Raycast to earth to see where it hit
+            if(touch.phase == TouchPhase.Ended && timer <= 1f)
+            {
+                Ray ray = mainCam.ScreenPointToRay(touch.position);
+                RaycastHit hit;
+                if(Physics.Raycast(ray, out hit))
+                {
+                    if(hit.transform.name == "AsiaCol")
+                    {
+                        emGM.StartMapTransition(true);
+                    }
+                }
             }
 
             touchDirection = touch.position - touchStartPos;
-            earth.transform.Rotate(touchDirection.y * rotSpeed, touchDirection.x * rotSpeed, 0f, Space.World);
+            earth.transform.Rotate(touchDirection.y * rotSpeed, -touchDirection.x * rotSpeed, 0f, Space.World);
             
-            // if(touch.position.x > touchStartPos.x)
-            // {
-            //     earth.transform.Rotate(0f, rotSpeed, 0f, Space.World);
-            // }
-            // else if(touch.position.x < touchStartPos.x)
-            // {
-            //     earth.transform.Rotate(0f, -rotSpeed, 0f, Space.World);
-            // }
-            // else if(touch.position.y > touchStartPos.y)
-            // {
-            //     earth.transform.Rotate(rotSpeed, 0f, 0f, Space.World);
-            // }
-            // else if(touch.position.y < touchStartPos.y)
-            // {
-            //     earth.transform.Rotate(-rotSpeed, 0f, 0f, Space.World);
-            // }
+            timer += Time.deltaTime;
         }
         else if(Input.touchCount == 2)
         {
@@ -97,10 +126,18 @@ public class RotatePlanet : MonoBehaviour
             // Find the difference in the distances between each frame.
             float deltaMagnitudeDiff = prevTouchDeltaMag - touchDeltaMag;
 
-            if(mainCam.transform.localPosition.z > -20f && mainCam.transform.localPosition.z < -8.2f)
+            if(deltaMagnitudeDiff > 0f && mainCam.transform.localPosition.z > maxZoom)
             {
-                mainCam.transform.position += mainCam.transform.forward * Time.deltaTime * deltaMagnitudeDiff;
+
             }
+            else if(deltaMagnitudeDiff < 0f && mainCam.transform.localPosition.z < minZoom)
+            {
+
+            }
+            else
+            {
+                mainCam.transform.Translate(Vector3.forward * Time.deltaTime * deltaMagnitudeDiff);
+            }   
         }
         
         #endif
