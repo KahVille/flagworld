@@ -8,6 +8,7 @@ public class MainMenuScript : MonoBehaviour
 
     private void Start()
     {
+        Screen.orientation = ScreenOrientation.Portrait;
         Games = GameObject.Find("GamesCanvas").GetComponent<Canvas>();
     }
 
