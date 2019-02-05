@@ -33,8 +33,10 @@ public class TriviaManager : MonoBehaviour
     [SerializeField]
     private UIQuestionCanvas questionCanvas = null;
 
-    int roundScore = 0;
+    [SerializeField]
+    private GameObject eventSystem;
 
+    int roundScore = 0;
     void Start()
     {
         roundScore = 0;
@@ -45,9 +47,11 @@ public class TriviaManager : MonoBehaviour
 
     public void OnAnswerButtonPressed(int option)
     {
+
         questionCanvas.OnUIAnswerButtonPressed(option, currentQuestion.answers);
         if (currentQuestion.answers[option].isCorrect == true)
         {
+            eventSystem.SetActive(false);
             Debug.Log("Correct Answer, give points");
             roundScore += 10;
             scoreTextUI.SetTextToDisplay(roundScore.ToString() + " FP");
@@ -60,6 +64,7 @@ public class TriviaManager : MonoBehaviour
 
     //called on button animation finnished
     public void MoveToNextQuestion() {
+        eventSystem.SetActive(true);
         if (!LoadNewQuestion())
         {
             Debug.Log("end of round");
