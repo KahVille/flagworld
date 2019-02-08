@@ -15,7 +15,6 @@ public class TriviaManager : MonoBehaviour
 
     QuestionData currentQuestion;
 
-
     [Header("Question UI")]
 
     [SerializeField]
@@ -41,16 +40,31 @@ public class TriviaManager : MonoBehaviour
     {
         roundScore = 0;
         Debug.Log(Application.persistentDataPath);
-        LoadRoundData();
-        if(currentRoundQuestions==null) {
-        Debug.Log("file is null");
-         SaveRoundData(SetDummyRoundData());
-         LoadRoundData();
-        }
-        
-        //currentRoundQuestions = LoadRoundQuestions(0);
+        LoadRoundDataFromFile();
+
         currentQuestion = currentRoundQuestions[currentQuestionNumber];
         questionCanvas.setNewQuestionUI(currentQuestion);
+    }
+
+    private void LoadRoundDataFromFile()
+    {
+        LoadRoundData();
+        if (currentRoundQuestions == null)
+        {
+            Debug.Log("file is null, setting dummy Questions");
+            SaveRoundData(SetDummyRoundData());
+            LoadRoundData();
+        }
+    }
+
+    void SaveRoundData(QuestionData[] round)
+    {
+        TriviaSaveLoadSystem.SaveRoundData(round);
+    }
+
+    void LoadRoundData()
+    {
+        currentRoundQuestions = TriviaSaveLoadSystem.LoadRoundData();
     }
 
     public void OnAnswerButtonPressed(int option)
@@ -69,19 +83,9 @@ public class TriviaManager : MonoBehaviour
 
     }
 
-    void SaveRoundData(QuestionData[] round) 
-    {
-        TriviaSaveLoadSystem.SaveRoundData(round);
-    }
-
-    void LoadRoundData() 
-    {
-        currentRoundQuestions = TriviaSaveLoadSystem.LoadRoundData();
-    } 
-
-
     //called on button animation finnished
-    public void MoveToNextQuestion() {
+    public void MoveToNextQuestion()
+    {
         eventSystem.SetActive(true);
         if (!LoadNewQuestion())
         {
@@ -120,14 +124,6 @@ public class TriviaManager : MonoBehaviour
 
     }
 
-    public QuestionData[] LoadRoundQuestions(int roundID)
-    {
-        //assign roundData
-        QuestionData[] roundData = SetDummyRoundData();
-
-        return roundData;
-    }
-
     private QuestionData[] SetDummyRoundData()
     {
 
@@ -146,7 +142,7 @@ public class TriviaManager : MonoBehaviour
         AssignAnswerData(answerPairs, answersData);
         SuffleAnswerOrder(ref answersData);
 
-        return new QuestionData(questionText,answersData,questionType);
+        return new QuestionData(questionText, answersData, questionType);
     }
 
     private void AssignAnswerData((string answerText, bool isCorrect)[] answerPairs, AnswerData[] answersData)
@@ -155,7 +151,7 @@ public class TriviaManager : MonoBehaviour
         for (int i = 0; i < answerPairs.Length; i++)
         {
             (string answerText, bool isCorrect) pair = answerPairs[i];
-            answersData[i] = new AnswerData(pair.answerText,pair.isCorrect);
+            answersData[i] = new AnswerData(pair.answerText, pair.isCorrect);
         }
     }
 

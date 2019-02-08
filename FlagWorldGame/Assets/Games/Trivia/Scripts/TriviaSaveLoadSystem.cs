@@ -3,15 +3,15 @@ using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 
 /*
-Load Round Data from data file to trivia manager
-Save new round data to data file from the web. 
+Load Round Data from a data file to the trivia manager
+Save new round data to a data file from the web. 
  */
 
 public static class TriviaSaveLoadSystem
 {
 
 
-    //save round data from array 
+    //save round data from an array 
     //shoud be called from the web handler in the final version.
     public static void SaveRoundData (QuestionData[] roundData) 
     {
