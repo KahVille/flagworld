@@ -112,40 +112,23 @@ public class TriviaManager : MonoBehaviour
 
     private QuestionData[] SetDummyRoundData()
     {
-        QuestionData dummyQuestionData1 = new QuestionData();
-        QuestionData dummyQuestionData2 = new QuestionData();
-        QuestionData dummyQuestionData3 = new QuestionData();
-        QuestionData dummyQuestionData4 = new QuestionData();
 
-        dummyQuestionData1 = SetQuestionData("What is the capital city of Finland", QuestionData.QuestionType.Textonly, ("Helsinki", true), ("Oulu", false), ("Kuopio", false), ("Kotka", false));
-        dummyQuestionData3 = SetQuestionData("Does Denmark belong to Nordic Countries", QuestionData.QuestionType.TrueFalse, ("FALSE", false), ("TRUE", true));
-        dummyQuestionData2 = SetQuestionData("Press the flag of Finland", QuestionData.QuestionType.Images, ("Finland", true), ("Sweden", false), ("Norway", false), ("Russia", false));
-        dummyQuestionData4 = SetQuestionData("Press the flag of Sweden", QuestionData.QuestionType.TrueFalseImage, ("Finland", false), ("Sweden", true));
+        QuestionData dummyQuestionData1 = SetQuestionData("What is the capital city of Finland", QuestionData.QuestionType.Textonly, ("Helsinki", true), ("Oulu", false), ("Kuopio", false), ("Kotka", false));
+        QuestionData dummyQuestionData3 = SetQuestionData("Does Denmark belong to Nordic Countries", QuestionData.QuestionType.TrueFalse, ("FALSE", false), ("TRUE", true));
+        QuestionData dummyQuestionData2 = SetQuestionData("Press the flag of Finland", QuestionData.QuestionType.Images, ("Finland", true), ("Sweden", false), ("Norway", false), ("Russia", false));
+        QuestionData dummyQuestionData4 = SetQuestionData("Press the flag of Sweden", QuestionData.QuestionType.TrueFalseImage, ("Finland", false), ("Sweden", true));
 
         return new QuestionData[4] { dummyQuestionData1, dummyQuestionData2, dummyQuestionData3, dummyQuestionData4 };
-    }
-    private AnswerData SetAnswerData(string text = null, bool correct = false)
-    {
-        AnswerData answer = new AnswerData();
-        answer.answerText = text;
-        answer.isCorrect = correct;
-        return answer;
     }
 
     private QuestionData SetQuestionData(string questionText = null, QuestionData.QuestionType questionType = 0, params (string answerText, bool isCorrect)[] answerPairs)
     {
-        QuestionData questionData = new QuestionData();
         AnswerData[] answersData = new AnswerData[answerPairs.Length];
-
-        questionData.questionText = questionText;
-        questionData.type = questionType;
 
         AssignAnswerData(answerPairs, answersData);
         SuffleAnswerOrder(ref answersData);
 
-        questionData.answers = answersData;
-
-        return questionData;
+        return new QuestionData(questionText,answersData,questionType);
     }
 
     private void AssignAnswerData((string answerText, bool isCorrect)[] answerPairs, AnswerData[] answersData)
@@ -154,7 +137,7 @@ public class TriviaManager : MonoBehaviour
         for (int i = 0; i < answerPairs.Length; i++)
         {
             (string answerText, bool isCorrect) pair = answerPairs[i];
-            answersData[i] = SetAnswerData(pair.answerText, pair.isCorrect);
+            answersData[i] = new AnswerData(pair.answerText,pair.isCorrect);
         }
     }
 
