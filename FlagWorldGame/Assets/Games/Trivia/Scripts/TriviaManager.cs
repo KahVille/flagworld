@@ -40,7 +40,15 @@ public class TriviaManager : MonoBehaviour
     void Start()
     {
         roundScore = 0;
-        currentRoundQuestions = LoadRoundQuestions(0);
+        Debug.Log(Application.persistentDataPath);
+        LoadRoundData();
+        if(currentRoundQuestions==null) {
+        Debug.Log("file is null");
+         SaveRoundData(SetDummyRoundData());
+         LoadRoundData();
+        }
+        
+        //currentRoundQuestions = LoadRoundQuestions(0);
         currentQuestion = currentRoundQuestions[currentQuestionNumber];
         questionCanvas.setNewQuestionUI(currentQuestion);
     }
@@ -60,6 +68,16 @@ public class TriviaManager : MonoBehaviour
 
 
     }
+
+    void SaveRoundData(QuestionData[] round) 
+    {
+        TriviaSaveLoadSystem.SaveRoundData(round);
+    }
+
+    void LoadRoundData() 
+    {
+        currentRoundQuestions = TriviaSaveLoadSystem.LoadRoundData();
+    } 
 
 
     //called on button animation finnished
