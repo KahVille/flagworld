@@ -10,21 +10,15 @@ public class TriviaManager : MonoBehaviour
 
     //contains questions for current round. 
     [SerializeField]
-    private QuestionData[] currentRoundQuestions;
+    private QuestionData[] currentRoundQuestions = null;
     int currentQuestionNumber = 0;
 
-    QuestionData currentQuestion;
+    QuestionData currentQuestion = null;
 
     [Header("Question UI")]
 
     [SerializeField]
-    private UIQuestionText questionTextUI = null;
-
-    [SerializeField]
     private UIScoreText scoreTextUI = null;
-
-    [SerializeField]
-    private Canvas answerButtonsCanvas = null;
 
     [SerializeField]
     private Canvas contiueAndRestartCanvas = null;
@@ -35,15 +29,41 @@ public class TriviaManager : MonoBehaviour
     [SerializeField]
     private GameObject eventSystem;
 
+    private RoundData currentRoundData;
+
     int roundScore = 0;
-    void Start()
+    IEnumerator Start()
     {
+        string dataRound;
+        yield return StartCoroutine( TriviaSaveLoadSystem.LoadRoundDataFromWeb(SetUpData));
+        currentRoundQuestions = currentRoundData.data;
+
         roundScore = 0;
         Debug.Log(Application.persistentDataPath);
         LoadRoundDataFromFile();
-
         currentQuestion = currentRoundQuestions[currentQuestionNumber];
         questionCanvas.setNewQuestionUI(currentQuestion);
+        //PrintDataAsJson();
+    }
+
+    private void SetUpData(string result) 
+    {
+        currentRoundData = new RoundData();
+        JsonUtility.FromJsonOverwrite(result, currentRoundData);
+
+    }
+
+    private void PrintDataAsJson()
+    {
+        string rounDataJson = JsonUtility.ToJson(currentRoundData);
+        Debug.Log(rounDataJson);
+
+        for (int qID = 0; qID < currentRoundQuestions.Length; qID++)
+        {
+            string jsonString = JsonUtility.ToJson(currentRoundQuestions[qID]);
+            Debug.Log(jsonString);
+        }
+
     }
 
     private void LoadRoundDataFromFile()

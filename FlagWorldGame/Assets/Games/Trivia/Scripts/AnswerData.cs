@@ -11,5 +11,5 @@ public class AnswerData
         answerText = text;
         isCorrect = correct;
     }
-   
+       
 }
