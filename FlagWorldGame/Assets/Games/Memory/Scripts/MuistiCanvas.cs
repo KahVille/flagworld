@@ -34,7 +34,7 @@ public class MuistiCanvas : MonoBehaviour {
                 }
             }
 
-            GameObject.Find("Points").GetComponent<TMP_Text>().text = "You made " + moves.ToString() + " moves\nYou scored " + points.ToString() + " MP";
+            GameObject.Find("Points").GetComponent<TMP_Text>().text = "You made " + moves.ToString() + " moves\nYou scored " + points.ToString() + " FP";
 
         }
         else
@@ -49,7 +49,7 @@ public class MuistiCanvas : MonoBehaviour {
                 points = 0;
             }
 
-            GameObject.Find("Points").GetComponent<TMP_Text>().text = "You opened " + pairs.ToString() + " pairs in " + moves.ToString() + " moves\nYou scored " + points.ToString() + " MP";
+            GameObject.Find("Points").GetComponent<TMP_Text>().text = "You opened " + pairs.ToString() + " pairs in " + moves.ToString() + " moves\nYou scored " + points.ToString() + " FP";
         }
         HUD.enabled = false;
         End.enabled = true;

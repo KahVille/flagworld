@@ -122,13 +122,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShaderNum: 0
   Right:
-  - {fileID: 21300004, guid: 4395631edfae68443aec3b01b109a89e, type: 3}
+  - {fileID: 21300000, guid: c2a72339930f6774a9f01fcbccb23cfe, type: 3}
+  - {fileID: 21300000, guid: b358e2aa798e4d341be3669d121fe4a8, type: 3}
+  - {fileID: 21300000, guid: d6976a5a05bbeee499a13241c633da2c, type: 3}
+  - {fileID: 21300000, guid: 5e941297cf6d36c44bc0c70b9d155fa9, type: 3}
   Left:
-  - {fileID: 21300010, guid: 4395631edfae68443aec3b01b109a89e, type: 3}
+  - {fileID: 21300000, guid: 1ddf2403e1179684281582ed2cba8827, type: 3}
+  - {fileID: 21300000, guid: 2510505eceffe1143add8fa3da923c69, type: 3}
+  - {fileID: 21300000, guid: 63c9e4a7fd2416643a176b59fd8c990b, type: 3}
+  - {fileID: 21300000, guid: 60964026e375c18429e7bf47da614177, type: 3}
   Up:
-  - {fileID: 21300012, guid: 4395631edfae68443aec3b01b109a89e, type: 3}
+  - {fileID: 21300000, guid: 2f6498fff24338d44b82a7a72a79dc5d, type: 3}
+  - {fileID: 21300000, guid: a7015b1b07fe9fe42801729196d141bb, type: 3}
+  - {fileID: 21300000, guid: 1e5dbb70c70333d4688dbff34f9714f3, type: 3}
+  - {fileID: 21300000, guid: e438e9acb22fe29498618f7cdbef8cc8, type: 3}
   Down:
-  - {fileID: 21300014, guid: 4395631edfae68443aec3b01b109a89e, type: 3}
+  - {fileID: 21300000, guid: 3b86beb4175f83247a5a40479384279a, type: 3}
+  - {fileID: 21300000, guid: 6f16f13c52d9aad4b8939d2ce328563f, type: 3}
+  - {fileID: 21300000, guid: 2fa0fe45f0aa4a6498360fd8b4199b4a, type: 3}
+  - {fileID: 21300000, guid: 9369e36c38159674ca05e54961279968, type: 3}
 --- !u!50 &8549035158506228342
 Rigidbody2D:
   serializedVersion: 4
