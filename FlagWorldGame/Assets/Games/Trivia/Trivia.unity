@@ -549,11 +549,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1510297493}
+      objectReference: {fileID: 1244766479}
     - target: {fileID: 3734300143598425018, guid: 317c358f0cedf4f729a412990fd31f91,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3734300143598425018, guid: 317c358f0cedf4f729a412990fd31f91,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnUIAnswerButtonPressed
       objectReference: {fileID: 0}
     - target: {fileID: 3734300144735559105, guid: 317c358f0cedf4f729a412990fd31f91,
         type: 3}
@@ -882,11 +887,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1510297493}
+      objectReference: {fileID: 1244766479}
     - target: {fileID: 3734300143598425018, guid: 317c358f0cedf4f729a412990fd31f91,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3734300143598425018, guid: 317c358f0cedf4f729a412990fd31f91,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnUIAnswerButtonPressed
       objectReference: {fileID: 0}
     - target: {fileID: 3734300144735559105, guid: 317c358f0cedf4f729a412990fd31f91,
         type: 3}
@@ -1534,11 +1544,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1510297493}
+      objectReference: {fileID: 1244766479}
     - target: {fileID: 3734300143598425018, guid: 317c358f0cedf4f729a412990fd31f91,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3734300143598425018, guid: 317c358f0cedf4f729a412990fd31f91,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnUIAnswerButtonPressed
       objectReference: {fileID: 0}
     - target: {fileID: 3734300144735559105, guid: 317c358f0cedf4f729a412990fd31f91,
         type: 3}
@@ -1782,10 +1797,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1dabe771c49f54b9ebe358e9ad9c77ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentRoundQuestions: []
-  questionTextUI: {fileID: 670735727}
-  scoreTextUI: {fileID: 1879583179}
-  answerButtonsCanvas: {fileID: 427370032}
+  questions: []
   contiueAndRestartCanvas: {fileID: 700711999}
   questionCanvas: {fileID: 1244766479}
   eventSystem: {fileID: 1339976597}
@@ -2520,7 +2532,12 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1510297493}
+      objectReference: {fileID: 1244766479}
+    - target: {fileID: 3734300143598425018, guid: 317c358f0cedf4f729a412990fd31f91,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnUIAnswerButtonPressed
+      objectReference: {fileID: 0}
     - target: {fileID: 3734300144735559105, guid: 317c358f0cedf4f729a412990fd31f91,
         type: 3}
       propertyPath: m_havePropertiesChanged

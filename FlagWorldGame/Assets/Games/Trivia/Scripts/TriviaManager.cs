@@ -10,15 +10,11 @@ public class TriviaManager : MonoBehaviour
 
     //contains questions for current round. 
     [SerializeField]
-    private QuestionData[] currentRoundQuestions = null;
+    private QuestionData[] questions = null;
+    private QuestionData currentQuestion = null;
     int currentQuestionNumber = 0;
 
-    QuestionData currentQuestion = null;
-
     [Header("Question UI")]
-
-    [SerializeField]
-    private UIScoreText scoreTextUI = null;
 
     [SerializeField]
     private Canvas contiueAndRestartCanvas = null;
@@ -28,79 +24,14 @@ public class TriviaManager : MonoBehaviour
 
     [SerializeField]
     private GameObject eventSystem;
+    void Start()
+    {   
+        //load from file based on the active contact point
+        questions = SetDummyRoundData();
 
-    private RoundData currentRoundData;
-
-    int roundScore = 0;
-    IEnumerator Start()
-    {
-        string dataRound;
-        yield return StartCoroutine( TriviaSaveLoadSystem.LoadRoundDataFromWeb(SetUpData));
-        currentRoundQuestions = currentRoundData.data;
-
-        roundScore = 0;
-        Debug.Log(Application.persistentDataPath);
-        LoadRoundDataFromFile();
-        currentQuestion = currentRoundQuestions[currentQuestionNumber];
+        currentQuestion = questions[currentQuestionNumber];
+        
         questionCanvas.setNewQuestionUI(currentQuestion);
-        //PrintDataAsJson();
-    }
-
-    private void SetUpData(string result) 
-    {
-        currentRoundData = new RoundData();
-        JsonUtility.FromJsonOverwrite(result, currentRoundData);
-
-    }
-
-    private void PrintDataAsJson()
-    {
-        string rounDataJson = JsonUtility.ToJson(currentRoundData);
-        Debug.Log(rounDataJson);
-
-        for (int qID = 0; qID < currentRoundQuestions.Length; qID++)
-        {
-            string jsonString = JsonUtility.ToJson(currentRoundQuestions[qID]);
-            Debug.Log(jsonString);
-        }
-
-    }
-
-    private void LoadRoundDataFromFile()
-    {
-        LoadRoundData();
-        if (currentRoundQuestions == null)
-        {
-            Debug.Log("file is null, setting dummy Questions");
-            SaveRoundData(SetDummyRoundData());
-            LoadRoundData();
-        }
-    }
-
-    void SaveRoundData(QuestionData[] round)
-    {
-        TriviaSaveLoadSystem.SaveRoundData(round);
-    }
-
-    void LoadRoundData()
-    {
-        currentRoundQuestions = TriviaSaveLoadSystem.LoadRoundData();
-    }
-
-    public void OnAnswerButtonPressed(int option)
-    {
-
-        questionCanvas.OnUIAnswerButtonPressed(option, currentQuestion.answers);
-        if (currentQuestion.answers[option].isCorrect == true)
-        {
-            eventSystem.SetActive(false);
-            Debug.Log("Correct Answer, give points");
-            roundScore += 10;
-            scoreTextUI.SetTextToDisplay(roundScore.ToString() + " FP");
-            //set Button with option, Color To Green
-        }
-
-
     }
 
     //called on button animation finnished
@@ -126,14 +57,13 @@ public class TriviaManager : MonoBehaviour
         questionCanvas.gameObject.SetActive(false);
     }
 
-
     //load the next question from the question pool
     private bool LoadNewQuestion()
     {
-        if (currentQuestionNumber < currentRoundQuestions.Length - 1)
+        if (currentQuestionNumber < questions.Length - 1)
         {
             currentQuestionNumber += 1;
-            currentQuestion = currentRoundQuestions[currentQuestionNumber];
+            currentQuestion = questions[currentQuestionNumber];
             questionCanvas.setNewQuestionUI(currentQuestion);
             return true;
         }
@@ -147,42 +77,15 @@ public class TriviaManager : MonoBehaviour
     private QuestionData[] SetDummyRoundData()
     {
 
-        QuestionData dummyQuestionData1 = SetQuestionData("What is the capital city of Finland", QuestionData.QuestionType.Textonly, ("Helsinki", true), ("Oulu", false), ("Kuopio", false), ("Kotka", false));
-        QuestionData dummyQuestionData3 = SetQuestionData("Does Denmark belong to Nordic Countries", QuestionData.QuestionType.TrueFalse, ("FALSE", false), ("TRUE", true));
-        QuestionData dummyQuestionData2 = SetQuestionData("Press the flag of Finland", QuestionData.QuestionType.Images, ("Finland", true), ("Sweden", false), ("Norway", false), ("Russia", false));
-        QuestionData dummyQuestionData4 = SetQuestionData("Press the flag of Sweden", QuestionData.QuestionType.TrueFalseImage, ("Finland", false), ("Sweden", true));
+        QuestionData dummyQuestionData1 = new QuestionData();
+        dummyQuestionData1.SetQuestionData("What is the capital city of Finland", QuestionData.QuestionType.Textonly, ("Helsinki", true), ("Oulu", false), ("Kuopio", false), ("Kotka", false));
+        QuestionData dummyQuestionData3 = new QuestionData();
+        dummyQuestionData3.SetQuestionData("Does Denmark belong to Nordic Countries", QuestionData.QuestionType.TrueFalse, ("FALSE", false), ("TRUE", true));
+        QuestionData dummyQuestionData2 = new QuestionData();
+        dummyQuestionData2.SetQuestionData("Press the flag of Finland", QuestionData.QuestionType.Images, ("Finland", true), ("Sweden", false), ("Norway", false), ("Russia", false));
+        QuestionData dummyQuestionData4 = new QuestionData();
+        dummyQuestionData4.SetQuestionData("Press the flag of Sweden", QuestionData.QuestionType.TrueFalseImage, ("Finland", false), ("Sweden", true));
 
         return new QuestionData[4] { dummyQuestionData1, dummyQuestionData2, dummyQuestionData3, dummyQuestionData4 };
-    }
-
-    private QuestionData SetQuestionData(string questionText = null, QuestionData.QuestionType questionType = 0, params (string answerText, bool isCorrect)[] answerPairs)
-    {
-        AnswerData[] answersData = new AnswerData[answerPairs.Length];
-
-        AssignAnswerData(answerPairs, answersData);
-        SuffleAnswerOrder(ref answersData);
-
-        return new QuestionData(questionText, answersData, questionType);
-    }
-
-    private void AssignAnswerData((string answerText, bool isCorrect)[] answerPairs, AnswerData[] answersData)
-    {
-        //cycle answers pairs and assign them to question
-        for (int i = 0; i < answerPairs.Length; i++)
-        {
-            (string answerText, bool isCorrect) pair = answerPairs[i];
-            answersData[i] = new AnswerData(pair.answerText, pair.isCorrect);
-        }
-    }
-
-    private static void SuffleAnswerOrder(ref AnswerData[] answerData)
-    {
-        for (int t = 0; t < answerData.Length; t++) // Randomize the order of answers
-        {
-            AnswerData tmp = answerData[t];
-            int rand = UnityEngine.Random.Range(t, answerData.Length);
-            answerData[t] = answerData[rand];
-            answerData[rand] = tmp;
-        }
     }
 }
