@@ -12,7 +12,7 @@ public static class TriviaSaveLoadSystem
 {
 
 
-    public static IEnumerator LoadContactPointsFromWeb(System.Action<string> onSuccess) 
+    public static IEnumerator LoadContactPointsFromWeb() 
     {
         UnityWebRequest www = new UnityWebRequest("https://gist.githubusercontent.com/KahVille/5a23729971d6905b91f8cf23217b33b8/raw/5d79f297d129dea6860ea9bc9f691fcf82297a43/flagworldDataTest.json");
         www.downloadHandler = new DownloadHandlerBuffer();
@@ -29,8 +29,6 @@ public static class TriviaSaveLoadSystem
             JsonUtility.FromJsonOverwrite(result,contactionPoints);
 
             SaveContactPoints(contactionPoints);
-            onSuccess(result);
-
             // make sure the data is in correct form?
             //parse data based on the type of data recieved.
             //from web -> json -> QuestionData[] -> binary?

@@ -39,24 +39,15 @@ public class TriviaManager : MonoBehaviour
         
         contactPoints = TriviaSaveLoadSystem.LoadContactPoints();
         if(contactPoints == null) {
-             yield return StartCoroutine( TriviaSaveLoadSystem.LoadContactPointsFromWeb(CallBack));
+             yield return StartCoroutine( TriviaSaveLoadSystem.LoadContactPointsFromWeb());
              contactPoints = TriviaSaveLoadSystem.LoadContactPoints();
         }
-
         //load from file based on the active contact point
-        questions = contactPoints.points[1].questions;
-
+        questions = contactPoints.points[0].questions;
         currentQuestion = questions[currentQuestionNumber];
         
         questionCanvas.setNewQuestionUI(currentQuestion);
-        Debug.Log(contactPoints.points[1].name);
-
-
-    }
-
-    void CallBack(string result) {
-        Debug.Log(contactPoints.points[0].name);
-
+        yield return true;
     }
 
     //called on button animation finnished
