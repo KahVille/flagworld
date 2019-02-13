@@ -12,9 +12,9 @@ public static class TriviaSaveLoadSystem
 {
 
 
-    public static IEnumerator LoadRoundDataFromWeb(System.Action<string> onSuccess) 
+    public static IEnumerator LoadContactPointsFromWeb(System.Action<string> onSuccess) 
     {
-        UnityWebRequest www = new UnityWebRequest("https://gist.githubusercontent.com/KahVille/5a23729971d6905b91f8cf23217b33b8/raw/d096dff982a32aeae5f62c1b198d30ef2cabc9e9/flagworldDataTest.json");
+        UnityWebRequest www = new UnityWebRequest("https://gist.githubusercontent.com/KahVille/5a23729971d6905b91f8cf23217b33b8/raw/5d79f297d129dea6860ea9bc9f691fcf82297a43/flagworldDataTest.json");
         www.downloadHandler = new DownloadHandlerBuffer();
         yield return www.SendWebRequest();
  
@@ -24,6 +24,11 @@ public static class TriviaSaveLoadSystem
         else {
             // Show results as text
             string result = www.downloadHandler.text;
+
+            ContactPointCollection contactionPoints = new ContactPointCollection();
+            JsonUtility.FromJsonOverwrite(result,contactionPoints);
+
+            SaveContactPoints(contactionPoints);
             onSuccess(result);
 
             // make sure the data is in correct form?
@@ -31,6 +36,43 @@ public static class TriviaSaveLoadSystem
             //from web -> json -> QuestionData[] -> binary?
         }
     }
+
+    private static void SaveContactPoints(ContactPointCollection contactPoints) {
+        Debug.Log("saving collection points");
+        BinaryFormatter formatter = new BinaryFormatter();
+
+        string path = Application.persistentDataPath + "/collectionPointTest.dat";
+        FileStream stream = new FileStream(path, FileMode.Create);
+
+        ContactPointCollection data = new ContactPointCollection();
+        data = contactPoints;
+
+        formatter.Serialize(stream,data);
+        stream.Close();
+
+        Debug.Log("collection points saved");
+    }
+
+    public static ContactPointCollection LoadContactPoints () {
+        string path = Application.persistentDataPath + "/collectionPointTest.dat";
+        if (File.Exists(path)) 
+        {
+            Debug.Log("File load started");
+            BinaryFormatter formatter = new BinaryFormatter();
+            FileStream stream = new FileStream(path, FileMode.Open);
+
+            ContactPointCollection data = formatter.Deserialize(stream) as ContactPointCollection;
+            stream.Close();
+            Debug.Log("File loaded");
+            return data;
+
+        } 
+        else 
+        {
+            Debug.LogError("File not Found in " + path);
+            return null;
+        }
+    } 
 
     //save round data from an array to a file 
     //shoud be called from the web handler in the final version.

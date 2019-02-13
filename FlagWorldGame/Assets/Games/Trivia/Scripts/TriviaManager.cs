@@ -6,6 +6,15 @@ using UnityEngine.UI;
 public class TriviaManager : MonoBehaviour
 {
 
+    ContactPoint dummyContactPoint;
+    ContactPoint dummyContactPoint2;
+
+    ContactPointCollection contactPoints;
+
+
+
+
+
     [Header("Question Data")]
 
     //contains questions for current round. 
@@ -24,14 +33,30 @@ public class TriviaManager : MonoBehaviour
 
     [SerializeField]
     private GameObject eventSystem;
-    void Start()
+
+    IEnumerator Start()
     {   
+        
+        contactPoints = TriviaSaveLoadSystem.LoadContactPoints();
+        if(contactPoints == null) {
+             yield return StartCoroutine( TriviaSaveLoadSystem.LoadContactPointsFromWeb(CallBack));
+             contactPoints = TriviaSaveLoadSystem.LoadContactPoints();
+        }
+
         //load from file based on the active contact point
-        questions = SetDummyRoundData();
+        questions = contactPoints.points[1].questions;
 
         currentQuestion = questions[currentQuestionNumber];
         
         questionCanvas.setNewQuestionUI(currentQuestion);
+        Debug.Log(contactPoints.points[1].name);
+
+
+    }
+
+    void CallBack(string result) {
+        Debug.Log(contactPoints.points[0].name);
+
     }
 
     //called on button animation finnished

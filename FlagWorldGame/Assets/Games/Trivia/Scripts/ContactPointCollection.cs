@@ -5,7 +5,7 @@ using UnityEngine;
 
 [System.Serializable]
 
-public class ContactPointCollection : MonoBehaviour
+public class ContactPointCollection
 {
     public ContactPoint[] points;
 }
