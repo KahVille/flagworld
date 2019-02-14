@@ -6,16 +6,12 @@ using TMPro;
 public class UIQuestionText : MonoBehaviour
 {
 
+    [SerializeField]
     TextMeshProUGUI questionText;
 
     // Start is called before the first frame update
-    void Start()
-    {
-       questionText = GetComponent<TextMeshProUGUI>(); 
-    }
 
-
-    public void SetQuestionText(string textToSet = null) {
+    public void SetQuestionText(string textToSet = "") {
         questionText.SetText($"{textToSet}");
     }
 

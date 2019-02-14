@@ -38,6 +38,10 @@ public class UIQuestionCanvas : MonoBehaviour
             //set Text only Question
             EnableButtonAndSetQuestionTextButtons(currentQuestion.answers);
         }
+        if(!scoreText.gameObject.activeInHierarchy) 
+        {
+          scoreText.gameObject.SetActive(true);  
+        }
 
         questionTextUI.SetQuestionText(currentQuestion.questionText + "?");
     }

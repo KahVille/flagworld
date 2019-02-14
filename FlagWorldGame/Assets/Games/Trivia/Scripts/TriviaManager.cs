@@ -32,7 +32,7 @@ public class TriviaManager : MonoBehaviour
     private UIQuestionCanvas questionCanvas = null;
 
     [SerializeField]
-    private GameObject eventSystem;
+    private GameObject eventSystem= null;
 
     IEnumerator Start()
     {   
@@ -46,6 +46,7 @@ public class TriviaManager : MonoBehaviour
         questions = contactPoints.points[0].questions;
         currentQuestion = questions[currentQuestionNumber];
         
+        questionCanvas.gameObject.SetActive(true);
         questionCanvas.setNewQuestionUI(currentQuestion);
         yield return true;
     }

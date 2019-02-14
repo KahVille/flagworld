@@ -425,6 +425,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: AnswerButton (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 3734300143598425028, guid: 317c358f0cedf4f729a412990fd31f91,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3734300143598425019, guid: 317c358f0cedf4f729a412990fd31f91,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -781,6 +786,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e0643344d0184f17bc06cae867c34a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  questionText: {fileID: 670735725}
 --- !u!1001 &689817884
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -792,6 +798,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: AnswerButton (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3734300143598425028, guid: 317c358f0cedf4f729a412990fd31f91,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3734300143598425019, guid: 317c358f0cedf4f729a412990fd31f91,
         type: 3}
@@ -1363,7 +1374,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1244766479
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1480,6 +1491,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: AnswerButton (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3734300143598425028, guid: 317c358f0cedf4f729a412990fd31f91,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3734300143598425019, guid: 317c358f0cedf4f729a412990fd31f91,
         type: 3}
@@ -2513,6 +2529,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: AnswerButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 3734300143598425028, guid: 317c358f0cedf4f729a412990fd31f91,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3734300143598425019, guid: 317c358f0cedf4f729a412990fd31f91,
         type: 3}
