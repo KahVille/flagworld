@@ -34,9 +34,11 @@ public class TriviaManager : MonoBehaviour
     [SerializeField]
     private GameObject eventSystem= null;
 
+
+    private GameObject loadingIndicator = null;
     IEnumerator Start()
     {   
-        
+        loadingIndicator.SetActive(true);
         contactPoints = TriviaSaveLoadSystem.LoadContactPoints();
         if(contactPoints == null) {
              yield return StartCoroutine( TriviaSaveLoadSystem.LoadContactPointsFromWeb());
@@ -45,7 +47,8 @@ public class TriviaManager : MonoBehaviour
         //load from file based on the active contact point
         questions = contactPoints.points[0].questions;
         currentQuestion = questions[currentQuestionNumber];
-        
+        loadingIndicator.SetActive(false);
+
         questionCanvas.gameObject.SetActive(true);
         questionCanvas.setNewQuestionUI(currentQuestion);
         yield return true;
