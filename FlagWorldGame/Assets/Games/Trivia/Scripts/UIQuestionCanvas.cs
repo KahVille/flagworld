@@ -5,6 +5,9 @@ using UnityEngine;
 public class UIQuestionCanvas : MonoBehaviour
 {
 
+
+    private QuestionData currentQuestion = null;
+
     [SerializeField]
     private UIQuestionText questionTextUI = null;
 
@@ -14,40 +17,52 @@ public class UIQuestionCanvas : MonoBehaviour
     [SerializeField]
     private UIAnswerButton[] answerButtons = new UIAnswerButton[4];
 
+    int score =0;
+
+    [SerializeField]
+    UIScoreText scoreText = null;
+
     public void setNewQuestionUI(QuestionData question)
     {
+        currentQuestion = question;
         ClearAnswerButtons();
 
         //set answer buttons by question type
-        if (IsImageQuestion(question))
+        if (IsImageQuestion(currentQuestion))
         {
             //set up images to button sprites based on the inputted text from question answertext
-            EnableAndSetImageQuestionButtons(question.answers);
+            EnableAndSetImageQuestionButtons(currentQuestion.answers);
         }
         else
         {
             //set Text only Question
-            EnableButtonAndSetQuestionTextButtons(question.answers);
+            EnableButtonAndSetQuestionTextButtons(currentQuestion.answers);
+        }
+        if(!scoreText.gameObject.activeInHierarchy) 
+        {
+          scoreText.gameObject.SetActive(true);  
         }
 
-        questionTextUI.SetQuestionText(question.questionText + "?");
+        questionTextUI.SetQuestionText(currentQuestion.questionText + "?");
     }
 
-    public void OnUIAnswerButtonPressed(int option, AnswerData[] answers)
+    public void OnUIAnswerButtonPressed(int option)
     {
 
-        if(answers[option].isCorrect==true) {
+        if(currentQuestion.answers[option].isCorrect==true) {
             Debug.Log("UI Correct");
             questionTextUI.SetQuestionText("Correct!");
             answerButtons[option].SetCorrectAnswerColor();
+            score+=10;
+            scoreText.SetTextToDisplay(score.ToString());
         }
         else 
         {
             questionTextUI.SetQuestionText("Wrong!");
             answerButtons[option].SetWrongAnswerColor();
-            for (int i = 0; i < answers.Length; i++)
+            for (int i = 0; i < currentQuestion.answers.Length; i++)
             {
-                if(answers[i].isCorrect == true) {
+                if(currentQuestion.answers[i].isCorrect == true) {
                     answerButtons[i].SetCorrectAnswerColor();
                 }
             }
