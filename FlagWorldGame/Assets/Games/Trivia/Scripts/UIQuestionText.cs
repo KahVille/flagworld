@@ -7,7 +7,7 @@ public class UIQuestionText : MonoBehaviour
 {
 
     [SerializeField]
-    TextMeshProUGUI questionText;
+    TextMeshProUGUI questionText = null;
 
     // Start is called before the first frame update
 

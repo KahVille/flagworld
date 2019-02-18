@@ -5,7 +5,7 @@ using UnityEngine;
 public class UIProgressCircle : MonoBehaviour
 {
     [SerializeField]
-    private RectTransform rectComponent;
+    private RectTransform rectComponent = null;
     private float rotateSpeed = 200f;
 
     private void OnDisable() {

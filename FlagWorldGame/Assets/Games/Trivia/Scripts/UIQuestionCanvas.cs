@@ -6,7 +6,7 @@ public class UIQuestionCanvas : MonoBehaviour
 {
 
 
-    private QuestionData currentQuestion;
+    private QuestionData currentQuestion = null;
 
     [SerializeField]
     private UIQuestionText questionTextUI = null;
@@ -20,7 +20,7 @@ public class UIQuestionCanvas : MonoBehaviour
     int score =0;
 
     [SerializeField]
-    UIScoreText scoreText;
+    UIScoreText scoreText = null;
 
     public void setNewQuestionUI(QuestionData question)
     {

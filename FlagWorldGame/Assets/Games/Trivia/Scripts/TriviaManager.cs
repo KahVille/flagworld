@@ -11,10 +11,6 @@ public class TriviaManager : MonoBehaviour
 
     ContactPointCollection contactPoints;
 
-
-
-
-
     [Header("Question Data")]
 
     //contains questions for current round. 
@@ -32,26 +28,56 @@ public class TriviaManager : MonoBehaviour
     private UIQuestionCanvas questionCanvas = null;
 
     [SerializeField]
-    private GameObject eventSystem= null;
+    private GameObject eventSystem = null;
 
-
+    [SerializeField]
     private GameObject loadingIndicator = null;
+
+    [SerializeField]
+    private GameObject networkError = null;
     IEnumerator Start()
-    {   
+    {
         loadingIndicator.SetActive(true);
         contactPoints = TriviaSaveLoadSystem.LoadContactPoints();
-        if(contactPoints == null) {
-             yield return StartCoroutine( TriviaSaveLoadSystem.LoadContactPointsFromWeb());
-             contactPoints = TriviaSaveLoadSystem.LoadContactPoints();
+        if (contactPoints == null)
+        {
+            yield return StartCoroutine(FetchTriviaData());
         }
         //load from file based on the active contact point
+        loadingIndicator.SetActive(false);
+        DisplayCurrentQuestionAndEnableCanvas();
+        yield return true;
+    }
+
+    private void DisplayCurrentQuestionAndEnableCanvas()
+    {
         questions = contactPoints.points[0].questions;
         currentQuestion = questions[currentQuestionNumber];
-        loadingIndicator.SetActive(false);
-
         questionCanvas.gameObject.SetActive(true);
         questionCanvas.setNewQuestionUI(currentQuestion);
-        yield return true;
+    }
+
+    public void FetchData()
+    {
+        StartCoroutine(FetchTriviaData());
+    }
+
+
+    public IEnumerator FetchTriviaData()
+    {
+        yield return StartCoroutine(TriviaSaveLoadSystem.LoadContactPointsFromWeb());
+        contactPoints = TriviaSaveLoadSystem.LoadContactPoints();
+        if (contactPoints == null)
+        {
+            Debug.Log("Spawn network error");
+            networkError.SetActive(true);
+            loadingIndicator.SetActive(false);
+        }
+        else
+        {
+            loadingIndicator.SetActive(false);
+            DisplayCurrentQuestionAndEnableCanvas();
+        }
     }
 
     //called on button animation finnished

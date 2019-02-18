@@ -20,6 +20,8 @@ public static class TriviaSaveLoadSystem
  
         if(www.isNetworkError || www.isHttpError) {
             Debug.Log(www.error);
+            yield return null;
+        
         }
         else {
             // Show results as text

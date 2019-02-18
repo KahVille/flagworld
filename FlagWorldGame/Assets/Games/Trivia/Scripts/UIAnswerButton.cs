@@ -6,11 +6,11 @@ using TMPro;
 public class UIAnswerButton : MonoBehaviour
 {
     [SerializeField]
-    TextMeshProUGUI answerText;
+    TextMeshProUGUI answerText = null;
     [SerializeField]
     private Sprite defaultSprite = null;
-    Animator animator;
-    TriviaManager triviaManager;
+    Animator animator = null;
+    TriviaManager triviaManager = null;
     void Start()
     {
         animator = GetComponent<Animator>();
