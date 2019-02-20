@@ -10,6 +10,7 @@ public class TriviaManager : MonoBehaviour
     ContactPoint dummyContactPoint2;
 
     ContactPointCollection contactPoints;
+    private int currentContactPointIndex=0;
 
     [Header("Question Data")]
 
@@ -17,7 +18,7 @@ public class TriviaManager : MonoBehaviour
     [SerializeField]
     private QuestionData[] questions = null;
     private QuestionData currentQuestion = null;
-    int currentQuestionNumber = 0;
+    private int currentQuestionNumber = 0;
 
     [Header("Question UI")]
 
@@ -51,7 +52,7 @@ public class TriviaManager : MonoBehaviour
 
     private void DisplayCurrentQuestionAndEnableCanvas()
     {
-        questions = contactPoints.points[0].questions;
+        questions = contactPoints.points[currentContactPointIndex].questions;
         currentQuestion = questions[currentQuestionNumber];
         questionCanvas.gameObject.SetActive(true);
         questionCanvas.setNewQuestionUI(currentQuestion);
