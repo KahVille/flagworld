@@ -27,6 +27,8 @@ public class UIQuestionCanvas : MonoBehaviour
         currentQuestion = question;
         ClearAnswerButtons();
 
+        currentQuestion.SuffleAnswerOrder();
+
         //set answer buttons by question type
         if (IsImageQuestion(currentQuestion))
         {

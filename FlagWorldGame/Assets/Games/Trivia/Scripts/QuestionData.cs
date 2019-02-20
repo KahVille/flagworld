@@ -54,4 +54,15 @@ public class QuestionData
         }
     }
 
+    public void SuffleAnswerOrder()
+    {
+        for (int t = 0; t < answers.Length; t++) // Randomize the order of answers
+        {
+            AnswerData tmp = answers[t];
+            int rand = UnityEngine.Random.Range(t, answers.Length);
+            answers[t] = answers[rand];
+            answers[rand] = tmp;
+        }
+    }
+
 }
