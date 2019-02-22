@@ -6,11 +6,8 @@ using UnityEngine.UI;
 public class TriviaManager : MonoBehaviour
 {
 
-    ContactPoint dummyContactPoint;
-    ContactPoint dummyContactPoint2;
-
     ContactPointCollection contactPoints;
-    private int currentContactPointIndex=0;
+    private int currentContactPointIndex=1;
 
     [Header("Question Data")]
 
@@ -44,8 +41,9 @@ public class TriviaManager : MonoBehaviour
         {
             yield return StartCoroutine(FetchTriviaData());
         }
-        //load from file based on the active contact point
         loadingIndicator.SetActive(false);
+        //cycle trough contact points and check if given contactpoint identifier matches the available contact points
+        currentContactPointIndex = SelectContactPointIndex(1);
         DisplayCurrentQuestionAndEnableCanvas();
         yield return true;
     }
@@ -56,6 +54,16 @@ public class TriviaManager : MonoBehaviour
         currentQuestion = questions[currentQuestionNumber];
         questionCanvas.gameObject.SetActive(true);
         questionCanvas.setNewQuestionUI(currentQuestion);
+    }
+
+    int SelectContactPointIndex(int identifier) {
+        for (int i = 0; i < contactPoints.points.Length; i++)
+        {
+            if(contactPoints.points[i].idetifier == identifier) {
+                return i;
+            }
+        }
+        return -1;
     }
 
     public void FetchData()
