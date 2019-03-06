@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.Android;
 using TMPro;
 
@@ -14,6 +15,10 @@ public class GPSScript : MonoBehaviour
     bool tracking;
     float longitude;
     float latitude;
+    bool autologging;
+    public Image autologImg;
+    string serializedData;
+    int logIndex;
 
     // Start is called before the first frame update
     IEnumerator Start()
@@ -38,6 +43,8 @@ public class GPSScript : MonoBehaviour
 		}
         // Start service before querying location
         Input.location.Start();
+        autologging = false;
+        autologImg.color = Color.red;
 
         // Wait until service initializes
         int maxWait = 20;
@@ -67,6 +74,11 @@ public class GPSScript : MonoBehaviour
 			tracking = true;
             StartCoroutine(UpdateLocation());
         }
+
+        if(!File.Exists(Application.persistentDataPath + "/GPSDatas.txt"))
+        {
+            File.AppendAllText(Application.persistentDataPath + "/GPSDatas.txt", String.Empty);
+        }
     }
 
     void Update()
@@ -77,13 +89,38 @@ public class GPSScript : MonoBehaviour
         }
     }
 
+    public void ToggleAutolog()
+    {
+        autologging = !autologging;
+        if(autologging)
+        {
+            autologImg.color = Color.green;
+        }
+        else
+        {
+            autologImg.color = Color.red;
+        }
+    }
+
+    public void WriteToTxt()
+    {
+        serializedData = logIndex.ToString() + ":" + "\n"
+        + "Longitude: " + longitude.ToString() + "\n"
+        + "Latitude: " + latitude.ToString() + "\n" + "\n";
+        File.AppendAllText(Application.persistentDataPath + "/GPSDatas.txt", serializedData);
+        logIndex++;
+    }
+
+    public void ClearTxt()
+    {
+        File.WriteAllText(Application.persistentDataPath + "/GPSDatas.txt", String.Empty);
+    }
+
     IEnumerator UpdateLocation()
     {
-        string serializedData;
-        StreamWriter writer = new StreamWriter(Application.persistentDataPath + "/GPSDatas.txt", true);
         DateTime now = DateTime.Now;
-        writer.Write("-+-+-+-+-" + now.ToString("F") + "-+-+-+-+-"  +"\n");
-        int index = 0;
+        File.AppendAllText(Application.persistentDataPath + "/GPSDatas.txt", "-+-+-+-+-" + now.ToString("F") + "-+-+-+-+-"  +"\n");
+        logIndex = 0;
         while(tracking)
         {
             longitude = Input.location.lastData.longitude;
@@ -91,13 +128,15 @@ public class GPSScript : MonoBehaviour
             longText.text = "Longitude: " + longitude.ToString();
             latText.text = "Latitude: " + latitude.ToString();
 
-            serializedData = index.ToString() + ":" + "\n"
-            + "Longitude: " + longitude.ToString() + "\n"
-            + "Latitude: " + latitude.ToString() + "\n" + "\n";
-            writer.Write(serializedData);
-
+            if(autologging)
+            {
+                serializedData = logIndex.ToString() + ":" + "\n"
+                + "Longitude: " + longitude.ToString() + "\n"
+                + "Latitude: " + latitude.ToString() + "\n" + "\n";
+                File.AppendAllText(Application.persistentDataPath + "/GPSDatas.txt", serializedData);
+                logIndex++;
+            }
             yield return new WaitForSeconds(3f);
         }
-        writer.Close();
     }
 }
