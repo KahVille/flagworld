@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 
 public class PlayerStuffGWTW : MonoBehaviour
@@ -16,6 +17,17 @@ public class PlayerStuffGWTW : MonoBehaviour
     Vector3 desiredPos;
     private Vector3 velocity = Vector3.zero;
 
+    public float FlagHP
+    {
+        get
+        {
+            return flagHP;
+        }
+        set
+        {
+            flagHP = value;
+        }
+    }
     float flagHP;
     public float hpDecayMult;
     public Slider flagHPSlider;
@@ -27,6 +39,12 @@ public class PlayerStuffGWTW : MonoBehaviour
     public GameObject gameOverPanel;
     public ParticleSystem windparticles;
 
+    float score;
+    float scoreMult;
+    public TextMeshProUGUI scoreText;
+
+    public GameObject bird;
+
     // Start is called before the first frame update
     IEnumerator Start()
     {
@@ -36,8 +54,10 @@ public class PlayerStuffGWTW : MonoBehaviour
         flagHP = 0f;
         windy = false;
         gameOver = false;
+        score = 0;
         yield return new WaitForSeconds(Random.Range(2f, 5f));
         StartCoroutine(WindRoutine());
+        StartCoroutine(BirdSpawnRoutine());
     }
 
     // Update is called once per frame
@@ -54,6 +74,10 @@ public class PlayerStuffGWTW : MonoBehaviour
             return;
         }
 
+        score += Time.deltaTime * scoreMult * 15f;
+        scoreMult = (flag.transform.position.y - bottomOfPole.position.y) / (topOfPole.position.y - bottomOfPole.position.y);
+        scoreText.text = score.ToString("F2");
+
         if(windy && flag.transform.position.y > topOfPole.position.y - 1f)
         {
             if(flagMat.GetFloat("_WaveSpeed") < 100f)
@@ -65,8 +89,7 @@ public class PlayerStuffGWTW : MonoBehaviour
             if(flagHP >= 100f)
             {
                 //GAME OVER
-                gameOver = true;
-                StartCoroutine(GameOverRoutine());
+                StartGameOver();
             }
         }
 
@@ -78,6 +101,12 @@ public class PlayerStuffGWTW : MonoBehaviour
         desiredPos.y -= (swipe.SwipeDelta.y * 0.01f);
         desiredPos.y = Mathf.Clamp(desiredPos.y, bottomOfPole.position.y, topOfPole.position.y);
         flag.transform.position = Vector3.SmoothDamp(flag.transform.position, desiredPos, ref velocity, smoothTime);
+    }
+
+    public void StartGameOver()
+    {
+        gameOver = true;
+        StartCoroutine(GameOverRoutine());
     }
 
     IEnumerator GameOverRoutine()
@@ -99,16 +128,38 @@ public class PlayerStuffGWTW : MonoBehaviour
         while(!gameOver)
         {
             // HEAVY WINDS!!
+            windparticles.Play();
+            yield return new WaitForSeconds(1.5f);
             windTime = Random.Range(1f, 4f);
             windy = true;
-            windparticles.Play();
             yield return new WaitForSeconds(windTime);
             // CALM BEFORE THE STORM
             windparticles.Stop();
+            yield return new WaitForSeconds(0.5f);
             flagMat.SetFloat("_WaveSpeed", 50f);
             windy = false;
             windTime = Random.Range(2f, 6f);
             yield return new WaitForSeconds(windTime);
+        }
+    }
+
+    IEnumerator BirdSpawnRoutine()
+    {
+        float birdTime;
+        Vector3 spawnPos;
+        spawnPos = Vector3.zero;
+        spawnPos.z = -1f;
+        spawnPos.x = -7f;
+        while(!gameOver)
+        {
+            birdTime = Random.Range(1f,10f);
+            yield return new WaitForSeconds(birdTime);
+            spawnPos.y = Random.Range(bottomOfPole.position.y, topOfPole.position.y - 1f);
+            GameObject newBird = Instantiate(bird, spawnPos, Quaternion.identity);
+            
+            //newBird.GetComponent<Rigidbody2D>().velocity = Vector2.right * 5f;
+            newBird.GetComponent<Rigidbody2D>().AddForce(Vector2.right * 5f * 70f);
+            Destroy(newBird, 5f);
         }
     }
 }

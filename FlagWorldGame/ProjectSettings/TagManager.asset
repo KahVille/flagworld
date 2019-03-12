@@ -6,8 +6,7 @@ TagManager:
   tags:
   - Sortable
   - Tile
-  tags:
-  - Flag
+  - Bird
   layers:
   - Default
   - TransparentFX

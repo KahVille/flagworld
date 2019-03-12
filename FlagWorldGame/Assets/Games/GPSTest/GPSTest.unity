@@ -1311,6 +1311,15 @@ MonoBehaviour:
   latText: {fileID: 1851046639}
   debugText: {fileID: 1976452804}
   autologImg: {fileID: 1993525942}
+  locations:
+  - name: Eurooppa
+    longitude: 27.18747
+    latitude: 60.565613
+    rangeDistance: 0.056
+  - name: Koulu
+    longitude: 26.892323
+    latitude: 60.487766
+    rangeDistance: 0.056
 --- !u!4 &774346873
 Transform:
   m_ObjectHideFlags: 0
