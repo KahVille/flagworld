@@ -47,7 +47,7 @@ public class GPSScript : MonoBehaviour
         // Start service before querying location
         Input.location.Start();
         autologging = false;
-        autologImg.color = Color.red;
+        //autologImg.color = Color.red;
 
         // Wait until service initializes
         int maxWait = 20;
@@ -73,8 +73,9 @@ public class GPSScript : MonoBehaviour
         else
         {
             // Access granted and location value could be retrieved
-            debugText.text = "Location: " + Input.location.lastData.latitude + " " + Input.location.lastData.longitude + " " + Input.location.lastData.altitude + " " + Input.location.lastData.horizontalAccuracy + " " + Input.location.lastData.timestamp;
-			tracking = true;
+            //debugText.text = "Location: " + Input.location.lastData.latitude + " " + Input.location.lastData.longitude + " " + Input.location.lastData.altitude + " " + Input.location.lastData.horizontalAccuracy + " " + Input.location.lastData.timestamp;
+			debugText.text = "Working, yay!";
+            tracking = true;
             lastDistance = float.MaxValue;
             StartCoroutine(UpdateLocation());
         }
@@ -130,6 +131,16 @@ public class GPSScript : MonoBehaviour
             {
                 lastDistance = tempDist;
                 lastLocation = locations[i];
+            }
+
+            // Check if distance is within a locations range, if it is, change the image color.
+            if(lastDistance < locations[i].rangeDistance)
+            {
+                locations[i].image.color = Color.green;
+            }
+            else if(lastDistance > locations[i].rangeDistance)
+            {
+                locations[i].image.color = Color.red;
             }
         }
     }
