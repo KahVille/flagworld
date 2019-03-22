@@ -132,16 +132,15 @@ public class GPSScript : MonoBehaviour
                 lastDistance = tempDist;
                 lastLocation = locations[i];
             }
+            Debug.Log(lastDistance);
+            locations[i].image.color = Color.red;
 
-            // Check if distance is within a locations range, if it is, change the image color.
-            if(lastDistance < locations[i].rangeDistance)
-            {
-                locations[i].image.color = Color.green;
-            }
-            else if(lastDistance > locations[i].rangeDistance)
-            {
-                locations[i].image.color = Color.red;
-            }
+        }
+
+        // Check if distance is within a locations range, if it is, change the image color.
+        if(lastDistance < lastLocation.rangeDistance)
+        {
+            lastLocation.image.color = Color.green;
         }
     }
 
@@ -171,8 +170,8 @@ public class GPSScript : MonoBehaviour
             {
                 debugText.text = "Dist: " + lastDistance;
             }
-            longText.text = "Longitude: " + longitude.ToString();
-            latText.text = "Latitude: " + latitude.ToString();
+            //longText.text = "Longitude: " + longitude.ToString();
+            //latText.text = "Latitude: " + latitude.ToString();
 
             if(autologging)
             {
