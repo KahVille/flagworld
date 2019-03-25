@@ -42,8 +42,9 @@ public class TriviaManager : MonoBehaviour
             yield return StartCoroutine(FetchTriviaData());
         }
         loadingIndicator.SetActive(false);
-        //cycle trough contact points and check if given contactpoint identifier matches the available contact points
-        currentContactPointIndex = SelectContactPointIndex(1);
+        
+        //id that is inside the contact point;contactpoint.identifier
+        currentContactPointIndex = SelectContactPointIndex(2);
         DisplayCurrentQuestionAndEnableCanvas();
         yield return true;
     }
@@ -59,9 +60,9 @@ public class TriviaManager : MonoBehaviour
     int SelectContactPointIndex(int identifier) {
         for (int i = 0; i < contactPoints.points.Length; i++)
         {
-            if(contactPoints.points[i].idetifier == identifier) {
-                return i;
-            }
+           if(contactPoints.points[i].identifier == identifier) {
+               return i;
+           }
         }
         return -1;
     }
@@ -133,13 +134,13 @@ public class TriviaManager : MonoBehaviour
     {
 
         QuestionData dummyQuestionData1 = new QuestionData();
-        dummyQuestionData1.SetQuestionData("What is the capital city of Finland", QuestionData.QuestionType.Textonly, ("Helsinki", true), ("Oulu", false), ("Kuopio", false), ("Kotka", false));
+        dummyQuestionData1.SetQuestionData(0,"What is the capital city of Finland", QuestionData.QuestionType.Textonly, ("Helsinki", true), ("Oulu", false), ("Kuopio", false), ("Kotka", false));
         QuestionData dummyQuestionData3 = new QuestionData();
-        dummyQuestionData3.SetQuestionData("Does Denmark belong to Nordic Countries", QuestionData.QuestionType.TrueFalse, ("FALSE", false), ("TRUE", true));
+        dummyQuestionData3.SetQuestionData(1,"Does Denmark belong to Nordic Countries", QuestionData.QuestionType.TrueFalse, ("FALSE", false), ("TRUE", true));
         QuestionData dummyQuestionData2 = new QuestionData();
-        dummyQuestionData2.SetQuestionData("Press the flag of Finland", QuestionData.QuestionType.Images, ("Finland", true), ("Sweden", false), ("Norway", false), ("Russia", false));
+        dummyQuestionData2.SetQuestionData(2,"Press the flag of Finland", QuestionData.QuestionType.Images, ("Finland", true), ("Sweden", false), ("Norway", false), ("Russia", false));
         QuestionData dummyQuestionData4 = new QuestionData();
-        dummyQuestionData4.SetQuestionData("Press the flag of Sweden", QuestionData.QuestionType.TrueFalseImage, ("Finland", false), ("Sweden", true));
+        dummyQuestionData4.SetQuestionData(3,"Press the flag of Sweden", QuestionData.QuestionType.TrueFalseImage, ("Finland", false), ("Sweden", true));
 
         return new QuestionData[4] { dummyQuestionData1, dummyQuestionData2, dummyQuestionData3, dummyQuestionData4 };
     }

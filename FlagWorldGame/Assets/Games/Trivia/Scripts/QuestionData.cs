@@ -12,23 +12,25 @@ public class QuestionData
         Images,
     }
 
+    public int questionID;
     public string questionText;
     public AnswerData[] answers;
     public QuestionType type;
 
-    public QuestionData(string text = null, AnswerData[] answerdata = null, QuestionType questionType = 0) {
+    public QuestionData(int qID = 0, string text = null, AnswerData[] answerdata = null, QuestionType questionType = 0) {
+        questionID = qID;
         questionText = text;
         answers = answerdata;
         type = questionType;
     }
 
-    public void SetQuestionData(string questionText = null, QuestionData.QuestionType questionType = 0, params (string answerText, bool isCorrect)[] answerPairs)
+    public void SetQuestionData(int questionID = 0,string questionText = null, QuestionData.QuestionType questionType = 0, params (string answerText, bool isCorrect)[] answerPairs)
     {
         AnswerData[] answersData = new AnswerData[answerPairs.Length];
 
         AssignAnswerData(answerPairs, answersData);
         SuffleAnswerOrder(ref answersData);
-
+        this.questionID = questionID;
         this.questionText = questionText;
         this.answers = answersData;
         this.type = questionType;
