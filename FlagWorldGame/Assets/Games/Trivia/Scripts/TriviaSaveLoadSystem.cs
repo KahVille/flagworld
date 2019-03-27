@@ -14,7 +14,7 @@ public static class TriviaSaveLoadSystem
 
     public static IEnumerator LoadContactPointsFromWeb()
     {
-        UnityWebRequest www = new UnityWebRequest("https://gist.githubusercontent.com/KahVille/5a23729971d6905b91f8cf23217b33b8/raw/cbd23048e4b8716983a4c6ce70a67c4fea83cfd9/flagworldDataTest.json");
+        UnityWebRequest www = new UnityWebRequest("https://gist.githubusercontent.com/KahVille/5a23729971d6905b91f8cf23217b33b8/raw/9a51699447a7104809eed3829a6fef6d138da7aa/flagworldDataTest.json");
         www.downloadHandler = new DownloadHandlerBuffer();
         yield return www.SendWebRequest();
  
