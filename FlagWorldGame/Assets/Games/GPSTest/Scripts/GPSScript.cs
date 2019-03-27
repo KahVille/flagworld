@@ -124,6 +124,7 @@ public class GPSScript : MonoBehaviour
     void CheckClosestLoc()
     {
         float tempDist;
+        lastDistance = float.MaxValue;
         for(int i = 0; i < locations.Length; i++)
         {
             tempDist = Calculate_Distance(longitude, latitude, locations[i].longitude, locations[i].latitude);
