@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class GamesScript : MonoBehaviour
 {
+
     private GameObject[] buttons;
     private Canvas MainM;
 
@@ -49,7 +50,14 @@ public class GamesScript : MonoBehaviour
     {
         SceneManager.LoadScene("Trivia", LoadSceneMode.Single);
     } 
-
+    public void ClickGPSTest() 
+    {
+        SceneManager.LoadScene("GPSTest", LoadSceneMode.Single);
+    }
+    public void ClickGoneWithTheWind()
+    {
+        SceneManager.LoadScene("GoneWithTheWind", LoadSceneMode.Single);
+    }
     public void ClickBack()
     {
         GetComponent<Canvas>().enabled = false;
