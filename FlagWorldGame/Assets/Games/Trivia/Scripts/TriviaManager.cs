@@ -44,7 +44,7 @@ public class TriviaManager : MonoBehaviour
         loadingIndicator.SetActive(false);
         
         //id that is inside the contact point;contactpoint.identifier
-        currentContactPointIndex = SelectContactPointIndex(2);
+        currentContactPointIndex = SelectContactPointIndex(1);
         DisplayCurrentQuestionAndEnableCanvas();
         yield return true;
     }
