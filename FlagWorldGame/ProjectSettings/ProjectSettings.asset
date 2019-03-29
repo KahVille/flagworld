@@ -398,9 +398,11 @@ PlayerSettings:
   enableInternalProfiler: 0
   logObjCUncaughtExceptions: 1
   enableCrashReportAPI: 0
-  cameraUsageDescription: 
-  locationUsageDescription: 
-  microphoneUsageDescription: 
+  cameraUsageDescription: Please enable camera usage. We use camera for QR code detection
+  locationUsageDescription: Please enable location usage. We use location for map
+    functionality
+  microphoneUsageDescription: Please enable microphone usage. We use microphone  for
+    one of the games.
   switchNetLibKey: 
   switchSocketMemoryPoolSize: 6144
   switchSocketAllocatorPoolSize: 128
