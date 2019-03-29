@@ -11,7 +11,35 @@ public class UIContinueAndRestartCanvas : MonoBehaviour
     }
 
     public void OnRestartButtonPressed() {
-        SceneManager.LoadScene("Trivia", LoadSceneMode.Single);
+
+
+        string sceneToLoad = "MainMenu";
+
+        switch (PlayerPrefs.GetInt("CurrentLocationIdentifier", 0))
+        {
+
+            case 0:
+            sceneToLoad = "Memory";
+            break;
+
+            case 1:
+            sceneToLoad = "Sorting";
+            break;
+
+            case 2:
+            sceneToLoad = "GoneWithTheWind";
+            break;
+
+            case 3:
+            sceneToLoad = "EarthMap";
+            break;
+            
+            default:
+                sceneToLoad = "MainMenu";
+            break;
+        }
+
+        SceneManager.LoadScene(sceneToLoad, LoadSceneMode.Single);
     }
 
 }

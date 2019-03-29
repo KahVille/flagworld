@@ -166,6 +166,9 @@ public class GPSScript : MonoBehaviour
             if(lastDistance < lastLocation.rangeDistance)
             {
                 debugText.text = "IN " + lastLocation.name;
+                SetCurrentContactPointForTrivia(lastLocation.name);
+                UnityEngine.SceneManagement.SceneManager.LoadScene("Trivia",UnityEngine.SceneManagement.LoadSceneMode.Single);
+
             }
             else
             {
@@ -184,6 +187,34 @@ public class GPSScript : MonoBehaviour
             }
             yield return new WaitForSeconds(3f);
         }
+    }
+
+    private void SetCurrentContactPointForTrivia(string currentLocationName = null) {
+        
+
+        //identified might be modified in the future to be more descriptive. like HAM473, or RaatiH123
+        switch (currentLocationName)
+        {
+            case "Koulu":
+            PlayerPrefs.SetInt("CurrentLocationIdentifier", 2);
+            break;
+            case "Suomenlipuntie":
+            PlayerPrefs.SetInt("CurrentLocationIdentifier", 0);
+            break;
+            case "Lipputorni":
+            PlayerPrefs.SetInt("CurrentLocationIdentifier", 1);
+            break;
+            case "Suurlippu":
+            PlayerPrefs.SetInt("CurrentLocationIdentifier", 2);
+            break;
+            case "Raatihuone":
+            PlayerPrefs.SetInt("CurrentLocationIdentifier", 3);
+            break;   
+            
+            default:
+            break;
+        }
+
     }
 
     private void OnDestroy() 
