@@ -17,6 +17,7 @@ public class BoardManager : MonoBehaviour
     public float tipInterval = 2f;
     private Color blink = new Color(.5f, .5f, .5f, 1.0f);
 
+    public bool UP = true;
     public bool IsShifting { get; set; }
 
     void Start()
@@ -28,6 +29,10 @@ public class BoardManager : MonoBehaviour
 
     private void Update()
     {
+        if (UP)
+        {
+            return;
+        }
         time += Time.deltaTime;
 
         if(time < lastMove + tipInterval || !updateTip)
@@ -36,7 +41,6 @@ public class BoardManager : MonoBehaviour
         }
         lastMove = time;
 
-        Debug.Log(Amove.name);
         StartCoroutine(Tip());
     }
 
@@ -528,4 +532,5 @@ public class BoardManager : MonoBehaviour
         updateTip = true;
         CheckForMatches();
     }
+
 }

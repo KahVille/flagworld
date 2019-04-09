@@ -497,6 +497,7 @@ MonoBehaviour:
   xSize: 8
   ySize: 12
   tipInterval: 4
+  UP: 1
 --- !u!4 &390942599
 Transform:
   m_ObjectHideFlags: 0
@@ -1049,7 +1050,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: Play
 --- !u!222 &815364962
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1128,7 +1129,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: Play again
 --- !u!222 &836831503
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1381,7 +1382,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: Back to menu
 --- !u!222 &1135718405
 CanvasRenderer:
   m_ObjectHideFlags: 0

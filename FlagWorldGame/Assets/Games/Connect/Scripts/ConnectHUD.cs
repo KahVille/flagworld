@@ -7,37 +7,34 @@ using UnityEngine.SceneManagement;
 public class ConnectHUD : MonoBehaviour
 {
     private int Points = 0;
-    private string LanguageID = "Language";
     private string CurrentGameHigh = "CurrGameHigh";
-    private string ModeID = "Playmode";
-    private int LID, P;
+    private int P;
     private Text PointsT, TimerT, EndP, StartT, DetailsT;
     private Canvas End;
     private float timeLeft = 30f;
     private bool TimeEnd = true;
+    private BoardManager BM;
+
+    private void Awake()
+    {
+        BM = GameObject.Find("BoardManager").GetComponent<BoardManager>();
+    }
 
     // Use this for initialization
     void Start()
     {
         Time.timeScale = 1;
-        LID = PlayerPrefs.GetInt(LanguageID);
         StartT = GameObject.Find("RulesText").GetComponent<Text>();
         DetailsT = GameObject.Find("Details").GetComponent<Text>();
-        if (LID != 1)
-        {
-            GameObject.Find("StartB").GetComponentInChildren<Text>().text = "Aloita";
-            StartT.text = "Vaihda kuvan paikkaa viereisen kuvan kanssa ja yritä saada aikaiseksi kolmen suoria.\n\n Pyyhkäise ruutua saadaksesi lisäohjeita.";
-            DetailsT.text = "Valmiit suorat katoavat ruudulta.\n\n Sinulla on 30 sekuntia aikaa. ";
-        }
         PointsT = GameObject.Find("Points").GetComponent<Text>();
         TimerT = GameObject.Find("Timer").GetComponent<Text>();
         EndP = GameObject.Find("EndPoints").GetComponent<Text>();
         End = GameObject.Find("End").GetComponent<Canvas>();
         SetText();
-        if (PlayerPrefs.GetInt(CurrentGameHigh) != 0)
-        {
-            StartCoroutine(WaitNewGame());
-        }
+        //if (PlayerPrefs.GetInt(CurrentGameHigh) != 0) // if restart
+        //{
+        //    StartCoroutine(WaitNewGame());
+        //}
     }
 
     private void Update()
@@ -54,26 +51,13 @@ public class ConnectHUD : MonoBehaviour
             TimeEnd = true;
             TheEnd();
         }
-        if (LID == 1)
-        {
-            TimerT.text = "Time: " + Mathf.RoundToInt(timeLeft).ToString();
-        }
-        else
-        {
-            TimerT.text = "Aika: " + Mathf.RoundToInt(timeLeft).ToString();
-        }
+
+        TimerT.text = "Time: " + Mathf.RoundToInt(timeLeft).ToString();
     }
 
     private void SetText()
     {
-        if (LID == 1)
-        {
-            PointsT.text = "Points: " + Points.ToString();
-        }
-        else
-        {
-            PointsT.text = "Pisteet: " + Points.ToString();
-        }
+        PointsT.text = "Points: " + Points.ToString();
     }
 
     public void SetPoints(int Add)
@@ -111,31 +95,9 @@ public class ConnectHUD : MonoBehaviour
         else P = 0;
 
         EndP.GetComponent<RectTransform>().sizeDelta = new Vector2(Screen.width, Screen.height);
-        if (LID == 1)
-        {
-            EndP.text = "Points: " + Points.ToString() + "\nIt equals to " + P.ToString() + " MP";
-            if (PlayerPrefs.GetInt("Playmode") == 1)
-            {
-                GameObject.Find("Continue").GetComponentInChildren<Text>().text = "Continue tour";
-            }
-            else
-            {
-                GameObject.Find("Continue").GetComponentInChildren<Text>().text = "Back to menu";
-            }
-        }
-        else
-        {
-            EndP.text = "Pisteet: " + Points.ToString() + "\nSe tarkoittaa " + P.ToString() + " MP";
-            if (PlayerPrefs.GetInt("Playmode") == 1)
-            {
-                GameObject.Find("Continue").GetComponentInChildren<Text>().text = "Jatka kierrosta";
-            }
-            else
-            {
-                GameObject.Find("Continue").GetComponentInChildren<Text>().text = "Palaa valikkoon";
-            }
-            GameObject.Find("NewGame").GetComponentInChildren<Text>().text = "Uusi yritys";
-        }
+        EndP.text = "Points: " + Points.ToString() + "\nIt equals to " + P.ToString() + " MP";
+        GameObject.Find("Continue").GetComponentInChildren<Text>().text = "Back to menu";
+
         if (P > PlayerPrefs.GetInt(CurrentGameHigh))
         {
             PlayerPrefs.SetInt(CurrentGameHigh, P);
@@ -150,17 +112,11 @@ public class ConnectHUD : MonoBehaviour
 
     public void ClickContinue()
     {
-        int CP = PlayerPrefs.GetInt("Points");
-        CP += P;
-        PlayerPrefs.SetInt("Points", CP);
-        if (PlayerPrefs.GetInt(ModeID) == 1)
-        {
-            SceneManager.LoadScene("TourMenu", LoadSceneMode.Single);
-        }
-        else
-        {
-            SceneManager.LoadScene("Menu", LoadSceneMode.Single);
-        }
+        // If game´will use some sort of highscore for combined gamescores
+        //int CP = PlayerPrefs.GetInt("Points");
+        //CP += P;
+        //PlayerPrefs.SetInt("Points", CP);
+        SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
     }
 
     public void ClickStart()
@@ -171,6 +127,7 @@ public class ConnectHUD : MonoBehaviour
             tile.GetComponent<ConnectTile>().Started = true;
         }
         Camera.main.GetComponent<StartSwipe>().enabled = false;
+        BM.UP = false;
         GameObject.Find("Start").GetComponent<Canvas>().enabled = false;
         GetComponent<Canvas>().enabled = true;
         TimeEnd = false;
