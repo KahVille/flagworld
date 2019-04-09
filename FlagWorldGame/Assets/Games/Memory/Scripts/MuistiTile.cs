@@ -10,6 +10,7 @@ public class MuistiTile : MonoBehaviour {
 
     private SpriteRenderer render, maretarium;
     private Sprite CardBack, Picture;
+    public Sprite Pair;
     private bool isSelected = false;
     private Color32 back, front;
     private MuistiManager MM;
@@ -48,11 +49,9 @@ public class MuistiTile : MonoBehaviour {
     {
         if (Paired || !Started || !CanClick)
         {
-            Debug.Log("Not Clickable");
             return;
         }
 
-        Debug.Log("Clickable");
         if (isSelected)
         { // 2 Is it already selected?
             Deselect();
@@ -76,7 +75,7 @@ public class MuistiTile : MonoBehaviour {
 
     private void CheckPair()
     {
-        if(Picture == previousSelected.GetPicture())
+        if(Pair == previousSelected.GetPicture())
         {
             Paired = true;
             previousSelected.Paired = true;
@@ -101,6 +100,11 @@ public class MuistiTile : MonoBehaviour {
     public void SetPicture(Sprite img)
     {
         Picture = img;
+    }
+
+    public void SetPair(Sprite img)
+    {
+        Pair = img;
     }
 
     public Sprite GetPicture()

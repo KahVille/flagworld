@@ -8,9 +8,8 @@ using TMPro;
 public class MuistiCanvas : MonoBehaviour {
 
     private Canvas StartC, HUD, End;
-    private string LanguageID = "Language";
     private string CurrentGameHigh = "CurrGameHigh";
-    private int LID, points;
+    private int points;
 
 	// Use this for initialization
 	void Start () {
@@ -69,7 +68,7 @@ public class MuistiCanvas : MonoBehaviour {
 
     public void ClickNewGame()
     {
-        SceneManager.LoadScene("Muisti", LoadSceneMode.Single);
+        SceneManager.LoadScene("Memory", LoadSceneMode.Single);
     }
 
     private IEnumerator NewGameStart()

@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class MuistiManager : MonoBehaviour {
 
-    public Sprite[] pictures;
+    public Sprite[] pictures, pairs;
     public GameObject tile;
     public int xSize, ySize;
 
@@ -28,11 +28,13 @@ public class MuistiManager : MonoBehaviour {
 
         for(int i = 0; i < pictures.Length; i++)
         {
-            for(int j = 0; j < 2; j++)
-            {
-                boardPics[bP] = pictures[i];
-                bP++;
-            }
+            boardPics[bP] = pictures[i];
+            bP++;
+        }
+        for(int i = 0; i < pairs.Length; i++)
+        {
+            boardPics[bP] = pairs[i];
+            bP++;
         }
 
         for (int t = 0; t < boardPics.Length; t++) // Randomize the order of Sprite within array
@@ -61,6 +63,7 @@ public class MuistiManager : MonoBehaviour {
                 newTile.transform.parent = transform;
 
                 newTile.GetComponent<MuistiTile>().SetPicture(boardPics[bP]);
+                newTile.GetComponent<MuistiTile>().SetPair(GetPair(boardPics[bP]));
                 bP++;
             }
         }
@@ -117,5 +120,33 @@ public class MuistiManager : MonoBehaviour {
     {
         tiles[0, 0].GetComponent<MuistiTile>().StartPressed();
         GameObject.Find("StartCanvas").GetComponent<MuistiCanvas>().TheEnd(moves, false, CountPairs());
+    }
+
+    private Sprite GetPair(Sprite pic)
+    {
+        Sprite pair = null;
+        bool found = false;
+        for (int i = 0; i < pictures.Length; i++)
+        {
+            if (pictures[i] == pic)
+            {
+                pair = pairs[i];
+                found = true;
+                break;
+            }       
+        }
+        if (!found)
+        {
+            for (int i = 0; i < pairs.Length; i++)
+            {
+                if (pairs[i] == pic)
+                {
+                    pair = pictures[i];
+                    break;
+                }
+            }
+        }
+
+        return pair;
     }
 }
