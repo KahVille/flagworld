@@ -26,4 +26,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Games/GPSTest/GPSTest.unity
     guid: 25b23e78a9348bd4db08cd2426aa2568
+  - enabled: 1
+    path: Assets/Games/Connect/Connect.unity
+    guid: ff94cf4ab2de0bb42af27d5ab60cd6cb
   m_configObjects: {}

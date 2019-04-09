@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class StartSwipe : MonoBehaviour
 {
@@ -10,15 +11,15 @@ public class StartSwipe : MonoBehaviour
     public bool FirstScreen;
     private bool isDragging;
     private Vector2 startTouch, swipeDelta;
-    Text details, rulestext;
+    TMP_Text details, rulestext;
     private Swipe SW;
 
 
     void Start()
     {
         SW = GetComponent<Swipe>();
-        details = GameObject.Find("Details").GetComponent<Text>();
-        rulestext = GameObject.Find("RulesText").GetComponent<Text>();
+        details = GameObject.Find("Details").GetComponent<TMP_Text>();
+        rulestext = GameObject.Find("RulesText").GetComponent<TMP_Text>();
         details.enabled = true;
         FirstScreen = true;
         if (FirstScreen)

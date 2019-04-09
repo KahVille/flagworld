@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class ConnectHUD : MonoBehaviour
 {
     private int Points = 0;
     private string CurrentGameHigh = "CurrGameHigh";
     private int P;
-    private Text PointsT, TimerT, EndP, StartT, DetailsT;
+    private TMP_Text EndP, PointsT, TimerT, StartT, DetailsT;
     private Canvas End;
     private float timeLeft = 30f;
     private bool TimeEnd = true;
@@ -24,11 +25,11 @@ public class ConnectHUD : MonoBehaviour
     void Start()
     {
         Time.timeScale = 1;
-        StartT = GameObject.Find("RulesText").GetComponent<Text>();
-        DetailsT = GameObject.Find("Details").GetComponent<Text>();
-        PointsT = GameObject.Find("Points").GetComponent<Text>();
-        TimerT = GameObject.Find("Timer").GetComponent<Text>();
-        EndP = GameObject.Find("EndPoints").GetComponent<Text>();
+        StartT = GameObject.Find("RulesText").GetComponent<TMP_Text>();
+        DetailsT = GameObject.Find("Details").GetComponent<TMP_Text>();
+        PointsT = GameObject.Find("Points").GetComponent<TMP_Text>();
+        TimerT = GameObject.Find("Timer").GetComponent<TMP_Text>();
+        EndP = GameObject.Find("EndPoints").GetComponent<TMP_Text>();
         End = GameObject.Find("End").GetComponent<Canvas>();
         SetText();
         //if (PlayerPrefs.GetInt(CurrentGameHigh) != 0) // if restart
@@ -95,8 +96,8 @@ public class ConnectHUD : MonoBehaviour
         else P = 0;
 
         EndP.GetComponent<RectTransform>().sizeDelta = new Vector2(Screen.width, Screen.height);
-        EndP.text = "Points: " + Points.ToString() + "\nIt equals to " + P.ToString() + " MP";
-        GameObject.Find("Continue").GetComponentInChildren<Text>().text = "Back to menu";
+        EndP.text = "Points: " + Points.ToString();
+        GameObject.Find("Continue").GetComponentInChildren<TMP_Text>().text = "Back to menu";  // End Button text set up
 
         if (P > PlayerPrefs.GetInt(CurrentGameHigh))
         {
