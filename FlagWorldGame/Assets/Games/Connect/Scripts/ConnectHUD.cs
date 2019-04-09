@@ -12,7 +12,7 @@ public class ConnectHUD : MonoBehaviour
     private int P;
     private TMP_Text EndP, PointsT, TimerT, StartT, DetailsT;
     private Canvas End;
-    private float timeLeft = 30f;
+    private float timeLeft = 60f;
     private bool TimeEnd = true;
     private BoardManager BM;
 

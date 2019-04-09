@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class LajitteluSpawner : MonoBehaviour
 {
@@ -13,7 +14,8 @@ public class LajitteluSpawner : MonoBehaviour
     private bool TimeEnd = false;
 
     private GameObject HUD, End;
-    private Text Top, Bottom, Right, Left, Points, Timer;
+    private Text Top, Bottom, Right, Left;
+    private TMP_Text Points, Timer;
 
     private string LanguageID = "Language";
     private string timeText = "Aika: ";
@@ -26,8 +28,8 @@ public class LajitteluSpawner : MonoBehaviour
     {
         HUD = GameObject.Find("HUD");
         End = GameObject.Find("EndCanvas");
-        Points = GameObject.Find("PointsText").GetComponent<Text>();
-        Timer = GameObject.Find("TimerText").GetComponent<Text>();
+        Points = GameObject.Find("PointsText").GetComponent<TMP_Text>();
+        Timer = GameObject.Find("TimerText").GetComponent<TMP_Text>();
         IL = GetComponent<InputLajittelu>();
         SetText();
     }

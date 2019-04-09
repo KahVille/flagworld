@@ -33,6 +33,6 @@ public class EndLajitteluScript : MonoBehaviour {
 
     public void NewGame()
     {
-        SceneManager.LoadScene("Lajittelu", LoadSceneMode.Single);
+        SceneManager.LoadScene("Sorting", LoadSceneMode.Single);
     }
 }
