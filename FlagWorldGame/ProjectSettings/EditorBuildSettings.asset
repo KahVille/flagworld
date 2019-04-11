@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/FirebaseConfig/TestScene/FirebaseTest.unity
+    guid: 9db312c3a544e4491be031a98495d972
+  - enabled: 1
     path: Assets/Menu/MainMenu.unity
     guid: 018d76dbd20df78458f81f6947242c7e
   - enabled: 1

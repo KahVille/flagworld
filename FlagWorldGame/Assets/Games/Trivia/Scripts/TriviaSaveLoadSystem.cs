@@ -38,7 +38,13 @@ public static class TriviaSaveLoadSystem
         }
     }
 
-    private static void SaveContactPoints(ContactPointCollection contactPoints) {
+
+    public static void DeleteData() {
+        string filePath = Application.persistentDataPath + "/collectionPointTest.dat";
+        File.Delete(filePath);
+    }
+
+    public static void SaveContactPoints(ContactPointCollection contactPoints) {
         Debug.Log("saving collection points");
         BinaryFormatter formatter = new BinaryFormatter();
 

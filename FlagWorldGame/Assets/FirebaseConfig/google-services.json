@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "390657013370",
+    "firebase_url": "https://flagworldgame.firebaseio.com",
+    "project_id": "flagworldgame",
+    "storage_bucket": "flagworldgame.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:390657013370:android:601c4fbb6b21c2e9",
+        "android_client_info": {
+          "package_name": "com.Xamk.FlagWorldGame"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "390657013370-9rq3a0ra44hcjg15kpbbq53378s4i4qb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBqfBYbw_e6u6SRjVOEtz6f2qVx-oN3kwI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "390657013370-9rq3a0ra44hcjg15kpbbq53378s4i4qb.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "390657013370-rg81nhiuu5a5p5n8np3lr9f1dfepkfvu.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.Xamk.FlagWorldGame"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
