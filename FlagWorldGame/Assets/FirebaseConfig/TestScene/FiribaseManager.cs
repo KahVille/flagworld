@@ -3,69 +3,117 @@ using System.Collections.Generic;
 using UnityEngine;
 using Firebase;
 using Firebase.Database;
+using Firebase.Unity.Editor;
 using TMPro;
-
+using UnityEngine.UI;
 public class FiribaseManager : MonoBehaviour
 {
 
-    protected bool isFirebaseReady = false;
+    protected bool isFirebaseInitialized = false;
 
     ContactPointCollection myPointData = null;
 
     [SerializeField]
     private TextMeshProUGUI myFirstContactPointName = null;
 
-    // Start is called before the first frame update
-    private void Start()
+    [SerializeField]
+    Button continueButton = null;
+
+    DependencyStatus dependencyStatus = DependencyStatus.UnavailableOther;
+
+    void Start()
     {
         FirebaseApp.CheckAndFixDependenciesAsync().ContinueWith(task =>
         {
-            var dependencyStatus = task.Result;
+            dependencyStatus = task.Result;
             if (dependencyStatus == DependencyStatus.Available)
             {
-        // Create and hold a reference to your FirebaseApp,
-        // where app is a Firebase.FirebaseApp property of your application class.
-        FirebaseApp app = FirebaseApp.DefaultInstance;
-        // Set a flag here to indicate whether Firebase is ready to use by your app.
-        isFirebaseReady = true;
-        DownloadDataFromDatabase();
-        myPointData = TriviaSaveLoadSystem.LoadContactPoints();
-        myFirstContactPointName.SetText(myPointData.points[0].name);
+                InitializeFirebase();
             }
             else
             {
-                isFirebaseReady = false;
-                UnityEngine.Debug.LogError(System.String.Format(
-        "Could not resolve all Firebase dependencies: {0}", dependencyStatus));
-        // Firebase Unity SDK is not safe to use here.
-    }
+                myFirstContactPointName.SetText(
+                   "Could not resolve all Firebase dependencies: " + dependencyStatus);
+            }
         });
     }
 
 
-    private void DownloadDataFromDatabase()
+    // Initialize the Firebase database:
+    protected virtual void InitializeFirebase()
     {
-        if (isFirebaseReady)
-        {
-            FirebaseDatabase.DefaultInstance
-            .GetReference("finnish_language")
-            .GetValueAsync().ContinueWith(task =>
-            {
-                if (task.IsFaulted)
-                {
-        // Handle the error...
-                }
-                else if (task.IsCompleted)
-                {
-                    DataSnapshot snapshot = task.Result;
-                    ContactPointCollection contactPoints = new ContactPointCollection();
-                    JsonUtility.FromJsonOverwrite(snapshot.GetRawJsonValue(), contactPoints);
-                    TriviaSaveLoadSystem.DeleteData();
-                    TriviaSaveLoadSystem.SaveContactPoints(contactPoints);
+        FirebaseApp app = FirebaseApp.DefaultInstance;
+        CheckDatabaseVersion();
+        isFirebaseInitialized = true;
+    }
 
+    protected void CheckDatabaseVersion()
+    {
+         continueButton.interactable = false;
+        myFirstContactPointName.SetText("Version Chekking...");
+        string currentDatabaseVersion = PlayerPrefs.GetString("database_version");
+        FirebaseDatabase.DefaultInstance
+        .GetReference("database_version")
+        .GetValueAsync().ContinueWith(task =>
+        {
+            if (task.IsFaulted)
+            {
+                myFirstContactPointName.SetText("Version check failed");
+            }
+            else if (task.IsCompleted)
+            {
+                DataSnapshot snapshot = task.Result;
+                string verNumberString = snapshot.GetRawJsonValue();
+
+                if (verNumberString != currentDatabaseVersion)
+                {
+                    myFirstContactPointName.SetText("newData found");
+                    TriviaSaveLoadSystem.DeleteData();
+                    PlayerPrefs.SetString("database_version", verNumberString);
+                    DownloadDataFromDatabase();
                 }
-            });
+                else
+                {
+                    myFirstContactPointName.SetText("No new data available...");
+                    continueButton.interactable = true;
+                }
+            }
+        });
+
+    }
+
+    public void SetUpContactPoints()
+    {
+        myPointData = TriviaSaveLoadSystem.LoadContactPoints();
+        myFirstContactPointName.SetText("Load completed...");
+        if (myPointData != null)
+        {
+            myFirstContactPointName.SetText(myPointData.points[0].name);
         }
     }
 
+    protected void DownloadDataFromDatabase()
+    {
+        myFirstContactPointName.SetText("Download start...");
+        FirebaseDatabase.DefaultInstance
+        .GetReference("finnish_language")
+        .GetValueAsync().ContinueWith(task =>
+        {
+            if (task.IsFaulted)
+            {
+                myFirstContactPointName.SetText("Download failed");
+            }
+            else if (task.IsCompleted)
+            {
+                myFirstContactPointName.SetText("Download completed...");
+                myFirstContactPointName.SetText("Saving to disk ...");
+                DataSnapshot snapshot = task.Result;
+                ContactPointCollection contactPoints = new ContactPointCollection();
+                JsonUtility.FromJsonOverwrite(snapshot.GetRawJsonValue(), contactPoints);
+                TriviaSaveLoadSystem.SaveContactPoints(contactPoints);
+                myFirstContactPointName.SetText("Saving completed ...");
+                continueButton.interactable = true;
+            }
+        });
+    }
 }
