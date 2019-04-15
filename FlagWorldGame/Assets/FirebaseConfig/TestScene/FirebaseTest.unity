@@ -896,6 +896,27 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1574731297}
   m_PrefabAsset: {fileID: 0}
+--- !u!223 &1812763092
+Canvas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1812763089}
+  m_Enabled: 0
+  serializedVersion: 3
+  m_RenderMode: 2
+  m_Camera: {fileID: 0}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 0
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_AdditionalShaderChannelsFlag: 25
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+  m_TargetDisplay: 0
 --- !u!1 &1819925268
 GameObject:
   m_ObjectHideFlags: 0
@@ -927,7 +948,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myFirstContactPointName: {fileID: 697709030}
   continueButton: {fileID: 2104499065}
-  loadingIndicator: {fileID: 1812763089}
 --- !u!4 &1819925270
 Transform:
   m_ObjectHideFlags: 0
