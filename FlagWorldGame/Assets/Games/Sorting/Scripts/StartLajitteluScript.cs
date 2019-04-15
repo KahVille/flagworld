@@ -24,5 +24,6 @@ public class StartLajitteluScript : MonoBehaviour {
         Spawner.GetComponent<LajitteluSpawner>().enabled = true;
         GetComponent<Canvas>().enabled = false;
         Spawner.GetComponent<InputLajittelu>().enabled = true;
+        Spawner.GetComponent<LajitteluSpawner>().enabled = true;
     }
 }
