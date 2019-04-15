@@ -1,0 +1,216 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!181963792 &2655988077585873504
+Preset:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: GPSScript
+  m_TargetType:
+    m_NativeTypeID: 114
+    m_ManagedTypePPtr: {fileID: 11500000, guid: 8eaddab6e88a71f4793f0a4f7db172c6,
+      type: 3}
+    m_ManagedTypeFallback: 
+  m_Properties:
+  - target: {fileID: 0}
+    propertyPath: m_Enabled
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_EditorHideFlags
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_EditorClassIdentifier
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: longText
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: latText
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: debugText
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: autologImg
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: locations.Array.size
+    value: 6
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: locations.Array.data[0].name
+    value: Suurlippu
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: locations.Array.data[0].longitude
+    value: 27.19861
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: locations.Array.data[0].latitude
+    value: 60.564
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: locations.Array.data[0].rangeDistance
+    value: 0.07
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: locations.Array.data[0].image
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: locations.Array.data[0].title
+    value: Suurlippu
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: locations.Array.data[0].description
+    value: "Suuri siniristilippu on n\xE4ht\xE4vyys, joka korostaa Suomen kansan erityisyytt\xE4,
+      mutta topeliaanisessa hengess\xE4 arvostaen erilaisuutta ja yhteis\xF6llisyytt\xE4."
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: locations.Array.data[1].name
+    value: Lipputorni
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: locations.Array.data[1].longitude
+    value: 27.20004
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: locations.Array.data[1].latitude
+    value: 60.56919
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: locations.Array.data[1].rangeDistance
+    value: 0.056
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: locations.Array.data[1].image
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: locations.Array.data[1].title
+    value: Lipputorni
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: locations.Array.data[1].description
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: locations.Array.data[2].name
+    value: Suomenlipuntie
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: locations.Array.data[2].longitude
+    value: 27.20055
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: locations.Array.data[2].latitude
+    value: 60.56885
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: locations.Array.data[2].rangeDistance
+    value: 0.1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: locations.Array.data[2].image
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: locations.Array.data[2].title
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: locations.Array.data[2].description
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: locations.Array.data[3].name
+    value: Raatihuone
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: locations.Array.data[3].longitude
+    value: 27.19762
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: locations.Array.data[3].latitude
+    value: 60.56969
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: locations.Array.data[3].rangeDistance
+    value: 0.1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: locations.Array.data[3].image
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: locations.Array.data[3].title
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: locations.Array.data[3].description
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: locations.Array.data[4].name
+    value: Koulu
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: locations.Array.data[4].longitude
+    value: 26.892323
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: locations.Array.data[4].latitude
+    value: 60.487766
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: locations.Array.data[4].rangeDistance
+    value: 0.056
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: locations.Array.data[4].image
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: locations.Array.data[4].title
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: locations.Array.data[4].description
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: locations.Array.data[5].name
+    value: Koti
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: locations.Array.data[5].longitude
+    value: 26.88898
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: locations.Array.data[5].latitude
+    value: 60.495598
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: locations.Array.data[5].rangeDistance
+    value: 0.056
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: locations.Array.data[5].image
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: locations.Array.data[5].title
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: locations.Array.data[5].description
+    value: 
+    objectReference: {fileID: 0}

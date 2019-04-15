@@ -12,6 +12,8 @@ public class GPSScript : MonoBehaviour
     public TextMeshProUGUI longText;
     public TextMeshProUGUI latText;
     public TextMeshProUGUI debugText;
+    public TextMeshProUGUI locationTitleText;
+    public TextMeshProUGUI locationDescText;
     bool tracking;
     float longitude;
     float latitude;
@@ -21,12 +23,19 @@ public class GPSScript : MonoBehaviour
     int logIndex;
     Location lastLocation;
     public Location[] locations;
+    public List<Button> locBtns = new List<Button>();
     float lastDistance;
+    public GameObject infoPanelObj;
+    Animator infoAnim;
+    bool canOpenMenu;
+    public float debugLongitude, debugLatitude;
 
     // Start is called before the first frame update
     IEnumerator Start()
     {
         debugText.text = "Start";
+        infoAnim = infoPanelObj.GetComponent<Animator>();
+        canOpenMenu = false;
         
         // Android permissions
         #if UNITY_ANDROID
@@ -37,6 +46,7 @@ public class GPSScript : MonoBehaviour
 
         #endif
 
+        #if UNITY_ANDROID && !UNITY_EDITOR
         yield return new WaitForSeconds(5f);
         // First, check if user has location service enabled
         if (!Input.location.isEnabledByUser)
@@ -84,6 +94,22 @@ public class GPSScript : MonoBehaviour
         {
             File.AppendAllText(Application.persistentDataPath + "/GPSDatas.txt", String.Empty);
         }
+
+        #elif UNITY_EDITOR
+        yield return null;
+        debugText.text = "Working, yay!";
+        tracking = true;
+        lastDistance = float.MaxValue;
+        StartCoroutine(UpdateLocation());
+        #endif
+
+        // Add listeners to location buttons
+        for(int i = 0; i < locations.Length; i++)
+        {
+            int tmp = i;
+            locBtns.Add(locations[i].image.transform.GetComponent<Button>());
+            locBtns[i].onClick.AddListener(delegate {PushBtn(tmp);});
+        }
     }
 
     void Update()
@@ -91,6 +117,37 @@ public class GPSScript : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape)) 
         {
             Application.Quit(); 
+        }
+    }
+
+    // Activate popup and set the correct texts
+    public void PushBtn(int locationIndex)
+    {
+        Debug.Log(locationIndex);
+        if(lastLocation != null)
+            Debug.Log("LAST LOCATION: " + lastLocation.title);
+        Debug.Log("LOCINDEX LOCATION: " + locations[locationIndex].title);
+        if(canOpenMenu && lastLocation != null && lastLocation.name == locations[locationIndex].name)
+        {
+            infoPanelObj.GetComponent<DisableScript>().enabled = false;
+            infoPanelObj.SetActive(true);
+            infoAnim.SetBool("ShowPanel", true);
+            locationTitleText.text = locations[locationIndex].title;
+            locationDescText.text = locations[locationIndex].description;
+        }
+    }
+
+    public void DisablePanel()
+    {
+        infoAnim.SetBool("ShowPanel", false);
+    }
+
+    // Disable listeners
+    private void OnDisable() 
+    {
+        for(int i = 0; i < locations.Length; i++)
+        {
+            locBtns[i].onClick.RemoveAllListeners();
         }
     }
 
@@ -124,6 +181,8 @@ public class GPSScript : MonoBehaviour
     void CheckClosestLoc()
     {
         float tempDist;
+        lastDistance = float.MaxValue;
+        lastLocation = null;
         for(int i = 0; i < locations.Length; i++)
         {
             tempDist = Calculate_Distance(longitude, latitude, locations[i].longitude, locations[i].latitude);
@@ -132,16 +191,20 @@ public class GPSScript : MonoBehaviour
                 lastDistance = tempDist;
                 lastLocation = locations[i];
             }
+            //Debug.Log(lastDistance);
+            locations[i].image.color = Color.red;
 
-            // Check if distance is within a locations range, if it is, change the image color.
-            if(lastDistance < locations[i].rangeDistance)
-            {
-                locations[i].image.color = Color.green;
-            }
-            else if(lastDistance > locations[i].rangeDistance)
-            {
-                locations[i].image.color = Color.red;
-            }
+        }
+
+        // Check if distance is within a locations range, if it is, change the image color.
+        if(lastDistance < lastLocation.rangeDistance)
+        {
+            lastLocation.image.color = Color.green;
+            canOpenMenu = true;
+        }
+        else
+        {
+            canOpenMenu = false;
         }
     }
 
@@ -152,6 +215,7 @@ public class GPSScript : MonoBehaviour
         logIndex = 0;
         while(tracking)
         {
+            #if UNITY_ANDROID && !UNITY_EDITOR
             longitude = Input.location.lastData.longitude;
 			latitude = Input.location.lastData.latitude;
             CheckClosestLoc();
@@ -174,8 +238,8 @@ public class GPSScript : MonoBehaviour
             {
                 debugText.text = "Dist: " + lastDistance;
             }
-            longText.text = "Longitude: " + longitude.ToString();
-            latText.text = "Latitude: " + latitude.ToString();
+            //longText.text = "Longitude: " + longitude.ToString();
+            //latText.text = "Latitude: " + latitude.ToString();
 
             if(autologging)
             {
@@ -186,6 +250,22 @@ public class GPSScript : MonoBehaviour
                 logIndex++;
             }
             yield return new WaitForSeconds(3f);
+
+            #elif UNITY_EDITOR
+            longitude = debugLongitude;
+            latitude = debugLatitude;
+            CheckClosestLoc();
+            if(lastDistance < lastLocation.rangeDistance)
+            {
+                debugText.text = "IN " + lastLocation.name;
+            }
+            else
+            {
+                debugText.text = "Dist: " + lastDistance;
+            }
+            yield return new WaitForSeconds(1f);
+
+            #endif
         }
     }
 

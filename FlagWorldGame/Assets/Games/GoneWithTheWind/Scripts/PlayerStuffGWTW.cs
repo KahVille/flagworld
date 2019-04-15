@@ -44,6 +44,7 @@ public class PlayerStuffGWTW : MonoBehaviour
     public TextMeshProUGUI scoreText;
 
     public GameObject bird;
+    public GameObject birdWarning;
 
     // Start is called before the first frame update
     IEnumerator Start()
@@ -98,7 +99,7 @@ public class PlayerStuffGWTW : MonoBehaviour
             flagMat.SetFloat("_WaveSpeed", 50f);
         }
     
-        desiredPos.y -= (swipe.SwipeDelta.y * 0.01f);
+        desiredPos.y -= (swipe.SwipeDelta.y * 0.005f);
         desiredPos.y = Mathf.Clamp(desiredPos.y, bottomOfPole.position.y, topOfPole.position.y);
         flag.transform.position = Vector3.SmoothDamp(flag.transform.position, desiredPos, ref velocity, smoothTime);
     }
@@ -148,13 +149,21 @@ public class PlayerStuffGWTW : MonoBehaviour
         float birdTime;
         Vector3 spawnPos;
         spawnPos = Vector3.zero;
-        spawnPos.z = -1f;
+        spawnPos.z = -2f;
         spawnPos.x = -7f;
         while(!gameOver)
         {
             birdTime = Random.Range(1f,10f);
             yield return new WaitForSeconds(birdTime);
             spawnPos.y = Random.Range(bottomOfPole.position.y, topOfPole.position.y - 1f);
+            Vector3 spawnPosInVP = Camera.main.WorldToViewportPoint(spawnPos);
+            spawnPosInVP.x = 0.15f;
+            spawnPosInVP = Camera.main.ViewportToWorldPoint(spawnPosInVP);
+            spawnPosInVP.z = -2f;
+            birdWarning.transform.position = spawnPosInVP;
+            birdWarning.SetActive(true);
+            yield return new WaitForSeconds(0.5f);
+            birdWarning.SetActive(false);
             GameObject newBird = Instantiate(bird, spawnPos, Quaternion.identity);
             
             //newBird.GetComponent<Rigidbody2D>().velocity = Vector2.right * 5f;
