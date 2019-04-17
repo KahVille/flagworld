@@ -6,6 +6,7 @@ using Firebase.Database;
 using Firebase.Unity.Editor;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.Networking;
 public class FiribaseManager : MonoBehaviour
 {
 
@@ -19,10 +20,17 @@ public class FiribaseManager : MonoBehaviour
     [SerializeField]
     Button continueButton = null;
 
+    [SerializeField]
+    private GameObject loadingIndicator = null;
+
     DependencyStatus dependencyStatus = DependencyStatus.UnavailableOther;
+
+    bool isNetworkReached = false;
 
     void Start()
     {
+        loadingIndicator.SetActive(true);
+
         FirebaseApp.CheckAndFixDependenciesAsync().ContinueWith(task =>
         {
             dependencyStatus = task.Result;
@@ -34,8 +42,31 @@ public class FiribaseManager : MonoBehaviour
             {
                 myFirstContactPointName.SetText(
                    "Could not resolve all Firebase dependencies: " + dependencyStatus);
+                continueButton.interactable = true;
+                loadingIndicator.SetActive(false);
             }
         });
+    }
+
+
+    IEnumerator GetRequest(string uri)
+    {
+        using (UnityWebRequest webRequest = UnityWebRequest.Get(uri))
+        {
+            // Request and wait for the desired page.
+            yield return webRequest.SendWebRequest();
+
+            if (webRequest.isNetworkError)
+            {
+                isNetworkReached = false;
+               yield return false;
+            }
+            else
+            {
+                isNetworkReached = true;
+                yield return true;
+            }
+        }
     }
 
 
@@ -43,13 +74,27 @@ public class FiribaseManager : MonoBehaviour
     protected virtual void InitializeFirebase()
     {
         FirebaseApp app = FirebaseApp.DefaultInstance;
-        CheckDatabaseVersion();
+        if(IsNetworkReachable()) {
+            CheckDatabaseVersion();
+        }
+        else {
+            myFirstContactPointName.SetText("Network not reacable");
+        }
         isFirebaseInitialized = true;
+    }
+
+    private bool IsNetworkReachable()
+    {
+        if (Application.internetReachability == NetworkReachability.NotReachable)
+        {
+            return false;
+        }
+        return true;
     }
 
     protected void CheckDatabaseVersion()
     {
-         continueButton.interactable = false;
+        continueButton.interactable = false;
         myFirstContactPointName.SetText("Version Chekking...");
         string currentDatabaseVersion = PlayerPrefs.GetString("database_version");
         FirebaseDatabase.DefaultInstance
@@ -76,6 +121,7 @@ public class FiribaseManager : MonoBehaviour
                 {
                     myFirstContactPointName.SetText("No new data available...");
                     continueButton.interactable = true;
+                    loadingIndicator.SetActive(false);
                 }
             }
         });
@@ -88,7 +134,7 @@ public class FiribaseManager : MonoBehaviour
         myFirstContactPointName.SetText("Load completed...");
         if (myPointData != null)
         {
-            myFirstContactPointName.SetText(myPointData.points[0].name);
+            myFirstContactPointName.SetText(myPointData.points[0].questions[0].questionText);
         }
     }
 
@@ -113,6 +159,7 @@ public class FiribaseManager : MonoBehaviour
                 TriviaSaveLoadSystem.SaveContactPoints(contactPoints);
                 myFirstContactPointName.SetText("Saving completed ...");
                 continueButton.interactable = true;
+                loadingIndicator.SetActive(false);
             }
         });
     }
