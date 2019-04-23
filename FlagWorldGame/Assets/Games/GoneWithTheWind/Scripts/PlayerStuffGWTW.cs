@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using TMPro;
 
 
@@ -46,6 +47,9 @@ public class PlayerStuffGWTW : MonoBehaviour
     public GameObject bird;
     public GameObject birdWarning;
 
+    //DEBUG
+    public TextMeshProUGUI debugText;
+
     // Start is called before the first frame update
     IEnumerator Start()
     {
@@ -67,7 +71,7 @@ public class PlayerStuffGWTW : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Escape)) 
         {
-            Application.Quit(); 
+            SceneManager.LoadScene("MainMenu"); 
         }
 
         if(gameOver)
@@ -102,6 +106,7 @@ public class PlayerStuffGWTW : MonoBehaviour
         desiredPos.y -= (swipe.SwipeDelta.y * 0.005f);
         desiredPos.y = Mathf.Clamp(desiredPos.y, bottomOfPole.position.y, topOfPole.position.y);
         flag.transform.position = Vector3.SmoothDamp(flag.transform.position, desiredPos, ref velocity, smoothTime);
+        debugText.text = swipe.SwipeDelta.y.ToString();
     }
 
     public void StartGameOver()

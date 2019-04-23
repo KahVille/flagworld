@@ -5,6 +5,7 @@ using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Android;
+using UnityEngine.SceneManagement;
 using TMPro;
 
 public class GPSScript : MonoBehaviour
@@ -24,11 +25,16 @@ public class GPSScript : MonoBehaviour
     Location lastLocation;
     public Location[] locations;
     public List<Button> locBtns = new List<Button>();
+    // Play-button in the pop-up menu
+    public Button playBtn;
     float lastDistance;
     public GameObject infoPanelObj;
     Animator infoAnim;
     bool canOpenMenu;
     public float debugLongitude, debugLatitude;
+    // Image, which shows are you close to the location on the pop-up panel
+    public Image popupLocImg;
+    public TextMeshProUGUI popupLocText;
 
     // Start is called before the first frame update
     IEnumerator Start()
@@ -108,7 +114,7 @@ public class GPSScript : MonoBehaviour
         {
             int tmp = i;
             locBtns.Add(locations[i].image.transform.GetComponent<Button>());
-            locBtns[i].onClick.AddListener(delegate {PushBtn(tmp);});
+            locBtns[i].onClick.AddListener(delegate {PushLocBtn(tmp);});
         }
     }
 
@@ -116,29 +122,48 @@ public class GPSScript : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape)) 
         {
-            Application.Quit(); 
+            SceneManager.LoadScene("MainMenu");
         }
     }
 
-    // Activate popup and set the correct texts
-    public void PushBtn(int locationIndex)
+    // Activate pop-up and set the correct texts
+    public void PushLocBtn(int locationIndex)
     {
         Debug.Log(locationIndex);
         if(lastLocation != null)
             Debug.Log("LAST LOCATION: " + lastLocation.title);
         Debug.Log("LOCINDEX LOCATION: " + locations[locationIndex].title);
+
+        // Open pop-up and show correct info
+        infoPanelObj.GetComponent<DisableScript>().enabled = false;
+        infoPanelObj.SetActive(true);
+        infoAnim.SetBool("ShowPanel", true);
+        locationTitleText.text = locations[locationIndex].title;
+        locationDescText.text = locations[locationIndex].description;
+
+        // Set listener for play button
+        playBtn.onClick.AddListener(delegate {PushPlayBtn(locBtns[locationIndex].transform.name);});
+
         if(canOpenMenu && lastLocation != null && lastLocation.name == locations[locationIndex].name)
         {
-            infoPanelObj.GetComponent<DisableScript>().enabled = false;
-            infoPanelObj.SetActive(true);
-            infoAnim.SetBool("ShowPanel", true);
-            locationTitleText.text = locations[locationIndex].title;
-            locationDescText.text = locations[locationIndex].description;
+            popupLocText.text = "Olet alueella";
+            popupLocImg.color = Color.green;
         }
+        else
+        {
+            popupLocText.text = "Et ole alueella";
+            popupLocImg.color = Color.red;
+        }
+    }
+
+    public void PushPlayBtn(string nameOfGame)
+    {
+        SceneManager.LoadScene(nameOfGame);
     }
 
     public void DisablePanel()
     {
+        playBtn.onClick.RemoveAllListeners();
         infoAnim.SetBool("ShowPanel", false);
     }
 
@@ -149,6 +174,8 @@ public class GPSScript : MonoBehaviour
         {
             locBtns[i].onClick.RemoveAllListeners();
         }
+
+        playBtn.onClick.RemoveAllListeners();
     }
 
     public void ToggleAutolog()
