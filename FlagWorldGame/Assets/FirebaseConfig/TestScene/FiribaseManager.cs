@@ -25,8 +25,6 @@ public class FiribaseManager : MonoBehaviour
 
     DependencyStatus dependencyStatus = DependencyStatus.UnavailableOther;
 
-    bool isNetworkReached = false;
-
     void Start()
     {
         loadingIndicator.SetActive(true);
@@ -48,39 +46,54 @@ public class FiribaseManager : MonoBehaviour
         });
     }
 
-
-    IEnumerator GetRequest(string uri)
+    // Initialize the Firebase database:
+    protected virtual void InitializeFirebase()
     {
-        using (UnityWebRequest webRequest = UnityWebRequest.Get(uri))
+        FirebaseApp app = FirebaseApp.DefaultInstance;
+
+        if (!IsNetworkReachable())
+        {
+            myFirstContactPointName.SetText("Network not reacable");
+            loadingIndicator.SetActive(false);
+            //spawn retry button
+        }
+        else
+        {
+            //continue download proggress
+            StartCoroutine(checkInternetConnection((isConnected) =>
+            {
+                myFirstContactPointName.SetText($"Network state: {isConnected}");
+                //set button to download or retry connectetion based on the network state
+                if (isConnected)
+                {
+                    CheckDatabaseVersion();
+                }
+                else
+                {
+                    loadingIndicator.SetActive(false);
+                    //span retry button
+                }
+            }));
+        }
+        isFirebaseInitialized = true;
+    }
+
+    IEnumerator checkInternetConnection(System.Action<bool> action)
+    {
+        using (UnityWebRequest webRequest = UnityWebRequest.Get("https://firebase.google.com/"))
         {
             // Request and wait for the desired page.
             yield return webRequest.SendWebRequest();
 
             if (webRequest.isNetworkError)
             {
-                isNetworkReached = false;
-               yield return false;
+                action(false);
             }
             else
             {
-                isNetworkReached = true;
-                yield return true;
+                action(true);
             }
         }
-    }
-
-
-    // Initialize the Firebase database:
-    protected virtual void InitializeFirebase()
-    {
-        FirebaseApp app = FirebaseApp.DefaultInstance;
-        if(IsNetworkReachable()) {
-            CheckDatabaseVersion();
-        }
-        else {
-            myFirstContactPointName.SetText("Network not reacable");
-        }
-        isFirebaseInitialized = true;
     }
 
     private bool IsNetworkReachable()
