@@ -23,6 +23,9 @@ public class FiribaseManager : MonoBehaviour
     [SerializeField]
     private GameObject loadingIndicator = null;
 
+    [SerializeField]
+    private GameObject retryConnectionPanel = null;
+
     DependencyStatus dependencyStatus = DependencyStatus.UnavailableOther;
 
     void Start()
@@ -45,6 +48,7 @@ public class FiribaseManager : MonoBehaviour
             }
         });
     }
+    
 
     // Initialize the Firebase database:
     protected virtual void InitializeFirebase()
@@ -56,6 +60,8 @@ public class FiribaseManager : MonoBehaviour
             myFirstContactPointName.SetText("Network not reacable");
             loadingIndicator.SetActive(false);
             //spawn retry button
+            //Instantiate(retryConnectionPanel,)
+
         }
         else
         {
@@ -72,6 +78,7 @@ public class FiribaseManager : MonoBehaviour
                 {
                     loadingIndicator.SetActive(false);
                     //span retry button
+                    retryConnectionPanel.SetActive(true);
                 }
             }));
         }
@@ -103,6 +110,28 @@ public class FiribaseManager : MonoBehaviour
             return false;
         }
         return true;
+    }
+        public void RetryConnection() {
+                  //continue download proggress
+            StartCoroutine(checkInternetConnection((isConnected) =>
+            {
+                myFirstContactPointName.SetText($"Network state: {isConnected}");
+                //set button to download or retry connectetion based on the network state
+                if (isConnected)
+                {
+                    CheckDatabaseVersion();
+                }
+                else
+                {
+                    loadingIndicator.SetActive(false);
+                    //spawn retry button
+                    retryConnectionPanel.SetActive(true);
+                }
+            }));
+    }
+
+    public void BackToMenu() {
+        UnityEngine.SceneManagement.SceneManager.LoadScene("MainMenu");
     }
 
     protected void CheckDatabaseVersion()
