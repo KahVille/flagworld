@@ -69,11 +69,6 @@ public class PlayerStuffGWTW : MonoBehaviour
     void Update()
     {
 
-        if (Input.GetKeyDown(KeyCode.Escape)) 
-        {
-            SceneManager.LoadScene("MainMenu"); 
-        }
-
         if(gameOver)
         {
             return;

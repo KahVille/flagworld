@@ -7,9 +7,9 @@ using UnityEngine.UI;
 public class Location
 {
     public string name;
-    public float longitude;
-    public float latitude;
-    public float rangeDistance;
+    public double longitude;
+    public double latitude;
+    public double rangeDistance;
     public Image image;
     public string title;
     [TextArea]

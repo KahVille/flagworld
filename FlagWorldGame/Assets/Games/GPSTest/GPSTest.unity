@@ -303,7 +303,7 @@ RectTransform:
   m_Children:
   - {fileID: 1752580517}
   m_Father: {fileID: 7569709899158876115}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
@@ -382,8 +382,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 206, y: 476}
-  m_SizeDelta: {x: 50, y: 50}
+  m_AnchoredPosition: {x: 0.98, y: -2.43}
+  m_SizeDelta: {x: 0.4, y: 0.4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &153876170
 MonoBehaviour:
@@ -498,7 +498,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 50, y: -25}
+  m_AnchoredPosition: {x: 99.9588, y: -74.95879}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &220745717
@@ -632,7 +632,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 333446009}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -640,13 +640,14 @@ RectTransform:
   - {fileID: 153876169}
   - {fileID: 1964779268}
   - {fileID: 2036547038}
-  m_Father: {fileID: 7569709899158876115}
+  - {fileID: 824615025}
+  m_Father: {fileID: 910814122}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -17.16, y: 6.6}
+  m_SizeDelta: {x: 17.52, y: 13.24}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &333446011
 MonoBehaviour:
@@ -668,7 +669,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 89deab4945139884f8c4b15c3ce187fa, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6d70f0095a3b8ba41b261f339dbc91ee, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -786,7 +787,7 @@ RectTransform:
   m_Children:
   - {fileID: 109178900}
   m_Father: {fileID: 7569709899158876115}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
@@ -916,6 +917,7 @@ GameObject:
   - component: {fileID: 403932396}
   - component: {fileID: 403932395}
   - component: {fileID: 403932394}
+  - component: {fileID: 403932397}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -987,6 +989,23 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &403932397
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 403932393}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e06ea264d3c4789449645ab45a5bdde5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 1
+  minX: 2.9
+  maxX: 14.7
+  minY: 5.07
+  maxY: 8.11
 --- !u!1 &411591406
 GameObject:
   m_ObjectHideFlags: 0
@@ -1121,11 +1140,11 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 0
+  m_havePropertiesChanged: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 0
+  m_isInputParsingRequired: 1
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_subTextObjects:
@@ -1299,8 +1318,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 235, y: 743}
-  m_SizeDelta: {x: 50, y: 50}
+  m_AnchoredPosition: {x: 2.44, y: 0.83}
+  m_SizeDelta: {x: 0.4, y: 0.4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &420602142
 MonoBehaviour:
@@ -1512,14 +1531,14 @@ MonoBehaviour:
     spaceCount: 0
     wordCount: 1
     linkCount: 0
-    lineCount: 3
+    lineCount: 88
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 0
+  m_havePropertiesChanged: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 0
+  m_isInputParsingRequired: 1
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_subTextObjects:
@@ -1577,7 +1596,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 440, y: -187.5}
+  m_AnchoredPosition: {x: 440, y: -299.9073}
   m_SizeDelta: {x: 500, y: 225}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &696977605
@@ -1696,59 +1715,68 @@ MonoBehaviour:
   autologImg: {fileID: 0}
   locations:
   - name: Suurlippu
-    longitude: 27.19861
-    latitude: 60.564
-    rangeDistance: 0.07
+    longitude: 27.198610305786133
+    latitude: 60.56399917602539
+    rangeDistance: 0.07000000029802322
     image: {fileID: 420602142}
     title: Suurlippu
     description: "Suuri siniristilippu on n\xE4ht\xE4vyys, joka korostaa Suomen kansan
       erityisyytt\xE4, mutta topeliaanisessa hengess\xE4 arvostaen erilaisuutta ja
       yhteis\xF6llisyytt\xE4."
   - name: Lipputorni
-    longitude: 27.20004
-    latitude: 60.56919
-    rangeDistance: 0.056
+    longitude: 27.200040817260742
+    latitude: 60.569190979003906
+    rangeDistance: 0.0560000017285347
     image: {fileID: 153876170}
     title: Lipputorni
     description: "Lipputornia kutsutaan my\xF6s Rauhantorniksi ja se sijaitsee Haminan
       torin laidalla. Se rakennettiin vuonna 1790 linnoituksen komentajan lipputorniksi."
   - name: Suomenlipuntie
-    longitude: 27.20055
-    latitude: 60.56885
-    rangeDistance: 0.1
+    longitude: 27.200550079345703
+    latitude: 60.568851470947266
+    rangeDistance: 0.10000000149011612
     image: {fileID: 1964779269}
     title: Suomen lipun tie
     description: "Suomen lipuntie -lipputeos avattiin RUK:n puistossa 28.5.2018.\r\n\r\nLipputeos
       kertoo kansallisen tunnuksemme ainutlaatuisuudesta, mutta korostaa my\xF6s sen
       historiallista kehityskaarta ja kansainv\xE4list\xE4 yhteytt\xE4. "
   - name: Raatihuone
-    longitude: 27.19762
-    latitude: 60.56969
-    rangeDistance: 0.1
+    longitude: 27.197620391845703
+    latitude: 60.5696907043457
+    rangeDistance: 0.10000000149011612
     image: {fileID: 2036547039}
     title: Raatihuone
     description: Yee haw
   - name: Koulu
-    longitude: 26.892323
-    latitude: 60.487766
-    rangeDistance: 0.056
+    longitude: 26.892322540283203
+    latitude: 60.48776626586914
+    rangeDistance: 0.0560000017285347
     image: {fileID: 416236560}
     title: Xamk
     description: Learn to read and write in this fine establishment.
   - name: Koti
-    longitude: 26.88898
-    latitude: 60.495598
-    rangeDistance: 0.056
+    longitude: 26.888980865478516
+    latitude: 60.49559783935547
+    rangeDistance: 0.0560000017285347
     image: {fileID: 1134919227}
     title: Home
     description: I Sleep
-  locBtns: []
   playBtn: {fileID: 696977605}
   infoPanelObj: {fileID: 1964728401}
-  debugLongitude: 26.89232
-  debugLatitude: 60.48777
+  debugLongitude: 26.89232063293457
+  debugLatitude: 60.487770080566406
   popupLocImg: {fileID: 220745717}
   popupLocText: {fileID: 1048093277}
+  mapImage: {fileID: 333446011}
+  userIndicatorImg: {fileID: 824615026}
+  bottomLeftLongitude: 26.869311
+  bottomRightLongitude: 26.934850692749023
+  topLeftLongitude: 26.857213973999023
+  topRightLongitude: 26.931230545043945
+  bottomLeftLatitude: 60.481929779052734
+  bottomRightLatitude: 60.481590270996094
+  topLeftLatitude: 60.509700775146484
+  topRightLatitude: 60.50961685180664
 --- !u!4 &774346873
 Transform:
   m_ObjectHideFlags: 0
@@ -1832,6 +1860,80 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 815879549}
+  m_CullTransparentMesh: 0
+--- !u!1 &824615024
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 824615025}
+  - component: {fileID: 824615027}
+  - component: {fileID: 824615026}
+  m_Layer: 5
+  m_Name: UserIndicator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &824615025
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 824615024}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 333446010}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &824615026
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 824615024}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 21300000, guid: 8c433a3406735534bbe88347b0737396, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+--- !u!222 &824615027
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 824615024}
   m_CullTransparentMesh: 0
 --- !u!1 &837149465
 GameObject:
@@ -1962,6 +2064,105 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 837149465}
   m_CullTransparentMesh: 0
+--- !u!1 &910814118
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 910814122}
+  - component: {fileID: 910814121}
+  - component: {fileID: 910814120}
+  - component: {fileID: 910814119}
+  m_Layer: 5
+  m_Name: MapCanvas
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &910814119
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 910814118}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1301386320, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreReversedGraphics: 1
+  m_BlockingObjects: 0
+  m_BlockingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+--- !u!114 &910814120
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 910814118}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1980459831, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_UiScaleMode: 0
+  m_ReferencePixelsPerUnit: 100
+  m_ScaleFactor: 1
+  m_ReferenceResolution: {x: 800, y: 600}
+  m_ScreenMatchMode: 0
+  m_MatchWidthOrHeight: 0
+  m_PhysicalUnit: 3
+  m_FallbackScreenDPI: 96
+  m_DefaultSpriteDPI: 96
+  m_DynamicPixelsPerUnit: 1
+--- !u!223 &910814121
+Canvas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 910814118}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 2
+  m_Camera: {fileID: 403932395}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 0
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_AdditionalShaderChannelsFlag: 0
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+  m_TargetDisplay: 0
+--- !u!224 &910814122
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 910814118}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 333446010}
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 50, y: 50}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &914496742
 GameObject:
   m_ObjectHideFlags: 0
@@ -2098,11 +2299,11 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 0
+  m_havePropertiesChanged: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 0
+  m_isInputParsingRequired: 1
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_subTextObjects:
@@ -2158,7 +2359,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 382.5, y: -75}
+  m_AnchoredPosition: {x: 332.5412, y: -75}
   m_SizeDelta: {x: 415, y: 125}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1048093277
@@ -2210,7 +2411,7 @@ MonoBehaviour:
     serializedVersion: 2
     rgba: 4278190080
   m_fontSize: 59.7
-  m_fontSizeBase: 59.7
+  m_fontSizeBase: 0
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -2258,11 +2459,11 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 0
+  m_havePropertiesChanged: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 0
+  m_isInputParsingRequired: 1
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_subTextObjects:
@@ -2418,11 +2619,11 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 0
+  m_havePropertiesChanged: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 0
+  m_isInputParsingRequired: 1
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_subTextObjects:
@@ -2592,7 +2793,7 @@ RectTransform:
   m_Children:
   - {fileID: 386446335}
   m_Father: {fileID: 7569709899158876115}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
@@ -2813,11 +3014,11 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 0
+  m_havePropertiesChanged: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 0
+  m_isInputParsingRequired: 1
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_subTextObjects:
@@ -2875,7 +3076,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 440, y: -462.5}
+  m_AnchoredPosition: {x: 440, y: -350.0927}
   m_SizeDelta: {x: 500, y: 225}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1696641443
@@ -3146,7 +3347,7 @@ RectTransform:
   - {fileID: 837149466}
   - {fileID: 815879550}
   m_Father: {fileID: 7569709899158876115}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -3256,8 +3457,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -102, y: 266}
-  m_SizeDelta: {x: 50, y: 50}
+  m_AnchoredPosition: {x: 0.98, y: 3.68}
+  m_SizeDelta: {x: 0.4, y: 0.4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1964779269
 MonoBehaviour:
@@ -3373,8 +3574,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 148, y: 591}
-  m_SizeDelta: {x: 50, y: 50}
+  m_AnchoredPosition: {x: -1.97, y: 3.38}
+  m_SizeDelta: {x: 0.4, y: 0.4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2036547039
 MonoBehaviour:
@@ -3485,7 +3686,6 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
-  - {fileID: 333446010}
   - {fileID: 1964728402}
   - {fileID: 7569709899511132877}
   - {fileID: 1173344826}
@@ -3673,7 +3873,7 @@ RectTransform:
   m_Children:
   - {fileID: 7569709899448554902}
   m_Father: {fileID: 7569709899158876115}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
