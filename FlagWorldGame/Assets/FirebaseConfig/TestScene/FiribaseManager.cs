@@ -23,10 +23,11 @@ public class FiribaseManager : MonoBehaviour
     [SerializeField]
     private GameObject loadingIndicator = null;
 
-    [SerializeField]
-    private GameObject retryConnectionPanel = null;
-
     DependencyStatus dependencyStatus = DependencyStatus.UnavailableOther;
+
+    public delegate void DatabaseError();
+    public static event DatabaseError OnDatabaseError;
+
 
     void Start()
     {
@@ -43,8 +44,9 @@ public class FiribaseManager : MonoBehaviour
             {
                 myFirstContactPointName.SetText(
                    "Could not resolve all Firebase dependencies: " + dependencyStatus);
-                continueButton.interactable = true;
-                loadingIndicator.SetActive(false);
+                if(OnDatabaseError != null)
+                    OnDatabaseError();
+                
             }
         });
     }
@@ -57,32 +59,22 @@ public class FiribaseManager : MonoBehaviour
 
         if (!IsNetworkReachable())
         {
-            myFirstContactPointName.SetText("Network not reacable");
-            loadingIndicator.SetActive(false);
-            //spawn retry button
-            //Instantiate(retryConnectionPanel,)
+
+           SpawnDatabaseError();
 
         }
         else
         {
-            //continue download proggress
-            StartCoroutine(checkInternetConnection((isConnected) =>
-            {
-                myFirstContactPointName.SetText($"Network state: {isConnected}");
-                //set button to download or retry connectetion based on the network state
-                if (isConnected)
-                {
-                    CheckDatabaseVersion();
-                }
-                else
-                {
-                    loadingIndicator.SetActive(false);
-                    //span retry button
-                    retryConnectionPanel.SetActive(true);
-                }
-            }));
+            RetryConnection();
         }
         isFirebaseInitialized = true;
+    }
+
+    private void SpawnDatabaseError() {
+            myFirstContactPointName.SetText("Network not reacable");
+            if(OnDatabaseError != null)
+                OnDatabaseError();
+            loadingIndicator.SetActive(false);
     }
 
     IEnumerator checkInternetConnection(System.Action<bool> action)
@@ -112,7 +104,8 @@ public class FiribaseManager : MonoBehaviour
         return true;
     }
         public void RetryConnection() {
-                  //continue download proggress
+                //continue download proggress
+            loadingIndicator.SetActive(true);
             StartCoroutine(checkInternetConnection((isConnected) =>
             {
                 myFirstContactPointName.SetText($"Network state: {isConnected}");
@@ -123,9 +116,7 @@ public class FiribaseManager : MonoBehaviour
                 }
                 else
                 {
-                    loadingIndicator.SetActive(false);
-                    //spawn retry button
-                    retryConnectionPanel.SetActive(true);
+                    SpawnDatabaseError();
                 }
             }));
     }
@@ -136,6 +127,7 @@ public class FiribaseManager : MonoBehaviour
 
     protected void CheckDatabaseVersion()
     {
+        loadingIndicator.SetActive(true);
         continueButton.interactable = false;
         myFirstContactPointName.SetText("Version Chekking...");
         string currentDatabaseVersion = PlayerPrefs.GetString("database_version");
@@ -162,22 +154,22 @@ public class FiribaseManager : MonoBehaviour
                 else
                 {
                     myFirstContactPointName.SetText("No new data available...");
-                    continueButton.interactable = true;
                     loadingIndicator.SetActive(false);
+                    // retryConnectionPanel.SetActive(false);
+                    myPointData = TriviaSaveLoadSystem.LoadContactPoints();
+                    if(myPointData !=null) {
+                        myFirstContactPointName.SetText("Trivia is up-to-date");
+                        continueButton.interactable = true;
+
+                    }
                 }
             }
         });
-
     }
 
     public void SetUpContactPoints()
     {
-        myPointData = TriviaSaveLoadSystem.LoadContactPoints();
-        myFirstContactPointName.SetText("Load completed...");
-        if (myPointData != null)
-        {
-            myFirstContactPointName.SetText(myPointData.points[0].questions[0].questionText);
-        }
+        UnityEngine.SceneManagement.SceneManager.LoadScene("MainMenu");
     }
 
     protected void DownloadDataFromDatabase()
