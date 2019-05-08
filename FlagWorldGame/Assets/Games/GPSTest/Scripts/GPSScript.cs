@@ -258,7 +258,6 @@ public class GPSScript : MonoBehaviour
             {
                 debugText.text = "IN " + lastLocation.name;
                 SetCurrentContactPointForTrivia(lastLocation.name);
-                UnityEngine.SceneManagement.SceneManager.LoadScene("Trivia",UnityEngine.SceneManagement.LoadSceneMode.Single);
 
             }
             else
