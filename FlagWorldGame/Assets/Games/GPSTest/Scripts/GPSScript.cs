@@ -16,25 +16,35 @@ public class GPSScript : MonoBehaviour
     public TextMeshProUGUI locationTitleText;
     public TextMeshProUGUI locationDescText;
     bool tracking;
-    float longitude;
-    float latitude;
+    double longitude;
+    double latitude;
     bool autologging;
     public Image autologImg;
     string serializedData;
     int logIndex;
     Location lastLocation;
     public Location[] locations;
-    public List<Button> locBtns = new List<Button>();
+    List<Button> locBtns = new List<Button>();
     // Play-button in the pop-up menu
     public Button playBtn;
-    float lastDistance;
+    double lastDistance;
     public GameObject infoPanelObj;
     Animator infoAnim;
     bool canOpenMenu;
-    public float debugLongitude, debugLatitude;
+    public double debugLongitude, debugLatitude;
     // Image, which shows are you close to the location on the pop-up panel
     public Image popupLocImg;
     public TextMeshProUGUI popupLocText;
+    // The map image
+    public Image mapImage;
+    // Image which shows where the player is on the map
+    public Image userIndicatorImg;
+    // Longitudes and latitudes for the map images corners
+    public double bottomLeftLongitude, bottomRightLongitude, topLeftLongitude, topRightLongitude;
+    public double bottomLeftLatitude, bottomRightLatitude, topLeftLatitude, topRightLatitude;
+    // Distance the user is from the bottom left of map, used to calculate where to show the user indicator on map
+    // Given in percent, have to use floats for Vectors
+    float mapDistX, mapDistY;
 
     // Start is called before the first frame update
     IEnumerator Start()
@@ -42,6 +52,20 @@ public class GPSScript : MonoBehaviour
         debugText.text = "Start";
         infoAnim = infoPanelObj.GetComponent<Animator>();
         canOpenMenu = false;
+
+        // Set map to correct position. First the map is moved to origo (0,0,0), then moved right and up so
+        // the bottom left corner of map is in origo, and the map extends right and up.
+        Vector3 wantedPos = Vector3.zero;
+        RectTransform rt = mapImage.GetComponent<RectTransform>();
+        wantedPos.x += rt.rect.width/2;
+        wantedPos.y += rt.rect.height/2;     
+        rt.position = wantedPos;
+
+        // Set camera start position to center of map
+        Vector3 cameraStartPos;
+        cameraStartPos = mapImage.transform.position;
+        cameraStartPos.z = -10f;
+        Camera.main.transform.position = cameraStartPos;
         
         // Android permissions
         #if UNITY_ANDROID
@@ -92,7 +116,7 @@ public class GPSScript : MonoBehaviour
             //debugText.text = "Location: " + Input.location.lastData.latitude + " " + Input.location.lastData.longitude + " " + Input.location.lastData.altitude + " " + Input.location.lastData.horizontalAccuracy + " " + Input.location.lastData.timestamp;
 			debugText.text = "Working, yay!";
             tracking = true;
-            lastDistance = float.MaxValue;
+            lastDistance = double.MaxValue;
             StartCoroutine(UpdateLocation());
         }
 
@@ -105,7 +129,7 @@ public class GPSScript : MonoBehaviour
         yield return null;
         debugText.text = "Working, yay!";
         tracking = true;
-        lastDistance = float.MaxValue;
+        lastDistance = double.MaxValue;
         StartCoroutine(UpdateLocation());
         #endif
 
@@ -115,14 +139,6 @@ public class GPSScript : MonoBehaviour
             int tmp = i;
             locBtns.Add(locations[i].image.transform.GetComponent<Button>());
             locBtns[i].onClick.AddListener(delegate {PushLocBtn(tmp);});
-        }
-    }
-
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Escape)) 
-        {
-            SceneManager.LoadScene("MainMenu");
         }
     }
 
@@ -205,10 +221,24 @@ public class GPSScript : MonoBehaviour
         File.WriteAllText(Application.persistentDataPath + "/GPSDatas.txt", String.Empty);
     }
 
+    void DebugWriteMapData()
+    {
+        if(!File.Exists(Application.persistentDataPath + "/MapData.txt"))
+        {
+            File.AppendAllText(Application.persistentDataPath + "/MapData.txt", String.Empty);
+        }
+
+        serializedData = "Longitude: " + longitude.ToString() + "\n"
+        + "Latitude: " + latitude.ToString() + "\n"
+        + "PercentX: " + mapDistX.ToString() + "\n"
+        + "PercentY: " + mapDistY.ToString() + "\n";
+        File.AppendAllText(Application.persistentDataPath + "/MapData.txt", serializedData);
+    }
+
     void CheckClosestLoc()
     {
-        float tempDist;
-        lastDistance = float.MaxValue;
+        double tempDist;
+        lastDistance = double.MaxValue;
         lastLocation = null;
         for(int i = 0; i < locations.Length; i++)
         {
@@ -235,6 +265,29 @@ public class GPSScript : MonoBehaviour
         }
     }
 
+    void UpdatePlayerIndicator()
+    {
+        double x1 = longitude - topLeftLongitude;
+        double x2 = topRightLongitude - longitude;
+        double x3 = x1 + x2;
+        mapDistX = (float)(x1 / x3);
+        double y1 = latitude - bottomRightLatitude;
+        double y2 = topRightLatitude - latitude;
+        double y3 = y1 + y2;
+        mapDistY = (float)(y1 / y3);
+        Vector3 endPos;
+        Vector3[] mapCorners = new Vector3[4];
+        mapImage.GetComponent<RectTransform>().GetWorldCorners(mapCorners);
+        for(int i = 0; i < 4; i++)
+        {
+            Debug.Log(mapCorners[i]);
+        }
+        endPos.x = mapCorners[2].x * mapDistX;
+        endPos.y = mapCorners[2].y * mapDistY;
+        endPos.z = 0f;
+        userIndicatorImg.transform.position = endPos;
+    }
+
     IEnumerator UpdateLocation()
     {
         DateTime now = DateTime.Now;
@@ -242,10 +295,12 @@ public class GPSScript : MonoBehaviour
         logIndex = 0;
         while(tracking)
         {
-            #if UNITY_ANDROID && !UNITY_EDITOR
+            #if (UNITY_ANDROID || UNITY_IOS) && !UNITY_EDITOR
             longitude = Input.location.lastData.longitude;
 			latitude = Input.location.lastData.latitude;
             CheckClosestLoc();
+            UpdatePlayerIndicator();
+            DebugWriteMapData();
             // if(lastDistance < rangeDistance)
             // {
             //     debugText.text = "IN " + lastLocation.name;
@@ -258,6 +313,7 @@ public class GPSScript : MonoBehaviour
             {
                 debugText.text = "IN " + lastLocation.name;
                 SetCurrentContactPointForTrivia(lastLocation.name);
+                //UnityEngine.SceneManagement.SceneManager.LoadScene("Trivia",UnityEngine.SceneManagement.LoadSceneMode.Single);
 
             }
             else
@@ -281,6 +337,7 @@ public class GPSScript : MonoBehaviour
             longitude = debugLongitude;
             latitude = debugLatitude;
             CheckClosestLoc();
+            UpdatePlayerIndicator();
             if(lastDistance < lastLocation.rangeDistance)
             {
                 debugText.text = "IN " + lastLocation.name;
@@ -330,43 +387,43 @@ public class GPSScript : MonoBehaviour
 
     // GPS functions
     // https://answers.unity.com/questions/1221259/how-to-get-distance-from-2-locations-with-unity-lo.html
-	float DegToRad(float deg)
+	double DegToRad(double deg)
 	{
-		float temp;
-		temp = (deg * Mathf.PI) / 180.0f;
-		temp = Mathf.Tan(temp);
+		double temp;
+		temp = (deg * Math.PI) / 180.0f;
+		temp = Math.Tan(temp);
 		return temp;
 	}
  
-  	float Distance_x(float lon_a, float lon_b, float lat_a, float lat_b)
+  	double Distance_x(double lon_a, double lon_b, double lat_a, double lat_b)
 	{
-		float temp;
-		float c;
+		double temp;
+		double c;
 		temp = (lat_b - lat_a);
-		c = Mathf.Abs(temp * Mathf.Cos((lat_a + lat_b)) / 2);
+		c = Math.Abs(temp * Math.Cos((lat_a + lat_b)) / 2);
 		return c;
 	}
  
-	private float Distance_y(float lat_a, float lat_b)
+	private double Distance_y(double lat_a, double lat_b)
 	{
-		float c;
+		double c;
 		c = (lat_b - lat_a);
 		return c;
 	}
  
-	float Final_distance(float x, float y)
+	double Final_distance(double x, double y)
 	{
-		float c;
-		c = Mathf.Abs(Mathf.Sqrt(Mathf.Pow(x, 2f) + Mathf.Pow(y, 2f))) * 6371;
+		double c;
+		c = Math.Abs(Math.Sqrt(Math.Pow(x, 2f) + Math.Pow(y, 2f))) * 6371;
 		return c;
 	}
  
      //*******************************
  //This is the function to call to calculate the distance between two points
  
-	public float Calculate_Distance(float long_a, float lat_a,float long_b, float lat_b )
+	public double Calculate_Distance(double long_a, double lat_a,double long_b, double lat_b )
 	{
-		float a_long_r, a_lat_r, p_long_r, p_lat_r, dist_x, dist_y, total_dist;
+		double a_long_r, a_lat_r, p_long_r, p_lat_r, dist_x, dist_y, total_dist;
 		a_long_r =DegToRad(long_a);
 		a_lat_r = DegToRad(lat_a);
 		p_long_r = DegToRad(long_b);
