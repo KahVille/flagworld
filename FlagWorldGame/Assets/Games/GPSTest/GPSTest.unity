@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44659364, g: 0.4964301, b: 0.5748256, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1002,10 +1002,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1
-  minX: 2.9
-  maxX: 14.7
-  minY: 5.07
-  maxY: 8.11
+  zoomMultiplier: 1
+  minZoomMult: 0.7
+  maxZoomMult: 1.3
+  debugText: {fileID: 109178901}
 --- !u!1 &411591406
 GameObject:
   m_ObjectHideFlags: 0
@@ -1179,7 +1179,7 @@ GameObject:
   - component: {fileID: 416236560}
   - component: {fileID: 416236562}
   m_Layer: 5
-  m_Name: GoneWithTheWind
+  m_Name: Loc5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1748,9 +1748,9 @@ MonoBehaviour:
     title: Raatihuone
     description: Yee haw
   - name: Koulu
-    longitude: 26.892323
-    latitude: 60.487766
-    rangeDistance: 0.3
+    longitude: 26.892322540283203
+    latitude: 60.48776626586914
+    rangeDistance: 0.0560000017285347
     image: {fileID: 416236560}
     title: Xamk
     description: Learn to read and write in this fine establishment.
@@ -1762,12 +1762,18 @@ MonoBehaviour:
     title: Home
     description: I Sleep
   playBtn: {fileID: 696977605}
+  triviaBtn: {fileID: 1696641443}
   infoPanelObj: {fileID: 1964728401}
   debugLongitude: 26.89232063293457
   debugLatitude: 60.487770080566406
   popupLocImg: {fileID: 220745717}
   popupLocText: {fileID: 1048093277}
   mapImage: {fileID: 333446011}
+  mapCorners:
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
   userIndicatorImg: {fileID: 824615026}
   bottomLeftLongitude: 26.869311
   bottomRightLongitude: 26.934850692749023
@@ -3118,29 +3124,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1696641444}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 774346872}
-        m_MethodName: DisablePanel
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 774346872}
-        m_MethodName: PushPlayBtn
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: Trivia
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1696641444
