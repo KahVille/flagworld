@@ -1002,10 +1002,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1
-  minX: 2.9
-  maxX: 14.7
-  minY: 5.07
-  maxY: 8.11
+  zoomMultiplier: 1
+  minZoomMult: 0.7
+  maxZoomMult: 1.3
+  debugText: {fileID: 109178901}
 --- !u!1 &411591406
 GameObject:
   m_ObjectHideFlags: 0
@@ -1762,12 +1762,18 @@ MonoBehaviour:
     title: Home
     description: I Sleep
   playBtn: {fileID: 696977605}
+  triviaBtn: {fileID: 1696641443}
   infoPanelObj: {fileID: 1964728401}
   debugLongitude: 26.89232063293457
   debugLatitude: 60.487770080566406
   popupLocImg: {fileID: 220745717}
   popupLocText: {fileID: 1048093277}
   mapImage: {fileID: 333446011}
+  mapCorners:
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
   userIndicatorImg: {fileID: 824615026}
   bottomLeftLongitude: 26.869311
   bottomRightLongitude: 26.934850692749023
@@ -3118,18 +3124,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1696641444}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 774346872}
-        m_MethodName: DisablePanel
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1696641444

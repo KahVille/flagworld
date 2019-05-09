@@ -27,6 +27,8 @@ public class GPSScript : MonoBehaviour
     List<Button> locBtns = new List<Button>();
     // Play-button in the pop-up menu
     public Button playBtn;
+    // Trivia-button in the pop-up menu
+    public Button triviaBtn;
     double lastDistance;
     public GameObject infoPanelObj;
     Animator infoAnim;
@@ -35,8 +37,10 @@ public class GPSScript : MonoBehaviour
     // Image, which shows are you close to the location on the pop-up panel
     public Image popupLocImg;
     public TextMeshProUGUI popupLocText;
-    // The map image
+    // The map image. Also used in CameraMovementGPS to get the image bounds 
     public Image mapImage;
+    // Corners of the map image. Indexes: 0 = bottomleft, 1 = bottomright, 2 = topright, 3 = topleft
+    public Vector3[] mapCorners = new Vector3[4];
     // Image which shows where the player is on the map
     public Image userIndicatorImg;
     // Longitudes and latitudes for the map images corners
@@ -66,6 +70,9 @@ public class GPSScript : MonoBehaviour
         cameraStartPos = mapImage.transform.position;
         cameraStartPos.z = -10f;
         Camera.main.transform.position = cameraStartPos;
+
+        // Get map image corners's world positions to mapCorners array
+        mapImage.GetComponent<RectTransform>().GetWorldCorners(mapCorners);
         
         // Android permissions
         #if UNITY_ANDROID
@@ -78,6 +85,9 @@ public class GPSScript : MonoBehaviour
 
         #if UNITY_ANDROID && !UNITY_EDITOR
         yield return new WaitForSeconds(5f);
+
+        // Need to tell the user about everything!
+
         // First, check if user has location service enabled
         if (!Input.location.isEnabledByUser)
 		{
@@ -159,6 +169,7 @@ public class GPSScript : MonoBehaviour
 
         // Set listener for play button
         playBtn.onClick.AddListener(delegate {PushPlayBtn(locBtns[locationIndex].transform.name);});
+        triviaBtn.onClick.AddListener(delegate{PushTriviaBtn(locationIndex);});
 
         if(canOpenMenu && lastLocation != null && lastLocation.name == locations[locationIndex].name)
         {
@@ -172,14 +183,25 @@ public class GPSScript : MonoBehaviour
         }
     }
 
-    public void PushPlayBtn(string nameOfGame)
+    // Possibly add checks to see if the player can play the game
+
+    // What happens when the player pushes the play button
+    void PushPlayBtn(string nameOfGame)
     {
         SceneManager.LoadScene(nameOfGame);
+    }
+
+    // What happens when the player pushes the trivia button
+    void PushTriviaBtn(int locIndex)
+    {
+        SetCurrentContactPointForTrivia(locations[locIndex].name);
+        UnityEngine.SceneManagement.SceneManager.LoadScene("Trivia",UnityEngine.SceneManagement.LoadSceneMode.Single);
     }
 
     public void DisablePanel()
     {
         playBtn.onClick.RemoveAllListeners();
+        triviaBtn.onClick.RemoveAllListeners();
         infoAnim.SetBool("ShowPanel", false);
     }
 
@@ -276,12 +298,6 @@ public class GPSScript : MonoBehaviour
         double y3 = y1 + y2;
         mapDistY = (float)(y1 / y3);
         Vector3 endPos;
-        Vector3[] mapCorners = new Vector3[4];
-        mapImage.GetComponent<RectTransform>().GetWorldCorners(mapCorners);
-        for(int i = 0; i < 4; i++)
-        {
-            Debug.Log(mapCorners[i]);
-        }
         endPos.x = mapCorners[2].x * mapDistX;
         endPos.y = mapCorners[2].y * mapDistY;
         endPos.z = 0f;
@@ -309,17 +325,17 @@ public class GPSScript : MonoBehaviour
             // {
             //     debugText.text = "Dist: " + lastDistance;
             // }
-            if(lastDistance < lastLocation.rangeDistance)
-            {
-                debugText.text = "IN " + lastLocation.name;
-                SetCurrentContactPointForTrivia(lastLocation.name);
-                //UnityEngine.SceneManagement.SceneManager.LoadScene("Trivia",UnityEngine.SceneManagement.LoadSceneMode.Single);
 
-            }
-            else
-            {
-                debugText.text = "Dist: " + lastDistance;
-            }
+            // Debug location
+            // if(lastDistance < lastLocation.rangeDistance)
+            // {
+            //     debugText.text = "IN " + lastLocation.name;
+            // }
+            // else
+            // {
+            //     debugText.text = "Dist: " + lastDistance;
+            // }
+
             //longText.text = "Longitude: " + longitude.ToString();
             //latText.text = "Latitude: " + latitude.ToString();
 
@@ -338,14 +354,15 @@ public class GPSScript : MonoBehaviour
             latitude = debugLatitude;
             CheckClosestLoc();
             UpdatePlayerIndicator();
-            if(lastDistance < lastLocation.rangeDistance)
-            {
-                debugText.text = "IN " + lastLocation.name;
-            }
-            else
-            {
-                debugText.text = "Dist: " + lastDistance;
-            }
+            // Debug location
+            // if(lastDistance < lastLocation.rangeDistance)
+            // {
+            //     debugText.text = "IN " + lastLocation.name;
+            // }
+            // else
+            // {
+            //     debugText.text = "Dist: " + lastDistance;
+            // }
             yield return new WaitForSeconds(1f);
 
             #endif
@@ -384,6 +401,9 @@ public class GPSScript : MonoBehaviour
     {
         Input.location.Stop();
     }
+
+    // Getters and setters
+    public Image GetUserIndicatorImg() { return userIndicatorImg; }
 
     // GPS functions
     // https://answers.unity.com/questions/1221259/how-to-get-distance-from-2-locations-with-unity-lo.html
