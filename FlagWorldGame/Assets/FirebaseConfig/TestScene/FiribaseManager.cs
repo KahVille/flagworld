@@ -172,6 +172,10 @@ public class FiribaseManager : MonoBehaviour
         UnityEngine.SceneManagement.SceneManager.LoadScene("MainMenu");
     }
 
+    public void HideDatabaseConnectionCheck() {
+        gameObject.SetActive(false);
+    }
+
     protected void DownloadDataFromDatabase()
     {
         myFirstContactPointName.SetText("Download start...");
