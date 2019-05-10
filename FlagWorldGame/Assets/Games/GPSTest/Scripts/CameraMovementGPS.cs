@@ -9,7 +9,12 @@ public class CameraMovementGPS : MonoBehaviour
     Camera mainCam;
     Vector2 touchStartPos;                  // Position where the touch started
     Vector2 touchDirection;                 // Direction vector from touch start position to current touch position
-    public float speed;                     // Speed of scrolling 
+    public float speed;                     // Speed of scrolling
+    public float swipeValue;                // Adjust to make the camera move faster or slower 
+    float zoomDivisor = 7000f;              // Value used in zoom stuff to make values better
+    public float zoomSpeed;                 // Adjust zoom speed, higher value means slower zoom
+    Vector3 desiredPosition;                // The position camera tries to get to
+    Vector3 velocity;                       // For the Smoothdamp function
     float minX, maxX, minY, maxY;           // Variables for restricting camera movement
     float horizontalExt, verticalExt;       // Camera movement restriction
     public float zoomMultiplier;            // Affects camera zoom and camera movement restrictions
@@ -22,6 +27,7 @@ public class CameraMovementGPS : MonoBehaviour
     Vector2 firstTouchVec;                  // Vector between two finger touches
     float curMagnitude;                     // Updated magnitude 
     bool canMove;                           // Used to check if can move
+    Swipe swipe;                            // Swipe script for swipe stuff
     public TextMeshProUGUI debugText;
 
 
@@ -33,6 +39,8 @@ public class CameraMovementGPS : MonoBehaviour
         initialOrtoSize = mainCam.orthographicSize;
         gpsScript = FindObjectOfType<GPSScript>();
         imgBounds = gpsScript.mapImage.GetComponent<Image>();
+        swipe = FindObjectOfType<Swipe>();
+        velocity = Vector3.zero;
     }
 
     // Update is called once per frame
@@ -43,6 +51,16 @@ public class CameraMovementGPS : MonoBehaviour
         #elif UNITY_EDITOR
         DebugInput();
         #endif
+        transform.position = Vector3.SmoothDamp(transform.position, desiredPosition, ref velocity, speed);
+        RecalculateBounds();
+        ClampCameraPos();
+    }
+
+    // Function for setting the beginning desired position. This is called in GPS script start to get the right start position.
+    // Need to do this because of the order the scripts are loaded.
+    public void SetStartDesiredPosition(Vector3 newPos)
+    {
+        desiredPosition = newPos;
     }
 
     // Used to test camera move and clamping on the editor
@@ -57,44 +75,60 @@ public class CameraMovementGPS : MonoBehaviour
         float xMove = Input.GetAxis("Horizontal") * 0.5f;
         float yMove = Input.GetAxis("Vertical") * 0.5f;
         transform.Translate(xMove, yMove, 0f);
-        RecalculateBounds();
-        ClampCameraPos();
+        Vector3 temp = swipe.SwipeDelta;
+        // Adjust the value to make the camera move slower or quicker
+        temp /= swipeValue;
+        desiredPosition -= temp;
+        desiredPosition.z = -10f;
     }
 
     void TouchInput()
     {
+        // Test input for moving the camera, so the user can scroll the map
+        #region TestPanning
+        // if(Input.touchCount == 1)
+        // {
+        //     if(!canMove)
+        //     {
+        //         return;
+        //     }
+
+        //     Touch touch = Input.GetTouch(0);
+
+        //     if(touch.phase == TouchPhase.Began)
+        //     {
+        //         touchStartPos = touch.position;
+        //         touchTimer = 0;
+        //     }
+
+        //     if(touch.phase == TouchPhase.Ended && touchTimer < 0.1f)
+        //     {
+        //         Vector3 newCamPos = gpsScript.GetUserIndicatorImg().transform.position;
+        //         newCamPos.z = -10f;
+        //         mainCam.transform.position = newCamPos;
+        //         RecalculateBounds();
+        //         ClampCameraPos();
+        //         return;
+        //     }
+
+        //     touchDirection = touch.position - touchStartPos;
+        //     mainCam.transform.Translate(touchDirection.x * (speed*0.1f) * Time.deltaTime, touchDirection.y * (speed*0.1f) * Time.deltaTime, 0f);
+        //     RecalculateBounds();
+        //     ClampCameraPos();
+
+        //     touchTimer += Time.deltaTime;
+            
+        // }
+        #endregion
+        
         // Input for moving the camera, so the user can scroll the map
         if(Input.touchCount == 1)
         {
-            if(!canMove)
-            {
-                return;
-            }
-
-            Touch touch = Input.GetTouch(0);
-
-            if(touch.phase == TouchPhase.Began)
-            {
-                touchStartPos = touch.position;
-                touchTimer = 0;
-            }
-
-            if(touch.phase == TouchPhase.Ended && touchTimer < 0.1f)
-            {
-                Vector3 newCamPos = gpsScript.GetUserIndicatorImg().transform.position;
-                newCamPos.z = -10f;
-                mainCam.transform.position = newCamPos;
-                RecalculateBounds();
-                ClampCameraPos();
-                return;
-            }
-
-            touchDirection = touch.position - touchStartPos;
-            mainCam.transform.Translate(touchDirection.x * (speed*0.1f) * Time.deltaTime, touchDirection.y * (speed*0.1f) * Time.deltaTime, 0f);
-            RecalculateBounds();
-            ClampCameraPos();
-
-            touchTimer += Time.deltaTime;
+            Vector3 temp = swipe.SwipeDelta;
+            // Adjust the value to make the camera move slower or quicker
+            temp *= swipeValue;
+            desiredPosition -= temp;
+            desiredPosition.z = -10f;
         }
         // Zoom with 2 fingers
         else if(Input.touchCount == 2)
@@ -105,21 +139,28 @@ public class CameraMovementGPS : MonoBehaviour
             firstTouchVec = touch2.position - touch1.position;      // Vector between first touch points
 
             // Get the magnitude of vector that is formed in the points of 2 touch inputs
-            if(touch1.phase == TouchPhase.Began)
+            if((touch1.phase == TouchPhase.Began) || touch2.phase == TouchPhase.Began)
             {
                 firstMagnitude = firstTouchVec.magnitude;
+                firstMagnitude /= zoomDivisor;
             }
 
-            curMagnitude = firstTouchVec.magnitude;
+            curMagnitude = firstTouchVec.magnitude - firstMagnitude;
             // Make value more sensible
-            curMagnitude /= 700f;
-            zoomMultiplier = curMagnitude;
+            curMagnitude /= zoomDivisor;
+            // Check whether to zoom in or out
+            if(firstMagnitude > (firstTouchVec.magnitude / zoomDivisor))
+            {
+                zoomMultiplier += curMagnitude / zoomSpeed;
+            }
+            else
+            {
+                zoomMultiplier -= curMagnitude / zoomSpeed;   
+            }
             zoomMultiplier = Mathf.Clamp(zoomMultiplier, minZoomMult, maxZoomMult);
-            debugText.text = firstMagnitude.ToString() + "|" + curMagnitude.ToString();
+            debugText.text = firstMagnitude.ToString() + "|" + (firstTouchVec).ToString();
 
             mainCam.orthographicSize = initialOrtoSize * zoomMultiplier;
-            RecalculateBounds();
-            ClampCameraPos();
 
             if(touch1.phase == TouchPhase.Ended || touch2.phase == TouchPhase.Ended)
             {
@@ -153,6 +194,7 @@ public class CameraMovementGPS : MonoBehaviour
         clampedPos.x = Mathf.Clamp(clampedPos.x, minX, maxX);
         clampedPos.y = Mathf.Clamp(clampedPos.y, minY, maxY);
         mainCam.transform.position = clampedPos;
+        desiredPosition = clampedPos;
     }
 
     IEnumerator CooldownCoroutine()

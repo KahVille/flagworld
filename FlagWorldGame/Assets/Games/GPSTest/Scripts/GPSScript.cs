@@ -71,6 +71,9 @@ public class GPSScript : MonoBehaviour
         cameraStartPos.z = -10f;
         Camera.main.transform.position = cameraStartPos;
 
+        // Set correct desiredPosition in camera movement script
+        FindObjectOfType<CameraMovementGPS>().SetStartDesiredPosition(cameraStartPos);
+
         // Get map image corners's world positions to mapCorners array
         mapImage.GetComponent<RectTransform>().GetWorldCorners(mapCorners);
         
