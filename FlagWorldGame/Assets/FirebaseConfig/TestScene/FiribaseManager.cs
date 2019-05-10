@@ -31,8 +31,12 @@ public class FiribaseManager : MonoBehaviour
 
     void Start()
     {
-        loadingIndicator.SetActive(true);
+        StartFirebase();
+    }
+    
 
+    private void StartFirebase() {
+        loadingIndicator.SetActive(true);
         FirebaseApp.CheckAndFixDependenciesAsync().ContinueWith(task =>
         {
             dependencyStatus = task.Result;
@@ -46,11 +50,10 @@ public class FiribaseManager : MonoBehaviour
                    "Could not resolve all Firebase dependencies: " + dependencyStatus);
                 if(OnDatabaseError != null)
                     OnDatabaseError();
-                
+
             }
         });
     }
-    
 
     // Initialize the Firebase database:
     protected virtual void InitializeFirebase()
@@ -104,7 +107,7 @@ public class FiribaseManager : MonoBehaviour
         return true;
     }
         public void RetryConnection() {
-                //continue download proggress
+            //continue download proggress
             loadingIndicator.SetActive(true);
             StartCoroutine(checkInternetConnection((isConnected) =>
             {
@@ -146,21 +149,20 @@ public class FiribaseManager : MonoBehaviour
 
                 if (verNumberString != currentDatabaseVersion)
                 {
-                    myFirstContactPointName.SetText("newData found");
+                    myFirstContactPointName.SetText("new data found");
                     TriviaSaveLoadSystem.DeleteData();
                     PlayerPrefs.SetString("database_version", verNumberString);
-                    DownloadDataFromDatabase();
+                    //TODO: Implement a function that checks current selected language, possible to do with the localization manager or playerprefabs.
+                    DownloadDataFromDatabase("finnish_language");
                 }
                 else
                 {
                     myFirstContactPointName.SetText("No new data available...");
                     loadingIndicator.SetActive(false);
-                    // retryConnectionPanel.SetActive(false);
                     myPointData = TriviaSaveLoadSystem.LoadContactPoints();
                     if(myPointData !=null) {
                         myFirstContactPointName.SetText("Trivia is up-to-date");
                         continueButton.interactable = true;
-
                     }
                 }
             }
@@ -176,11 +178,11 @@ public class FiribaseManager : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    protected void DownloadDataFromDatabase()
+    protected void DownloadDataFromDatabase(string selectedLanguage = null)
     {
         myFirstContactPointName.SetText("Download start...");
         FirebaseDatabase.DefaultInstance
-        .GetReference("finnish_language")
+        .GetReference(selectedLanguage)
         .GetValueAsync().ContinueWith(task =>
         {
             if (task.IsFaulted)
