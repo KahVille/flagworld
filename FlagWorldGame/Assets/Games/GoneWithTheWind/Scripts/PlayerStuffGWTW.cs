@@ -1,7 +1,7 @@
-﻿// ALSO CONTAINS FLAG-RELATED STUFFS
+﻿// Contains input during the Gone With The Wind-game. Is also in charge
+// of flags HP and constricting the flag's movement. 
 
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
@@ -68,7 +68,7 @@ public class PlayerStuffGWTW : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        debugText.text = FindObjectOfType<Swipe>().SwipeDelta.magnitude.ToString();
         if(gameOver)
         {
             return;
@@ -101,7 +101,6 @@ public class PlayerStuffGWTW : MonoBehaviour
         desiredPos.y -= (swipe.SwipeDelta.y * 0.005f);
         desiredPos.y = Mathf.Clamp(desiredPos.y, bottomOfPole.position.y, topOfPole.position.y);
         flag.transform.position = Vector3.SmoothDamp(flag.transform.position, desiredPos, ref velocity, smoothTime);
-        debugText.text = swipe.SwipeDelta.y.ToString();
     }
 
     public void StartGameOver()

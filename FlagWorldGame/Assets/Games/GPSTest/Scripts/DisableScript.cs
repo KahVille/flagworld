@@ -1,5 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿// Script used to disable the popup menu at the end of the closing animation.
+
 using UnityEngine;
 
 public class DisableScript : MonoBehaviour

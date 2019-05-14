@@ -1,5 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿// In charge of camera movement in GPS map scene.
+
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -27,7 +28,19 @@ public class CameraMovementGPS : MonoBehaviour
     Vector2 firstTouchVec;                  // Vector between two finger touches
     float curMagnitude;                     // Updated magnitude 
     bool canMove;                           // Used to check if can move
+    public bool CanMove
+    {
+        get
+        {
+            return canMove;
+        }
+        set
+        {
+            canMove = value;
+        }
+    }
     Swipe swipe;                            // Swipe script for swipe stuff
+    SuperSwipe ss;
     public TextMeshProUGUI debugText;
 
 
@@ -40,6 +53,7 @@ public class CameraMovementGPS : MonoBehaviour
         gpsScript = FindObjectOfType<GPSScript>();
         imgBounds = gpsScript.mapImage.GetComponent<Image>();
         swipe = FindObjectOfType<Swipe>();
+        ss = FindObjectOfType<SuperSwipe>();
         velocity = Vector3.zero;
     }
 
@@ -66,10 +80,14 @@ public class CameraMovementGPS : MonoBehaviour
     // Used to test camera move and clamping on the editor
     void DebugInput()
     {
+        if(!canMove)
+        {
+            return;
+        }
         float mouseScroll = Input.GetAxis("Mouse ScrollWheel");
         zoomMultiplier += mouseScroll;
         zoomMultiplier = Mathf.Clamp(zoomMultiplier, minZoomMult, maxZoomMult);
-        debugText.text = zoomMultiplier.ToString();
+        //debugText.text = zoomMultiplier.ToString();
         mainCam.orthographicSize = initialOrtoSize * zoomMultiplier;
 
         float xMove = Input.GetAxis("Horizontal") * 0.5f;
@@ -84,6 +102,10 @@ public class CameraMovementGPS : MonoBehaviour
 
     void TouchInput()
     {
+        if(!canMove)
+        {
+            return;
+        }
         // Test input for moving the camera, so the user can scroll the map
         #region TestPanning
         // if(Input.touchCount == 1)
@@ -124,11 +146,17 @@ public class CameraMovementGPS : MonoBehaviour
         // Input for moving the camera, so the user can scroll the map
         if(Input.touchCount == 1)
         {
+            /*
             Vector3 temp = swipe.SwipeDelta;
             // Adjust the value to make the camera move slower or quicker
             temp *= swipeValue;
             desiredPosition -= temp;
             desiredPosition.z = -10f;
+            */
+            float x = ss.HorizontalMoveDistance();
+            float y = ss.VerticalMoveDistance();
+            debugText.text = x.ToString() + "|" + y.ToString();
+            desiredPosition = new Vector3(x, y, -10f);
         }
         // Zoom with 2 fingers
         else if(Input.touchCount == 2)
@@ -158,7 +186,7 @@ public class CameraMovementGPS : MonoBehaviour
                 zoomMultiplier -= curMagnitude / zoomSpeed;   
             }
             zoomMultiplier = Mathf.Clamp(zoomMultiplier, minZoomMult, maxZoomMult);
-            debugText.text = firstMagnitude.ToString() + "|" + (firstTouchVec).ToString();
+            //debugText.text = firstMagnitude.ToString() + "|" + (firstTouchVec).ToString();
 
             mainCam.orthographicSize = initialOrtoSize * zoomMultiplier;
 

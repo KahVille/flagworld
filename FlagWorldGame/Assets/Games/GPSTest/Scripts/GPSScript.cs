@@ -1,4 +1,6 @@
-﻿using System;
+﻿// Script in charge of the GPS. Updates the player's location on the map.
+
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
