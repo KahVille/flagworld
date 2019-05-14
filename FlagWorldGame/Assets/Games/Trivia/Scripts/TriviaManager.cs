@@ -33,6 +33,11 @@ public class TriviaManager : MonoBehaviour
 
     [SerializeField]
     private GameObject networkError = null;
+
+
+    [SerializeField]
+    UIScoreText scoreText = null;
+    
     IEnumerator Start()
     {
         loadingIndicator.SetActive(true);
@@ -54,6 +59,7 @@ public class TriviaManager : MonoBehaviour
         questions = contactPoints.points[currentContactPointIndex].questions;
         currentQuestion = questions[currentQuestionNumber];
         questionCanvas.gameObject.SetActive(true);
+        scoreText.SetTextToDisplay($"{currentQuestionNumber +1 } / {questions.Length}");
         questionCanvas.setNewQuestionUI(currentQuestion);
     }
 
@@ -99,13 +105,16 @@ public class TriviaManager : MonoBehaviour
             Debug.Log("end of round");
             //load end of trivia round canvas
             HideQuestionCanvas();
-            ShowContiueAndRestartCanvas();
+            int roundScore = questionCanvas.GetComponent<UIQuestionCanvas>().GetScore();
+            int numberOfQuestions = questions.Length;
+            ShowContiueAndRestartCanvas(roundScore, numberOfQuestions);
         }
     }
 
-    private void ShowContiueAndRestartCanvas()
+    private void ShowContiueAndRestartCanvas(int roundScore, int numberOfQuestions)
     {
         contiueAndRestartCanvas.enabled = true;
+        contiueAndRestartCanvas.GetComponent<UIContinueAndRestartCanvas>().SetTriviaScoreText(roundScore,numberOfQuestions);
     }
 
     private void HideQuestionCanvas()
@@ -120,6 +129,7 @@ public class TriviaManager : MonoBehaviour
         {
             currentQuestionNumber += 1;
             currentQuestion = questions[currentQuestionNumber];
+            scoreText.SetTextToDisplay($"{currentQuestionNumber +1 } / {questions.Length}");
             questionCanvas.setNewQuestionUI(currentQuestion);
             return true;
         }
