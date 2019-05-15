@@ -10,7 +10,10 @@ using TMPro;
 
 public class PlayerStuffGWTW : MonoBehaviour
 {
-    Swipe swipe;
+    Camera mainCam;
+    Vector3 touchStartPos;
+    Vector3 touchDirection;
+    public float scrollSpeed;
     public GameObject flag;
     public Transform topOfPole;
     public Transform bottomOfPole;
@@ -53,7 +56,7 @@ public class PlayerStuffGWTW : MonoBehaviour
     // Start is called before the first frame update
     IEnumerator Start()
     {
-        swipe = GetComponent<Swipe>();
+        mainCam = Camera.main;
         flagMat = flag.GetComponent<Renderer>().material;
         desiredPos = flag.transform.position;
         flagHP = 0f;
@@ -68,7 +71,6 @@ public class PlayerStuffGWTW : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        debugText.text = FindObjectOfType<Swipe>().SwipeDelta.magnitude.ToString();
         if(gameOver)
         {
             return;
@@ -97,10 +99,29 @@ public class PlayerStuffGWTW : MonoBehaviour
         {
             flagMat.SetFloat("_WaveSpeed", 50f);
         }
-    
-        desiredPos.y -= (swipe.SwipeDelta.y * 0.005f);
+
+        TouchInput();
+
         desiredPos.y = Mathf.Clamp(desiredPos.y, bottomOfPole.position.y, topOfPole.position.y);
         flag.transform.position = Vector3.SmoothDamp(flag.transform.position, desiredPos, ref velocity, smoothTime);
+    }
+
+    void TouchInput()
+    {
+        // Move the flag with 1 finger
+        if(Input.touchCount == 1)
+        {
+            Touch touch = Input.GetTouch(0);
+
+            if(touch.phase == TouchPhase.Began)
+            {
+                touchStartPos = mainCam.ScreenToWorldPoint(touch.position);
+            }
+
+            touchDirection = touchStartPos - mainCam.ScreenToWorldPoint(touch.position);
+            desiredPos.y += touchDirection.y * scrollSpeed;
+            desiredPos.z = 1.5f;
+        }
     }
 
     public void StartGameOver()
@@ -135,7 +156,7 @@ public class PlayerStuffGWTW : MonoBehaviour
             yield return new WaitForSeconds(windTime);
             // CALM BEFORE THE STORM
             windparticles.Stop();
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(0.8f);
             flagMat.SetFloat("_WaveSpeed", 50f);
             windy = false;
             windTime = Random.Range(2f, 6f);

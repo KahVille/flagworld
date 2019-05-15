@@ -8,9 +8,10 @@ using TMPro;
 public class CameraMovementGPS : MonoBehaviour
 {
     Camera mainCam;
-    Vector2 touchStartPos;                  // Position where the touch started
-    Vector2 touchDirection;                 // Direction vector from touch start position to current touch position
-    public float speed;                     // Speed of scrolling
+    Vector3 touchStartPos;                  // Position where the touch started
+    Vector3 touchDirection;                 // Direction vector from touch start position to current touch position
+    public float speed;                     // Speed value used in smoothdamp
+    public float scrollSpeed;               // Use this to modify the speed of scrolling
     public float swipeValue;                // Adjust to make the camera move faster or slower 
     float zoomDivisor = 7000f;              // Value used in zoom stuff to make values better
     public float zoomSpeed;                 // Adjust zoom speed, higher value means slower zoom
@@ -52,8 +53,6 @@ public class CameraMovementGPS : MonoBehaviour
         initialOrtoSize = mainCam.orthographicSize;
         gpsScript = FindObjectOfType<GPSScript>();
         imgBounds = gpsScript.mapImage.GetComponent<Image>();
-        swipe = FindObjectOfType<Swipe>();
-        ss = FindObjectOfType<SuperSwipe>();
         velocity = Vector3.zero;
     }
 
@@ -106,64 +105,13 @@ public class CameraMovementGPS : MonoBehaviour
         {
             return;
         }
-        // Test input for moving the camera, so the user can scroll the map
-        #region TestPanning
-        // if(Input.touchCount == 1)
-        // {
-        //     if(!canMove)
-        //     {
-        //         return;
-        //     }
-
-        //     Touch touch = Input.GetTouch(0);
-
-        //     if(touch.phase == TouchPhase.Began)
-        //     {
-        //         touchStartPos = touch.position;
-        //         touchTimer = 0;
-        //     }
-
-        //     if(touch.phase == TouchPhase.Ended && touchTimer < 0.1f)
-        //     {
-        //         Vector3 newCamPos = gpsScript.GetUserIndicatorImg().transform.position;
-        //         newCamPos.z = -10f;
-        //         mainCam.transform.position = newCamPos;
-        //         RecalculateBounds();
-        //         ClampCameraPos();
-        //         return;
-        //     }
-
-        //     touchDirection = touch.position - touchStartPos;
-        //     mainCam.transform.Translate(touchDirection.x * (speed*0.1f) * Time.deltaTime, touchDirection.y * (speed*0.1f) * Time.deltaTime, 0f);
-        //     RecalculateBounds();
-        //     ClampCameraPos();
-
-        //     touchTimer += Time.deltaTime;
-            
-        // }
-        #endregion
+       
         
-        // Input for moving the camera, so the user can scroll the map
-        if(Input.touchCount == 1)
-        {
-            /*
-            Vector3 temp = swipe.SwipeDelta;
-            // Adjust the value to make the camera move slower or quicker
-            temp *= swipeValue;
-            desiredPosition -= temp;
-            desiredPosition.z = -10f;
-            */
-            float x = ss.HorizontalMoveDistance();
-            float y = ss.VerticalMoveDistance();
-            debugText.text = x.ToString() + "|" + y.ToString();
-            desiredPosition = new Vector3(x, y, -10f);
-        }
         // Zoom with 2 fingers
-        else if(Input.touchCount == 2)
+        if(Input.touchCount == 2)
         {
             Touch touch1 = Input.GetTouch(0);
             Touch touch2 = Input.GetTouch(1);
-            canMove = false;
             firstTouchVec = touch2.position - touch1.position;      // Vector between first touch points
 
             // Get the magnitude of vector that is formed in the points of 2 touch inputs
@@ -195,6 +143,66 @@ public class CameraMovementGPS : MonoBehaviour
                 StartCoroutine(CooldownCoroutine());
             }
         }
+
+        // Move the map with 1 finger
+        if(Input.touchCount == 1)
+        {
+            Touch touch = Input.GetTouch(0);
+
+            if(touch.phase == TouchPhase.Began)
+            {
+                touchStartPos = mainCam.ScreenToWorldPoint(touch.position);
+                touchTimer = 0;
+            }
+
+            // if(touch.phase == TouchPhase.Ended && touchTimer < 0.1f)
+            // {
+            //     Vector3 newCamPos = gpsScript.GetUserIndicatorImg().transform.position;
+            //     newCamPos.z = -10f;
+            //     mainCam.transform.position = newCamPos;
+            //     return;
+            // }
+
+            touchDirection = touchStartPos - mainCam.ScreenToWorldPoint(touch.position);
+            desiredPosition += touchDirection * scrollSpeed;
+            desiredPosition.z = -10f;
+
+            // if(touchDirection.magnitude > 70f)
+            // {
+            //     desiredPosition.x += touchDirection.x;
+            //     desiredPosition.y += touchDirection.y;
+            //     desiredPosition /= 20f;
+            //     desiredPosition.z = -10f;
+            // }
+
+            // debugText.text = touchDirection.magnitude.ToString();
+            //mainCam.transform.Translate(touchDirection.x * (speed*0.1f) * Time.deltaTime, touchDirection.y * (speed*0.1f) * Time.deltaTime, 0f);
+
+            touchTimer += Time.deltaTime;
+            
+        }
+        
+         // Test input for moving the camera, so the user can scroll the map
+        #region TestPanning
+        // Input for moving the camera, so the user can scroll the map
+        // if(Input.touchCount == 1)
+        // {
+        //     /*
+        //     Vector3 temp = swipe.SwipeDelta;
+        //     // Adjust the value to make the camera move slower or quicker
+        //     temp *= swipeValue;
+        //     desiredPosition -= temp;
+        //     desiredPosition.z = -10f;
+        //     */
+        //     // float x = ss.HorizontalMoveDistance();
+        //     // float y = ss.VerticalMoveDistance();
+        //     float x = ss.DistVec().x;
+        //     float y = ss.DistVec().y;
+        //     debugText.text = x.ToString() + "|" + y.ToString();
+        //     desiredPosition = new Vector3(x, y, -10f);
+        // }
+        #endregion
+
     }
 
     // https://answers.unity.com/questions/682751/keep-top-down-2d-camera-in-bounds-of-background-sp.html

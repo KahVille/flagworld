@@ -83,4 +83,9 @@ public class SuperSwipe : MonoBehaviour
     {
         return Mathf.Abs(currentPos.x - endPos.x);
     }
+
+    public Vector2 DistVec()
+    {
+        return (currentPos - endPos);
+    }
 }
