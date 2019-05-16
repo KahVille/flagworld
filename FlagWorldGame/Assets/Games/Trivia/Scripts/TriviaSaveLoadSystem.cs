@@ -12,31 +12,31 @@ public static class TriviaSaveLoadSystem
 {
 
 
-    public static IEnumerator LoadContactPointsFromWeb()
-    {
-        string connectionAddress = "https://gist.githubusercontent.com/KahVille/5a23729971d6905b91f8cf23217b33b8/raw/9ffac8c3a6bd5c39f26e6629c738e0fd8434003f/flagworldDataTest.json";
-        UnityWebRequest www = new UnityWebRequest(connectionAddress);
-        www.downloadHandler = new DownloadHandlerBuffer();
-        yield return www.SendWebRequest();
+    // public static IEnumerator LoadContactPointsFromWeb()
+    // {
+    //     string connectionAddress = "https://gist.githubusercontent.com/KahVille/5a23729971d6905b91f8cf23217b33b8/raw/9ffac8c3a6bd5c39f26e6629c738e0fd8434003f/flagworldDataTest.json";
+    //     UnityWebRequest www = new UnityWebRequest(connectionAddress);
+    //     www.downloadHandler = new DownloadHandlerBuffer();
+    //     yield return www.SendWebRequest();
  
-        if(www.isNetworkError || www.isHttpError) {
-            Debug.Log(www.error);
-            yield return null;
+    //     if(www.isNetworkError || www.isHttpError) {
+    //         Debug.Log(www.error);
+    //         yield return null;
         
-        }
-        else {
-            // Show results as text
-            string result = www.downloadHandler.text;
+    //     }
+    //     else {
+    //         // Show results as text
+    //         string result = www.downloadHandler.text;
 
-            ContactPointCollection contactionPoints = new ContactPointCollection();
-            JsonUtility.FromJsonOverwrite(result,contactionPoints);
+    //         ContactPointCollection contactionPoints = new ContactPointCollection();
+    //         JsonUtility.FromJsonOverwrite(result,contactionPoints);
 
-            SaveContactPoints(contactionPoints);
-            // make sure the data is in correct form?
-            //parse data based on the type of data recieved.
-            //from web -> json -> QuestionData[] -> binary?
-        }
-    }
+    //         SaveContactPoints(contactionPoints);
+    //         // make sure the data is in correct form?
+    //         //parse data based on the type of data recieved.
+    //         //from web -> json -> QuestionData[] -> binary?
+    //     }
+    // }
 
 
     public static void DeleteData() {
@@ -83,45 +83,45 @@ public static class TriviaSaveLoadSystem
 
     //save round data from an array to a file 
     //shoud be called from the web handler in the final version.
-    public static void SaveRoundData (QuestionData[] roundData) 
-    {
-        Debug.Log("saving started");
-        BinaryFormatter formatter = new BinaryFormatter();
+    // public static void SaveRoundData (QuestionData[] roundData) 
+    // {
+    //     Debug.Log("saving started");
+    //     BinaryFormatter formatter = new BinaryFormatter();
 
-        string path = Application.persistentDataPath + "/roundDataTest.dat";
-        FileStream stream = new FileStream(path, FileMode.Create);
+    //     string path = Application.persistentDataPath + "/roundDataTest.dat";
+    //     FileStream stream = new FileStream(path, FileMode.Create);
 
-        QuestionData[] data = new QuestionData[roundData.Length];
-        data = roundData;
+    //     QuestionData[] data = new QuestionData[roundData.Length];
+    //     data = roundData;
 
-        formatter.Serialize(stream,data);
-        stream.Close();
+    //     formatter.Serialize(stream,data);
+    //     stream.Close();
 
-        Debug.Log("saving ended");
+    //     Debug.Log("saving ended");
 
 
-    }
-    public static QuestionData[] LoadRoundData () 
-    {
-        string path = Application.persistentDataPath + "/roundDataTest.dat";
-        if (File.Exists(path)) 
-        {
-            Debug.Log("File load started");
-            BinaryFormatter formatter = new BinaryFormatter();
-            FileStream stream = new FileStream(path, FileMode.Open);
+    // }
+    // public static QuestionData[] LoadRoundData () 
+    // {
+    //     string path = Application.persistentDataPath + "/roundDataTest.dat";
+    //     if (File.Exists(path)) 
+    //     {
+    //         Debug.Log("File load started");
+    //         BinaryFormatter formatter = new BinaryFormatter();
+    //         FileStream stream = new FileStream(path, FileMode.Open);
 
-            QuestionData[] data = formatter.Deserialize(stream) as QuestionData[];
-            stream.Close();
-            Debug.Log("File loaded");
-            return data;
+    //         QuestionData[] data = formatter.Deserialize(stream) as QuestionData[];
+    //         stream.Close();
+    //         Debug.Log("File loaded");
+    //         return data;
 
-        } 
-        else 
-        {
-            Debug.LogError("File not Found in " + path);
-            return null;
-        }
+    //     } 
+    //     else 
+    //     {
+    //         Debug.LogError("File not Found in " + path);
+    //         return null;
+    //     }
 
-    }
+    // }
 
 }

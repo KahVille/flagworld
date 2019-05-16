@@ -1,11 +1,8 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Firebase;
 using Firebase.Database;
-using Firebase.Unity.Editor;
 using TMPro;
-using UnityEngine.UI;
 using UnityEngine.Networking;
 public class FiribaseManager : MonoBehaviour
 {
@@ -22,13 +19,40 @@ public class FiribaseManager : MonoBehaviour
     public static event DatabaseError OnDatabaseError;
 
 
+    private ModalPanel modalPanel;
+
+    //grab instance of panel
+    void Awake()
+    {
+        modalPanel = ModalPanel.Instance();
+    }
+
     void Start()
     {
         StartFirebase();
     }
-    
 
-    private void StartFirebase() {
+    void SpawnPanel(string mainTitle, string titleDescription, EventButtonDetails button1, EventButtonDetails button2 = null, Sprite icon = null)
+    {
+        ModalPanelDetails modalPanelDetails = new ModalPanelDetails { question = mainTitle, description = titleDescription, iconImage = icon };
+        modalPanelDetails.button1Details = button1;
+        modalPanelDetails.button2Details = button2;
+        modalPanel.SpawnWithDetails(modalPanelDetails);
+    }
+
+    //callbacks for buttons
+    void ReloadScene()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene("MainMenu");
+    }
+
+
+    void ContinueSuccess() { }
+
+    //end of callbacks
+
+    private void StartFirebase()
+    {
         loadingIndicator.SetActive(true);
         FirebaseApp.CheckAndFixDependenciesAsync().ContinueWith(task =>
         {
@@ -39,10 +63,12 @@ public class FiribaseManager : MonoBehaviour
             }
             else
             {
-                if(OnDatabaseError != null)
-                    OnDatabaseError("Firebase not init","");
+                loadingIndicator.SetActive(false);
+                //firebase error
+                EventButtonDetails button1Detail = new EventButtonDetails { buttonTitle = "Reload", action = ReloadScene };
+                SpawnPanel("Firebase Error", "please Reload the game", button1Detail);
             }
-        }, System.Threading.Tasks.TaskScheduler.FromCurrentSynchronizationContext() );
+        }, System.Threading.Tasks.TaskScheduler.FromCurrentSynchronizationContext());
     }
 
     // Initialize the Firebase database:
@@ -52,10 +78,10 @@ public class FiribaseManager : MonoBehaviour
 
         if (!IsNetworkReachable())
         {
-            if(OnDatabaseError != null) {
-                loadingIndicator.SetActive(false);
-                 OnDatabaseError("network not reached","please try again");
-            }
+            loadingIndicator.SetActive(false);
+            //Network error
+            EventButtonDetails button1Detail = new EventButtonDetails { buttonTitle = "Retry", action = RetryConnection };
+            SpawnPanel("Network Error", "please enable network connection", button1Detail);
         }
         else
         {
@@ -89,25 +115,25 @@ public class FiribaseManager : MonoBehaviour
         }
         return true;
     }
-        public void RetryConnection() {
-            //continue download proggress
-            loadingIndicator.SetActive(true);
-            StartCoroutine(checkInternetConnection((isConnected) =>
+    public void RetryConnection()
+    {
+        //continue download proggress
+        loadingIndicator.SetActive(true);
+        StartCoroutine(checkInternetConnection((isConnected) =>
+        {
+            //set button to download or retry connectetion based on the network state
+            if (isConnected)
             {
-                //set button to download or retry connectetion based on the network state
-                if (isConnected)
-                {
-                    CheckDatabaseVersion();
-                }
-                else
-                {
-                   if(OnDatabaseError != null) {
-                       loadingIndicator.SetActive(false);
-                        OnDatabaseError("network not reached","please try again");
-                   }
-
-                }
-            }));
+                CheckDatabaseVersion();
+            }
+            else
+            {
+                loadingIndicator.SetActive(false);
+                //Network error
+                EventButtonDetails button1Detail = new EventButtonDetails { buttonTitle = "Retry", action = RetryConnection };
+                SpawnPanel("Network Error", "please enable network connection", button1Detail);
+            }
+        }));
     }
 
     protected void CheckDatabaseVersion()
@@ -118,8 +144,7 @@ public class FiribaseManager : MonoBehaviour
         .GetReference("database_version")
         .GetValueAsync().ContinueWith(task =>
         {
-
-             if (task.IsCompleted)
+            if (task.IsCompleted)
             {
                 DataSnapshot snapshot = task.Result;
                 string verNumberString = snapshot.GetRawJsonValue();
@@ -133,21 +158,17 @@ public class FiribaseManager : MonoBehaviour
                 }
                 else
                 {
-                    loadingIndicator.SetActive(false);
                     myPointData = TriviaSaveLoadSystem.LoadContactPoints();
-                    if(myPointData !=null) {
-                        if(OnDatabaseError != null) {
-                       loadingIndicator.SetActive(false);
-                        OnDatabaseError("trivia up-to-date","please continue");
-                   }
+                    if (myPointData != null)
+                    {
+                        //trivia up to date
+                        loadingIndicator.SetActive(false);
+                        EventButtonDetails button1Detail = new EventButtonDetails { buttonTitle = "Continue", action = ContinueSuccess };
+                        SpawnPanel("Trivia up-to-date", "please continue", button1Detail);
                     }
                 }
             }
         }, System.Threading.Tasks.TaskScheduler.FromCurrentSynchronizationContext());
-    }
-
-    public void HideDatabaseConnectionCheck() {
-        gameObject.SetActive(false);
     }
 
     protected void DownloadDataFromDatabase(string selectedLanguage = null)
@@ -156,18 +177,16 @@ public class FiribaseManager : MonoBehaviour
         .GetReference(selectedLanguage)
         .GetValueAsync().ContinueWith(task =>
         {
-             if (task.IsCompleted)
+            if (task.IsCompleted)
             {
                 DataSnapshot snapshot = task.Result;
                 ContactPointCollection contactPoints = new ContactPointCollection();
                 JsonUtility.FromJsonOverwrite(snapshot.GetRawJsonValue(), contactPoints);
                 TriviaSaveLoadSystem.SaveContactPoints(contactPoints);
                 loadingIndicator.SetActive(false);
-                if(OnDatabaseError != null) {
-                       loadingIndicator.SetActive(false);
-                        OnDatabaseError("Dowloaded the newest data","please continue");
-                   }
+                EventButtonDetails button1Detail = new EventButtonDetails { buttonTitle = "Continue", action = ContinueSuccess };
+                SpawnPanel("Trivia up-to-date", "newest data downloaded", button1Detail);
             }
-        }, System.Threading.Tasks.TaskScheduler.FromCurrentSynchronizationContext() );
+        }, System.Threading.Tasks.TaskScheduler.FromCurrentSynchronizationContext());
     }
 }

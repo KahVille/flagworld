@@ -2555,7 +2555,6 @@ MonoBehaviour:
   questionCanvas: {fileID: 1244766479}
   eventSystem: {fileID: 1339976597}
   loadingIndicator: {fileID: 1617200365}
-  networkError: {fileID: 0}
   scoreText: {fileID: 1879583179}
 --- !u!4 &1510297494
 Transform:
@@ -3071,6 +3070,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1701686454}
     m_Modifications:
+    - target: {fileID: 4974291884788361351, guid: 980121c0a76284b7d98e8394a8b48ea7,
+        type: 3}
+      propertyPath: m_Name
+      value: ModalPanel
+      objectReference: {fileID: 0}
+    - target: {fileID: 4974291884788361351, guid: 980121c0a76284b7d98e8394a8b48ea7,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4889910634972292789, guid: 980121c0a76284b7d98e8394a8b48ea7,
         type: 3}
       propertyPath: m_AnchorMin.y
@@ -3091,15 +3100,15 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -633.47504
       objectReference: {fileID: 0}
-    - target: {fileID: 4889910636090327105, guid: 980121c0a76284b7d98e8394a8b48ea7,
+    - target: {fileID: 4889910634972292789, guid: 980121c0a76284b7d98e8394a8b48ea7,
         type: 3}
-      propertyPath: m_havePropertiesChanged
-      value: 1
+      propertyPath: m_SizeDelta.x
+      value: 600
       objectReference: {fileID: 0}
-    - target: {fileID: 4889910636090327105, guid: 980121c0a76284b7d98e8394a8b48ea7,
+    - target: {fileID: 4889910634972292789, guid: 980121c0a76284b7d98e8394a8b48ea7,
         type: 3}
-      propertyPath: m_isInputParsingRequired
-      value: 1
+      propertyPath: m_SizeDelta.y
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 4974291884566606838, guid: 980121c0a76284b7d98e8394a8b48ea7,
         type: 3}
@@ -3121,15 +3130,15 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -210.82501
       objectReference: {fileID: 0}
-    - target: {fileID: 4974291884602055123, guid: 980121c0a76284b7d98e8394a8b48ea7,
+    - target: {fileID: 4974291884566606838, guid: 980121c0a76284b7d98e8394a8b48ea7,
         type: 3}
-      propertyPath: m_havePropertiesChanged
-      value: 1
+      propertyPath: m_SizeDelta.y
+      value: 200
       objectReference: {fileID: 0}
-    - target: {fileID: 4974291884602055123, guid: 980121c0a76284b7d98e8394a8b48ea7,
+    - target: {fileID: 4974291884566606838, guid: 980121c0a76284b7d98e8394a8b48ea7,
         type: 3}
-      propertyPath: m_isInputParsingRequired
-      value: 1
+      propertyPath: m_SizeDelta.x
+      value: 600
       objectReference: {fileID: 0}
     - target: {fileID: 4974291884788361348, guid: 980121c0a76284b7d98e8394a8b48ea7,
         type: 3}
@@ -3246,15 +3255,45 @@ PrefabInstance:
       propertyPath: m_LocalScale.y
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 4974291884788361351, guid: 980121c0a76284b7d98e8394a8b48ea7,
+    - target: {fileID: 4889910636090327105, guid: 980121c0a76284b7d98e8394a8b48ea7,
         type: 3}
-      propertyPath: m_Name
-      value: ModalPanel
+      propertyPath: m_havePropertiesChanged
+      value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 4974291884788361351, guid: 980121c0a76284b7d98e8394a8b48ea7,
+    - target: {fileID: 4889910636090327105, guid: 980121c0a76284b7d98e8394a8b48ea7,
         type: 3}
-      propertyPath: m_IsActive
-      value: 0
+      propertyPath: m_isInputParsingRequired
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4974291885692507394, guid: 980121c0a76284b7d98e8394a8b48ea7,
+        type: 3}
+      propertyPath: m_havePropertiesChanged
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4974291885692507394, guid: 980121c0a76284b7d98e8394a8b48ea7,
+        type: 3}
+      propertyPath: m_isInputParsingRequired
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4974291885297903219, guid: 980121c0a76284b7d98e8394a8b48ea7,
+        type: 3}
+      propertyPath: m_havePropertiesChanged
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4974291885297903219, guid: 980121c0a76284b7d98e8394a8b48ea7,
+        type: 3}
+      propertyPath: m_isInputParsingRequired
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4974291884602055123, guid: 980121c0a76284b7d98e8394a8b48ea7,
+        type: 3}
+      propertyPath: m_havePropertiesChanged
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4974291884602055123, guid: 980121c0a76284b7d98e8394a8b48ea7,
+        type: 3}
+      propertyPath: m_isInputParsingRequired
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4974291885249668494, guid: 980121c0a76284b7d98e8394a8b48ea7,
         type: 3}
@@ -3266,25 +3305,25 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4974291885297903219, guid: 980121c0a76284b7d98e8394a8b48ea7,
+    - target: {fileID: 1269473015559234402, guid: 980121c0a76284b7d98e8394a8b48ea7,
         type: 3}
-      propertyPath: m_havePropertiesChanged
+      propertyPath: m_Spacing
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 4974291885297903219, guid: 980121c0a76284b7d98e8394a8b48ea7,
+    - target: {fileID: 1269473015559234402, guid: 980121c0a76284b7d98e8394a8b48ea7,
         type: 3}
-      propertyPath: m_isInputParsingRequired
+      propertyPath: m_ChildForceExpandWidth
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 4974291885692507394, guid: 980121c0a76284b7d98e8394a8b48ea7,
+    - target: {fileID: 1269473015559234402, guid: 980121c0a76284b7d98e8394a8b48ea7,
         type: 3}
-      propertyPath: m_havePropertiesChanged
+      propertyPath: m_ChildForceExpandHeight
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 4974291885692507394, guid: 980121c0a76284b7d98e8394a8b48ea7,
+    - target: {fileID: 1269473015559234402, guid: 980121c0a76284b7d98e8394a8b48ea7,
         type: 3}
-      propertyPath: m_isInputParsingRequired
-      value: 1
+      propertyPath: m_ChildAlignment
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 980121c0a76284b7d98e8394a8b48ea7, type: 3}
