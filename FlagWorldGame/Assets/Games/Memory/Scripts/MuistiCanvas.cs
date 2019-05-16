@@ -17,38 +17,29 @@ public class MuistiCanvas : MonoBehaviour {
         StartC = GameObject.Find("StartCanvas").GetComponent<Canvas>();
         HUD = GameObject.Find("HUD").GetComponent<Canvas>();
         End = GameObject.Find("EndCanvas").GetComponent<Canvas>();
+        if(PlayerPrefs.GetInt(CurrentGameHigh) != 0)
+        {
+            StartCoroutine(NewGameStart());
+        }
     }
 
     public void TheEnd(int moves, bool finished, int pairs)
     {
         if (finished)
         {
-            points = 30;
-            if(moves > 20)
+            GameObject.Find("Points").GetComponent<TMP_Text>().text = "You made " + moves.ToString() + " moves";
+            if(moves > PlayerPrefs.GetInt(CurrentGameHigh))
             {
-                points = 30 - (moves - 20);
-                if (points < 0)
-                {
-                    points = 0;
-                }
+                PlayerPrefs.SetInt(CurrentGameHigh, moves);
             }
-
-            GameObject.Find("Points").GetComponent<TMP_Text>().text = "You made " + moves.ToString() + " moves\nYou scored " + points.ToString() + " FP";
-
+            else
+            {
+                moves = PlayerPrefs.GetInt(CurrentGameHigh);
+            }
         }
         else
         {
-            points = pairs * 3 - 5;
-            if (moves > 20)
-            {
-                points = points - (moves - 20);
-            }
-            if (points < 0)
-            {
-                points = 0;
-            }
-
-            GameObject.Find("Points").GetComponent<TMP_Text>().text = "You opened " + pairs.ToString() + " pairs in " + moves.ToString() + " moves\nYou scored " + points.ToString() + " FP";
+            GameObject.Find("Points").GetComponent<TMP_Text>().text = "You opened " + pairs.ToString() + " pairs in " + moves.ToString() + " moves";
         }
         HUD.enabled = false;
         End.enabled = true;
@@ -63,6 +54,7 @@ public class MuistiCanvas : MonoBehaviour {
 
     public void ClickContinue()
     {
+        // Set Highscore using CurrGameHigh
         SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
     }
 

@@ -12,6 +12,7 @@ public class LajitteluSpawner : MonoBehaviour
 
     private bool Spawn = true;
     private bool TimeEnd = false;
+    private bool HardMode = false;
 
     private GameObject HUD, End;
     private Text Top, Bottom, Right, Left;
@@ -43,7 +44,7 @@ public class LajitteluSpawner : MonoBehaviour
 
     private void SetText()
     {
-        timeText = "Time: ";
+        timeText = "";
 
         SetPoints();
     }
@@ -128,4 +129,13 @@ public class LajitteluSpawner : MonoBehaviour
         Spawn = !Spawn;
     }
 
+    public void SetHard()
+    {
+        HardMode = true;
+    }
+
+    public bool GetHard()
+    {
+        return HardMode;
+    }
 }

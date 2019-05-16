@@ -141,6 +141,26 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 6f16f13c52d9aad4b8939d2ce328563f, type: 3}
   - {fileID: 21300000, guid: 2fa0fe45f0aa4a6498360fd8b4199b4a, type: 3}
   - {fileID: 21300000, guid: 9369e36c38159674ca05e54961279968, type: 3}
+  NRight:
+  - India
+  - South Korea
+  - Saudi-Arabia
+  - China
+  NLeft:
+  - Canada
+  - Argentina
+  - Brazil
+  - USA
+  NUp:
+  - Germany
+  - Great Britain
+  - Finland
+  - Spain
+  NDown:
+  - Kenya
+  - South Africa
+  - Uganda
+  - Egypt
 --- !u!50 &8549035158506228342
 Rigidbody2D:
   serializedVersion: 4
