@@ -37,11 +37,11 @@ public class ConnectHUD : MonoBehaviour
         {
             timerClockScript = FindObjectOfType<TimerClockScript>();
         }
-        
-        //if (PlayerPrefs.GetInt(CurrentGameHigh) != 0) // if restart
-        //{
-        //    StartCoroutine(WaitNewGame());
-        //}
+
+        if (PlayerPrefs.GetInt(CurrentGameHigh) != 0) // if restart
+        {
+            StartCoroutine(WaitNewGame());
+        }
     }
 
     private void Update()
@@ -76,32 +76,6 @@ public class ConnectHUD : MonoBehaviour
 
     private void TheEnd()
     {
-        if (Points >= 500)
-        {
-            P = 30;
-        }
-        else if (Points >= 400)
-        {
-            P = 25;
-        }
-        else if (Points >= 300)
-        {
-            P = 20;
-        }
-        else if (Points >= 200)
-        {
-            P = 15;
-        }
-        else if (Points >= 100)
-        {
-            P = 10;
-        }
-        else if (Points > 0)
-        {
-            P = 5;
-        }
-        else P = 0;
-
         EndP.GetComponent<RectTransform>().sizeDelta = new Vector2(Screen.width, Screen.height);
         EndP.text = "Points: " + Points.ToString();
         GameObject.Find("Continue").GetComponentInChildren<TMP_Text>().text = "Back to menu";  // End Button text set up

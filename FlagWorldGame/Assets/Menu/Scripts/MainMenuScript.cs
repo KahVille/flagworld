@@ -10,6 +10,7 @@ public class MainMenuScript : MonoBehaviour
     {
         Screen.orientation = ScreenOrientation.Portrait;
         Games = GameObject.Find("GamesCanvas").GetComponent<Canvas>();
+        PlayerPrefs.SetInt("CurrGameHigh", 0);
     }
 
     public void ClickGames()

@@ -22,7 +22,7 @@ public class EndLajitteluScript : MonoBehaviour {
     public void SetEnd()
     {
         Points = Spawner.GetComponent<LajitteluSpawner>().GetPoints();
-        EndScore.GetComponent<TMP_Text>().text = "You scored " + Points.ToString() + " FP";
+        EndScore.GetComponent<TMP_Text>().text = "You scored " + Points.ToString() + " points";
     }
 
 
