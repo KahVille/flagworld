@@ -58,6 +58,11 @@ public class GamesScript : MonoBehaviour
     {
         SceneManager.LoadScene("GoneWithTheWind", LoadSceneMode.Single);
     }
+    
+    public void LoadGameScene(string sceneToLoad = null) {
+        SceneManager.LoadScene(sceneToLoad, LoadSceneMode.Single);
+    }
+
     public void ClickBack()
     {
         GetComponent<Canvas>().enabled = false;

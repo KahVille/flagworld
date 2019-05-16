@@ -19,8 +19,9 @@ public class UIQuestionCanvas : MonoBehaviour
 
     int score =0;
 
-    [SerializeField]
-    UIScoreText scoreText = null;
+    public int GetScore () {
+        return score;
+    }
 
     public void setNewQuestionUI(QuestionData question)
     {
@@ -40,11 +41,6 @@ public class UIQuestionCanvas : MonoBehaviour
             //set Text only Question
             EnableButtonAndSetQuestionTextButtons(currentQuestion.answers);
         }
-        if(!scoreText.gameObject.activeInHierarchy) 
-        {
-          scoreText.gameObject.SetActive(true);  
-        }
-
         questionTextUI.SetQuestionText(currentQuestion.questionText + "?");
     }
 
@@ -55,8 +51,7 @@ public class UIQuestionCanvas : MonoBehaviour
             Debug.Log("UI Correct");
             questionTextUI.SetQuestionText("Correct!");
             answerButtons[option].SetCorrectAnswerColor();
-            score+=10;
-            scoreText.SetTextToDisplay(score.ToString());
+            score+=1;           
         }
         else 
         {

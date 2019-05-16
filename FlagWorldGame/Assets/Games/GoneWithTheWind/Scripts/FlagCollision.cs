@@ -1,5 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿// Detects collision with the flag object.
+
 using UnityEngine;
 
 public class FlagCollision : MonoBehaviour

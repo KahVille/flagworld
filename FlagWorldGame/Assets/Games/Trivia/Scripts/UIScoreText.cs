@@ -8,7 +8,7 @@ public class UIScoreText : MonoBehaviour
     TextMeshProUGUI scoreText;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
       scoreText = GetComponent<TextMeshProUGUI>();  
     }

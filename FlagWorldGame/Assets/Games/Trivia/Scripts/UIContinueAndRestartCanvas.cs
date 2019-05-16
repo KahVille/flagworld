@@ -2,12 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
+
 
 public class UIContinueAndRestartCanvas : MonoBehaviour
 {
 
+
+    [SerializeField]
+    TextMeshProUGUI endText = null;
+
+
     public void OnContinueButtonPressed() {
-        SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
+        SceneManager.LoadScene("GPSTest", LoadSceneMode.Single);
+    }
+
+    public void SetTriviaScoreText(int roundScore, int numberOfQuestions) {
+            endText.SetText($"Round Ended, You answered correctly to: {roundScore} out of {numberOfQuestions} questions");
     }
 
     public void OnRestartButtonPressed() {
