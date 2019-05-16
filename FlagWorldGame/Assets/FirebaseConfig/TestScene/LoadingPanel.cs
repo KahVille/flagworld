@@ -5,19 +5,19 @@ using UnityEngine;
 public class LoadingPanel : MonoBehaviour
 {
     
-    private void OnEnable() {
-        FiribaseManager.OnDatabaseError += ShowPanel;
-    }
+    // private void OnEnable() {
+    //     FiribaseManager.OnDatabaseError += ShowPanel;
+    // }
 
-    private void OnDisable() {
-        FiribaseManager.OnDatabaseError -= ShowPanel;
-    }
+    // private void OnDisable() {
+    //     FiribaseManager.OnDatabaseError -= ShowPanel;
+    // }
 
-    public void ShowPanel() {
-        GetComponent<Canvas>().enabled = true;
-    }
+    // public void ShowPanel() {
+    //     GetComponent<Canvas>().enabled = true;
+    // }
 
-    public void HidePanel() {
-        GetComponent<Canvas>().enabled = false;
-    }
+    // public void HidePanel() {
+    //     GetComponent<Canvas>().enabled = false;
+    // }
 }

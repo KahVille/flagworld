@@ -32,25 +32,47 @@ public class TriviaManager : MonoBehaviour
     private GameObject loadingIndicator = null;
 
     [SerializeField]
-    private GameObject networkError = null;
-
-
-    [SerializeField]
     UIScoreText scoreText = null;
+
+     private ModalPanel modalPanel;
+
+    void Awake () {
+        modalPanel = ModalPanel.Instance();
+    }
+
+    public void ShowPanel(string title = null, string desc=null) {
+        EventButtonDetails button1Detail = new EventButtonDetails {buttonTitle = "Back to Title", action = ClosePanel};
+        SpawnPanel(title,desc, button1Detail);
+    }
+
+    void SpawnPanel(string mainTitle, string titleDescription, EventButtonDetails button1, EventButtonDetails button2 = null, Sprite icon = null ) {
+         ModalPanelDetails modalPanelDetails = new ModalPanelDetails {question = mainTitle,description = titleDescription, iconImage = icon};
+          modalPanelDetails.button1Details = button1;
+          modalPanelDetails.button2Details = button2;
+          modalPanel.SpawnWithDetails (modalPanelDetails);
+    }
+
+    public void ClosePanel() {
+        UnityEngine.SceneManagement.SceneManager.LoadScene("MainMenu");
+    }
     
     IEnumerator Start()
     {
         loadingIndicator.SetActive(true);
         contactPoints = TriviaSaveLoadSystem.LoadContactPoints();
         if (contactPoints == null)
-        {
-            yield return StartCoroutine(FetchTriviaData());
+        { 
+            loadingIndicator.SetActive(false);
+            //spawnDialog where user needs to go back to menu
+            ShowPanel("Error","contactPoint data is null");
         }
-        loadingIndicator.SetActive(false);
-        
+        else {
+          loadingIndicator.SetActive(false);   
         //id that is inside the contact point;contactpoint.identifier
         currentContactPointIndex = SelectContactPointIndex(PlayerPrefs.GetInt("CurrentLocationIdentifier", 0));
         DisplayCurrentQuestionAndEnableCanvas();
+        }
+
         yield return true;
     }
 
@@ -71,29 +93,6 @@ public class TriviaManager : MonoBehaviour
            }
         }
         return -1;
-    }
-
-    public void FetchData()
-    {
-        StartCoroutine(FetchTriviaData());
-    }
-
-
-    public IEnumerator FetchTriviaData()
-    {
-        yield return StartCoroutine(TriviaSaveLoadSystem.LoadContactPointsFromWeb());
-        contactPoints = TriviaSaveLoadSystem.LoadContactPoints();
-        if (contactPoints == null)
-        {
-            Debug.Log("Spawn network error");
-            networkError.SetActive(true);
-            loadingIndicator.SetActive(false);
-        }
-        else
-        {
-            loadingIndicator.SetActive(false);
-            DisplayCurrentQuestionAndEnableCanvas();
-        }
     }
 
     //called on button animation finnished
@@ -140,6 +139,8 @@ public class TriviaManager : MonoBehaviour
 
     }
 
+
+    // for testing purposes only
     private QuestionData[] SetDummyRoundData()
     {
 

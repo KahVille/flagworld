@@ -50,6 +50,7 @@ public class ModalPanel : MonoBehaviour {
     }
     
     public void SpawnWithDetails (ModalPanelDetails details){
+        
         modalPanelObject.SetActive (true);
 
         this.iconImage.gameObject.SetActive(false);

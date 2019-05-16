@@ -10,22 +10,15 @@ using UnityEngine.Networking;
 public class FiribaseManager : MonoBehaviour
 {
 
-    protected bool isFirebaseInitialized = false;
-
     ContactPointCollection myPointData = null;
-
-    [SerializeField]
-    private TextMeshProUGUI myFirstContactPointName = null;
-
-    [SerializeField]
-    Button continueButton = null;
 
     [SerializeField]
     private GameObject loadingIndicator = null;
 
+    //for firebase ui to work
+    //https://forum.unity.com/threads/can-only-be-called-from-the-main-thread.622948/
     DependencyStatus dependencyStatus = DependencyStatus.UnavailableOther;
-
-    public delegate void DatabaseError();
+    public delegate void DatabaseError(string title, string description);
     public static event DatabaseError OnDatabaseError;
 
 
@@ -46,13 +39,10 @@ public class FiribaseManager : MonoBehaviour
             }
             else
             {
-                myFirstContactPointName.SetText(
-                   "Could not resolve all Firebase dependencies: " + dependencyStatus);
                 if(OnDatabaseError != null)
-                    OnDatabaseError();
-
+                    OnDatabaseError("Firebase not init","");
             }
-        });
+        }, System.Threading.Tasks.TaskScheduler.FromCurrentSynchronizationContext() );
     }
 
     // Initialize the Firebase database:
@@ -62,22 +52,15 @@ public class FiribaseManager : MonoBehaviour
 
         if (!IsNetworkReachable())
         {
-
-           SpawnDatabaseError();
-
+            if(OnDatabaseError != null) {
+                loadingIndicator.SetActive(false);
+                 OnDatabaseError("network not reached","please try again");
+            }
         }
         else
         {
             RetryConnection();
         }
-        isFirebaseInitialized = true;
-    }
-
-    private void SpawnDatabaseError() {
-            myFirstContactPointName.SetText("Network not reacable");
-            if(OnDatabaseError != null)
-                OnDatabaseError();
-            loadingIndicator.SetActive(false);
     }
 
     IEnumerator checkInternetConnection(System.Action<bool> action)
@@ -111,7 +94,6 @@ public class FiribaseManager : MonoBehaviour
             loadingIndicator.SetActive(true);
             StartCoroutine(checkInternetConnection((isConnected) =>
             {
-                myFirstContactPointName.SetText($"Network state: {isConnected}");
                 //set button to download or retry connectetion based on the network state
                 if (isConnected)
                 {
@@ -119,37 +101,31 @@ public class FiribaseManager : MonoBehaviour
                 }
                 else
                 {
-                    SpawnDatabaseError();
+                   if(OnDatabaseError != null) {
+                       loadingIndicator.SetActive(false);
+                        OnDatabaseError("network not reached","please try again");
+                   }
+
                 }
             }));
-    }
-
-    public void BackToMenu() {
-        UnityEngine.SceneManagement.SceneManager.LoadScene("MainMenu");
     }
 
     protected void CheckDatabaseVersion()
     {
         loadingIndicator.SetActive(true);
-        continueButton.interactable = false;
-        myFirstContactPointName.SetText("Version Chekking...");
         string currentDatabaseVersion = PlayerPrefs.GetString("database_version");
         FirebaseDatabase.DefaultInstance
         .GetReference("database_version")
         .GetValueAsync().ContinueWith(task =>
         {
-            if (task.IsFaulted)
-            {
-                myFirstContactPointName.SetText("Version check failed");
-            }
-            else if (task.IsCompleted)
+
+             if (task.IsCompleted)
             {
                 DataSnapshot snapshot = task.Result;
                 string verNumberString = snapshot.GetRawJsonValue();
 
                 if (verNumberString != currentDatabaseVersion)
                 {
-                    myFirstContactPointName.SetText("new data found");
                     TriviaSaveLoadSystem.DeleteData();
                     PlayerPrefs.SetString("database_version", verNumberString);
                     //TODO: Implement a function that checks current selected language, possible to do with the localization manager or playerprefabs.
@@ -157,21 +133,17 @@ public class FiribaseManager : MonoBehaviour
                 }
                 else
                 {
-                    myFirstContactPointName.SetText("No new data available...");
                     loadingIndicator.SetActive(false);
                     myPointData = TriviaSaveLoadSystem.LoadContactPoints();
                     if(myPointData !=null) {
-                        myFirstContactPointName.SetText("Trivia is up-to-date");
-                        continueButton.interactable = true;
+                        if(OnDatabaseError != null) {
+                       loadingIndicator.SetActive(false);
+                        OnDatabaseError("trivia up-to-date","please continue");
+                   }
                     }
                 }
             }
-        });
-    }
-
-    public void SetUpContactPoints()
-    {
-        UnityEngine.SceneManagement.SceneManager.LoadScene("MainMenu");
+        }, System.Threading.Tasks.TaskScheduler.FromCurrentSynchronizationContext());
     }
 
     public void HideDatabaseConnectionCheck() {
@@ -180,27 +152,22 @@ public class FiribaseManager : MonoBehaviour
 
     protected void DownloadDataFromDatabase(string selectedLanguage = null)
     {
-        myFirstContactPointName.SetText("Download start...");
         FirebaseDatabase.DefaultInstance
         .GetReference(selectedLanguage)
         .GetValueAsync().ContinueWith(task =>
         {
-            if (task.IsFaulted)
+             if (task.IsCompleted)
             {
-                myFirstContactPointName.SetText("Download failed");
-            }
-            else if (task.IsCompleted)
-            {
-                myFirstContactPointName.SetText("Download completed...");
-                myFirstContactPointName.SetText("Saving to disk ...");
                 DataSnapshot snapshot = task.Result;
                 ContactPointCollection contactPoints = new ContactPointCollection();
                 JsonUtility.FromJsonOverwrite(snapshot.GetRawJsonValue(), contactPoints);
                 TriviaSaveLoadSystem.SaveContactPoints(contactPoints);
-                myFirstContactPointName.SetText("Saving completed ...");
-                continueButton.interactable = true;
                 loadingIndicator.SetActive(false);
+                if(OnDatabaseError != null) {
+                       loadingIndicator.SetActive(false);
+                        OnDatabaseError("Dowloaded the newest data","please continue");
+                   }
             }
-        });
+        }, System.Threading.Tasks.TaskScheduler.FromCurrentSynchronizationContext() );
     }
 }
