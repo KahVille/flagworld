@@ -22,6 +22,8 @@ public class LajitteluSpawner : MonoBehaviour
 
     private int P = 0, WP = 0;
     private InputLajittelu IL;
+    // Used to update the timer clock
+    public TimerClockScript timerClockScript;
 
     // Use this for initialization
     void Start()
@@ -31,6 +33,11 @@ public class LajitteluSpawner : MonoBehaviour
         Points = GameObject.Find("PointsText").GetComponent<TMP_Text>();
         Timer = GameObject.Find("TimerText").GetComponent<TMP_Text>();
         IL = GetComponent<InputLajittelu>();
+        if(!timerClockScript)
+        {
+            timerClockScript = FindObjectOfType<TimerClockScript>();
+        }
+        timerClockScript.InitializeClock(playTime);
         SetText();
     }
 
@@ -52,6 +59,7 @@ public class LajitteluSpawner : MonoBehaviour
         if (!TimeEnd)
         {
             playTime -= Time.deltaTime;
+            timerClockScript.UpdateClock(playTime);
             Timer.text = timeText + Mathf.RoundToInt(playTime);
             if(playTime <= 0)
             {

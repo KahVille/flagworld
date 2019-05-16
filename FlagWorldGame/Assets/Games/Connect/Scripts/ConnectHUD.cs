@@ -15,6 +15,7 @@ public class ConnectHUD : MonoBehaviour
     private float timeLeft = 60f;
     private bool TimeEnd = true;
     private BoardManager BM;
+    public TimerClockScript timerClockScript;
 
     private void Awake()
     {
@@ -32,6 +33,11 @@ public class ConnectHUD : MonoBehaviour
         EndP = GameObject.Find("EndPoints").GetComponent<TMP_Text>();
         End = GameObject.Find("End").GetComponent<Canvas>();
         SetText();
+        if(!timerClockScript)
+        {
+            timerClockScript = FindObjectOfType<TimerClockScript>();
+        }
+        
         //if (PlayerPrefs.GetInt(CurrentGameHigh) != 0) // if restart
         //{
         //    StartCoroutine(WaitNewGame());
@@ -45,6 +51,7 @@ public class ConnectHUD : MonoBehaviour
             return;
         }
         timeLeft -= Time.deltaTime;
+        timerClockScript.UpdateClock(timeLeft);
 
         if (Mathf.RoundToInt(timeLeft) <= 0)
         {
@@ -131,6 +138,7 @@ public class ConnectHUD : MonoBehaviour
         BM.UP = false;
         GameObject.Find("Start").GetComponent<Canvas>().enabled = false;
         GetComponent<Canvas>().enabled = true;
+        timerClockScript.InitializeClock(timeLeft);
         TimeEnd = false;
     }
 

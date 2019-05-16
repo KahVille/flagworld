@@ -1,5 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿// Class for the location.
+
 using UnityEngine;
 using UnityEngine.UI;
 
