@@ -5,19 +5,51 @@ using UnityEngine.UI;
 
 public class ButtonImageToggle : MonoBehaviour
 {
+    // Image to be changed
+    public Image changeImg;
     // Images for on and off state
     public Sprite offImg;
     public Sprite onImg;
 
     public void ToggleButtonImg()
     {
-        if(GetComponent<Image>().sprite == offImg)
+        if(changeImg.sprite == offImg)
         {
-            GetComponent<Image>().sprite = onImg;
+            changeImg.sprite = onImg;
         }
-        else if(GetComponent<Image>().sprite == onImg)
+        else if(changeImg.sprite == onImg)
         {
-            GetComponent<Image>().sprite = offImg;
+            changeImg.sprite = offImg;
+        }
+    }
+
+    // Toggle for gps, we dont change the sprite if gps is initializing so you can't spam the button.
+    public void ToggleGPSButtonImg()
+    {
+        if(!FindObjectOfType<GPSScript>().IsInitializing)
+        {
+            if(changeImg.sprite == offImg)
+            {
+                changeImg.sprite = onImg;
+                FindObjectOfType<GPSScript>().ToggleGPS();
+            }
+            else if(changeImg.sprite == onImg)
+            {
+                changeImg.sprite = offImg;
+                FindObjectOfType<GPSScript>().ToggleGPS();
+            }
+        }
+    }
+
+    public void SetImg(bool isOn)
+    {
+        if(isOn)
+        {
+            changeImg.sprite = onImg;
+        }
+        else
+        {
+            changeImg.sprite = offImg;
         }
     }
 }

@@ -92,11 +92,9 @@ public class CameraMovementGPS : MonoBehaviour
         float xMove = Input.GetAxis("Horizontal") * 0.5f;
         float yMove = Input.GetAxis("Vertical") * 0.5f;
         transform.Translate(xMove, yMove, 0f);
-        Vector3 temp = swipe.SwipeDelta;
+        //Vector3 temp = swipe.SwipeDelta;
         // Adjust the value to make the camera move slower or quicker
-        temp /= swipeValue;
-        desiredPosition -= temp;
-        desiredPosition.z = -10f;
+
     }
 
     void TouchInput()

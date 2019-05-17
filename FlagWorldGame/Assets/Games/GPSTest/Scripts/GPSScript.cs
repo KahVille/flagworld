@@ -18,6 +18,19 @@ public class GPSScript : MonoBehaviour
     public TextMeshProUGUI locationTitleText;
     public TextMeshProUGUI locationDescText;
     bool tracking;
+    // Variable for checking if the GPS is initializing
+    public bool IsInitializing
+    {
+        get
+        {
+            return isInitializing;
+        }
+        set
+        {
+            isInitializing = value;
+        }
+    }
+    bool isInitializing;
     double longitude;
     double latitude;
     bool autologging;
@@ -51,12 +64,20 @@ public class GPSScript : MonoBehaviour
     // Distance the user is from the bottom left of map, used to calculate where to show the user indicator on map
     // Given in percent, have to use floats for Vectors
     float mapDistX, mapDistY;
+    // Coroutine for location update
+    Coroutine updateLocationCO;
+    // GPS on/off button image in options menu
+    public ButtonImageToggle optionsGPSImg;
+    // GPSButtonsScript ref to hide and show buttons during pop up
+    GPSButtonsScript gpsBtnScript;
 
     // Start is called before the first frame update
     IEnumerator Start()
     {
+        isInitializing = true;
         debugText.text = "Start";
         infoAnim = infoPanelObj.GetComponent<Animator>();
+        gpsBtnScript = FindObjectOfType<GPSButtonsScript>();
         canOpenMenu = false;
 
         // Set map to correct position. First the map is moved to origo (0,0,0), then moved right and up so
@@ -89,6 +110,90 @@ public class GPSScript : MonoBehaviour
         #endif
 
         #if UNITY_ANDROID && !UNITY_EDITOR
+        yield return new WaitForSeconds(5f);
+
+        // Need to tell the user about everything!
+
+        // First, check if user has location service enabled
+        if (!Input.location.isEnabledByUser)
+		{
+			debugText.text = "Not Enabled";
+            optionsGPSImg.SetImg(false);
+            yield break;
+		}
+        // Start service before querying location
+        Input.location.Start();
+        autologging = false;
+        //autologImg.color = Color.red;
+
+        // Wait until service initializes
+        int maxWait = 20;
+        while (Input.location.status == LocationServiceStatus.Initializing && maxWait > 0)
+        {
+            yield return new WaitForSeconds(1);
+            maxWait--;
+        }
+
+        // Service didn't initialize in 20 seconds
+        if (maxWait < 1)
+        {
+            debugText.text = "Timed out";
+            optionsGPSImg.SetImg(false);
+            yield break;
+        }
+
+        // Connection has failed
+        if (Input.location.status == LocationServiceStatus.Failed)
+        {
+            debugText.text = "Unable to determine device location";
+            optionsGPSImg.SetImg(false);
+            yield break;
+        }
+        else
+        {
+            // Access granted and location value could be retrieved
+            //debugText.text = "Location: " + Input.location.lastData.latitude + " " + Input.location.lastData.longitude + " " + Input.location.lastData.altitude + " " + Input.location.lastData.horizontalAccuracy + " " + Input.location.lastData.timestamp;
+			debugText.text = "Working, yay!";
+            tracking = true;
+            lastDistance = double.MaxValue;
+            optionsGPSImg.SetImg(true);
+            updateLocationCO = StartCoroutine(UpdateLocation());
+        }
+
+        if(!File.Exists(Application.persistentDataPath + "/GPSDatas.txt"))
+        {
+            File.AppendAllText(Application.persistentDataPath + "/GPSDatas.txt", String.Empty);
+        }
+
+        #elif UNITY_EDITOR
+        yield return null;
+        debugText.text = "Working, yay!";
+        tracking = true;
+        optionsGPSImg.SetImg(false);
+        lastDistance = double.MaxValue;
+        updateLocationCO = StartCoroutine(UpdateLocation());
+        #endif
+
+        // Add listeners to location buttons
+        for(int i = 0; i < locations.Length; i++)
+        {
+            int tmp = i;
+            locBtns.Add(locations[i].image.transform.GetComponent<Button>());
+            locBtns[i].onClick.AddListener(delegate {PushLocBtn(tmp);});
+        }
+        isInitializing = false;
+    }
+
+    // For restarting the gps
+    IEnumerator ReStartGPS()
+    {
+        isInitializing = true;
+        // Android permissions
+        if(!Permission.HasUserAuthorizedPermission(Permission.FineLocation))
+        {
+            Permission.RequestUserPermission(Permission.FineLocation);
+        }
+
         yield return new WaitForSeconds(5f);
 
         // Need to tell the user about everything!
@@ -132,29 +237,9 @@ public class GPSScript : MonoBehaviour
 			debugText.text = "Working, yay!";
             tracking = true;
             lastDistance = double.MaxValue;
-            StartCoroutine(UpdateLocation());
+            updateLocationCO = StartCoroutine(UpdateLocation());
         }
-
-        if(!File.Exists(Application.persistentDataPath + "/GPSDatas.txt"))
-        {
-            File.AppendAllText(Application.persistentDataPath + "/GPSDatas.txt", String.Empty);
-        }
-
-        #elif UNITY_EDITOR
-        yield return null;
-        debugText.text = "Working, yay!";
-        tracking = true;
-        lastDistance = double.MaxValue;
-        StartCoroutine(UpdateLocation());
-        #endif
-
-        // Add listeners to location buttons
-        for(int i = 0; i < locations.Length; i++)
-        {
-            int tmp = i;
-            locBtns.Add(locations[i].image.transform.GetComponent<Button>());
-            locBtns[i].onClick.AddListener(delegate {PushLocBtn(tmp);});
-        }
+        isInitializing = false;
     }
 
     // Activate pop-up and set the correct texts
@@ -168,6 +253,7 @@ public class GPSScript : MonoBehaviour
         // Open pop-up and show correct info
         infoPanelObj.GetComponent<DisableScript>().enabled = false;
         infoPanelObj.SetActive(true);
+        gpsBtnScript.HideOrShowButtons(true);
         infoAnim.SetBool("ShowPanel", true);
         locationTitleText.text = locations[locationIndex].title;
         locationDescText.text = locations[locationIndex].description;
@@ -203,11 +289,38 @@ public class GPSScript : MonoBehaviour
         UnityEngine.SceneManagement.SceneManager.LoadScene("Trivia",UnityEngine.SceneManagement.LoadSceneMode.Single);
     }
 
+    // Hide the popup panel
     public void DisablePanel()
     {
         playBtn.onClick.RemoveAllListeners();
         triviaBtn.onClick.RemoveAllListeners();
+        gpsBtnScript.HideOrShowButtons(false);
         infoAnim.SetBool("ShowPanel", false);
+    }
+
+    public void ToggleGPS()
+    {
+        if(tracking)
+        {
+            StopCoroutine(updateLocationCO);
+            tracking = false;
+            Input.location.Stop();
+            Debug.Log("NO: " + isInitializing);
+            debugText.text = "NO GPS!!!";
+        }
+        else
+        {
+            StartCoroutine(ReStartGPS());
+        }
+    }
+
+    public void StopGPS()
+    {
+        StopCoroutine(updateLocationCO);
+        tracking = false;
+        Input.location.Stop();
+        Debug.Log("NO: " + isInitializing);
+        debugText.text = "NO GPS!!!";
     }
 
     // Disable listeners
@@ -311,17 +424,19 @@ public class GPSScript : MonoBehaviour
 
     IEnumerator UpdateLocation()
     {
-        DateTime now = DateTime.Now;
-        File.AppendAllText(Application.persistentDataPath + "/GPSDatas.txt", "-+-+-+-+-" + now.ToString("F") + "-+-+-+-+-"  +"\n");
-        logIndex = 0;
+        // DateTime now = DateTime.Now;
+        // File.AppendAllText(Application.persistentDataPath + "/GPSDatas.txt", "-+-+-+-+-" + now.ToString("F") + "-+-+-+-+-"  +"\n");
+        // logIndex = 0;
         while(tracking)
         {
+            Debug.Log("UPDATELOC: " + isInitializing);
             #if (UNITY_ANDROID || UNITY_IOS) && !UNITY_EDITOR
             longitude = Input.location.lastData.longitude;
 			latitude = Input.location.lastData.latitude;
             CheckClosestLoc();
             UpdatePlayerIndicator();
-            DebugWriteMapData();
+
+            // DebugWriteMapData();
             // if(lastDistance < rangeDistance)
             // {
             //     debugText.text = "IN " + lastLocation.name;

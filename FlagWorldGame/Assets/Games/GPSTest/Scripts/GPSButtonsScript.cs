@@ -7,6 +7,7 @@ public class GPSButtonsScript : MonoBehaviour
 {
     public Button exitBtn;
     public Button menuBtn;
+    public GameObject[] buttons;
     [SerializeField]
     Animator menuAnim;
     [SerializeField]
@@ -20,6 +21,24 @@ public class GPSButtonsScript : MonoBehaviour
         exitBtn.onClick.AddListener(delegate { exitBtn.GetComponent<UIExitBtnScript>().BackToMainMenu(); });
         menuBtn.onClick.AddListener(delegate { FromBackToMainMenuToCloseMenu(); });
         cameraMovementScript = FindObjectOfType<CameraMovementGPS>();
+    }
+
+    public void HideOrShowButtons(bool hide)
+    {
+        if(hide)
+        {
+            foreach(GameObject obj in buttons)
+            {
+                obj.SetActive(false);
+            }
+        }
+        else
+        {
+            foreach(GameObject obj in buttons)
+            {
+                obj.SetActive(true);
+            }
+        }
     }
 
     // Called when going back to map from the main menu
