@@ -93,6 +93,10 @@ public class FiribaseManager : MonoBehaviour
             }
         }, System.Threading.Tasks.TaskScheduler.FromCurrentSynchronizationContext());
         
+        #elif UNITY_EDITOR
+        loadingIndicator.SetActive(false);
+        EventButtonDetails button1Detail = new EventButtonDetails { buttonTitle = "OK I understand", action = ContinueSuccess };
+        SpawnPanel("You run in Editor", "in case of null refrence exception in trivia, please test on a mobile device", button1Detail, null, networkErrorSprite);
         #endif
     }
 
