@@ -18,9 +18,6 @@ public class LajitteluSpawner : MonoBehaviour
     private Text Top, Bottom, Right, Left;
     private TMP_Text Points, Timer;
 
-    private string LanguageID = "Language";
-    private string timeText = "Aika: ";
-
     private int P = 0, WP = 0;
     private InputLajittelu IL;
     // Used to update the timer clock
@@ -39,13 +36,6 @@ public class LajitteluSpawner : MonoBehaviour
             timerClockScript = FindObjectOfType<TimerClockScript>();
         }
         timerClockScript.InitializeClock(playTime);
-        SetText();
-    }
-
-    private void SetText()
-    {
-        timeText = "";
-
         SetPoints();
     }
 
@@ -61,7 +51,7 @@ public class LajitteluSpawner : MonoBehaviour
         {
             playTime -= Time.deltaTime;
             timerClockScript.UpdateClock(playTime);
-            Timer.text = timeText + Mathf.RoundToInt(playTime);
+            Timer.text = Mathf.RoundToInt(playTime).ToString();
             if(playTime <= 0)
             {
                 TimeEnd = true;

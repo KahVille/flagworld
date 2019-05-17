@@ -9,6 +9,7 @@ public class MuistiCanvas : MonoBehaviour {
 
     private Canvas StartC, HUD, End;
     private string CurrentGameHigh = "CurrGameHigh";
+    private string MemoryHigh = "MemoryHigh";
     private int points;
 
 	// Use this for initialization
@@ -17,7 +18,7 @@ public class MuistiCanvas : MonoBehaviour {
         StartC = GameObject.Find("StartCanvas").GetComponent<Canvas>();
         HUD = GameObject.Find("HUD").GetComponent<Canvas>();
         End = GameObject.Find("EndCanvas").GetComponent<Canvas>();
-        if(PlayerPrefs.GetInt(CurrentGameHigh) != 0)
+        if(PlayerPrefs.GetInt(CurrentGameHigh) == 1)
         {
             StartCoroutine(NewGameStart());
         }
@@ -28,19 +29,21 @@ public class MuistiCanvas : MonoBehaviour {
         if (finished)
         {
             GameObject.Find("Points").GetComponent<TMP_Text>().text = "You made " + moves.ToString() + " moves";
-            if(moves > PlayerPrefs.GetInt(CurrentGameHigh))
+            if(moves < PlayerPrefs.GetInt(MemoryHigh))
             {
-                PlayerPrefs.SetInt(CurrentGameHigh, moves);
+                GameObject.Find("Points").GetComponent<TMP_Text>().text += "\nNew Highscore!";
+                PlayerPrefs.SetInt(MemoryHigh, moves);
             }
             else
             {
-                moves = PlayerPrefs.GetInt(CurrentGameHigh);
+                GameObject.Find("Points").GetComponent<TMP_Text>().text += "\nHighscore: " +  PlayerPrefs.GetInt(MemoryHigh).ToString();
             }
         }
         else
         {
             GameObject.Find("Points").GetComponent<TMP_Text>().text = "You opened " + pairs.ToString() + " pairs in " + moves.ToString() + " moves";
         }
+
         HUD.enabled = false;
         End.enabled = true;
     }
@@ -54,12 +57,13 @@ public class MuistiCanvas : MonoBehaviour {
 
     public void ClickContinue()
     {
-        // Set Highscore using CurrGameHigh
+        PlayerPrefs.SetInt(CurrentGameHigh, 0);
         SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
     }
 
     public void ClickNewGame()
     {
+        PlayerPrefs.SetInt(CurrentGameHigh, 1);
         SceneManager.LoadScene("Memory", LoadSceneMode.Single);
     }
 

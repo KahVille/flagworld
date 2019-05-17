@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class LajitteluBackground : MonoBehaviour {
 
-    private void Start()
+    private void Awake()
     {
         Screen.orientation = ScreenOrientation.Portrait;
         float height = Camera.main.orthographicSize * 2;
