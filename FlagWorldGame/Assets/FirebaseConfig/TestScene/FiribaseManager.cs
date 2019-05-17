@@ -1,25 +1,35 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 using Firebase;
 using Firebase.Database;
 using TMPro;
 using UnityEngine.Networking;
+
+    //fixes ui hang with firebase
+    //https://forum.unity.com/threads/can-only-be-called-from-the-main-thread.622948/
+    // Add System.Threading.Tasks.TaskScheduler.FromCurrentSynchronizationContext()
+
+
 public class FiribaseManager : MonoBehaviour
 {
 
-    ContactPointCollection myPointData = null;
+
 
     [SerializeField]
     private GameObject loadingIndicator = null;
 
-    //for firebase ui to work
-    //https://forum.unity.com/threads/can-only-be-called-from-the-main-thread.622948/
-    DependencyStatus dependencyStatus = DependencyStatus.UnavailableOther;
-    public delegate void DatabaseError(string title, string description);
-    public static event DatabaseError OnDatabaseError;
-
+    [SerializeField]
+    Sprite networkErrorSprite = null;
 
     private ModalPanel modalPanel;
+
+    DependencyStatus dependencyStatus = DependencyStatus.UnavailableOther;
+    ContactPointCollection myPointData = null;
+
+
+
+
 
     //grab instance of panel
     void Awake()
@@ -40,6 +50,21 @@ public class FiribaseManager : MonoBehaviour
         modalPanel.SpawnWithDetails(modalPanelDetails);
     }
 
+    //ErrorDisplays
+    void ShowNetworkError()
+    {
+        loadingIndicator.SetActive(false);
+        EventButtonDetails button1Detail = new EventButtonDetails { buttonTitle = "Retry", action = RetryConnection };
+        SpawnPanel("Network Error", "please enable network connection", button1Detail, null, networkErrorSprite);
+    }
+
+    void ShowFirebaseError()
+    {
+        loadingIndicator.SetActive(false);
+        EventButtonDetails button1Detail = new EventButtonDetails { buttonTitle = "Reload", action = ReloadScene };
+        SpawnPanel("Firebase Error", "please Reload the game", button1Detail);
+    }
+
     //callbacks for buttons
     void ReloadScene()
     {
@@ -53,6 +78,7 @@ public class FiribaseManager : MonoBehaviour
 
     private void StartFirebase()
     {
+        #if !UNITY_EDITOR
         loadingIndicator.SetActive(true);
         FirebaseApp.CheckAndFixDependenciesAsync().ContinueWith(task =>
         {
@@ -63,12 +89,11 @@ public class FiribaseManager : MonoBehaviour
             }
             else
             {
-                loadingIndicator.SetActive(false);
-                //firebase error
-                EventButtonDetails button1Detail = new EventButtonDetails { buttonTitle = "Reload", action = ReloadScene };
-                SpawnPanel("Firebase Error", "please Reload the game", button1Detail);
+                ShowFirebaseError();
             }
         }, System.Threading.Tasks.TaskScheduler.FromCurrentSynchronizationContext());
+        
+        #endif
     }
 
     // Initialize the Firebase database:
@@ -78,10 +103,7 @@ public class FiribaseManager : MonoBehaviour
 
         if (!IsNetworkReachable())
         {
-            loadingIndicator.SetActive(false);
-            //Network error
-            EventButtonDetails button1Detail = new EventButtonDetails { buttonTitle = "Retry", action = RetryConnection };
-            SpawnPanel("Network Error", "please enable network connection", button1Detail);
+            ShowNetworkError();
         }
         else
         {
@@ -117,6 +139,7 @@ public class FiribaseManager : MonoBehaviour
     }
     public void RetryConnection()
     {
+        #if !UNITY_EDITOR
         //continue download proggress
         loadingIndicator.SetActive(true);
         StartCoroutine(checkInternetConnection((isConnected) =>
@@ -128,16 +151,15 @@ public class FiribaseManager : MonoBehaviour
             }
             else
             {
-                loadingIndicator.SetActive(false);
-                //Network error
-                EventButtonDetails button1Detail = new EventButtonDetails { buttonTitle = "Retry", action = RetryConnection };
-                SpawnPanel("Network Error", "please enable network connection", button1Detail);
+                ShowNetworkError();
             }
         }));
+        #endif
     }
 
     protected void CheckDatabaseVersion()
     {
+        #if !UNITY_EDITOR
         loadingIndicator.SetActive(true);
         string currentDatabaseVersion = PlayerPrefs.GetString("database_version");
         FirebaseDatabase.DefaultInstance
@@ -169,10 +191,12 @@ public class FiribaseManager : MonoBehaviour
                 }
             }
         }, System.Threading.Tasks.TaskScheduler.FromCurrentSynchronizationContext());
+        #endif
     }
 
     protected void DownloadDataFromDatabase(string selectedLanguage = null)
     {
+        #if !UNITY_EDITOR
         FirebaseDatabase.DefaultInstance
         .GetReference(selectedLanguage)
         .GetValueAsync().ContinueWith(task =>
@@ -188,5 +212,6 @@ public class FiribaseManager : MonoBehaviour
                 SpawnPanel("Trivia up-to-date", "newest data downloaded", button1Detail);
             }
         }, System.Threading.Tasks.TaskScheduler.FromCurrentSynchronizationContext());
+        #endif
     }
 }
