@@ -9,6 +9,7 @@ public class ConnectHUD : MonoBehaviour
 {
     private int Points = 0;
     private string CurrentGameHigh = "CurrGameHigh";
+    private string ConnectHigh = "ConnectHigh";
     private int P;
     private TMP_Text EndP, PointsT, TimerT, StartT, DetailsT;
     private Canvas End;
@@ -32,13 +33,14 @@ public class ConnectHUD : MonoBehaviour
         TimerT = GameObject.Find("Timer").GetComponent<TMP_Text>();
         EndP = GameObject.Find("EndPoints").GetComponent<TMP_Text>();
         End = GameObject.Find("End").GetComponent<Canvas>();
+
         SetText();
         if(!timerClockScript)
         {
             timerClockScript = FindObjectOfType<TimerClockScript>();
         }
 
-        if (PlayerPrefs.GetInt(CurrentGameHigh) != 0) // if restart
+        if (PlayerPrefs.GetInt(CurrentGameHigh) == 1) // if restart
         {
             StartCoroutine(WaitNewGame());
         }
@@ -60,7 +62,7 @@ public class ConnectHUD : MonoBehaviour
             TheEnd();
         }
 
-        TimerT.text = "Time: " + Mathf.RoundToInt(timeLeft).ToString();
+        TimerT.text = Mathf.RoundToInt(timeLeft).ToString();
     }
 
     private void SetText()
@@ -78,26 +80,24 @@ public class ConnectHUD : MonoBehaviour
     {
         EndP.GetComponent<RectTransform>().sizeDelta = new Vector2(Screen.width, Screen.height);
         EndP.text = "Points: " + Points.ToString();
-        GameObject.Find("Continue").GetComponentInChildren<TMP_Text>().text = "Back to menu";  // End Button text set up
-
-        if (P > PlayerPrefs.GetInt(CurrentGameHigh))
+        if(Points > PlayerPrefs.GetInt(ConnectHigh))
         {
-            PlayerPrefs.SetInt(CurrentGameHigh, P);
+            EndP.text += "\nNew Highscore!";
+            PlayerPrefs.SetInt(ConnectHigh, Points);
         }
         else
         {
-            P = PlayerPrefs.GetInt(CurrentGameHigh);
+            EndP.text += "\nHighscore: " + PlayerPrefs.GetInt(ConnectHigh).ToString();
         }
+        GameObject.Find("Continue").GetComponentInChildren<TMP_Text>().text = "Back to menu";  // End Button text set up
+
         GetComponent<Canvas>().enabled = false;
         End.GetComponent<Canvas>().enabled = true;
     }
 
     public void ClickContinue()
     {
-        // If game´will use some sort of highscore for combined gamescores
-        //int CP = PlayerPrefs.GetInt("Points");
-        //CP += P;
-        //PlayerPrefs.SetInt("Points", CP);
+        PlayerPrefs.SetInt(CurrentGameHigh, 0);
         SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
     }
 
@@ -118,6 +118,7 @@ public class ConnectHUD : MonoBehaviour
 
     public void NewGame()
     {
+        PlayerPrefs.SetInt(CurrentGameHigh, 1);
         SceneManager.LoadScene("Connect", LoadSceneMode.Single);
     }
 

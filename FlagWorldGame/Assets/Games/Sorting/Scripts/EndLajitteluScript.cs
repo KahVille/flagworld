@@ -9,8 +9,7 @@ public class EndLajitteluScript : MonoBehaviour {
 
     private GameObject EndScore, Spawner;
     private Button ContinueB, NewGameB;
-    private string LanguageID = "Language";
-    private string CurrentGameHigh = "CurrGameHigh";
+    private string SortingHigh = "SortingHigh";
     private int Points;
 
     // Use this for initialization
@@ -23,6 +22,15 @@ public class EndLajitteluScript : MonoBehaviour {
     {
         Points = Spawner.GetComponent<LajitteluSpawner>().GetPoints();
         EndScore.GetComponent<TMP_Text>().text = "You scored " + Points.ToString() + " points";
+        if(Points > PlayerPrefs.GetInt(SortingHigh))
+        {
+            EndScore.GetComponent<TMP_Text>().text += "\nNew Highscore!";
+            PlayerPrefs.SetInt(SortingHigh, Points);
+        }
+        else
+        {
+            EndScore.GetComponent<TMP_Text>().text += "\nHighscore: " + PlayerPrefs.GetInt(SortingHigh).ToString();
+        }
     }
 
 
