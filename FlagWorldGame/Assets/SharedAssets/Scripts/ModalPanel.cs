@@ -17,7 +17,7 @@ public class EventButtonDetails {
 
 public class ModalPanelDetails {
     public string description; // Not implemented
-    public string question;
+    public string shortText;
     public Sprite iconImage;
     public Sprite panelBackgroundImage; // Not implemented
     public EventButtonDetails button1Details;
@@ -28,7 +28,7 @@ public class ModalPanelDetails {
 public class ModalPanel : MonoBehaviour {
     
     public TextMeshProUGUI description;
-    public TextMeshProUGUI question;
+    public TextMeshProUGUI shortText;
     public Image iconImage;
     public Button button1;
     public Button button2;
@@ -57,7 +57,7 @@ public class ModalPanel : MonoBehaviour {
         button1.gameObject.SetActive(false);
         button2.gameObject.SetActive(false);
 
-        this.question.text = details.question;
+        this.shortText.text = details.shortText;
 
         if(details.description != null || details.description != "")
         this.description.text = details.description;

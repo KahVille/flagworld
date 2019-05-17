@@ -23,7 +23,7 @@ public class TestModalPanel : MonoBehaviour {
     //example use case 1. Assing directly
     public void TestExample1 () {
         ModalPanelDetails modalPanelDetails = new ModalPanelDetails ();
-        modalPanelDetails.question = "This is an announcement!\nIf you don't like it, shove off!";
+        modalPanelDetails.shortText = "This is an announcement!\nIf you don't like it, shove off!";
         modalPanelDetails.button1Details = new EventButtonDetails ();
         modalPanelDetails.button1Details.buttonTitle = "Gotcha!";
         modalPanelDetails.button1Details.action = TestCancelFunction;
@@ -52,7 +52,7 @@ public class TestModalPanel : MonoBehaviour {
 /// <param name="button2">can be null parameter</param>
 /// <param name="icon">can be null parameter</param>
     void SpawnPanel(string mainTitle, string titleDescription, EventButtonDetails button1, EventButtonDetails button2 = null, Sprite icon = null ) {
-         ModalPanelDetails modalPanelDetails = new ModalPanelDetails {question = mainTitle,description = titleDescription, iconImage = icon};
+         ModalPanelDetails modalPanelDetails = new ModalPanelDetails {shortText = mainTitle,description = titleDescription, iconImage = icon};
           modalPanelDetails.button1Details = button1;
           modalPanelDetails.button2Details = button2;
           modalPanel.SpawnWithDetails (modalPanelDetails);

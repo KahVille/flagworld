@@ -46,7 +46,7 @@ public class TriviaManager : MonoBehaviour
     }
 
     void SpawnPanel(string mainTitle, string titleDescription, EventButtonDetails button1, EventButtonDetails button2 = null, Sprite icon = null ) {
-         ModalPanelDetails modalPanelDetails = new ModalPanelDetails {question = mainTitle,description = titleDescription, iconImage = icon};
+         ModalPanelDetails modalPanelDetails = new ModalPanelDetails {shortText = mainTitle,description = titleDescription, iconImage = icon};
           modalPanelDetails.button1Details = button1;
           modalPanelDetails.button2Details = button2;
           modalPanel.SpawnWithDetails (modalPanelDetails);

@@ -219,6 +219,11 @@ PrefabInstance:
       propertyPath: modalPanelObject
       value: 
       objectReference: {fileID: 980454866}
+    - target: {fileID: 7063350415841267427, guid: 0d1120e2f04af465780bfe9a228b9d93,
+        type: 3}
+      propertyPath: shortText
+      value: 
+      objectReference: {fileID: 980454865}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0d1120e2f04af465780bfe9a228b9d93, type: 3}
 --- !u!1 &296796949
