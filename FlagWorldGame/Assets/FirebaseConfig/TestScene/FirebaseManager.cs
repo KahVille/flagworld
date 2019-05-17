@@ -11,7 +11,7 @@ using UnityEngine.Networking;
     // Add System.Threading.Tasks.TaskScheduler.FromCurrentSynchronizationContext()
 
 
-public class FiribaseManager : MonoBehaviour
+public class FirebaseManager : MonoBehaviour
 {
 
 
