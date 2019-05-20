@@ -2,67 +2,67 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
+
 public class LocalizationManager : MonoBehaviour {
 
     public static LocalizationManager Instance;
 
     private Dictionary<string, string> localizedText;
-
     private bool isReady = false;
-    private string missingTextString = "Localized Text not Found";
-	// Use this for initialization
-	void Awake () {
-        if(Instance == null)
-        {
-            Instance = this;
-        }
-        else if(Instance != this)
-        {
-            Destroy(gameObject);
-        }
+    private string missingTextString = "Localized text not found";
 
-        DontDestroyOnLoad(gameObject);
+    public delegate void LanguageLocalization();
+    public static event LanguageLocalization OnLanguageLocalization;
 
-	}
-
-    public void loadLocalizedText(string fileName = null)
+    // Use this for initialization
+    void Awake () 
     {
-        localizedText = new Dictionary<string, string>();
-        string filePath = Path.Combine(Application.streamingAssetsPath,fileName);
-        if(File.Exists(filePath))
+        if (Instance == null) {
+            Instance = this;
+        } else if (Instance != this)
         {
-            string dataAsJson = File.ReadAllText(filePath);
-            LocalizationData loadedData = JsonUtility.FromJson<LocalizationData>(dataAsJson);
+            Destroy (gameObject);
+        }
 
-            for (int i = 0; i < loadedData.items.Length; i++)
+        DontDestroyOnLoad (gameObject);
+
+        LoadLocalizedText("localizedText_fi.json");
+    }
+    
+    public void LoadLocalizedText(string fileName)
+    {
+        localizedText = new Dictionary<string, string> ();
+        string filePath = Path.Combine (Application.streamingAssetsPath, fileName);
+
+        if (File.Exists (filePath)) {
+            string dataAsJson = File.ReadAllText (filePath);
+            LocalizationData loadedData = JsonUtility.FromJson<LocalizationData> (dataAsJson);
+
+            for (int i = 0; i < loadedData.items.Length; i++) 
             {
-                localizedText.Add(loadedData.items[i].key, loadedData.items[i].value);
+                localizedText.Add (loadedData.items [i].key, loadedData.items [i].value);   
             }
 
-            Debug.Log("Data loaded, Dictionary contains: " + localizedText.Count + " entries");
-        }
-        else
+            Debug.Log ("Data loaded, dictionary contains: " + localizedText.Count + " entries");
+        } else 
         {
-            Debug.LogError("Canot find file");
+            Debug.LogError ("Cannot find file!");
         }
 
         isReady = true;
-
     }
 
-    public string getLocalizedValue(string key)
+    public string GetLocalizedValue(string key)
     {
         string result = missingTextString;
-        if(localizedText.ContainsKey(key))
+        if (localizedText.ContainsKey (key))
         {
-            result = localizedText[key];
+            result = localizedText [key];
         }
-
         return result;
-
     }
 
-    public bool getIsReady()
+    public bool GetIsReady()
     {
         return isReady;
     }

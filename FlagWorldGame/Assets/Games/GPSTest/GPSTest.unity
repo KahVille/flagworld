@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44659364, g: 0.4964301, b: 0.5748256, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -123,6 +123,7 @@ GameObject:
   - component: {fileID: 21880834}
   - component: {fileID: 21880836}
   - component: {fileID: 21880835}
+  - component: {fileID: 21880837}
   m_Layer: 5
   m_Name: AsetuksetPoistaPisteetTxt
   m_TagString: Untagged
@@ -274,6 +275,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 21880833}
   m_CullTransparentMesh: 0
+--- !u!114 &21880837
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 21880833}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ecefcd602d84c14194dbaddb6bcccae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  key: remove_points_button
 --- !u!1 &33699220
 GameObject:
   m_ObjectHideFlags: 0
@@ -1132,7 +1146,7 @@ MonoBehaviour:
   m_material: {fileID: 0}
   m_sharedMaterial: {fileID: 0}
   m_isDefaultMaterial: 0
-  m_padding: 0.5
+  m_padding: 0
   m_canvasRenderer: {fileID: 265957351}
   m_TextComponent: {fileID: 751713187}
   m_materialReferenceIndex: 1
@@ -1206,7 +1220,7 @@ MonoBehaviour:
   m_material: {fileID: 0}
   m_sharedMaterial: {fileID: 0}
   m_isDefaultMaterial: 0
-  m_padding: 0.5
+  m_padding: 0
   m_canvasRenderer: {fileID: 275067870}
   m_TextComponent: {fileID: 21880835}
   m_materialReferenceIndex: 1
@@ -1229,6 +1243,7 @@ GameObject:
   - component: {fileID: 293337095}
   - component: {fileID: 293337097}
   - component: {fileID: 293337096}
+  - component: {fileID: 293337098}
   m_Layer: 5
   m_Name: MenuOhjeBtnTxt
   m_TagString: Untagged
@@ -1379,6 +1394,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 293337094}
   m_CullTransparentMesh: 0
+--- !u!114 &293337098
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 293337094}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ecefcd602d84c14194dbaddb6bcccae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  key: help_button
 --- !u!1 &324119480
 GameObject:
   m_ObjectHideFlags: 0
@@ -1935,6 +1963,7 @@ GameObject:
   - component: {fileID: 411591407}
   - component: {fileID: 411591409}
   - component: {fileID: 411591408}
+  - component: {fileID: 411591410}
   m_Layer: 5
   m_Name: PlaytBtnTxt
   m_TagString: Untagged
@@ -2084,6 +2113,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 411591406}
   m_CullTransparentMesh: 0
+--- !u!114 &411591410
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 411591406}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ecefcd602d84c14194dbaddb6bcccae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  key: play_button
 --- !u!1 &416236558
 GameObject:
   m_ObjectHideFlags: 0
@@ -2489,6 +2531,7 @@ GameObject:
   - component: {fileID: 550743528}
   - component: {fileID: 550743530}
   - component: {fileID: 550743529}
+  - component: {fileID: 550743531}
   m_Layer: 5
   m_Name: MenuAsetuksetBtnTxt
   m_TagString: Untagged
@@ -2641,6 +2684,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 550743527}
   m_CullTransparentMesh: 0
+--- !u!114 &550743531
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 550743527}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ecefcd602d84c14194dbaddb6bcccae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  key: settings_button
 --- !u!1 &562421797
 GameObject:
   m_ObjectHideFlags: 0
@@ -3209,7 +3265,7 @@ MonoBehaviour:
   m_material: {fileID: 0}
   m_sharedMaterial: {fileID: 0}
   m_isDefaultMaterial: 0
-  m_padding: 0.5
+  m_padding: 0
   m_canvasRenderer: {fileID: 633125033}
   m_TextComponent: {fileID: 741908761}
   m_materialReferenceIndex: 1
@@ -3422,6 +3478,7 @@ GameObject:
   - component: {fileID: 741908760}
   - component: {fileID: 741908762}
   - component: {fileID: 741908761}
+  - component: {fileID: 741908763}
   m_Layer: 5
   m_Name: AsetuksetGPSTxt
   m_TagString: Untagged
@@ -3573,6 +3630,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 741908759}
   m_CullTransparentMesh: 0
+--- !u!114 &741908763
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 741908759}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ecefcd602d84c14194dbaddb6bcccae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  key: gps_button
 --- !u!1 &751713185
 GameObject:
   m_ObjectHideFlags: 0
@@ -3584,6 +3654,7 @@ GameObject:
   - component: {fileID: 751713186}
   - component: {fileID: 751713188}
   - component: {fileID: 751713187}
+  - component: {fileID: 751713189}
   m_Layer: 5
   m_Name: AsetuksetKieliTxt
   m_TagString: Untagged
@@ -3735,6 +3806,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 751713185}
   m_CullTransparentMesh: 0
+--- !u!114 &751713189
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 751713185}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ecefcd602d84c14194dbaddb6bcccae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  key: language_button
 --- !u!1 &774346871
 GameObject:
   m_ObjectHideFlags: 0
@@ -4312,6 +4396,7 @@ GameObject:
   - component: {fileID: 914496743}
   - component: {fileID: 914496745}
   - component: {fileID: 914496744}
+  - component: {fileID: 914496746}
   m_Layer: 5
   m_Name: TriviaTxt
   m_TagString: Untagged
@@ -4463,6 +4548,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 914496742}
   m_CullTransparentMesh: 0
+--- !u!114 &914496746
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 914496742}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ecefcd602d84c14194dbaddb6bcccae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  key: trivia_button
 --- !u!1 &964908631
 GameObject:
   m_ObjectHideFlags: 0
@@ -5933,6 +6031,7 @@ GameObject:
   - component: {fileID: 1528002281}
   - component: {fileID: 1528002283}
   - component: {fileID: 1528002282}
+  - component: {fileID: 1528002284}
   m_Layer: 5
   m_Name: AsetuksetAanetTxt
   m_TagString: Untagged
@@ -6084,6 +6183,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1528002280}
   m_CullTransparentMesh: 0
+--- !u!114 &1528002284
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1528002280}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ecefcd602d84c14194dbaddb6bcccae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  key: settings_button
 --- !u!1 &1581672232
 GameObject:
   m_ObjectHideFlags: 0
@@ -6821,6 +6933,7 @@ GameObject:
   - component: {fileID: 1778128205}
   - component: {fileID: 1778128207}
   - component: {fileID: 1778128206}
+  - component: {fileID: 1778128208}
   m_Layer: 5
   m_Name: "MenuTekij\xE4tBtnTxt"
   m_TagString: Untagged
@@ -6972,6 +7085,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1778128204}
   m_CullTransparentMesh: 0
+--- !u!114 &1778128208
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1778128204}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ecefcd602d84c14194dbaddb6bcccae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  key: credits_button
 --- !u!1 &1784082867
 GameObject:
   m_ObjectHideFlags: 0
@@ -7272,6 +7398,7 @@ GameObject:
   - component: {fileID: 1943573466}
   - component: {fileID: 1943573468}
   - component: {fileID: 1943573467}
+  - component: {fileID: 1943573469}
   m_Layer: 5
   m_Name: MenuAsetuksetBtnTxt
   m_TagString: Untagged
@@ -7424,6 +7551,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1943573465}
   m_CullTransparentMesh: 0
+--- !u!114 &1943573469
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1943573465}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ecefcd602d84c14194dbaddb6bcccae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  key: settings_button
 --- !u!1 &1946454578
 GameObject:
   m_ObjectHideFlags: 0
