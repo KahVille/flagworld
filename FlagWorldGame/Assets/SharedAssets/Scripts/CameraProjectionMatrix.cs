@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class CameraProjectionMatrix : MonoBehaviour
 {
-    public float orthographicSize = 5;
+    float orthographicSize;
     public float aspect = 1.77777f;
 
     void Start()
     {
+        orthographicSize = Camera.main.orthographicSize;
         Camera.main.projectionMatrix = Matrix4x4.Ortho(
                 -orthographicSize * aspect, orthographicSize * aspect,
                 -orthographicSize, orthographicSize,

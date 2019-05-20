@@ -153,13 +153,13 @@ public class CameraMovementGPS : MonoBehaviour
                 touchTimer = 0;
             }
 
-            // if(touch.phase == TouchPhase.Ended && touchTimer < 0.1f)
-            // {
-            //     Vector3 newCamPos = gpsScript.GetUserIndicatorImg().transform.position;
-            //     newCamPos.z = -10f;
-            //     mainCam.transform.position = newCamPos;
-            //     return;
-            // }
+            if(touch.phase == TouchPhase.Ended && touchTimer < 0.1f)
+            {
+                Vector3 newCamPos = gpsScript.GetUserIndicatorImg().transform.position;
+                newCamPos.z = -10f;
+                mainCam.transform.position = newCamPos;
+                return;
+            }
 
             touchDirection = touchStartPos - mainCam.ScreenToWorldPoint(touch.position);
             desiredPosition += touchDirection * scrollSpeed;

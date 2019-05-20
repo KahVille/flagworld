@@ -22,5 +22,17 @@ public class FlagCollision : MonoBehaviour
                 playerScript.StartGameOver();
             }
         }
+        if(other.transform.CompareTag("Wind"))
+        {
+            playerScript.Windy = true;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other) 
+    {
+        if(other.transform.CompareTag("Wind"))
+        {
+            playerScript.Windy = false;
+        }   
     }
 }
