@@ -207,6 +207,7 @@ public class ConnectTile : MonoBehaviour
             {
                 matchingTiles[i].GetComponent<SpriteRenderer>().sprite = null;
                 matchingTiles[i].GetComponent<ConnectTile>().Pop.Play();
+                matchingTiles[i].GetComponent<AudioSource>().Play();
                 HUD.SetPoints(10);
             }
             matchFound = true; // 6

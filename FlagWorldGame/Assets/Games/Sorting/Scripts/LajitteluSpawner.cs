@@ -20,6 +20,7 @@ public class LajitteluSpawner : MonoBehaviour
 
     private int P = 0, WP = 0;
     private InputLajittelu IL;
+    private Color32 OrigColor;
     // Used to update the timer clock
     public TimerClockScript timerClockScript;
 
@@ -30,6 +31,7 @@ public class LajitteluSpawner : MonoBehaviour
         End = GameObject.Find("EndCanvas");
         Points = GameObject.Find("PointsText").GetComponent<TMP_Text>();
         Timer = GameObject.Find("TimerText").GetComponent<TMP_Text>();
+        OrigColor = Points.color;
         IL = GetComponent<InputLajittelu>();
         if(!timerClockScript)
         {
@@ -98,7 +100,7 @@ public class LajitteluSpawner : MonoBehaviour
     private IEnumerator ShowFeed()
     {
         yield return new WaitForSeconds(0.5f);
-        Points.color = new Color32(0, 0, 0, 255);
+        Points.color = OrigColor;
     }
 
     private IEnumerator Ending()

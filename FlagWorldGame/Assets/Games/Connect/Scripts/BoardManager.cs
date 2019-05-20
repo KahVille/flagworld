@@ -521,7 +521,7 @@ public class BoardManager : MonoBehaviour
 
     private IEnumerator WaitToCheck()
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1f);
         for (int x = 1; x < xSize - 1; x++)
         {
             for (int y = 1; y < ySize - 1; y++)
