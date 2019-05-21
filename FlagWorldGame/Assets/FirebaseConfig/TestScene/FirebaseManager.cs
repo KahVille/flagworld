@@ -53,9 +53,12 @@ public class FirebaseManager : MonoBehaviour
     //ErrorDisplays
     void ShowNetworkError()
     {
+        string buttonRetryText = (LocalizationManager.Instance !=null) ? LocalizationManager.Instance.GetLocalizedValue("try_again_button") : " Try Again" ;
+        string networkTextShort = (LocalizationManager.Instance !=null) ? LocalizationManager.Instance.GetLocalizedValue("Network_error_short") : " Network error" ;
+        string networkTextLong = (LocalizationManager.Instance !=null) ? LocalizationManager.Instance.GetLocalizedValue("Network_error_long") : " please enable network" ;
         loadingIndicator.SetActive(false);
-        EventButtonDetails button1Detail = new EventButtonDetails { buttonTitle = "Retry", action = RetryConnection };
-        SpawnPanel("Network Error", "please enable network connection", button1Detail, null, networkErrorSprite);
+        EventButtonDetails button1Detail = new EventButtonDetails { buttonTitle = buttonRetryText, action = RetryConnection };
+        SpawnPanel(networkTextShort, networkTextLong, button1Detail, null, networkErrorSprite);
     }
 
     void ShowFirebaseError()
@@ -188,9 +191,11 @@ public class FirebaseManager : MonoBehaviour
                     if (myPointData != null)
                     {
                         //trivia up to date
+                            string buttonContinueText = (LocalizationManager.Instance !=null) ? LocalizationManager.Instance.GetLocalizedValue("continue_button") : "Continue" ;
+                            string triviaUpToDate = (LocalizationManager.Instance !=null) ? LocalizationManager.Instance.GetLocalizedValue("trivia_up_to_date") : "Trivia up to date" ;
                         loadingIndicator.SetActive(false);
-                        EventButtonDetails button1Detail = new EventButtonDetails { buttonTitle = "Continue", action = ContinueSuccess };
-                        SpawnPanel("Trivia up-to-date", "please continue", button1Detail);
+                        EventButtonDetails button1Detail = new EventButtonDetails { buttonTitle = buttonContinueText, action = ContinueSuccess };
+                        SpawnPanel(triviaUpToDate, "", button1Detail);
                     }
                 }
             }
@@ -207,13 +212,16 @@ public class FirebaseManager : MonoBehaviour
         {
             if (task.IsCompleted)
             {
+                string buttonContinueText = (LocalizationManager.Instance !=null) ? LocalizationManager.Instance.GetLocalizedValue("continue_button") : "Continue" ;
+                string triviaUpToDate = (LocalizationManager.Instance !=null) ? LocalizationManager.Instance.GetLocalizedValue("trivia_up_to_date") : "Trivia up to date" ;
+                string newDataDownloaded = (LocalizationManager.Instance !=null) ? LocalizationManager.Instance.GetLocalizedValue("trivia_data_long") : " Trivia new data downloaded" ;
                 DataSnapshot snapshot = task.Result;
                 ContactPointCollection contactPoints = new ContactPointCollection();
                 JsonUtility.FromJsonOverwrite(snapshot.GetRawJsonValue(), contactPoints);
                 TriviaSaveLoadSystem.SaveContactPoints(contactPoints);
                 loadingIndicator.SetActive(false);
-                EventButtonDetails button1Detail = new EventButtonDetails { buttonTitle = "Continue", action = ContinueSuccess };
-                SpawnPanel("Trivia up-to-date", "newest data downloaded", button1Detail);
+                EventButtonDetails button1Detail = new EventButtonDetails { buttonTitle = buttonContinueText, action = ContinueSuccess };
+                SpawnPanel(triviaUpToDate, newDataDownloaded, button1Detail);
             }
         }, System.Threading.Tasks.TaskScheduler.FromCurrentSynchronizationContext());
         #endif

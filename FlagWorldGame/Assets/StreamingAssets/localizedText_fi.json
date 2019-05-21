@@ -13,8 +13,8 @@
         {"key":"button_off","value":"Pois"},
         {"key":"play_button","value":"Pelaa"},
         {"key":"trivia_button","value":"Trivia"},
-        {"key":"location_proximity_in","value":"olet kohteen lähellä"},
-        {"key":"location_proximity_off","value":"Et ole kohteen lähellä"},
+        {"key":"location_proximity_in","value":"olet alueella"},
+        {"key":"location_proximity_off","value":"Et ole alueella"},
         {"key":"correct_choice","value":"Oikein"},
         {"key":"wrong_choice","value":"Väärin"},
         {"key":"game_end_text","value":"Peli loppui"},
@@ -38,8 +38,8 @@
         {"key":"Network_error_short","value":"Verkkovirhe"},
         {"key":"Network_error_long","value":"Tarkista internetyhteytesi ole hyvä ja yritä uudelleen."},
         {"key":"try_again_button","value":"Yritä uudelleen"},
-        {"key":"run_editor_short","value":"Huomiothan että pelaat peliä editorissa."},
-        {"key":"run_editor_long","value":"null reference -virheen varalta tarkista toimiiko peli mobiililaitteella"},
-        {"key":"understand_yes","value":"Ok, Ymmärrän"}
+        {"key":"trivia_up_to_date","value":"Trivian tiedot ovat ajantasalla"},
+        {"key":"trivia_data_long","value":"Trivian uusin versio on ladattu palvelimelta"}
+
     ]
 }

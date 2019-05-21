@@ -264,12 +264,17 @@ public class GPSScript : MonoBehaviour
 
         if(canOpenMenu && lastLocation != null && lastLocation.name == locations[locationIndex].name)
         {
-            popupLocText.text = "Olet alueella";
+
+            // Example classify = (input >= 0) ? "nonnegative" : "negative";
+            string localizedLocation = (LocalizationManager.Instance !=null) ? LocalizationManager.Instance.GetLocalizedValue("location_proximity_in") : "Olet alueella" ;
+            popupLocText.text = localizedLocation;
             popupLocImg.color = Color.green;
         }
         else
         {
-            popupLocText.text = "Et ole alueella";
+            // Example classify = (input >= 0) ? "nonnegative" : "negative";
+            string localizedLocation = (LocalizationManager.Instance !=null) ? LocalizationManager.Instance.GetLocalizedValue("location_proximity_off") : " Et ole alueella" ;
+            popupLocText.text = localizedLocation;
             popupLocImg.color = Color.red;
         }
     }

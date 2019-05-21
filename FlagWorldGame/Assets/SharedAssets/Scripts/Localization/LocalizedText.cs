@@ -19,19 +19,21 @@ public class LocalizedText : MonoBehaviour, ILocalizedText {
         localManager = LocalizationManager.Instance;
 	}
 
+    private void OnEnable() {
+        LocalizationManager.OnLanguageLocalization += GetLocalizedText;
+    }
+
+    private void OnDisable() {
+        LocalizationManager.OnLanguageLocalization -= GetLocalizedText;
+    }
+
     private void Start() {
        GetLocalizedText();
     }
 
     public void GetLocalizedText()
     {
-        if(localManager !=null) {
         string key_value = LocalizationManager.Instance.GetLocalizedValue(key);
-            if(key_value !=null) {
-                text.SetText(key_value);
-            }
-
-        }
-
+        text.SetText(key_value);
     }
 }

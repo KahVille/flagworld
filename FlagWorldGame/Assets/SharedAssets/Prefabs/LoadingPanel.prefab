@@ -250,7 +250,7 @@ GameObject:
   - component: {fileID: 8628789333487390777}
   - component: {fileID: 2793143093342239902}
   - component: {fileID: 3943565515953350343}
-  - component: {fileID: 3124795612429302071}
+  - component: {fileID: 2253116415893300359}
   m_Layer: 5
   m_Name: LoadingText
   m_TagString: Untagged
@@ -401,7 +401,7 @@ MonoBehaviour:
   - {fileID: 0}
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!114 &3124795612429302071
+--- !u!114 &2253116415893300359
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

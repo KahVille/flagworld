@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
+using UnityEngine.Networking;
 
 public class LocalizationManager : MonoBehaviour {
 
@@ -26,13 +27,42 @@ public class LocalizationManager : MonoBehaviour {
 
         DontDestroyOnLoad (gameObject);
 
-        LoadLocalizedText("localizedText_fi.json");
+        StartCoroutine(LoadLocalizedText("localizedText_fi.json"));
     }
     
-    public void LoadLocalizedText(string fileName)
+    IEnumerator LoadLocalizedText(string fileName)
     {
+
         localizedText = new Dictionary<string, string> ();
         string filePath = Path.Combine (Application.streamingAssetsPath, fileName);
+
+        #if UNITY_ANDROID || UNITY_IOS
+        using (UnityWebRequest webRequest = UnityWebRequest.Get(filePath))
+        {
+
+        yield return webRequest.SendWebRequest();
+        if (webRequest.isNetworkError || webRequest.isHttpError) {
+            Debug.Log(webRequest.error);
+        }
+        else {
+            string dataAsJson = webRequest.downloadHandler.text;
+            LocalizationData loadedData = JsonUtility.FromJson<LocalizationData> (dataAsJson);
+            for (int i = 0; i < loadedData.items.Length; i++) 
+            {
+                localizedText.Add (loadedData.items [i].key, loadedData.items [i].value);   
+            }
+            Debug.Log ("Data loaded, dictionary contains: " + localizedText.Count + " entries");
+            if(OnLanguageLocalization !=null) {
+                OnLanguageLocalization();
+            }
+
+        }
+
+        }
+        #endif
+
+
+        #if UNITY_EDITOR
 
         if (File.Exists (filePath)) {
             string dataAsJson = File.ReadAllText (filePath);
@@ -44,11 +74,13 @@ public class LocalizationManager : MonoBehaviour {
             }
 
             Debug.Log ("Data loaded, dictionary contains: " + localizedText.Count + " entries");
+            if(OnLanguageLocalization !=null)
+                OnLanguageLocalization();
         } else 
         {
             Debug.LogError ("Cannot find file!");
         }
-
+        #endif
         isReady = true;
     }
 
