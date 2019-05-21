@@ -29,7 +29,7 @@ public class MuistiCanvas : MonoBehaviour {
         if (finished)
         {
             GameObject.Find("Points").GetComponent<TMP_Text>().text = "You made " + moves.ToString() + " moves";
-            if(moves < PlayerPrefs.GetInt(MemoryHigh))
+            if(moves < PlayerPrefs.GetInt(MemoryHigh) && PlayerPrefs.GetInt(MemoryHigh) == 0)
             {
                 GameObject.Find("Points").GetComponent<TMP_Text>().text += "\nNew Highscore!";
                 PlayerPrefs.SetInt(MemoryHigh, moves);
