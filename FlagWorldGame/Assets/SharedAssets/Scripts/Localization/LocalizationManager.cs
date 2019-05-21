@@ -33,6 +33,10 @@ public class LocalizationManager : MonoBehaviour
         StartCoroutine(LoadLocalizedText("localizedText_fi.json"));
     }
 
+    public void LoadLocale(string localeFile = null) {
+         StartCoroutine(LoadLocalizedText(localeFile));
+    }
+
     IEnumerator LoadLocalizedText(string fileName)
     {
 

@@ -79,7 +79,7 @@ public class FirebaseManager : MonoBehaviour
 
     //end of callbacks
 
-    private void StartFirebase()
+    public void StartFirebase()
     {
 #if !UNITY_EDITOR
         loadingIndicator.SetActive(true);
@@ -183,7 +183,13 @@ public class FirebaseManager : MonoBehaviour
                     TriviaSaveLoadSystem.DeleteData();
                     PlayerPrefs.SetString("database_version", verNumberString);
                     //TODO: Implement a function that checks current selected language, possible to do with the localization manager or playerprefabs.
-                    DownloadDataFromDatabase("finnish_language");
+                    if(PlayerPrefs.GetString("Language") == "fin") {
+                         DownloadDataFromDatabase("finnish_language");
+                    }
+                    else {
+                         DownloadDataFromDatabase("english_language");
+                    }
+                   
                 }
                 else
                 {
