@@ -19,7 +19,7 @@ public class UIContinueAndRestartCanvas : MonoBehaviour
 
     public void SetTriviaScoreText(int roundScore, int numberOfQuestions) {
         string triviaEndText = LocalizationManager.Instance.GetLocalizedValue("game_end_text_trivia");
-            endText.SetText($"{triviaEndText} {roundScore} / {numberOfQuestions}");
+            endText.SetText($"{triviaEndText} \n {roundScore} / {numberOfQuestions}");
     }
 
     public void OnRestartButtonPressed() {

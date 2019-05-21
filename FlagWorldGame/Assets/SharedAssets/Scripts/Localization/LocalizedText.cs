@@ -11,12 +11,9 @@ public class LocalizedText : MonoBehaviour, ILocalizedText {
 
      TextMeshProUGUI text = null;
 
-     LocalizationManager localManager = null;
-
 	// Use this for initialization
 	void Awake () {
         text = GetComponent<TextMeshProUGUI>();
-        localManager = LocalizationManager.Instance;
 	}
 
     private void OnEnable() {

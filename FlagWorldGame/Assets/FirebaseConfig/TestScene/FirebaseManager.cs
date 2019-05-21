@@ -6,9 +6,9 @@ using Firebase.Database;
 using TMPro;
 using UnityEngine.Networking;
 
-    //fixes ui hang with firebase
-    //https://forum.unity.com/threads/can-only-be-called-from-the-main-thread.622948/
-    // Add System.Threading.Tasks.TaskScheduler.FromCurrentSynchronizationContext()
+//fixes ui hang with firebase
+//https://forum.unity.com/threads/can-only-be-called-from-the-main-thread.622948/
+// Add System.Threading.Tasks.TaskScheduler.FromCurrentSynchronizationContext()
 
 
 public class FirebaseManager : MonoBehaviour
@@ -53,9 +53,9 @@ public class FirebaseManager : MonoBehaviour
     //ErrorDisplays
     void ShowNetworkError()
     {
-        string buttonRetryText = (LocalizationManager.Instance !=null) ? LocalizationManager.Instance.GetLocalizedValue("try_again_button") : " Try Again" ;
-        string networkTextShort = (LocalizationManager.Instance !=null) ? LocalizationManager.Instance.GetLocalizedValue("Network_error_short") : " Network error" ;
-        string networkTextLong = (LocalizationManager.Instance !=null) ? LocalizationManager.Instance.GetLocalizedValue("Network_error_long") : " please enable network" ;
+        string buttonRetryText = (LocalizationManager.Instance != null) ? LocalizationManager.Instance.GetLocalizedValue("try_again_button") : " Try Again";
+        string networkTextShort = (LocalizationManager.Instance != null) ? LocalizationManager.Instance.GetLocalizedValue("Network_error_short") : " Network error";
+        string networkTextLong = (LocalizationManager.Instance != null) ? LocalizationManager.Instance.GetLocalizedValue("Network_error_long") : " please enable network";
         loadingIndicator.SetActive(false);
         EventButtonDetails button1Detail = new EventButtonDetails { buttonTitle = buttonRetryText, action = RetryConnection };
         SpawnPanel(networkTextShort, networkTextLong, button1Detail, null, networkErrorSprite);
@@ -81,7 +81,7 @@ public class FirebaseManager : MonoBehaviour
 
     private void StartFirebase()
     {
-        #if !UNITY_EDITOR
+#if !UNITY_EDITOR
         loadingIndicator.SetActive(true);
         FirebaseApp.CheckAndFixDependenciesAsync().ContinueWith(task =>
         {
@@ -95,12 +95,12 @@ public class FirebaseManager : MonoBehaviour
                 ShowFirebaseError();
             }
         }, System.Threading.Tasks.TaskScheduler.FromCurrentSynchronizationContext());
-        
-        #elif UNITY_EDITOR
+
+#elif UNITY_EDITOR
         loadingIndicator.SetActive(false);
         EventButtonDetails button1Detail = new EventButtonDetails { buttonTitle = "OK I understand", action = ContinueSuccess };
         SpawnPanel("You run in Editor", "in case of null refrence exception in trivia, please test on a mobile device", button1Detail, null, networkErrorSprite);
-        #endif
+#endif
     }
 
     // Initialize the Firebase database:
@@ -146,7 +146,7 @@ public class FirebaseManager : MonoBehaviour
     }
     public void RetryConnection()
     {
-        #if !UNITY_EDITOR
+#if !UNITY_EDITOR
         //continue download proggress
         loadingIndicator.SetActive(true);
         StartCoroutine(checkInternetConnection((isConnected) =>
@@ -161,12 +161,12 @@ public class FirebaseManager : MonoBehaviour
                 ShowNetworkError();
             }
         }));
-        #endif
+#endif
     }
 
     protected void CheckDatabaseVersion()
     {
-        #if !UNITY_EDITOR
+#if !UNITY_EDITOR
         loadingIndicator.SetActive(true);
         string currentDatabaseVersion = PlayerPrefs.GetString("database_version");
         FirebaseDatabase.DefaultInstance
@@ -191,8 +191,8 @@ public class FirebaseManager : MonoBehaviour
                     if (myPointData != null)
                     {
                         //trivia up to date
-                            string buttonContinueText = (LocalizationManager.Instance !=null) ? LocalizationManager.Instance.GetLocalizedValue("continue_button") : "Continue" ;
-                            string triviaUpToDate = (LocalizationManager.Instance !=null) ? LocalizationManager.Instance.GetLocalizedValue("trivia_up_to_date") : "Trivia up to date" ;
+                        string buttonContinueText = (LocalizationManager.Instance != null) ? LocalizationManager.Instance.GetLocalizedValue("continue_button") : "Continue";
+                        string triviaUpToDate = (LocalizationManager.Instance != null) ? LocalizationManager.Instance.GetLocalizedValue("trivia_up_to_date") : "Trivia up to date";
                         loadingIndicator.SetActive(false);
                         EventButtonDetails button1Detail = new EventButtonDetails { buttonTitle = buttonContinueText, action = ContinueSuccess };
                         SpawnPanel(triviaUpToDate, "", button1Detail);
@@ -200,21 +200,21 @@ public class FirebaseManager : MonoBehaviour
                 }
             }
         }, System.Threading.Tasks.TaskScheduler.FromCurrentSynchronizationContext());
-        #endif
+#endif
     }
 
     protected void DownloadDataFromDatabase(string selectedLanguage = null)
     {
-        #if !UNITY_EDITOR
+#if !UNITY_EDITOR
         FirebaseDatabase.DefaultInstance
         .GetReference(selectedLanguage)
         .GetValueAsync().ContinueWith(task =>
         {
             if (task.IsCompleted)
             {
-                string buttonContinueText = (LocalizationManager.Instance !=null) ? LocalizationManager.Instance.GetLocalizedValue("continue_button") : "Continue" ;
-                string triviaUpToDate = (LocalizationManager.Instance !=null) ? LocalizationManager.Instance.GetLocalizedValue("trivia_up_to_date") : "Trivia up to date" ;
-                string newDataDownloaded = (LocalizationManager.Instance !=null) ? LocalizationManager.Instance.GetLocalizedValue("trivia_data_long") : " Trivia new data downloaded" ;
+                string buttonContinueText = (LocalizationManager.Instance != null) ? LocalizationManager.Instance.GetLocalizedValue("continue_button") : "Continue";
+                string triviaUpToDate = (LocalizationManager.Instance != null) ? LocalizationManager.Instance.GetLocalizedValue("trivia_up_to_date") : "Trivia up to date";
+                string newDataDownloaded = (LocalizationManager.Instance != null) ? LocalizationManager.Instance.GetLocalizedValue("trivia_data_long") : " Trivia new data downloaded";
                 DataSnapshot snapshot = task.Result;
                 ContactPointCollection contactPoints = new ContactPointCollection();
                 JsonUtility.FromJsonOverwrite(snapshot.GetRawJsonValue(), contactPoints);
@@ -224,6 +224,6 @@ public class FirebaseManager : MonoBehaviour
                 SpawnPanel(triviaUpToDate, newDataDownloaded, button1Detail);
             }
         }, System.Threading.Tasks.TaskScheduler.FromCurrentSynchronizationContext());
-        #endif
+#endif
     }
 }

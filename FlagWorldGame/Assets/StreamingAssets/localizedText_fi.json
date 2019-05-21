@@ -40,6 +40,5 @@
         {"key":"try_again_button","value":"Yritä uudelleen"},
         {"key":"trivia_up_to_date","value":"Trivian tiedot ovat ajantasalla"},
         {"key":"trivia_data_long","value":"Trivian uusin versio on ladattu palvelimelta"}
-
     ]
 }

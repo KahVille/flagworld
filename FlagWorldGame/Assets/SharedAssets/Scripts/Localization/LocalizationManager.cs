@@ -4,7 +4,8 @@ using UnityEngine;
 using System.IO;
 using UnityEngine.Networking;
 
-public class LocalizationManager : MonoBehaviour {
+public class LocalizationManager : MonoBehaviour
+{
 
     public static LocalizationManager Instance;
 
@@ -16,27 +17,29 @@ public class LocalizationManager : MonoBehaviour {
     public static event LanguageLocalization OnLanguageLocalization;
 
     // Use this for initialization
-    void Awake () 
+    void Awake()
     {
-        if (Instance == null) {
-            Instance = this;
-        } else if (Instance != this)
+        if (Instance == null)
         {
-            Destroy (gameObject);
+            Instance = this;
+        }
+        else if (Instance != this)
+        {
+            Destroy(gameObject);
         }
 
-        DontDestroyOnLoad (gameObject);
+        DontDestroyOnLoad(gameObject);
 
         StartCoroutine(LoadLocalizedText("localizedText_fi.json"));
     }
-    
+
     IEnumerator LoadLocalizedText(string fileName)
     {
 
-        localizedText = new Dictionary<string, string> ();
-        string filePath = Path.Combine (Application.streamingAssetsPath, fileName);
+        localizedText = new Dictionary<string, string>();
+        string filePath = Path.Combine(Application.streamingAssetsPath, fileName);
 
-        #if UNITY_ANDROID || UNITY_IOS
+#if UNITY_ANDROID || UNITY_IOS
         using (UnityWebRequest webRequest = UnityWebRequest.Get(filePath))
         {
 
@@ -59,10 +62,10 @@ public class LocalizationManager : MonoBehaviour {
         }
 
         }
-        #endif
+#endif
 
 
-        #if UNITY_EDITOR
+#if UNITY_EDITOR
 
         if (File.Exists (filePath)) {
             string dataAsJson = File.ReadAllText (filePath);
@@ -80,16 +83,16 @@ public class LocalizationManager : MonoBehaviour {
         {
             Debug.LogError ("Cannot find file!");
         }
-        #endif
+#endif
         isReady = true;
     }
 
     public string GetLocalizedValue(string key)
     {
         string result = missingTextString;
-        if (localizedText.ContainsKey (key))
+        if (localizedText.ContainsKey(key))
         {
-            result = localizedText [key];
+            result = localizedText[key];
         }
         return result;
     }
