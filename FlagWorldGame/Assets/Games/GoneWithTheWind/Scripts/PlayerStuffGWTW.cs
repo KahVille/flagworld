@@ -216,13 +216,13 @@ public class PlayerStuffGWTW : MonoBehaviour
             ParticleSystem.MainModule mm = windparticles.main;
             mm.startColor = Color.white;
             windSpawnPos = flag.transform.position;
-            windSpawnPos.y += Random.Range(1f, 5f);
+            windSpawnPos.y += Random.Range(2f, 15f);
             windSpawnPos.x -= 11f;
             windObj.transform.position = windSpawnPos;
             yield return new WaitForSeconds(1.5f);
             windCol.enabled = true;
-            windTime = Random.Range(1f, 4f);
-            yield return new WaitForSeconds(windTime);
+            //windTime = Random.Range(1f, 4f);
+            yield return new WaitForSeconds(3.5f);
             // CALM BEFORE THE STORM
             windparticles.Stop();
             //StartCoroutine(FadeWind());
@@ -247,7 +247,7 @@ public class PlayerStuffGWTW : MonoBehaviour
         {
             birdTime = Random.Range(1f,10f);
             yield return new WaitForSeconds(birdTime);
-            spawnPos.y = flag.transform.position.y + Random.Range(-5f, 5f);
+            spawnPos.y = flag.transform.position.y + Random.Range(-3f, 15f);
             Vector3 spawnPosInVP = Camera.main.WorldToViewportPoint(spawnPos);
             spawnPosInVP.x = 0.2f;
             spawnPosInVP = Camera.main.ViewportToWorldPoint(spawnPosInVP);

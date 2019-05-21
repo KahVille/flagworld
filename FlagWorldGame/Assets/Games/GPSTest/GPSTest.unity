@@ -618,7 +618,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.98, y: -2.43}
+  m_AnchoredPosition: {x: -1.31, y: -0.64}
   m_SizeDelta: {x: 0.4, y: 0.4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &153876170
@@ -1488,7 +1488,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -17.16, y: 6.6}
-  m_SizeDelta: {x: 17.52, y: 13.24}
+  m_SizeDelta: {x: 17.52, y: 17.52}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &333446011
 MonoBehaviour:
@@ -1510,7 +1510,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 6d70f0095a3b8ba41b261f339dbc91ee, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 16b2ae6781374dd46b34577221f324c4, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2236,7 +2236,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 2.44, y: 0.83}
+  m_AnchoredPosition: {x: 3.5, y: -6.48}
   m_SizeDelta: {x: 0.4, y: 0.4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &420602142
@@ -3832,14 +3832,14 @@ MonoBehaviour:
   - {x: 0, y: 0, z: 0}
   - {x: 0, y: 0, z: 0}
   userIndicatorImg: {fileID: 824615026}
-  bottomLeftLongitude: 26.869311
-  bottomRightLongitude: 26.934850692749023
-  topLeftLongitude: 26.857213973999023
-  topRightLongitude: 26.931230545043945
-  bottomLeftLatitude: 60.481929779052734
-  bottomRightLatitude: 60.481590270996094
-  topLeftLatitude: 60.509700775146484
-  topRightLatitude: 60.50961685180664
+  bottomLeftLongitude: 27.181063
+  bottomRightLongitude: 27.20758
+  topLeftLongitude: 27.181035
+  topRightLongitude: 27.208507
+  bottomLeftLatitude: 60.561908
+  bottomRightLatitude: 60.561712
+  topLeftLatitude: 60.575054
+  topRightLatitude: 60.574465000000004
   optionsGPSImg: {fileID: 1748119447}
 --- !u!4 &774346873
 Transform:
@@ -7880,7 +7880,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.98, y: 3.68}
+  m_AnchoredPosition: {x: 2.24, y: 1.88}
   m_SizeDelta: {x: 0.4, y: 0.4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1964779269
@@ -8071,7 +8071,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -1.97, y: 3.38}
+  m_AnchoredPosition: {x: 4.01, y: 1.08}
   m_SizeDelta: {x: 0.4, y: 0.4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2036547039
