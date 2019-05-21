@@ -22,7 +22,7 @@ EditorBuildSettings:
     guid: 6f2465500e9503149ab9614865a65957
   - enabled: 1
     path: Assets/Games/GoneWithTheWind/GoneWithTheWind.unity
-    guid: d89d1576f2cb56e4aa33e7c61be6ee12
+    guid: 0c28c184120122d478cd18ffb27c57bb
   - enabled: 1
     path: Assets/Games/GPSTest/GPSTest.unity
     guid: 25b23e78a9348bd4db08cd2426aa2568

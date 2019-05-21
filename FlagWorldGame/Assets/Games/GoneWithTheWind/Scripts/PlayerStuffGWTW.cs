@@ -35,14 +35,29 @@ public class PlayerStuffGWTW : MonoBehaviour
     float flagHP;
     public float hpDecayMult;
     public Slider flagHPSlider;
-    Material flagMat;
+    public Material flagMat;
     float windTime;
+    public bool Windy
+    {
+        get
+        {
+            return windy;
+        }
+        set
+        {
+            windy = value;
+        }
+    }
     bool windy;
+    public BoxCollider2D windCol;
     bool gameOver;
 
     public GameObject gameOverPanel;
+    public GameObject victoryPanel;
+    public Animator scorePanelAnim;
     public ParticleSystem windparticles;
-
+    public GameObject windObj;
+    Material windMat;
     float score;
     float scoreMult;
     public TextMeshProUGUI scoreText;
@@ -63,6 +78,8 @@ public class PlayerStuffGWTW : MonoBehaviour
         windy = false;
         gameOver = false;
         score = 0;
+        windMat = windparticles.GetComponent<ParticleSystemRenderer>().material;
+        windCol.enabled = false;
         yield return new WaitForSeconds(Random.Range(2f, 5f));
         StartCoroutine(WindRoutine());
         StartCoroutine(BirdSpawnRoutine());
@@ -76,31 +93,36 @@ public class PlayerStuffGWTW : MonoBehaviour
             return;
         }
 
+        if(flag.transform.position.y >= topOfPole.position.y - 2f)
+        {
+            gameOver = true;
+            Victory();
+        }
+
         score += Time.deltaTime * scoreMult * 15f;
         scoreMult = (flag.transform.position.y - bottomOfPole.position.y) / (topOfPole.position.y - bottomOfPole.position.y);
         scoreText.text = score.ToString("F2");
 
-        if(windy && flag.transform.position.y > topOfPole.position.y - 1f)
+        // Move this to flagCollision
+        if(windy)
         {
             if(flagMat.GetFloat("_WaveSpeed") < 100f)
             {
-                flagMat.SetFloat("_WaveSpeed", 200f);
+                flagMat.SetFloat("_WaveSpeed", 300f);
             }
-            flagHP += Time.deltaTime * hpDecayMult;
-            flagHPSlider.value = flagHP;
-            if(flagHP >= 100f)
-            {
-                //GAME OVER
-                StartGameOver();
-            }
+            Damage(Time.deltaTime * hpDecayMult);
         }
 
-        if(flag.transform.position.y <= topOfPole.position.y - 1f)
+        if(flag.transform.position.y <= topOfPole.position.y - 1f && !windy)
         {
             flagMat.SetFloat("_WaveSpeed", 50f);
         }
 
+        #if (UNITY_ANDROID || UNITY_IOS) && !UNITY_EDITOR
         TouchInput();
+        #elif UNITY_EDITOR
+        DebugInput();
+        #endif
 
         desiredPos.y = Mathf.Clamp(desiredPos.y, bottomOfPole.position.y, topOfPole.position.y);
         flag.transform.position = Vector3.SmoothDamp(flag.transform.position, desiredPos, ref velocity, smoothTime);
@@ -124,10 +146,35 @@ public class PlayerStuffGWTW : MonoBehaviour
         }
     }
 
+    // Mouse movement for debug
+    void DebugInput()
+    {
+        float mouseScroll = Input.GetAxis("Mouse ScrollWheel");
+        desiredPos.y += mouseScroll;
+    }
+
     public void StartGameOver()
     {
         gameOver = true;
         StartCoroutine(GameOverRoutine());
+    }
+
+    public void Damage(float howMuch)
+    {
+        flagHP += howMuch;
+        flagHPSlider.value = flagHP;
+        if(flagHP >= 100f)
+        {
+            mainCam.GetComponent<CameraMovementGWTW>().enabled = false;
+            //GAME OVER
+            StartGameOver();
+        }
+    }
+
+    void Victory()
+    {
+        victoryPanel.SetActive(true);
+        scorePanelAnim.SetBool("Move", true);
     }
 
     IEnumerator GameOverRoutine()
@@ -144,18 +191,43 @@ public class PlayerStuffGWTW : MonoBehaviour
         gameOverPanel.SetActive(true);
     }
 
+    IEnumerator FadeWind()
+    {
+        float lerp = 0;
+        Color startCol = Color.white;
+        Color endCol = Color.clear;
+        ParticleSystem.MainModule mm = windparticles.main;
+        while(lerp <= 1f)
+        {
+            mm.startColor = Color.Lerp(startCol, endCol, lerp);
+            lerp += Time.deltaTime / 0.8f;
+            yield return null;
+        }
+        windparticles.Clear();
+    }
+
     IEnumerator WindRoutine()
     {
+        Vector3 windSpawnPos;
         while(!gameOver)
         {
             // HEAVY WINDS!!
             windparticles.Play();
+            ParticleSystem.MainModule mm = windparticles.main;
+            mm.startColor = Color.white;
+            windSpawnPos = flag.transform.position;
+            windSpawnPos.y += Random.Range(2f, 15f);
+            windSpawnPos.x -= 11f;
+            windObj.transform.position = windSpawnPos;
             yield return new WaitForSeconds(1.5f);
-            windTime = Random.Range(1f, 4f);
-            windy = true;
-            yield return new WaitForSeconds(windTime);
+            windCol.enabled = true;
+            //windTime = Random.Range(1f, 4f);
+            yield return new WaitForSeconds(3.5f);
             // CALM BEFORE THE STORM
             windparticles.Stop();
+            //StartCoroutine(FadeWind());
+            //windparticles.Clear();
+            windCol.enabled = false;
             yield return new WaitForSeconds(0.8f);
             flagMat.SetFloat("_WaveSpeed", 50f);
             windy = false;
@@ -170,14 +242,14 @@ public class PlayerStuffGWTW : MonoBehaviour
         Vector3 spawnPos;
         spawnPos = Vector3.zero;
         spawnPos.z = -2f;
-        spawnPos.x = -7f;
+        spawnPos.x = -10f;
         while(!gameOver)
         {
             birdTime = Random.Range(1f,10f);
             yield return new WaitForSeconds(birdTime);
-            spawnPos.y = Random.Range(bottomOfPole.position.y, topOfPole.position.y - 1f);
+            spawnPos.y = flag.transform.position.y + Random.Range(-3f, 15f);
             Vector3 spawnPosInVP = Camera.main.WorldToViewportPoint(spawnPos);
-            spawnPosInVP.x = 0.15f;
+            spawnPosInVP.x = 0.2f;
             spawnPosInVP = Camera.main.ViewportToWorldPoint(spawnPosInVP);
             spawnPosInVP.z = -2f;
             birdWarning.transform.position = spawnPosInVP;
@@ -188,7 +260,7 @@ public class PlayerStuffGWTW : MonoBehaviour
             
             //newBird.GetComponent<Rigidbody2D>().velocity = Vector2.right * 5f;
             newBird.GetComponent<Rigidbody2D>().AddForce(Vector2.right * 5f * 70f);
-            Destroy(newBird, 5f);
+            Destroy(newBird, 7f);
         }
     }
 }

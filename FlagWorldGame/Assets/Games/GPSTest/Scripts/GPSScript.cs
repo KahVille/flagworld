@@ -101,7 +101,7 @@ public class GPSScript : MonoBehaviour
         mapImage.GetComponent<RectTransform>().GetWorldCorners(mapCorners);
         
         // Android permissions
-        #if UNITY_ANDROID || UNITY_IOS
+        #if UNITY_ANDROID
         if(!Permission.HasUserAuthorizedPermission(Permission.FineLocation))
         {
             Permission.RequestUserPermission(Permission.FineLocation);
@@ -109,7 +109,7 @@ public class GPSScript : MonoBehaviour
 
         #endif
 
-        #if (UNITY_ANDROID || UNITY_IOS) && !UNITY_EDITOR
+        #if UNITY_ANDROID && !UNITY_EDITOR
         yield return new WaitForSeconds(5f);
 
         // Need to tell the user about everything!
