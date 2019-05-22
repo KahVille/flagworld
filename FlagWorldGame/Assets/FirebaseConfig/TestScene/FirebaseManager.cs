@@ -82,7 +82,11 @@ public class FirebaseManager : MonoBehaviour
     public void StartFirebase()
     {
 #if !UNITY_EDITOR
+
+        if(PlayerPrefs.GetInt("FirstTimeCompleted") == 1){
         loadingIndicator.SetActive(true);
+        }
+
         FirebaseApp.CheckAndFixDependenciesAsync().ContinueWith(task =>
         {
             dependencyStatus = task.Result;
@@ -114,7 +118,10 @@ public class FirebaseManager : MonoBehaviour
         }
         else
         {
-            RetryConnection();
+            loadingIndicator.SetActive(false);
+            if(PlayerPrefs.GetInt("FirstTimeCompleted") == 1){
+                RetryConnection();
+            }
         }
     }
 
@@ -164,8 +171,16 @@ public class FirebaseManager : MonoBehaviour
 #endif
     }
 
-
     public void DownloadWithNewLanguage() {
+        #if !UNITY_EDITOR
+        loadingIndicator.SetActive(true);
+        if (!IsNetworkReachable())
+        {
+            ShowNetworkError();
+            return;
+        }
+        #endif
+
         if(PlayerPrefs.GetInt("Language") == ((int) LanguageUtility.Language.Finnish)) {
                 DownloadDataFromDatabase("finnish_language");
         }
@@ -174,7 +189,7 @@ public class FirebaseManager : MonoBehaviour
         }
     }
 
-    protected void CheckDatabaseVersion()
+    public void CheckDatabaseVersion()
     {
 #if !UNITY_EDITOR
         loadingIndicator.SetActive(true);

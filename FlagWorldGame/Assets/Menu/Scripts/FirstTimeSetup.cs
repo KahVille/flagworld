@@ -15,8 +15,13 @@ LocalizationManager localeManager = null;
 
 
     private void Awake() {
-        selectedColors[LanguageUtility.GetCurrentLanguage()].enabled = true;
+
         originalLanguage = LanguageUtility.GetCurrentLanguage();
+        if(PlayerPrefs.GetInt("FirstTimeCompleted") != 1) {
+            GetComponent<Canvas>().enabled = true;
+            selectedColors[LanguageUtility.GetCurrentLanguage()].enabled = true;
+        }
+
     }
 
 
@@ -50,21 +55,20 @@ LocalizationManager localeManager = null;
             default:
             break;
         }
-
-    PlayerPrefs.SetInt("FirstTimeCompleted",1);
     }
 
 
     public void ConfirmSelection() {
 
-            if(originalLanguage == LanguageUtility.GetCurrentLanguage()) {
+            if((originalLanguage == LanguageUtility.GetCurrentLanguage()) && (PlayerPrefs.GetInt("FirstTimeCompleted") == 1 )) {
                     GetComponent<Canvas>().enabled = false;
                     return;
             }
 
+            PlayerPrefs.SetInt("FirstTimeCompleted",1);
             originalLanguage = LanguageUtility.GetCurrentLanguage();
             FirebaseManager firebase = FindObjectOfType<FirebaseManager>() as FirebaseManager;
-            firebase.DownloadWithNewLanguage();
+            firebase.CheckDatabaseVersion();
             GetComponent<Canvas>().enabled = false;
     }
 
