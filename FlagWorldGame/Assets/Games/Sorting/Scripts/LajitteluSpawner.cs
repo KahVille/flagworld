@@ -75,7 +75,14 @@ public class LajitteluSpawner : MonoBehaviour
     public void RightDir()
     {
         Points.color = new Color32(4, 191, 4, 255);
-        P++;
+        if (!HardMode)
+        {
+            P++;
+        }
+        else
+        {
+            P += 2;
+        }
         SetPoints();
         StartCoroutine(ShowFeed());
     }
@@ -83,11 +90,18 @@ public class LajitteluSpawner : MonoBehaviour
     public void WrongDir()
     {
         Points.color = new Color32(219, 5, 0, 255);
-        WP++;
-        if (WP == 5)
+        if (!HardMode)
+        {
+            WP++;
+            if (WP == 5 && !HardMode)
+            {
+                P--;
+                WP = 0;
+            }
+        }
+        else 
         {
             P--;
-            WP = 0;
         }
         if (P < 0)
         {
