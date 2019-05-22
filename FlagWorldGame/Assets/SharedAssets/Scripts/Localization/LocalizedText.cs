@@ -30,7 +30,9 @@ public class LocalizedText : MonoBehaviour, ILocalizedText {
 
     public void GetLocalizedText()
     {
+        if(LocalizationManager.Instance !=null){
         string key_value = LocalizationManager.Instance.GetLocalizedValue(key);
         text.SetText(key_value);
+        }
     }
 }
