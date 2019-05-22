@@ -64,12 +64,31 @@ public class PlayerStuffGWTW : MonoBehaviour
 
     public GameObject bird;
     public GameObject birdWarning;
+    public Canvas startCanvas;
+    public Canvas victoryCanvas;
+    public TextMeshProUGUI victoryPointsTxt;
+    public Canvas loseCanvas;
+    public TextMeshProUGUI losePointsTxt;
 
     //DEBUG
     public TextMeshProUGUI debugText;
 
+    void Start()
+    {
+        gameOver = true;
+        if(!PlayerPrefs.HasKey("GWTWHigh"))
+        {
+            PlayerPrefs.SetFloat("GWTWHigh", 0.0f);
+        }
+    }
+
+    public void CallReStart()
+    {
+        StartCoroutine(ReStart());
+    }
+
     // Start is called before the first frame update
-    IEnumerator Start()
+    public IEnumerator ReStart()
     {
         mainCam = Camera.main;
         flagMat = flag.GetComponent<Renderer>().material;
@@ -80,6 +99,7 @@ public class PlayerStuffGWTW : MonoBehaviour
         score = 0;
         windMat = windparticles.GetComponent<ParticleSystemRenderer>().material;
         windCol.enabled = false;
+        startCanvas.enabled = false;
         yield return new WaitForSeconds(Random.Range(2f, 5f));
         StartCoroutine(WindRoutine());
         StartCoroutine(BirdSpawnRoutine());
@@ -173,13 +193,25 @@ public class PlayerStuffGWTW : MonoBehaviour
 
     void Victory()
     {
-        victoryPanel.SetActive(true);
-        scorePanelAnim.SetBool("Move", true);
+        victoryCanvas.enabled = true;
+        score += 50.0f;
+        victoryPointsTxt.text = "Points: " + score.ToString();
+        if(score > PlayerPrefs.GetFloat("GWTWHigh"))
+        {
+            victoryPointsTxt.text += "\nNew Highscore!";
+            PlayerPrefs.SetFloat("GWTWHigh", score);
+        }
+        else
+        {
+            victoryPointsTxt.text += "\nHighscore: " + PlayerPrefs.GetFloat("GWTWHigh").ToString();
+        }
+        //victoryPanel.SetActive(true);
+        //scorePanelAnim.SetBool("Move", true);
     }
 
     IEnumerator GameOverRoutine()
     {
-        desiredPos.x += 10f;
+        desiredPos.x += 25f;
         float timer = 0f;
         while(timer <= 1f)
         {
@@ -188,7 +220,18 @@ public class PlayerStuffGWTW : MonoBehaviour
             yield return null;
         }
         
-        gameOverPanel.SetActive(true);
+        //gameOverPanel.SetActive(true);
+        loseCanvas.enabled = true;
+        losePointsTxt.text = "Points: " + score.ToString();
+        if(score > PlayerPrefs.GetFloat("GWTWHigh"))
+        {
+            losePointsTxt.text += "\nNew Highscore!";
+            PlayerPrefs.SetFloat("GWTWHigh", score);
+        }
+        else
+        {
+            losePointsTxt.text += "\nHighscore: " + PlayerPrefs.GetFloat("GWTWHigh").ToString();
+        }
     }
 
     IEnumerator FadeWind()
@@ -227,9 +270,9 @@ public class PlayerStuffGWTW : MonoBehaviour
             windparticles.Stop();
             //StartCoroutine(FadeWind());
             //windparticles.Clear();
-            windCol.enabled = false;
-            yield return new WaitForSeconds(0.8f);
+            yield return new WaitForSeconds(1.4f);
             flagMat.SetFloat("_WaveSpeed", 50f);
+            windCol.enabled = false;
             windy = false;
             windTime = Random.Range(2f, 6f);
             yield return new WaitForSeconds(windTime);

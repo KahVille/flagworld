@@ -15,12 +15,7 @@ public class FlagCollision : MonoBehaviour
     {
         if(other.transform.CompareTag("Bird"))
         {
-            playerScript.FlagHP += 20f;
-            playerScript.flagHPSlider.value = playerScript.FlagHP;
-            if(playerScript.FlagHP > 100f)
-            {
-                playerScript.StartGameOver();
-            }
+            playerScript.Damage(20.0f);
         }
         if(other.transform.CompareTag("Wind"))
         {
