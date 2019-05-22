@@ -14,14 +14,15 @@ public class MuistiTile : MonoBehaviour {
     private bool isSelected = false;
     private Color32 back, front;
     private MuistiManager MM;
+    private AudioSource AudioS;
+    public AudioClip Found;
 
     [HideInInspector] public bool Paired = false;
 
     void Start () {
         MM = GameObject.Find("Manager").GetComponent<MuistiManager>();
         render = GetComponent<SpriteRenderer>();
-        //SpriteRenderer[] Srs = gameObject.GetComponentsInChildren<SpriteRenderer>();
-        //maretarium = Srs[1];
+        AudioS = GetComponent<AudioSource>();
         back = render.color;
         front = new Color32(255, 255, 255, 255);
         CardBack = render.sprite;
@@ -30,18 +31,18 @@ public class MuistiTile : MonoBehaviour {
     private void Select()
     {
         isSelected = true;
-        render.sprite = Picture;
+        //render.sprite = Picture;
+        StartCoroutine(Flip(Picture));
         render.color = front;
-        //maretarium.enabled = false;
         previousSelected = gameObject.GetComponent<MuistiTile>();
     }
 
     private void Deselect()
     {
         isSelected = false;
-        render.sprite = CardBack;
+        //render.sprite = CardBack;
+        StartCoroutine(Flip(CardBack));
         render.color = back;
-        //maretarium.enabled = true;
         previousSelected = null;
     }
 
@@ -65,9 +66,9 @@ public class MuistiTile : MonoBehaviour {
             }
             else
             {
-                render.sprite = Picture;
+                //render.sprite = Picture;
+                StartCoroutine(Flip(Picture));
                 render.color = front;
-                //maretarium.enabled = false;
                 CheckPair();
             }
         }
@@ -79,6 +80,8 @@ public class MuistiTile : MonoBehaviour {
         {
             Paired = true;
             previousSelected.Paired = true;
+            AudioS.clip = Found;
+            AudioS.Play();
             previousSelected = null;
         }
         else
@@ -91,7 +94,7 @@ public class MuistiTile : MonoBehaviour {
     private IEnumerator WrongPair()
     {
         CanClick = false;
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0.6f);
         previousSelected.Deselect();
         Deselect();
         CanClick = true;
@@ -122,5 +125,22 @@ public class MuistiTile : MonoBehaviour {
         {
             Started = false;
         }
+    }
+
+    private IEnumerator Flip(Sprite s)
+    {
+        AudioS.Play();
+        for (int i = 0; i < 3; i++)
+        {
+            transform.Rotate(0, 25, 0);
+            yield return new WaitForSeconds(0.05f);
+        }
+        render.sprite = s;
+        for (int i = 0; i < 2; i++)
+        {
+            transform.Rotate(0, -25, 0);
+            yield return new WaitForSeconds(0.05f);
+        }
+        transform.Rotate(0, -25, 0);
     }
 }

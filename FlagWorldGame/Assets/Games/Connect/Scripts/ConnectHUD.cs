@@ -20,6 +20,15 @@ public class ConnectHUD : MonoBehaviour
 
     private void Awake()
     {
+        Screen.orientation = ScreenOrientation.Portrait;
+        if(Screen.height / Screen.width >= 2)
+        {
+            Camera.main.orthographicSize = 6.3f;
+        }
+        else
+        {
+            Camera.main.orthographicSize = 5.5f;
+        }
         BM = GameObject.Find("BoardManager").GetComponent<BoardManager>();
     }
 
