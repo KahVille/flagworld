@@ -1,27 +1,49 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class FirstTimeSetup : MonoBehaviour
 {
 
+LocalizationManager localeManager = null;
 
-    public void SetCurrentLanguage(string languageSelected = null) {
-        if(languageSelected == null) {
+
+    [SerializeField]
+    Image[] selectedColors = null;
+
+    int originalLanguage;
+
+
+    private void Awake() {
+        selectedColors[LanguageUtility.GetCurrentLanguage()].enabled = true;
+        originalLanguage = LanguageUtility.GetCurrentLanguage();
+    }
+
+
+    public void SetCurrentLanguage(int languageSelected) {
+        if(languageSelected == LanguageUtility.GetCurrentLanguage()) {
             return;
         }
-            
         
-        switch (languageSelected)
+        localeManager = FindObjectOfType<LocalizationManager>() as LocalizationManager;
+        LanguageUtility.Language selected = (LanguageUtility.Language) languageSelected;
+        foreach (var item in selectedColors)
+        {
+            item.enabled = false;
+        }
+
+        switch (selected)
         {
 
-            case "fin":
-            PlayerPrefs.SetString("Language", languageSelected);
+            case LanguageUtility.Language.Finnish:
+            selectedColors[0].enabled = true;
+            PlayerPrefs.SetInt("Language", (int)selected);
             localeManager.LoadLocale("localizedText_fi.json");
             break;
 
-            case "eng":
-            PlayerPrefs.SetString("Language", languageSelected);
+            case LanguageUtility.Language.English:
+            selectedColors[1].enabled = true;
+            PlayerPrefs.SetInt("Language", (int)selected);
             localeManager.LoadLocale("localizedText_en.json");
             break;
             
@@ -33,11 +55,16 @@ public class FirstTimeSetup : MonoBehaviour
     }
 
 
-
     public void ConfirmSelection() {
+
+            if(originalLanguage == LanguageUtility.GetCurrentLanguage()) {
+                    GetComponent<Canvas>().enabled = false;
+                    return;
+            }
+
+            originalLanguage = LanguageUtility.GetCurrentLanguage();
             FirebaseManager firebase = FindObjectOfType<FirebaseManager>() as FirebaseManager;
-            firebase.StartFirebase();
-            LocalizationManager localeManager = FindObjectOfType<LocalizationManager>() as LocalizationManager;
+            firebase.DownloadWithNewLanguage();
             GetComponent<Canvas>().enabled = false;
     }
 

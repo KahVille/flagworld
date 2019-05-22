@@ -164,6 +164,16 @@ public class FirebaseManager : MonoBehaviour
 #endif
     }
 
+
+    public void DownloadWithNewLanguage() {
+        if(PlayerPrefs.GetInt("Language") == ((int) LanguageUtility.Language.Finnish)) {
+                DownloadDataFromDatabase("finnish_language");
+        }
+        else {
+        DownloadDataFromDatabase("english_language");
+        }
+    }
+
     protected void CheckDatabaseVersion()
     {
 #if !UNITY_EDITOR
@@ -183,12 +193,7 @@ public class FirebaseManager : MonoBehaviour
                     TriviaSaveLoadSystem.DeleteData();
                     PlayerPrefs.SetString("database_version", verNumberString);
                     //TODO: Implement a function that checks current selected language, possible to do with the localization manager or playerprefabs.
-                    if(PlayerPrefs.GetString("Language") == "fin") {
-                         DownloadDataFromDatabase("finnish_language");
-                    }
-                    else {
-                         DownloadDataFromDatabase("english_language");
-                    }
+                    DownloadWithNewLanguage();
                    
                 }
                 else

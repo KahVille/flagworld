@@ -16,6 +16,7 @@ public class LocalizationManager : MonoBehaviour
     public delegate void LanguageLocalization();
     public static event LanguageLocalization OnLanguageLocalization;
 
+
     // Use this for initialization
     void Awake()
     {
@@ -29,8 +30,14 @@ public class LocalizationManager : MonoBehaviour
         }
 
         DontDestroyOnLoad(gameObject);
+        
+        if(PlayerPrefs.GetInt("Language") == ((int) LanguageUtility.Language.Finnish)) {
+                    LoadLocale("localizedText_fi.json");
+        }
+        else {
+              LoadLocale("localizedText_en.json");
+        }
 
-        StartCoroutine(LoadLocalizedText("localizedText_fi.json"));
     }
 
     public void LoadLocale(string localeFile = null) {

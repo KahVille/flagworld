@@ -39,6 +39,7 @@
         {"key":"Network_error_long","value":"Tarkista internetyhteytesi ole hyvä ja yritä uudelleen."},
         {"key":"try_again_button","value":"Yritä uudelleen"},
         {"key":"trivia_up_to_date","value":"Trivian tiedot ovat ajantasalla"},
-        {"key":"trivia_data_long","value":"Trivian uusin versio on ladattu palvelimelta"}
+        {"key":"trivia_data_long","value":"Trivian uusin versio on ladattu palvelimelta"},
+        {"key":"select_language","value":"Ole hyvä ja valitse kieli"}
     ]
 }

@@ -39,6 +39,7 @@
         {"key":"Network_error_long","value":"please establish internet connection and try again"},
         {"key":"try_again_button","value":"Try again"},
         {"key":"trivia_up_to_date","value":"Trivia data is up-to-date"},
-        {"key":"trivia_data_long","value":"Newest trivia version downloaded"}
+        {"key":"trivia_data_long","value":"Newest trivia version downloaded"},
+        {"key":"select_language","value":"Please choose game language"}
     ]
 }
