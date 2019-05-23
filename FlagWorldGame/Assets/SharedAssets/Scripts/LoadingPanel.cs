@@ -4,15 +4,16 @@ using UnityEngine;
 
 public class LoadingPanel : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
+
+    [SerializeField]
+    GameObject eventSystem = null;
+
+    private void OnEnable() {
+        eventSystem.SetActive(false);
         
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+    
+    private void OnDisable() {
+        eventSystem.SetActive(true);
     }
 }

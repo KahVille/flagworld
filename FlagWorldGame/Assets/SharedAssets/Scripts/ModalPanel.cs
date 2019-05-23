@@ -16,7 +16,7 @@ public class EventButtonDetails {
 }
 
 public class ModalPanelDetails {
-    public string description; // Not implemented
+    public string description;
     public string shortText;
     public Sprite iconImage;
     public Sprite panelBackgroundImage; // Not implemented
