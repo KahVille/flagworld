@@ -73,10 +73,8 @@ public class LocalizationManager : MonoBehaviour
         }
 
         }
-#endif
-
-
-#if UNITY_EDITOR
+        
+#elif UNITY_EDITOR
 
         if (File.Exists (filePath)) {
             string dataAsJson = File.ReadAllText (filePath);
@@ -95,6 +93,7 @@ public class LocalizationManager : MonoBehaviour
             Debug.LogError ("Cannot find file!");
         }
 #endif
+
         isReady = true;
     }
 

@@ -24,6 +24,10 @@ public class FirebaseManager : MonoBehaviour
 
     private ModalPanel modalPanel;
 
+    [SerializeField]
+    private ModalPanel modalPanelPrefab = null;
+
+
     DependencyStatus dependencyStatus = DependencyStatus.UnavailableOther;
     ContactPointCollection myPointData = null;
 
@@ -35,6 +39,10 @@ public class FirebaseManager : MonoBehaviour
     void Awake()
     {
         modalPanel = ModalPanel.Instance();
+        if(modalPanel == null) {
+            Instantiate(modalPanelPrefab);
+             modalPanel = ModalPanel.Instance();
+        }
     }
 
     void Start()

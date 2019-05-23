@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &4064676355333819803
+--- !u!1 &2062328917308362679
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,41 +8,38 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4064676355333819801}
-  - component: {fileID: 8334801909199998054}
+  - component: {fileID: 2062328917308362677}
+  - component: {fileID: 2062328917308362676}
   m_Layer: 0
-  m_Name: FirebaseManager
+  m_Name: LocalizationManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4064676355333819801
+--- !u!4 &2062328917308362677
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4064676355333819803}
+  m_GameObject: {fileID: 2062328917308362679}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalPosition: {x: 1869.5486, y: 1917.0912, z: -28.81518}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8334801909199998054
+--- !u!114 &2062328917308362676
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4064676355333819803}
+  m_GameObject: {fileID: 2062328917308362679}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e70b5c385d0094bf891405b5b02605b6, type: 3}
+  m_Script: {fileID: 11500000, guid: 49b1b54302a121344bcde80c70ac6b5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  loadingIndicator: {fileID: 3023588063397189251, guid: 74c35a6d68afc4924800e7eee882e328,
-    type: 3}
-  networkErrorSprite: {fileID: 21300000, guid: 79a28b904e167a74ca1e0954d4e56a97, type: 3}
