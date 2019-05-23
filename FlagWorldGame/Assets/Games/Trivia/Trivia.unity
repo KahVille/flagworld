@@ -270,11 +270,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 420562109}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f852a452ad94d48a28c927b1082dafc2, type: 3}
+  m_Script: {fileID: 11500000, guid: 9ecefcd602d84c14194dbaddb6bcccae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  answerText: {fileID: 0}
-  defaultSprite: {fileID: 0}
+  key: continue_button
 --- !u!114 &420562112
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1237,6 +1236,7 @@ GameObject:
   - component: {fileID: 792264467}
   - component: {fileID: 792264469}
   - component: {fileID: 792264468}
+  - component: {fileID: 792264470}
   m_Layer: 5
   m_Name: RoundEndText
   m_TagString: Untagged
@@ -1387,6 +1387,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 792264466}
   m_CullTransparentMesh: 0
+--- !u!114 &792264470
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 792264466}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ecefcd602d84c14194dbaddb6bcccae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  key: game_end_text_trivia
 --- !u!1 &858615025
 GameObject:
   m_ObjectHideFlags: 0
@@ -2125,6 +2138,7 @@ GameObject:
   - component: {fileID: 1320134150}
   - component: {fileID: 1320134152}
   - component: {fileID: 1320134151}
+  - component: {fileID: 1320134153}
   m_Layer: 5
   m_Name: RoundEndText
   m_TagString: Untagged
@@ -2275,6 +2289,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1320134149}
   m_CullTransparentMesh: 0
+--- !u!114 &1320134153
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1320134149}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ecefcd602d84c14194dbaddb6bcccae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  key: game_end_text
 --- !u!1 &1339976597
 GameObject:
   m_ObjectHideFlags: 0
@@ -3099,6 +3126,16 @@ PrefabInstance:
       propertyPath: m_LocalScale.y
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4974291885297903219, guid: 980121c0a76284b7d98e8394a8b48ea7,
+        type: 3}
+      propertyPath: m_havePropertiesChanged
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4974291885297903219, guid: 980121c0a76284b7d98e8394a8b48ea7,
+        type: 3}
+      propertyPath: m_isInputParsingRequired
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4889910636090327105, guid: 980121c0a76284b7d98e8394a8b48ea7,
         type: 3}
       propertyPath: m_havePropertiesChanged
@@ -3115,16 +3152,6 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4974291885692507394, guid: 980121c0a76284b7d98e8394a8b48ea7,
-        type: 3}
-      propertyPath: m_isInputParsingRequired
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4974291885297903219, guid: 980121c0a76284b7d98e8394a8b48ea7,
-        type: 3}
-      propertyPath: m_havePropertiesChanged
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4974291885297903219, guid: 980121c0a76284b7d98e8394a8b48ea7,
         type: 3}
       propertyPath: m_isInputParsingRequired
       value: 1
@@ -3496,6 +3523,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3943565515953350343, guid: 74c35a6d68afc4924800e7eee882e328,
+        type: 3}
+      propertyPath: m_havePropertiesChanged
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3943565515953350343, guid: 74c35a6d68afc4924800e7eee882e328,
+        type: 3}
+      propertyPath: m_isInputParsingRequired
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 74c35a6d68afc4924800e7eee882e328, type: 3}

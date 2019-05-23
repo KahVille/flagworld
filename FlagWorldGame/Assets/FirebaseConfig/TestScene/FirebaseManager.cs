@@ -6,9 +6,9 @@ using Firebase.Database;
 using TMPro;
 using UnityEngine.Networking;
 
-    //fixes ui hang with firebase
-    //https://forum.unity.com/threads/can-only-be-called-from-the-main-thread.622948/
-    // Add System.Threading.Tasks.TaskScheduler.FromCurrentSynchronizationContext()
+//fixes ui hang with firebase
+//https://forum.unity.com/threads/can-only-be-called-from-the-main-thread.622948/
+// Add System.Threading.Tasks.TaskScheduler.FromCurrentSynchronizationContext()
 
 
 public class FirebaseManager : MonoBehaviour
@@ -23,6 +23,10 @@ public class FirebaseManager : MonoBehaviour
     Sprite networkErrorSprite = null;
 
     private ModalPanel modalPanel;
+
+    [SerializeField]
+    private ModalPanel modalPanelPrefab = null;
+
 
     DependencyStatus dependencyStatus = DependencyStatus.UnavailableOther;
     ContactPointCollection myPointData = null;
@@ -53,9 +57,12 @@ public class FirebaseManager : MonoBehaviour
     //ErrorDisplays
     void ShowNetworkError()
     {
+        string buttonRetryText = (LocalizationManager.Instance != null) ? LocalizationManager.Instance.GetLocalizedValue("try_again_button") : " Try Again";
+        string networkTextShort = (LocalizationManager.Instance != null) ? LocalizationManager.Instance.GetLocalizedValue("Network_error_short") : " Network error";
+        string networkTextLong = (LocalizationManager.Instance != null) ? LocalizationManager.Instance.GetLocalizedValue("Network_error_long") : " please enable network";
         loadingIndicator.SetActive(false);
-        EventButtonDetails button1Detail = new EventButtonDetails { buttonTitle = "Retry", action = RetryConnection };
-        SpawnPanel("Network Error", "please enable network connection", button1Detail, null, networkErrorSprite);
+        EventButtonDetails button1Detail = new EventButtonDetails { buttonTitle = buttonRetryText, action = RetryConnection };
+        SpawnPanel(networkTextShort, networkTextLong, button1Detail, null, networkErrorSprite);
     }
 
     void ShowFirebaseError()
@@ -76,10 +83,14 @@ public class FirebaseManager : MonoBehaviour
 
     //end of callbacks
 
-    private void StartFirebase()
+    public void StartFirebase()
     {
-        #if !UNITY_EDITOR
+#if !UNITY_EDITOR
+
+        if(PlayerPrefs.GetInt("FirstTimeCompleted") == 1){
         loadingIndicator.SetActive(true);
+        }
+
         FirebaseApp.CheckAndFixDependenciesAsync().ContinueWith(task =>
         {
             dependencyStatus = task.Result;
@@ -92,12 +103,12 @@ public class FirebaseManager : MonoBehaviour
                 ShowFirebaseError();
             }
         }, System.Threading.Tasks.TaskScheduler.FromCurrentSynchronizationContext());
-        
-        #elif UNITY_EDITOR
+
+#elif UNITY_EDITOR
         loadingIndicator.SetActive(false);
         EventButtonDetails button1Detail = new EventButtonDetails { buttonTitle = "OK I understand", action = ContinueSuccess };
         SpawnPanel("You run in Editor", "in case of null refrence exception in trivia, please test on a mobile device", button1Detail, null, networkErrorSprite);
-        #endif
+#endif
     }
 
     // Initialize the Firebase database:
@@ -111,7 +122,10 @@ public class FirebaseManager : MonoBehaviour
         }
         else
         {
-            RetryConnection();
+            loadingIndicator.SetActive(false);
+            if(PlayerPrefs.GetInt("FirstTimeCompleted") == 1){
+                RetryConnection();
+            }
         }
     }
 
@@ -143,7 +157,7 @@ public class FirebaseManager : MonoBehaviour
     }
     public void RetryConnection()
     {
-        #if !UNITY_EDITOR
+#if !UNITY_EDITOR
         //continue download proggress
         loadingIndicator.SetActive(true);
         StartCoroutine(checkInternetConnection((isConnected) =>
@@ -158,12 +172,30 @@ public class FirebaseManager : MonoBehaviour
                 ShowNetworkError();
             }
         }));
-        #endif
+#endif
     }
 
-    protected void CheckDatabaseVersion()
-    {
+    public void DownloadWithNewLanguage() {
         #if !UNITY_EDITOR
+        loadingIndicator.SetActive(true);
+        if (!IsNetworkReachable())
+        {
+            ShowNetworkError();
+            return;
+        }
+        #endif
+
+        if(PlayerPrefs.GetInt("Language") == ((int) LanguageUtility.Language.Finnish)) {
+            DownloadDataFromDatabase("finnish_language");
+        }
+        else {
+            DownloadDataFromDatabase("english_language");
+        }
+    }
+
+    public void CheckDatabaseVersion()
+    {
+#if !UNITY_EDITOR
         loadingIndicator.SetActive(true);
         string currentDatabaseVersion = PlayerPrefs.GetString("database_version");
         FirebaseDatabase.DefaultInstance
@@ -180,7 +212,8 @@ public class FirebaseManager : MonoBehaviour
                     TriviaSaveLoadSystem.DeleteData();
                     PlayerPrefs.SetString("database_version", verNumberString);
                     //TODO: Implement a function that checks current selected language, possible to do with the localization manager or playerprefabs.
-                    DownloadDataFromDatabase("finnish_language");
+                    DownloadWithNewLanguage();
+                   
                 }
                 else
                 {
@@ -188,34 +221,39 @@ public class FirebaseManager : MonoBehaviour
                     if (myPointData != null)
                     {
                         //trivia up to date
+                        string buttonContinueText = (LocalizationManager.Instance != null) ? LocalizationManager.Instance.GetLocalizedValue("continue_button") : "Continue";
+                        string triviaUpToDate = (LocalizationManager.Instance != null) ? LocalizationManager.Instance.GetLocalizedValue("trivia_up_to_date") : "Trivia up to date";
                         loadingIndicator.SetActive(false);
-                        EventButtonDetails button1Detail = new EventButtonDetails { buttonTitle = "Continue", action = ContinueSuccess };
-                        SpawnPanel("Trivia up-to-date", "please continue", button1Detail);
+                        EventButtonDetails button1Detail = new EventButtonDetails { buttonTitle = buttonContinueText, action = ContinueSuccess };
+                        SpawnPanel(triviaUpToDate, "", button1Detail);
                     }
                 }
             }
         }, System.Threading.Tasks.TaskScheduler.FromCurrentSynchronizationContext());
-        #endif
+#endif
     }
 
     protected void DownloadDataFromDatabase(string selectedLanguage = null)
     {
-        #if !UNITY_EDITOR
+#if !UNITY_EDITOR
         FirebaseDatabase.DefaultInstance
         .GetReference(selectedLanguage)
         .GetValueAsync().ContinueWith(task =>
         {
             if (task.IsCompleted)
             {
+                string buttonContinueText = (LocalizationManager.Instance != null) ? LocalizationManager.Instance.GetLocalizedValue("continue_button") : "Continue";
+                string triviaUpToDate = (LocalizationManager.Instance != null) ? LocalizationManager.Instance.GetLocalizedValue("trivia_up_to_date") : "Trivia up to date";
+                string newDataDownloaded = (LocalizationManager.Instance != null) ? LocalizationManager.Instance.GetLocalizedValue("trivia_data_long") : " Trivia new data downloaded";
                 DataSnapshot snapshot = task.Result;
                 ContactPointCollection contactPoints = new ContactPointCollection();
                 JsonUtility.FromJsonOverwrite(snapshot.GetRawJsonValue(), contactPoints);
                 TriviaSaveLoadSystem.SaveContactPoints(contactPoints);
                 loadingIndicator.SetActive(false);
-                EventButtonDetails button1Detail = new EventButtonDetails { buttonTitle = "Continue", action = ContinueSuccess };
-                SpawnPanel("Trivia up-to-date", "newest data downloaded", button1Detail);
+                EventButtonDetails button1Detail = new EventButtonDetails { buttonTitle = buttonContinueText, action = ContinueSuccess };
+                SpawnPanel(triviaUpToDate, newDataDownloaded, button1Detail);
             }
         }, System.Threading.Tasks.TaskScheduler.FromCurrentSynchronizationContext());
-        #endif
+#endif
     }
 }

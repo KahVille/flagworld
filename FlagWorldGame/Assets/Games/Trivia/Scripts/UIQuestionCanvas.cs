@@ -49,13 +49,13 @@ public class UIQuestionCanvas : MonoBehaviour
 
         if(currentQuestion.answers[option].isCorrect==true) {
             Debug.Log("UI Correct");
-            questionTextUI.SetQuestionText("Correct!");
+            questionTextUI.SetQuestionText(LocalizationManager.Instance.GetLocalizedValue("correct_choice"));
             answerButtons[option].SetCorrectAnswerColor();
             score+=1;           
         }
         else 
         {
-            questionTextUI.SetQuestionText("Wrong!");
+            questionTextUI.SetQuestionText(LocalizationManager.Instance.GetLocalizedValue("wrong_choice"));
             answerButtons[option].SetWrongAnswerColor();
             for (int i = 0; i < currentQuestion.answers.Length; i++)
             {

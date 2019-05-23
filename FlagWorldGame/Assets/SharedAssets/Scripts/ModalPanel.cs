@@ -26,17 +26,11 @@ public class ModalPanelDetails {
 
 
 public class ModalPanel : MonoBehaviour {
-    
-    public TextMeshProUGUI description;
-    public TextMeshProUGUI shortText;
-    public Image iconImage;
-    public Button button1;
-    public Button button2;
 
-    public TextMeshProUGUI button1Text;
-    public TextMeshProUGUI button2Text;
-    
-    public GameObject modalPanelObject;
+
+
+    [SerializeField]
+    private ModalPanelCanvas modalPanelCanvas;
     
     private static ModalPanel modalPanel;
     
@@ -51,38 +45,38 @@ public class ModalPanel : MonoBehaviour {
     
     public void SpawnWithDetails (ModalPanelDetails details){
         
-        modalPanelObject.SetActive (true);
+        modalPanelCanvas.gameObject.SetActive (true);
 
-        this.iconImage.gameObject.SetActive(false);
-        button1.gameObject.SetActive(false);
-        button2.gameObject.SetActive(false);
+        modalPanelCanvas.iconImage.gameObject.SetActive(false);
+        modalPanelCanvas.button1.gameObject.SetActive(false);
+        modalPanelCanvas.button2.gameObject.SetActive(false);
 
-        this.shortText.text = details.shortText;
+       modalPanelCanvas.shortText.text = details.shortText;
 
         if(details.description != null || details.description != "")
-        this.description.text = details.description;
+       modalPanelCanvas.description.text = details.description;
 
         if (details.iconImage) {
-            this.iconImage.sprite = details.iconImage;
-            this.iconImage.gameObject.SetActive(true);
+           modalPanelCanvas.iconImage.sprite = details.iconImage;
+           modalPanelCanvas.iconImage.gameObject.SetActive(true);
         }
 
-        button1.onClick.RemoveAllListeners();
-        button1.onClick.AddListener (details.button1Details.action);
-        button1.onClick.AddListener (ClosePanel);
-        button1Text.text = details.button1Details.buttonTitle;
-        button1.gameObject.SetActive(true);
+        modalPanelCanvas.button1.onClick.RemoveAllListeners();
+        modalPanelCanvas.button1.onClick.AddListener (details.button1Details.action);
+        modalPanelCanvas.button1.onClick.AddListener (ClosePanel);
+        modalPanelCanvas.button1Text.text = details.button1Details.buttonTitle;
+        modalPanelCanvas.button1.gameObject.SetActive(true);
         
         if (details.button2Details != null) {
-            button2.onClick.RemoveAllListeners();
-            button2.onClick.AddListener (details.button2Details.action);
-            button2.onClick.AddListener (ClosePanel);
-            button2Text.text = details.button2Details.buttonTitle;
-            button2.gameObject.SetActive(true);
+            modalPanelCanvas.button2.onClick.RemoveAllListeners();
+            modalPanelCanvas.button2.onClick.AddListener (details.button2Details.action);
+            modalPanelCanvas.button2.onClick.AddListener (ClosePanel);
+            modalPanelCanvas.button2Text.text = details.button2Details.buttonTitle;
+            modalPanelCanvas.button2.gameObject.SetActive(true);
         }
     }
         
     void ClosePanel () {
-        modalPanelObject.SetActive (false); 
+         modalPanelCanvas.gameObject.SetActive (false); 
     }
 }

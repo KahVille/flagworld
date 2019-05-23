@@ -174,13 +174,15 @@ GameObject:
   - component: {fileID: 3023588063397189248}
   - component: {fileID: 3023588063397189278}
   - component: {fileID: 3023588063397189249}
+  - component: {fileID: 3073523808971775694}
+  - component: {fileID: 3966785835649461597}
   m_Layer: 5
   m_Name: LoadingPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3023588063397189248
 RectTransform:
   m_ObjectHideFlags: 0
@@ -239,6 +241,30 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
+--- !u!114 &3073523808971775694
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3023588063397189251}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8587df9e321ed4d71a6ccafcc0773df8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3966785835649461597
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3023588063397189251}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c48abdce76e64cd5bd8155d87a6da43, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4038836525628689405
 GameObject:
   m_ObjectHideFlags: 0
@@ -250,6 +276,7 @@ GameObject:
   - component: {fileID: 8628789333487390777}
   - component: {fileID: 2793143093342239902}
   - component: {fileID: 3943565515953350343}
+  - component: {fileID: 2253116415893300359}
   m_Layer: 5
   m_Name: LoadingText
   m_TagString: Untagged
@@ -382,7 +409,7 @@ MonoBehaviour:
     lineCount: 2
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 0
+  m_havePropertiesChanged: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
@@ -400,3 +427,16 @@ MonoBehaviour:
   - {fileID: 0}
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &2253116415893300359
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4038836525628689405}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ecefcd602d84c14194dbaddb6bcccae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  key: loading_data_text

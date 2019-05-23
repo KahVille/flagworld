@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+using TMPro;
 
 
 public class LocalizedText : MonoBehaviour, ILocalizedText {
@@ -9,25 +9,30 @@ public class LocalizedText : MonoBehaviour, ILocalizedText {
     [SerializeField]
     private string key = "";
 
+     TextMeshProUGUI text = null;
+
 	// Use this for initialization
-	void Start () {
-        Text text = GetComponent<Text>();
-        text.text = LocalizationManager.Instance.getLocalizedValue(key);
+	void Awake () {
+        text = GetComponent<TextMeshProUGUI>();
 	}
+
+    private void OnEnable() {
+        LocalizationManager.OnLanguageLocalization += GetLocalizedText;
+    }
+
+    private void OnDisable() {
+        LocalizationManager.OnLanguageLocalization -= GetLocalizedText;
+    }
+
+    private void Start() {
+       GetLocalizedText();
+    }
 
     public void GetLocalizedText()
     {
-        Text text = GetComponent<Text>();
-        text.text = LocalizationManager.Instance.getLocalizedValue(key);
+        if(LocalizationManager.Instance !=null){
+        string key_value = LocalizationManager.Instance.GetLocalizedValue(key);
+        text.SetText(key_value);
+        }
     }
-
-    /*
-     *
-     *   List<GameObject> LocalizedObjects
-         for (int i = 0; i < localizedObjects.Count; i++)
-            {
-                localizedObjects[i].GetComponent<ILocalizedText>().GetLocalizedText();
-            }
-     * 
-     */
 }
