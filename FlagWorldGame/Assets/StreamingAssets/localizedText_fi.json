@@ -26,12 +26,11 @@
         {"key":"back_to_menu_button","value":"Valikkoon"},
         {"key":"difficulty_easy_button","value":"Helppo"},
         {"key":"difficulty_hard_button","value":"Vaikea"},
-        {"key":"game_instruction_short_sorting","value":"Lajittele lippu oikean maanosan kohdalle"},
         {"key":"continent_asia_sorting","value":"Aasia"},
         {"key":"continent_europe_sorting","value":"Eurooppa"},
         {"key":"continent_america_sorting","value":"Amerikka"},
         {"key":"continent_africa_sorting","value":"Afrikka"},
-        {"key":"points_text","value":"Pisteet"},
+        {"key":"points_text","value":"pisteet"},
         {"key":"gwtw_game_over_title","value":"Lippu karkasi! "},
         {"key":"quit_button","value":"Lopeta"},
         {"key":"loading_data_text","value":"Ladataan dataa"},
@@ -40,6 +39,13 @@
         {"key":"try_again_button","value":"Yritä uudelleen"},
         {"key":"trivia_up_to_date","value":"Trivian tiedot ovat ajantasalla"},
         {"key":"trivia_data_long","value":"Trivian uusin versio on ladattu palvelimelta"},
-        {"key":"select_language","value":"Ole hyvä ja valitse kieli"}
+        {"key":"select_language","value":"Ole hyvä ja valitse kieli"},
+        {"key":"connect_instruction_short","value":"Kerää pisteitä muodostamalla lipuista kolmen suoria"},
+        {"key":"memory_instruction_short","value":"Etsi kaikki parit kääntämällä kortteja"},
+        {"key":"sorting_instruction_short","value":"Lajittele lippu oikean maanosan kohdalle"},
+        {"key":"gwtw_instruction_short","value":"Yritä päästä lipputangon huipulle! Lippu liikkuu pyyhkäisemällä ruutua ylhäältä alas."},
+        {"key":"time_text","value":"Aika:"},
+        {"key":"best_time","value":"Paras aikasi:"},
+        {"key":"new_highscore_text","value":"Uusi huipputulos"}
     ]
 }
