@@ -50,7 +50,7 @@ public class LocalizationManager : MonoBehaviour
         localizedText = new Dictionary<string, string>();
         string filePath = Path.Combine(Application.streamingAssetsPath, fileName);
 
-#if UNITY_ANDROID || UNITY_IOS
+#if (UNITY_ANDROID || UNITY_IOS) && !UNITY_EDITOR
         using (UnityWebRequest webRequest = UnityWebRequest.Get(filePath))
         {
 
@@ -95,6 +95,7 @@ public class LocalizationManager : MonoBehaviour
 #endif
 
         isReady = true;
+        yield return true;
     }
 
     public string GetLocalizedValue(string key)

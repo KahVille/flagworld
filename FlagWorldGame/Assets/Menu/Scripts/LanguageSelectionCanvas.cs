@@ -22,7 +22,7 @@ LocalizationManager localeManager = null;
         originalLanguage = LanguageUtility.GetCurrentLanguage();
         selectedColors[LanguageUtility.GetCurrentLanguage()].enabled = true;
         if(PlayerPrefs.GetInt("FirstTimeCompleted") != 1) {
-            //GetComponent<Canvas>().enabled = true;
+            GetComponent<Canvas>().enabled = true;
         }
 
     }
@@ -89,6 +89,8 @@ LocalizationManager localeManager = null;
             Instantiate(firebasePrefab);
             firebase = FindObjectOfType<FirebaseManager>() as FirebaseManager;
         }
+        //delete database version player pref
+        PlayerPrefs.DeleteKey("database_version");
         firebase.CheckDatabaseVersion();
     }
 }

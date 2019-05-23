@@ -39,10 +39,6 @@ public class FirebaseManager : MonoBehaviour
     void Awake()
     {
         modalPanel = ModalPanel.Instance();
-        if(modalPanel == null) {
-            Instantiate(modalPanelPrefab);
-             modalPanel = ModalPanel.Instance();
-        }
     }
 
     void Start()
@@ -190,10 +186,10 @@ public class FirebaseManager : MonoBehaviour
         #endif
 
         if(PlayerPrefs.GetInt("Language") == ((int) LanguageUtility.Language.Finnish)) {
-                DownloadDataFromDatabase("finnish_language");
+            DownloadDataFromDatabase("finnish_language");
         }
         else {
-        DownloadDataFromDatabase("english_language");
+            DownloadDataFromDatabase("english_language");
         }
     }
 
