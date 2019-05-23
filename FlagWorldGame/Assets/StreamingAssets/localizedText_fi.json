@@ -46,6 +46,10 @@
         {"key":"gwtw_instruction_short","value":"Yritä päästä lipputangon huipulle! Lippu liikkuu pyyhkäisemällä ruutua ylhäältä alas."},
         {"key":"time_text","value":"Aika:"},
         {"key":"best_time","value":"Paras aikasi:"},
-        {"key":"new_highscore_text","value":"Uusi huipputulos"}
+        {"key":"new_highscore_text","value":"Uusi huipputulos"},
+        {"key":"you_made","value":"Teit"},
+        {"key":"moves_text","value":"siirtoa"},
+        {"key":"you_opened","value":"Avasit"},
+        {"key":"pairs_in","value":"paria"}
     ]
 }
