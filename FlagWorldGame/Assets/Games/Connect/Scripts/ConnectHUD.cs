@@ -88,15 +88,22 @@ public class ConnectHUD : MonoBehaviour
     private void TheEnd()
     {
         EndP.GetComponent<RectTransform>().sizeDelta = new Vector2(Screen.width, Screen.height);
-        EndP.text = LocalizationManager.Instance.GetLocalizedValue("points_text").ToUpper() + " " + Points.ToString();
+        string localized_youscored = (LocalizationManager.Instance != null) ?
+                                $"{LocalizationManager.Instance.GetLocalizedValue("points_earned")} {Points.ToString()} {LocalizationManager.Instance.GetLocalizedValue("points_text")}  \n"
+                                : $"You scored {Points.ToString()} points \n";
+        EndP.text = localized_youscored;
         if(Points > PlayerPrefs.GetInt(ConnectHigh))
         {
-            EndP.text += "\n" + LocalizationManager.Instance.GetLocalizedValue("new_highscore_text");
+            string localized_newHigh = (LocalizationManager.Instance != null) ? LocalizationManager.Instance.GetLocalizedValue("new_highscore_text")
+                                    : "New highscore";
+            EndP.text += localized_newHigh;
             PlayerPrefs.SetInt(ConnectHigh, Points);
         }
         else
         {
-            EndP.text += "\n" + LocalizationManager.Instance.GetLocalizedValue("highscore_text") + " "+ PlayerPrefs.GetInt(ConnectHigh).ToString();
+            string localized_highscore = (LocalizationManager.Instance != null) ? $"{LocalizationManager.Instance.GetLocalizedValue("highscore_text")} {PlayerPrefs.GetInt(ConnectHigh).ToString()} \n"
+                                    : $"Highscore {PlayerPrefs.GetInt(ConnectHigh).ToString()}";
+            EndP.text += localized_highscore;
         }
 
         GetComponent<Canvas>().enabled = false;

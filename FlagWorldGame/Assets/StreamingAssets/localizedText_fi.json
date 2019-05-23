@@ -50,6 +50,7 @@
         {"key":"you_made","value":"Teit"},
         {"key":"moves_text","value":"siirtoa"},
         {"key":"you_opened","value":"Avasit"},
-        {"key":"pairs_in","value":"paria"}
+        {"key":"pairs_in","value":"paria"},
+        {"key":"points_earned","value":"Ansaitsit"}
     ]
 }

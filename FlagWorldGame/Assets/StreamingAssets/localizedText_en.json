@@ -50,6 +50,7 @@
         {"key":"you_made","value":"You mde"},
         {"key":"moves_text","value":"moves"},
         {"key":"you_opened","value":"You opened"},
-        {"key":"pairs_in","value":"pairs in"}
+        {"key":"pairs_in","value":"pairs in"},
+        {"key":"points_earned","value":"You scored"}
     ]
 }
