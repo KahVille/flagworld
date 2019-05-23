@@ -18,14 +18,11 @@ public class LocalizedText : MonoBehaviour, ILocalizedText {
 
     private void OnEnable() {
         LocalizationManager.OnLanguageLocalization += GetLocalizedText;
+        GetLocalizedText();
     }
 
     private void OnDisable() {
         LocalizationManager.OnLanguageLocalization -= GetLocalizedText;
-    }
-
-    private void Start() {
-       GetLocalizedText();
     }
 
     public void GetLocalizedText()
