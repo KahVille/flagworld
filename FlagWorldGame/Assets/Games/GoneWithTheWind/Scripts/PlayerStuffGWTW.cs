@@ -17,7 +17,7 @@ public class PlayerStuffGWTW : MonoBehaviour
     public GameObject flag;
     public Transform topOfPole;
     public Transform bottomOfPole;
-    public float smoothTime = 0.3f;
+    public float smoothTime;
     Vector3 desiredPos;
     private Vector3 velocity = Vector3.zero;
 
@@ -50,6 +50,7 @@ public class PlayerStuffGWTW : MonoBehaviour
     }
     bool windy;
     public BoxCollider2D windCol;
+    public BoxCollider2D flagCol;
     bool gameOver;
 
     public GameObject gameOverPanel;
@@ -75,10 +76,12 @@ public class PlayerStuffGWTW : MonoBehaviour
 
     void Start()
     {
+        // gameOver is set to true in the beginning so the game doesnt run when the start canvas is on.
+        // It is turned off when the player clicks the Start button on the start canvas and the game begins.
         gameOver = true;
         if(!PlayerPrefs.HasKey("GWTWHigh"))
         {
-            PlayerPrefs.SetFloat("GWTWHigh", 0.0f);
+            PlayerPrefs.SetFloat("GWTWHigh", 9999.0f);
         }
     }
 
@@ -119,8 +122,9 @@ public class PlayerStuffGWTW : MonoBehaviour
             Victory();
         }
 
-        score += Time.deltaTime * scoreMult * 15f;
-        scoreMult = (flag.transform.position.y - bottomOfPole.position.y) / (topOfPole.position.y - bottomOfPole.position.y);
+        //score += Time.deltaTime * scoreMult * 15f;
+        //scoreMult = (flag.transform.position.y - bottomOfPole.position.y) / (topOfPole.position.y - bottomOfPole.position.y);
+        score += Time.deltaTime;
         scoreText.text = score.ToString("F2");
 
         // Move this to flagCollision
@@ -170,7 +174,7 @@ public class PlayerStuffGWTW : MonoBehaviour
     void DebugInput()
     {
         float mouseScroll = Input.GetAxis("Mouse ScrollWheel");
-        desiredPos.y += mouseScroll;
+        desiredPos.y += mouseScroll * 5.0f;
     }
 
     public void StartGameOver()
@@ -186,24 +190,30 @@ public class PlayerStuffGWTW : MonoBehaviour
         if(flagHP >= 100f)
         {
             mainCam.GetComponent<CameraMovementGWTW>().enabled = false;
+            flagCol.enabled = false;
             //GAME OVER
             StartGameOver();
         }
     }
 
+    public void TimeDamage(float howMuch)
+    {
+        score += howMuch;
+    }
+
     void Victory()
     {
         victoryCanvas.enabled = true;
-        score += 50.0f;
-        victoryPointsTxt.text = "Points: " + score.ToString();
-        if(score > PlayerPrefs.GetFloat("GWTWHigh"))
+        //score += 50.0f;
+        victoryPointsTxt.text = "Time: " + score.ToString();
+        if(score < PlayerPrefs.GetFloat("GWTWHigh"))
         {
-            victoryPointsTxt.text += "\nNew Highscore!";
+            victoryPointsTxt.text += "\nNew best time!";
             PlayerPrefs.SetFloat("GWTWHigh", score);
         }
         else
         {
-            victoryPointsTxt.text += "\nHighscore: " + PlayerPrefs.GetFloat("GWTWHigh").ToString();
+            victoryPointsTxt.text += "\nBest time: " + PlayerPrefs.GetFloat("GWTWHigh").ToString();
         }
         //victoryPanel.SetActive(true);
         //scorePanelAnim.SetBool("Move", true);
@@ -223,15 +233,15 @@ public class PlayerStuffGWTW : MonoBehaviour
         //gameOverPanel.SetActive(true);
         loseCanvas.enabled = true;
         losePointsTxt.text = "Points: " + score.ToString();
-        if(score > PlayerPrefs.GetFloat("GWTWHigh"))
-        {
-            losePointsTxt.text += "\nNew Highscore!";
-            PlayerPrefs.SetFloat("GWTWHigh", score);
-        }
-        else
-        {
-            losePointsTxt.text += "\nHighscore: " + PlayerPrefs.GetFloat("GWTWHigh").ToString();
-        }
+        // if(score > PlayerPrefs.GetFloat("GWTWHigh"))
+        // {
+        //     losePointsTxt.text += "\nNew Highscore!";
+        //     PlayerPrefs.SetFloat("GWTWHigh", score);
+        // }
+        // else
+        // {
+        //     losePointsTxt.text += "\nHighscore: " + PlayerPrefs.GetFloat("GWTWHigh").ToString();
+        // }
     }
 
     IEnumerator FadeWind()
@@ -259,7 +269,7 @@ public class PlayerStuffGWTW : MonoBehaviour
             ParticleSystem.MainModule mm = windparticles.main;
             mm.startColor = Color.white;
             windSpawnPos = flag.transform.position;
-            windSpawnPos.y += Random.Range(2f, 15f);
+            windSpawnPos.y += Random.Range(3f, 12f);
             windSpawnPos.x -= 11f;
             windObj.transform.position = windSpawnPos;
             yield return new WaitForSeconds(1.5f);
@@ -288,9 +298,9 @@ public class PlayerStuffGWTW : MonoBehaviour
         spawnPos.x = -10f;
         while(!gameOver)
         {
-            birdTime = Random.Range(1f,10f);
+            birdTime = Random.Range(1f,3f);
             yield return new WaitForSeconds(birdTime);
-            spawnPos.y = flag.transform.position.y + Random.Range(-3f, 15f);
+            spawnPos.y = flag.transform.position.y + Random.Range(3f, 15f);
             Vector3 spawnPosInVP = Camera.main.WorldToViewportPoint(spawnPos);
             spawnPosInVP.x = 0.2f;
             spawnPosInVP = Camera.main.ViewportToWorldPoint(spawnPosInVP);
@@ -302,7 +312,8 @@ public class PlayerStuffGWTW : MonoBehaviour
             GameObject newBird = Instantiate(bird, spawnPos, Quaternion.identity);
             
             //newBird.GetComponent<Rigidbody2D>().velocity = Vector2.right * 5f;
-            newBird.GetComponent<Rigidbody2D>().AddForce(Vector2.right * 5f * 70f);
+            float randSpeed = Random.Range(0.7f, 1.3f);
+            newBird.GetComponent<Rigidbody2D>().AddForce(Vector2.right * 5f * 70f * randSpeed);
             Destroy(newBird, 7f);
         }
     }

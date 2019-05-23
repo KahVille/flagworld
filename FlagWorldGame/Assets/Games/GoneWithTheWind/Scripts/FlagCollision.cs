@@ -15,7 +15,8 @@ public class FlagCollision : MonoBehaviour
     {
         if(other.transform.CompareTag("Bird"))
         {
-            playerScript.Damage(20.0f);
+            playerScript.TimeDamage(5.0f);
+            playerScript.Damage(20.0f); 
         }
         if(other.transform.CompareTag("Wind"))
         {
