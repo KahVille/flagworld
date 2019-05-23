@@ -76,7 +76,7 @@ public class ConnectHUD : MonoBehaviour
 
     private void SetText()
     {
-        PointsT.text = "Points: " + Points.ToString();
+        PointsT.text = "P: " + Points.ToString();
     }
 
     public void SetPoints(int Add)
@@ -88,17 +88,16 @@ public class ConnectHUD : MonoBehaviour
     private void TheEnd()
     {
         EndP.GetComponent<RectTransform>().sizeDelta = new Vector2(Screen.width, Screen.height);
-        EndP.text = "Points: " + Points.ToString();
+        EndP.text = LocalizationManager.Instance.GetLocalizedValue("points_text").ToUpper() + " " + Points.ToString();
         if(Points > PlayerPrefs.GetInt(ConnectHigh))
         {
-            EndP.text += "\nNew Highscore!";
+            EndP.text += "\n" + LocalizationManager.Instance.GetLocalizedValue("new_highscore_text");
             PlayerPrefs.SetInt(ConnectHigh, Points);
         }
         else
         {
-            EndP.text += "\nHighscore: " + PlayerPrefs.GetInt(ConnectHigh).ToString();
+            EndP.text += "\n" + LocalizationManager.Instance.GetLocalizedValue("highscore_text") + " "+ PlayerPrefs.GetInt(ConnectHigh).ToString();
         }
-        GameObject.Find("Continue").GetComponentInChildren<TMP_Text>().text = "Back to menu";  // End Button text set up
 
         GetComponent<Canvas>().enabled = false;
         End.GetComponent<Canvas>().enabled = true;
