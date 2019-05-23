@@ -17,4 +17,10 @@ public class UIManager : MonoBehaviour
     {
         Application.Quit();
     }
+
+    // Delete playerpref keys
+    public void DeletThis()
+    {
+        PlayerPrefs.DeleteAll();
+    }
 }
