@@ -184,8 +184,19 @@ public class BoardManager : MonoBehaviour
     private void CheckForMatches() // Check if board has possible moves.
     {
         lastMove = time;
-        for (int x = 1; x < xSize - 1; x++)
+        int r = Random.Range(1, xSize);
+        int endL;
+        if(r == 1)
         {
+            endL = xSize - 1;
+        }
+        else
+        {
+            endL = r - 1;
+        }
+        for (int x = r; x != endL; x++) // xSize - 1
+        {
+            if (x == xSize - 1) x = 1;
             for (int y = 1; y < ySize - 1; y++)
             {
                 #region Take every tile 3x3 from center [x,y]

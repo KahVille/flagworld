@@ -17,6 +17,8 @@ public class LajitteluSpawner : MonoBehaviour
     private GameObject HUD, End;
     private Text Top, Bottom, Right, Left;
     private TMP_Text Points, Timer;
+    private AudioSource AS;
+    public AudioClip Correct, Wrong;
 
     private int P = 0, WP = 0;
     private InputLajittelu IL;
@@ -31,6 +33,7 @@ public class LajitteluSpawner : MonoBehaviour
         End = GameObject.Find("EndCanvas");
         Points = GameObject.Find("PointsText").GetComponent<TMP_Text>();
         Timer = GameObject.Find("TimerText").GetComponent<TMP_Text>();
+        AS = GetComponent<AudioSource>();
         OrigColor = Points.color;
         IL = GetComponent<InputLajittelu>();
         if(!timerClockScript)
@@ -75,6 +78,8 @@ public class LajitteluSpawner : MonoBehaviour
     public void RightDir()
     {
         Points.color = new Color32(4, 191, 4, 255);
+        AS.clip = Correct;
+        AS.Play();
         if (!HardMode)
         {
             P++;
@@ -90,6 +95,8 @@ public class LajitteluSpawner : MonoBehaviour
     public void WrongDir()
     {
         Points.color = new Color32(219, 5, 0, 255);
+        AS.clip = Wrong;
+        AS.Play();
         if (!HardMode)
         {
             WP++;
