@@ -5,20 +5,22 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
 
-public class MuistiCanvas : MonoBehaviour {
+public class MuistiCanvas : MonoBehaviour
+{
 
     private Canvas StartC, HUD, End;
     private string CurrentGameHigh = "CurrGameHigh";
     private string MemoryHigh = "MemoryHigh";
     private int points;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start()
+    {
         Screen.orientation = ScreenOrientation.Portrait;
         StartC = GameObject.Find("StartCanvas").GetComponent<Canvas>();
         HUD = GameObject.Find("HUD").GetComponent<Canvas>();
         End = GameObject.Find("EndCanvas").GetComponent<Canvas>();
-        if(PlayerPrefs.GetInt(CurrentGameHigh) == 1)
+        if (PlayerPrefs.GetInt(CurrentGameHigh) == 1)
         {
             StartCoroutine(NewGameStart());
         }
@@ -28,20 +30,32 @@ public class MuistiCanvas : MonoBehaviour {
     {
         if (finished)
         {
-            GameObject.Find("Points").GetComponent<TMP_Text>().text = "You made " + moves.ToString() + " moves";
-            if(moves < PlayerPrefs.GetInt(MemoryHigh) || PlayerPrefs.GetInt(MemoryHigh) == 0)
+            string localized_youmade = (LocalizationManager.Instance != null) ?
+                                $"{LocalizationManager.Instance.GetLocalizedValue("you_made")} {moves.ToString()} {LocalizationManager.Instance.GetLocalizedValue("moves_text")}  \n"
+                                : $"You made {moves.ToString()} moves  \n";
+
+            GameObject.Find("Points").GetComponent<TMP_Text>().text = localized_youmade;
+            if (moves < PlayerPrefs.GetInt(MemoryHigh) || PlayerPrefs.GetInt(MemoryHigh) == 0)
             {
-                GameObject.Find("Points").GetComponent<TMP_Text>().text += "\nNew Highscore!";
+                string localized_newHigh = (LocalizationManager.Instance != null) ? LocalizationManager.Instance.GetLocalizedValue("new_highscore_text")
+                                    : "New highscore";
+                GameObject.Find("Points").GetComponent<TMP_Text>().text += localized_newHigh;
                 PlayerPrefs.SetInt(MemoryHigh, moves);
             }
             else
             {
-                GameObject.Find("Points").GetComponent<TMP_Text>().text += "\nHighscore: " +  PlayerPrefs.GetInt(MemoryHigh).ToString();
+                string localized_highscore = (LocalizationManager.Instance != null) ? $"{LocalizationManager.Instance.GetLocalizedValue("highscore_text")} {PlayerPrefs.GetInt(MemoryHigh).ToString()} \n"
+                                    : $"Highscore {PlayerPrefs.GetInt(MemoryHigh).ToString()}";
+                GameObject.Find("Points").GetComponent<TMP_Text>().text += localized_highscore;
             }
         }
         else
         {
-            GameObject.Find("Points").GetComponent<TMP_Text>().text = "You opened " + pairs.ToString() + " pairs in " + moves.ToString() + " moves";
+            //is this condition true ? yes : no
+            string localized_early_end = (LocalizationManager.Instance != null) ? 
+            $"{LocalizationManager.Instance.GetLocalizedValue("you_opened")} {pairs.ToString()} {LocalizationManager.Instance.GetLocalizedValue("pairs_in")} \n {moves.ToString()} {LocalizationManager.Instance.GetLocalizedValue("moves_text")}"
+                                : $"You opened {pairs.ToString()} pairs in {moves.ToString()} moves";
+            GameObject.Find("Points").GetComponent<TMP_Text>().text = localized_early_end;
         }
 
         HUD.enabled = false;

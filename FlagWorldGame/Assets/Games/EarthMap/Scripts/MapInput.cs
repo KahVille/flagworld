@@ -5,8 +5,8 @@ using UnityEngine;
 public class MapInput : MonoBehaviour
 {
     Camera mainCam;
-    GameObject currentFlag;
-    Vector3 currentTouchPos;
+    GameObject currentFlag = null;
+    Vector3 currentTouchPos = Vector3.zero;
     FlagSpawner fsScript;
 
     void Start() 

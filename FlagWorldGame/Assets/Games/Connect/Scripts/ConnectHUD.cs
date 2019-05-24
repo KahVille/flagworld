@@ -76,7 +76,7 @@ public class ConnectHUD : MonoBehaviour
 
     private void SetText()
     {
-        PointsT.text = "Points: " + Points.ToString();
+        PointsT.text = "P: " + Points.ToString();
     }
 
     public void SetPoints(int Add)
@@ -88,17 +88,23 @@ public class ConnectHUD : MonoBehaviour
     private void TheEnd()
     {
         EndP.GetComponent<RectTransform>().sizeDelta = new Vector2(Screen.width, Screen.height);
-        EndP.text = "Points: " + Points.ToString();
+        string localized_youscored = (LocalizationManager.Instance != null) ?
+                                $"{LocalizationManager.Instance.GetLocalizedValue("points_earned")} {Points.ToString()} {LocalizationManager.Instance.GetLocalizedValue("points_text")}  \n"
+                                : $"You scored {Points.ToString()} points \n";
+        EndP.text = localized_youscored;
         if(Points > PlayerPrefs.GetInt(ConnectHigh))
         {
-            EndP.text += "\nNew Highscore!";
+            string localized_newHigh = (LocalizationManager.Instance != null) ? LocalizationManager.Instance.GetLocalizedValue("new_highscore_text")
+                                    : "New highscore";
+            EndP.text += localized_newHigh;
             PlayerPrefs.SetInt(ConnectHigh, Points);
         }
         else
         {
-            EndP.text += "\nHighscore: " + PlayerPrefs.GetInt(ConnectHigh).ToString();
+            string localized_highscore = (LocalizationManager.Instance != null) ? $"{LocalizationManager.Instance.GetLocalizedValue("highscore_text")} {PlayerPrefs.GetInt(ConnectHigh).ToString()} \n"
+                                    : $"Highscore {PlayerPrefs.GetInt(ConnectHigh).ToString()}";
+            EndP.text += localized_highscore;
         }
-        GameObject.Find("Continue").GetComponentInChildren<TMP_Text>().text = "Back to menu";  // End Button text set up
 
         GetComponent<Canvas>().enabled = false;
         End.GetComponent<Canvas>().enabled = true;

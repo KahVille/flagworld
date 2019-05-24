@@ -24,10 +24,6 @@ public class FirebaseManager : MonoBehaviour
 
     private ModalPanel modalPanel;
 
-    [SerializeField]
-    private ModalPanel modalPanelPrefab = null;
-
-
     DependencyStatus dependencyStatus = DependencyStatus.UnavailableOther;
     ContactPointCollection myPointData = null;
 

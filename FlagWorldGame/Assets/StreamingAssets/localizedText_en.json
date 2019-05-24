@@ -32,7 +32,7 @@
         {"key":"continent_africa_sorting","value":"Africa"},
         {"key":"points_text","value":"points"},
         {"key":"gwtw_game_over_title","value":"Flag flew away! "},
-        {"key":"quit_button","value":"Quit"},
+        {"key":"quit_button","value":"Back to map"},
         {"key":"loading_data_text","value":"Loading data"},
         {"key":"Network_error_short","value":"Network error"},
         {"key":"Network_error_long","value":"please establish internet connection and try again"},
@@ -46,6 +46,12 @@
         {"key":"gwtw_instruction_short","value":"Swipe from up to down to move the flag up the pole and get to the top!"},
         {"key":"time_text","value":"Time:"},
         {"key":"best_time","value":"Best time:"},
-        {"key":"new_highscore_text","value":"New Highscore"}
+        {"key":"new_highscore_text","value":"New Highscore"},
+        {"key":"you_made","value":"You mde"},
+        {"key":"moves_text","value":"moves"},
+        {"key":"you_opened","value":"You opened"},
+        {"key":"pairs_in","value":"pairs in"},
+        {"key":"points_earned","value":"You scored"},
+        {"key":"new_best_time","value":"New Record"}
     ]
 }
