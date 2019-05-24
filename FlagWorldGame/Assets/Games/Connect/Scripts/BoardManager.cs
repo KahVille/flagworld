@@ -5,6 +5,9 @@ using UnityEngine;
 public class BoardManager : MonoBehaviour
 {
     public static BoardManager instance;
+    public List<Sprite> DoubleCross = new List<Sprite>();
+    public List<Sprite> Finns = new List<Sprite>();
+    public List<Sprite> Dansk = new List<Sprite>();
     public List<Sprite> characters = new List<Sprite>();
     public GameObject tile;
     public int xSize, ySize;
@@ -24,6 +27,7 @@ public class BoardManager : MonoBehaviour
     {
         instance = GetComponent<BoardManager>();
         Vector2 offset = tile.GetComponent<SpriteRenderer>().bounds.size;
+        SetCharacters();
         CreateBoard(offset.x, offset.y);
     }
 
@@ -42,6 +46,21 @@ public class BoardManager : MonoBehaviour
         lastMove = time;
 
         StartCoroutine(Tip());
+    }
+
+    private void SetCharacters()
+    {
+        int rDC = Random.Range(0, DoubleCross.Count);
+        int rF = 0;
+        if (rDC != 2)
+        {
+            rF = Random.Range(0, Finns.Count);
+        }
+        int rD = Random.Range(0, Dansk.Count);
+
+        characters[0] = DoubleCross[rDC];
+        characters[2] = Finns[rF];
+        characters[1] = Dansk[rD];
     }
 
     private IEnumerator Tip()

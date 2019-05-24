@@ -796,12 +796,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40ba580b6881fa543bc5e278b4b09ea7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characters:
-  - {fileID: 21300000, guid: 84c447e63e08545d094c540db6393f2b, type: 3}
-  - {fileID: 21300000, guid: ec4014a2846a54c0cb10b1dd71382222, type: 3}
+  DoubleCross:
+  - {fileID: 21300000, guid: a07f0215c2f124d8ebc922a5f1d2516c, type: 3}
+  - {fileID: 21300000, guid: f43a212a3278e44c48ca11e9c608637c, type: 3}
+  - {fileID: 21300000, guid: c56e6bc1a23f544fbb4a10d78b5dfb8b, type: 3}
+  Finns:
   - {fileID: 21300000, guid: e370497906b984c2986e7b48b75d294b, type: 3}
+  - {fileID: 21300000, guid: 5caf58cc0b72d4bd5b32b97cb68b804b, type: 3}
+  Dansk:
+  - {fileID: 21300000, guid: 3af0ad79888ea467e9abc54f0fe1a423, type: 3}
+  - {fileID: 21300000, guid: 55d2d3ccb167d414486d3a43b59a1160, type: 3}
+  characters:
   - {fileID: 21300000, guid: a07f0215c2f124d8ebc922a5f1d2516c, type: 3}
   - {fileID: 21300000, guid: 3af0ad79888ea467e9abc54f0fe1a423, type: 3}
+  - {fileID: 21300000, guid: e370497906b984c2986e7b48b75d294b, type: 3}
+  - {fileID: 21300000, guid: 84c447e63e08545d094c540db6393f2b, type: 3}
+  - {fileID: 21300000, guid: ec4014a2846a54c0cb10b1dd71382222, type: 3}
   - {fileID: 21300000, guid: 5acf1957e28924050965b92254b11ab8, type: 3}
   - {fileID: 21300000, guid: 047e1f3692d3d493ebb79ff66c33cb48, type: 3}
   tile: {fileID: 4553608736617986036, guid: 55a2e23a96d5d034a9a86499c84b8bee, type: 3}
