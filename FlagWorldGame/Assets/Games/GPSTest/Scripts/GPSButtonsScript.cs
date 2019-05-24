@@ -9,9 +9,9 @@ public class GPSButtonsScript : MonoBehaviour
     public Button menuBtn;
     public GameObject[] buttons;
     [SerializeField]
-    Animator menuAnim;
+    Animator menuAnim = null;
     [SerializeField]
-    Animator optionsAnim;
+    Animator optionsAnim = null;
     CameraMovementGPS cameraMovementScript;
     
 

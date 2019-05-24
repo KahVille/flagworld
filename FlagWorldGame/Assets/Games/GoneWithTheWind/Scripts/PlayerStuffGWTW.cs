@@ -83,6 +83,9 @@ public class PlayerStuffGWTW : MonoBehaviour
         {
             PlayerPrefs.SetFloat("GWTWHigh", 9999.0f);
         }
+        if(PlayerPrefs.GetInt("CurrentGameHigh") == 1) {
+            CallReStart();
+        }
     }
 
     public void CallReStart()
@@ -205,15 +208,24 @@ public class PlayerStuffGWTW : MonoBehaviour
     {
         victoryCanvas.enabled = true;
         //score += 50.0f;
-        victoryPointsTxt.text = "Time: " + score.ToString();
-        if(score < PlayerPrefs.GetFloat("GWTWHigh"))
+        string localized_time = (LocalizationManager.Instance != null) ?
+                                $"{LocalizationManager.Instance.GetLocalizedValue("time_text")} {score.ToString()} \n"
+                                : $"Time {score.ToString()} \n";
+        victoryPointsTxt.text = localized_time;
+        if((score < PlayerPrefs.GetFloat("GWTWHigh")) || (PlayerPrefs.GetFloat("GWTWHigh") == 0))
         {
-            victoryPointsTxt.text += "\nNew best time!";
+            string localized_nNewBestTime = (LocalizationManager.Instance != null) ?
+                                $"{LocalizationManager.Instance.GetLocalizedValue("new_best_time")}"
+                                : $"New best time!";
+            victoryPointsTxt.text += localized_nNewBestTime;
             PlayerPrefs.SetFloat("GWTWHigh", score);
         }
         else
         {
-            victoryPointsTxt.text += "\nBest time: " + PlayerPrefs.GetFloat("GWTWHigh").ToString();
+            string localized_BestTime = (LocalizationManager.Instance != null) ?
+                                $"{LocalizationManager.Instance.GetLocalizedValue("best_time")} {PlayerPrefs.GetFloat("GWTWHigh").ToString()}"
+                                : $"best time!";
+            victoryPointsTxt.text += localized_BestTime;
         }
         //victoryPanel.SetActive(true);
         //scorePanelAnim.SetBool("Move", true);
@@ -232,7 +244,10 @@ public class PlayerStuffGWTW : MonoBehaviour
         
         //gameOverPanel.SetActive(true);
         loseCanvas.enabled = true;
-        losePointsTxt.text = "Points: " + score.ToString();
+        string localized_time = (LocalizationManager.Instance != null) ?
+                                $"{LocalizationManager.Instance.GetLocalizedValue("time_text")} {score.ToString()} \n"
+                                : $"Time {score.ToString()} \n";
+        losePointsTxt.text = localized_time;
         // if(score > PlayerPrefs.GetFloat("GWTWHigh"))
         // {
         //     losePointsTxt.text += "\nNew Highscore!";

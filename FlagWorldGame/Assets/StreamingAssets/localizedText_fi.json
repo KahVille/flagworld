@@ -32,7 +32,7 @@
         {"key":"continent_africa_sorting","value":"Afrikka"},
         {"key":"points_text","value":"pisteet"},
         {"key":"gwtw_game_over_title","value":"Lippu karkasi! "},
-        {"key":"quit_button","value":"Palaa valikkoon"},
+        {"key":"quit_button","value":"Palaa takaisin karttaan"},
         {"key":"loading_data_text","value":"Ladataan dataa"},
         {"key":"Network_error_short","value":"Verkkovirhe"},
         {"key":"Network_error_long","value":"Tarkista internetyhteytesi ole hyvä ja yritä uudelleen."},
@@ -51,6 +51,7 @@
         {"key":"moves_text","value":"siirtoa"},
         {"key":"you_opened","value":"Avasit"},
         {"key":"pairs_in","value":"paria"},
-        {"key":"points_earned","value":"Ansaitsit"}
+        {"key":"points_earned","value":"Ansaitsit"},
+        {"key":"new_best_time","value":"Uusi paras aika"}
     ]
 }

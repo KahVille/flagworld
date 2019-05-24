@@ -30,7 +30,7 @@ public class ModalPanel : MonoBehaviour {
 
 
     [SerializeField]
-    private ModalPanelCanvas modalPanelCanvas;
+    private ModalPanelCanvas modalPanelCanvas = null;
     
     private static ModalPanel modalPanel;
     
