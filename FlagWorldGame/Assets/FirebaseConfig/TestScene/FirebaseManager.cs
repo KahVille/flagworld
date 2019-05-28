@@ -10,12 +10,8 @@ using UnityEngine.Networking;
 //https://forum.unity.com/threads/can-only-be-called-from-the-main-thread.622948/
 // Add System.Threading.Tasks.TaskScheduler.FromCurrentSynchronizationContext()
 
-
 public class FirebaseManager : MonoBehaviour
 {
-
-
-
     [SerializeField]
     private GameObject loadingIndicator = null;
 
@@ -65,12 +61,28 @@ public class FirebaseManager : MonoBehaviour
         SpawnPanel("Firebase Error", "please Reload the game", button1Detail);
     }
 
+    void SpawnUpToDatePanel() {
+        string buttonContinueText = (LocalizationManager.Instance != null) ? LocalizationManager.Instance.GetLocalizedValue("continue_button") : "Continue";
+        string triviaUpToDate = (LocalizationManager.Instance != null) ? LocalizationManager.Instance.GetLocalizedValue("trivia_up_to_date") : "Trivia up to date";
+        loadingIndicator.SetActive(false);
+        EventButtonDetails button1Detail = new EventButtonDetails { buttonTitle = buttonContinueText, action = ContinueSuccess };
+        SpawnPanel(triviaUpToDate, "", button1Detail);
+    }
+
+    void SpawnNewDataDownloadedPanel() {
+        string buttonContinueText = (LocalizationManager.Instance != null) ? LocalizationManager.Instance.GetLocalizedValue("continue_button") : "Continue";
+        string triviaUpToDate = (LocalizationManager.Instance != null) ? LocalizationManager.Instance.GetLocalizedValue("trivia_up_to_date") : "Trivia up to date";
+        string newDataDownloaded = (LocalizationManager.Instance != null) ? LocalizationManager.Instance.GetLocalizedValue("trivia_data_long") : " Trivia new data downloaded";
+        loadingIndicator.SetActive(false);
+        EventButtonDetails button1Detail = new EventButtonDetails { buttonTitle = buttonContinueText, action = ContinueSuccess };
+        SpawnPanel(triviaUpToDate, newDataDownloaded, button1Detail);
+    }
+
     //callbacks for buttons
     void ReloadScene()
     {
         UnityEngine.SceneManagement.SceneManager.LoadScene("MainMenu");
     }
-
 
     void ContinueSuccess() { }
 
@@ -214,11 +226,7 @@ public class FirebaseManager : MonoBehaviour
                     if (myPointData != null)
                     {
                         //trivia up to date
-                        string buttonContinueText = (LocalizationManager.Instance != null) ? LocalizationManager.Instance.GetLocalizedValue("continue_button") : "Continue";
-                        string triviaUpToDate = (LocalizationManager.Instance != null) ? LocalizationManager.Instance.GetLocalizedValue("trivia_up_to_date") : "Trivia up to date";
-                        loadingIndicator.SetActive(false);
-                        EventButtonDetails button1Detail = new EventButtonDetails { buttonTitle = buttonContinueText, action = ContinueSuccess };
-                        SpawnPanel(triviaUpToDate, "", button1Detail);
+                        SpawnUpToDatePanel();
                     }
                 }
             }
@@ -235,18 +243,17 @@ public class FirebaseManager : MonoBehaviour
         {
             if (task.IsCompleted)
             {
-                string buttonContinueText = (LocalizationManager.Instance != null) ? LocalizationManager.Instance.GetLocalizedValue("continue_button") : "Continue";
-                string triviaUpToDate = (LocalizationManager.Instance != null) ? LocalizationManager.Instance.GetLocalizedValue("trivia_up_to_date") : "Trivia up to date";
-                string newDataDownloaded = (LocalizationManager.Instance != null) ? LocalizationManager.Instance.GetLocalizedValue("trivia_data_long") : " Trivia new data downloaded";
-                DataSnapshot snapshot = task.Result;
-                ContactPointCollection contactPoints = new ContactPointCollection();
-                JsonUtility.FromJsonOverwrite(snapshot.GetRawJsonValue(), contactPoints);
-                TriviaSaveLoadSystem.SaveContactPoints(contactPoints);
-                loadingIndicator.SetActive(false);
-                EventButtonDetails button1Detail = new EventButtonDetails { buttonTitle = buttonContinueText, action = ContinueSuccess };
-                SpawnPanel(triviaUpToDate, newDataDownloaded, button1Detail);
+                SaveNewDataToFileFromDatabase(task.Result);
+                SpawnNewDataDownloadedPanel();
             }
         }, System.Threading.Tasks.TaskScheduler.FromCurrentSynchronizationContext());
 #endif
     }
+
+    void SaveNewDataToFileFromDatabase(DataSnapshot snapshot) {
+        ContactPointCollection contactPoints = new ContactPointCollection();
+        JsonUtility.FromJsonOverwrite(snapshot.GetRawJsonValue(), contactPoints);
+        TriviaSaveLoadSystem.SaveContactPoints(contactPoints);
+    }
+
 }
