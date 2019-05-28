@@ -23,7 +23,6 @@ public class FirebaseManager : MonoBehaviour
     DependencyStatus dependencyStatus = DependencyStatus.UnavailableOther;
     ContactPointCollection myPointData = null;
 
-
     //grab instance of panel
     void Awake()
     {
@@ -33,6 +32,12 @@ public class FirebaseManager : MonoBehaviour
     void Start()
     {
         StartFirebase();
+    }
+
+    void SaveNewDataToFileFromDatabase(DataSnapshot snapshot) {
+        ContactPointCollection contactPoints = new ContactPointCollection();
+        JsonUtility.FromJsonOverwrite(snapshot.GetRawJsonValue(), contactPoints);
+        TriviaSaveLoadSystem.SaveContactPoints(contactPoints);
     }
 
     void SpawnPanel(string mainTitle, string titleDescription, EventButtonDetails button1, EventButtonDetails button2 = null, Sprite icon = null)
@@ -49,14 +54,14 @@ public class FirebaseManager : MonoBehaviour
         string buttonRetryText = (LocalizationManager.Instance != null) ? LocalizationManager.Instance.GetLocalizedValue("try_again_button") : " Try Again";
         string networkTextShort = (LocalizationManager.Instance != null) ? LocalizationManager.Instance.GetLocalizedValue("Network_error_short") : " Network error";
         string networkTextLong = (LocalizationManager.Instance != null) ? LocalizationManager.Instance.GetLocalizedValue("Network_error_long") : " please enable network";
-        loadingIndicator.SetActive(false);
+        DisableLoadingIndicator();
         EventButtonDetails button1Detail = new EventButtonDetails { buttonTitle = buttonRetryText, action = RetryConnection };
         SpawnPanel(networkTextShort, networkTextLong, button1Detail, null, networkErrorSprite);
     }
 
     void ShowFirebaseError()
     {
-        loadingIndicator.SetActive(false);
+        DisableLoadingIndicator();
         EventButtonDetails button1Detail = new EventButtonDetails { buttonTitle = "Reload", action = ReloadScene };
         SpawnPanel("Firebase Error", "please Reload the game", button1Detail);
     }
@@ -64,7 +69,7 @@ public class FirebaseManager : MonoBehaviour
     void SpawnUpToDatePanel() {
         string buttonContinueText = (LocalizationManager.Instance != null) ? LocalizationManager.Instance.GetLocalizedValue("continue_button") : "Continue";
         string triviaUpToDate = (LocalizationManager.Instance != null) ? LocalizationManager.Instance.GetLocalizedValue("trivia_up_to_date") : "Trivia up to date";
-        loadingIndicator.SetActive(false);
+        DisableLoadingIndicator();
         EventButtonDetails button1Detail = new EventButtonDetails { buttonTitle = buttonContinueText, action = ContinueSuccess };
         SpawnPanel(triviaUpToDate, "", button1Detail);
     }
@@ -73,9 +78,15 @@ public class FirebaseManager : MonoBehaviour
         string buttonContinueText = (LocalizationManager.Instance != null) ? LocalizationManager.Instance.GetLocalizedValue("continue_button") : "Continue";
         string triviaUpToDate = (LocalizationManager.Instance != null) ? LocalizationManager.Instance.GetLocalizedValue("trivia_up_to_date") : "Trivia up to date";
         string newDataDownloaded = (LocalizationManager.Instance != null) ? LocalizationManager.Instance.GetLocalizedValue("trivia_data_long") : " Trivia new data downloaded";
-        loadingIndicator.SetActive(false);
+        DisableLoadingIndicator();
         EventButtonDetails button1Detail = new EventButtonDetails { buttonTitle = buttonContinueText, action = ContinueSuccess };
         SpawnPanel(triviaUpToDate, newDataDownloaded, button1Detail);
+    }
+
+    void SpawnInEditorWarning() {
+        DisableLoadingIndicator();
+        EventButtonDetails button1Detail = new EventButtonDetails { buttonTitle = "OK I understand", action = ContinueSuccess };
+        SpawnPanel("You run in Editor", "in case of null refrence exception in trivia, please test on a mobile device", button1Detail, null, networkErrorSprite);
     }
 
     //callbacks for buttons
@@ -88,12 +99,20 @@ public class FirebaseManager : MonoBehaviour
 
     //end of callbacks
 
+    void EnableLoadingIndicator(){
+        loadingIndicator.SetActive(true);
+    }
+
+    void DisableLoadingIndicator() {
+        loadingIndicator.SetActive(false);
+    }
+
     public void StartFirebase()
     {
 #if !UNITY_EDITOR
 
         if(PlayerPrefs.GetInt("FirstTimeCompleted") == 1){
-        loadingIndicator.SetActive(true);
+        EnableLoadingIndicator();
         }
 
         FirebaseApp.CheckAndFixDependenciesAsync().ContinueWith(task =>
@@ -110,9 +129,7 @@ public class FirebaseManager : MonoBehaviour
         }, System.Threading.Tasks.TaskScheduler.FromCurrentSynchronizationContext());
 
 #elif UNITY_EDITOR
-        loadingIndicator.SetActive(false);
-        EventButtonDetails button1Detail = new EventButtonDetails { buttonTitle = "OK I understand", action = ContinueSuccess };
-        SpawnPanel("You run in Editor", "in case of null refrence exception in trivia, please test on a mobile device", button1Detail, null, networkErrorSprite);
+        SpawnInEditorWarning();
 #endif
     }
 
@@ -127,7 +144,7 @@ public class FirebaseManager : MonoBehaviour
         }
         else
         {
-            loadingIndicator.SetActive(false);
+            DisableLoadingIndicator();
             if(PlayerPrefs.GetInt("FirstTimeCompleted") == 1){
                 RetryConnection();
             }
@@ -164,7 +181,7 @@ public class FirebaseManager : MonoBehaviour
     {
 #if !UNITY_EDITOR
         //continue download proggress
-        loadingIndicator.SetActive(true);
+        EnableLoadingIndicator();
         StartCoroutine(checkInternetConnection((isConnected) =>
         {
             //set button to download or retry connectetion based on the network state
@@ -182,7 +199,7 @@ public class FirebaseManager : MonoBehaviour
 
     public void DownloadWithNewLanguage() {
         #if !UNITY_EDITOR
-        loadingIndicator.SetActive(true);
+        EnableLoadingIndicator();
         if (!IsNetworkReachable())
         {
             ShowNetworkError();
@@ -201,7 +218,7 @@ public class FirebaseManager : MonoBehaviour
     public void CheckDatabaseVersion()
     {
 #if !UNITY_EDITOR
-        loadingIndicator.SetActive(true);
+        EnableLoadingIndicator();
         string currentDatabaseVersion = PlayerPrefs.GetString("database_version");
         FirebaseDatabase.DefaultInstance
         .GetReference("database_version")
@@ -248,12 +265,6 @@ public class FirebaseManager : MonoBehaviour
             }
         }, System.Threading.Tasks.TaskScheduler.FromCurrentSynchronizationContext());
 #endif
-    }
-
-    void SaveNewDataToFileFromDatabase(DataSnapshot snapshot) {
-        ContactPointCollection contactPoints = new ContactPointCollection();
-        JsonUtility.FromJsonOverwrite(snapshot.GetRawJsonValue(), contactPoints);
-        TriviaSaveLoadSystem.SaveContactPoints(contactPoints);
     }
 
 }
