@@ -15,7 +15,8 @@ public class MainMenuScript : MonoBehaviour
 
     public void ClickGames()
     {
-        GetComponent<Canvas>().enabled = false;
-        Games.enabled = true;
+        //GetComponent<Canvas>().enabled = false;
+        //Games.enabled = true;
+        UnityEngine.SceneManagement.SceneManager.LoadScene("GPSTest");
     }
 }
