@@ -2562,11 +2562,11 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 0
+  m_havePropertiesChanged: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 0
+  m_isInputParsingRequired: 1
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_subTextObjects:
@@ -3593,11 +3593,11 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 0
+  m_havePropertiesChanged: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 0
+  m_isInputParsingRequired: 1
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_subTextObjects:
@@ -3948,11 +3948,11 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 0
+  m_havePropertiesChanged: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 0
+  m_isInputParsingRequired: 1
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_subTextObjects:
@@ -4088,8 +4088,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Thing: {fileID: 5855209762141287846, guid: 540b5418b692bdd4ba1d16096a8e645b, type: 3}
   playTime: 30
-  Correct: {fileID: 8300000, guid: de63df775def9c9428c78ce769138ff7, type: 3}
-  Wrong: {fileID: 8300000, guid: 4a8a96e5e5374d34a8a99d42a6fe283b, type: 3}
+  Correct: {fileID: 8300000, guid: 1129671648421494ba65577e8f38d798, type: 3}
+  Wrong: {fileID: 8300000, guid: db97e11befe76d147b86aeb05a99ba20, type: 3}
   timerClockScript: {fileID: 0}
 --- !u!4 &2146315941
 Transform:

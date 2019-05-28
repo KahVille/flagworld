@@ -17,22 +17,18 @@ public class InputLajittelu : MonoBehaviour {
 	void Update () {
         if (SW.SwipeLeft)
         {
-            Debug.Log("Left");
             SO.GetComponent<Rigidbody2D>().velocity = new Vector2(-Speed, 0);
         }
         else if (SW.SwipeRight)
         {
-            Debug.Log("Right");
             SO.GetComponent<Rigidbody2D>().velocity = new Vector2(Speed, 0);
         }
         else if (SW.SwipeUp)
         {
-            Debug.Log("Up");
             SO.GetComponent<Rigidbody2D>().velocity = new Vector2(0, Speed + 5);
         }
         else if (SW.SwipeDown)
         {
-            Debug.Log("Down");
             SO.GetComponent<Rigidbody2D>().velocity = new Vector2(0, -Speed - 5);
         }
 	}
