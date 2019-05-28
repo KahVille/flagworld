@@ -71,6 +71,9 @@ public class GPSScript : MonoBehaviour
     // GPSButtonsScript ref to hide and show buttons during pop up
     GPSButtonsScript gpsBtnScript;
 
+    //Reference the contact points that are downloaded from the locally stored database file.
+     ContactPointCollection contactPoints = null;
+
     // Start is called before the first frame update
     IEnumerator Start()
     {
@@ -247,16 +250,41 @@ public class GPSScript : MonoBehaviour
     {
         Debug.Log(locationIndex);
         if(lastLocation != null)
-            Debug.Log("LAST LOCATION: " + lastLocation.title);
-        Debug.Log("LOCINDEX LOCATION: " + locations[locationIndex].title);
+            Debug.Log("LAST LOCATION: " + lastLocation.name);
+        Debug.Log("LOCINDEX LOCATION: " + locations[locationIndex].name);
+
+
+        //load info from a file
+        contactPoints = TriviaSaveLoadSystem.LoadContactPoints();
+        
+        if (contactPoints == null)
+        {
+            Debug.LogError("Contact points are null");
+        }
+
+        ContactPoint currentLocationData=null;
+
+        for (int i = 0; i < contactPoints.points.Length; i++)
+        {
+            if( contactPoints.points[i].identifier.ToString() == locations[locationIndex].identifier) {
+                currentLocationData = contactPoints.points[i];
+                break;
+            }
+        }
+        
+        bool contactPointValidation = (contactPoints !=null && locationIndex <= contactPoints.points.Length && currentLocationData !=null);
+        string locationNameFromFile = (contactPointValidation) ? currentLocationData.name : locations[locationIndex].name;
+        string locationDescriptionFromFile = (contactPointValidation) ? currentLocationData.description : locations[locationIndex].description;
+
+        
 
         // Open pop-up and show correct info
         infoPanelObj.GetComponent<DisableScript>().enabled = false;
         infoPanelObj.SetActive(true);
         gpsBtnScript.HideOrShowButtons(true);
         infoAnim.SetBool("ShowPanel", true);
-        locationTitleText.text = locations[locationIndex].title;
-        locationDescText.text = locations[locationIndex].description;
+        locationTitleText.text = locationNameFromFile;
+        locationDescText.text = locationDescriptionFromFile;
 
         // Set listener for play button
         playBtn.onClick.AddListener(delegate {PushPlayBtn(locBtns[locationIndex].transform.name);});

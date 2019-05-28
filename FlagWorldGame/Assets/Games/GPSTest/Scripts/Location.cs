@@ -11,7 +11,7 @@ public class Location
     public double latitude;
     public double rangeDistance;
     public Image image;
-    public string title;
+    public string identifier;
     [TextArea]
     public string description;
 }
