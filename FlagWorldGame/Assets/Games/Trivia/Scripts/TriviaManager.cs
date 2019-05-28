@@ -2,9 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
+
 public class TriviaManager : MonoBehaviour
 {
+
+
+    [SerializeField]
+    private UITriviaCanvas triviaCanvas = null;
 
     ContactPointCollection contactPoints;
     private int currentContactPointIndex=1;
@@ -20,24 +24,19 @@ public class TriviaManager : MonoBehaviour
     [Header("Question UI")]
 
     [SerializeField]
-    private Canvas contiueAndRestartCanvas = null;
-
-    [SerializeField]
     private UIQuestionCanvas questionCanvas = null;
-
-    [SerializeField]
-    private GameObject eventSystem = null;
-
-    [SerializeField]
-    private GameObject loadingIndicator = null;
 
     [SerializeField]
     UIScoreText scoreText = null;
 
-     private ModalPanel modalPanel;
+    private ModalPanel modalPanel;
 
     void Awake () {
         modalPanel = ModalPanel.Instance();
+    }
+
+    private void SetScoreText() {
+        scoreText.SetTextToDisplay($"{currentQuestionNumber +1 } / {questions.Length}");
     }
 
     public void ShowPanel(string title = null, string desc=null) {
@@ -58,16 +57,16 @@ public class TriviaManager : MonoBehaviour
     
     IEnumerator Start()
     {
-        loadingIndicator.SetActive(true);
+        triviaCanvas.EnableLoadIndicator();
         contactPoints = TriviaSaveLoadSystem.LoadContactPoints();
         if (contactPoints == null)
         { 
-            loadingIndicator.SetActive(false);
+            triviaCanvas.DisableLoadIndicator();
             //spawnDialog where user needs to go back to menu
             ShowPanel("Error","contactPoint data is null");
         }
         else {
-          loadingIndicator.SetActive(false);   
+         triviaCanvas.DisableLoadIndicator();
         //id that is inside the contact point;contactpoint.identifier
         currentContactPointIndex = SelectContactPointIndex(PlayerPrefs.GetInt("CurrentLocationIdentifier", 0));
         DisplayCurrentQuestionAndEnableCanvas();
@@ -80,8 +79,8 @@ public class TriviaManager : MonoBehaviour
     {
         questions = contactPoints.points[currentContactPointIndex].questions;
         currentQuestion = questions[currentQuestionNumber];
-        questionCanvas.gameObject.SetActive(true);
-        scoreText.SetTextToDisplay($"{currentQuestionNumber +1 } / {questions.Length}");
+        EnableQuestionCanvas();
+        SetScoreText();
         questionCanvas.setNewQuestionUI(currentQuestion);
     }
 
@@ -98,27 +97,25 @@ public class TriviaManager : MonoBehaviour
     //called on button animation finnished
     public void MoveToNextQuestion()
     {
-        eventSystem.SetActive(true);
+        triviaCanvas.EnableEventSystem();
         if (!LoadNewQuestion())
         {
             Debug.Log("end of round");
             //load end of trivia round canvas
             HideQuestionCanvas();
-            int roundScore = questionCanvas.GetComponent<UIQuestionCanvas>().GetScore();
+            int roundScore = questionCanvas.GetScore();
             int numberOfQuestions = questions.Length;
-            ShowContiueAndRestartCanvas(roundScore, numberOfQuestions);
+            triviaCanvas.ShowContiueAndRestartCanvas(roundScore, numberOfQuestions);
         }
-    }
-
-    private void ShowContiueAndRestartCanvas(int roundScore, int numberOfQuestions)
-    {
-        contiueAndRestartCanvas.enabled = true;
-        contiueAndRestartCanvas.GetComponent<UIContinueAndRestartCanvas>().SetTriviaScoreText(roundScore,numberOfQuestions);
     }
 
     private void HideQuestionCanvas()
     {
-        questionCanvas.gameObject.SetActive(false);
+        triviaCanvas.DisableQuestionCanvas();
+    }
+
+    private void EnableQuestionCanvas() {
+        triviaCanvas.EnableQuestionCanvas();
     }
 
     //load the next question from the question pool
@@ -128,7 +125,7 @@ public class TriviaManager : MonoBehaviour
         {
             currentQuestionNumber += 1;
             currentQuestion = questions[currentQuestionNumber];
-            scoreText.SetTextToDisplay($"{currentQuestionNumber +1 } / {questions.Length}");
+            SetScoreText();
             questionCanvas.setNewQuestionUI(currentQuestion);
             return true;
         }

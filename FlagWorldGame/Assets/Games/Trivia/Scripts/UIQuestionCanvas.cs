@@ -5,7 +5,6 @@ using UnityEngine;
 public class UIQuestionCanvas : MonoBehaviour
 {
 
-
     private QuestionData currentQuestion = null;
 
     [SerializeField]
@@ -41,7 +40,7 @@ public class UIQuestionCanvas : MonoBehaviour
             //set Text only Question
             EnableButtonAndSetQuestionTextButtons(currentQuestion.answers);
         }
-        questionTextUI.SetQuestionText(currentQuestion.questionText + "?");
+        questionTextUI.SetQuestionText(currentQuestion.questionText);
     }
 
     public void OnUIAnswerButtonPressed(int option)
