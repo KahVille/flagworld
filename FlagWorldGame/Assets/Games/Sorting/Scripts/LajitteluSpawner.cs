@@ -151,4 +151,9 @@ public class LajitteluSpawner : MonoBehaviour
     {
         return HardMode;
     }
+
+    public void ClickStop()
+    {
+        playTime = 0;
+    }
 }

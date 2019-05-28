@@ -142,4 +142,9 @@ public class ConnectHUD : MonoBehaviour
         yield return new WaitForSeconds(0.01f);
         ClickStart();
     }
+
+    public void ClickStop()
+    {
+        timeLeft = 0;
+    }
 }
