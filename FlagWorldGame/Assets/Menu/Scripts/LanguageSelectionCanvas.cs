@@ -45,13 +45,13 @@ LocalizationManager localeManager = null;
 
             case LanguageUtility.Language.Finnish:
             selectedColors[0].enabled = true;
-            PlayerPrefs.SetInt("Language", (int)selected);
+            LanguageUtility.SetCurrentLanguage((int)selected);
             localeManager.LoadLocale("localizedText_fi.json");
             break;
 
             case LanguageUtility.Language.English:
             selectedColors[1].enabled = true;
-            PlayerPrefs.SetInt("Language", (int)selected);
+            LanguageUtility.SetCurrentLanguage((int)selected);
             localeManager.LoadLocale("localizedText_en.json");
             break;
             

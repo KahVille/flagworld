@@ -15,4 +15,8 @@ public static class LanguageUtility
         return PlayerPrefs.GetInt("Language");
     }
 
+    public static void SetCurrentLanguage(int currentLaguage) {
+        PlayerPrefs.SetInt("Language", currentLaguage);
+    }
+
 }

@@ -28,9 +28,6 @@ public class FirebaseManager : MonoBehaviour
     ContactPointCollection myPointData = null;
 
 
-
-
-
     //grab instance of panel
     void Awake()
     {
@@ -181,7 +178,7 @@ public class FirebaseManager : MonoBehaviour
         }
         #endif
 
-        if(PlayerPrefs.GetInt("Language") == ((int) LanguageUtility.Language.Finnish)) {
+        if(LanguageUtility.GetCurrentLanguage() == ((int) LanguageUtility.Language.Finnish)) {
             DownloadDataFromDatabase("finnish_language");
         }
         else {
