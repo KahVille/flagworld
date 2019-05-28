@@ -3568,11 +3568,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: AnswerButton
       objectReference: {fileID: 0}
-    - target: {fileID: 3734300143598425028, guid: 317c358f0cedf4f729a412990fd31f91,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3734300143598425019, guid: 317c358f0cedf4f729a412990fd31f91,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3678,46 +3673,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 3734300143598425018, guid: 317c358f0cedf4f729a412990fd31f91,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3734300143598425018, guid: 317c358f0cedf4f729a412990fd31f91,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1244766479}
-    - target: {fileID: 3734300143598425018, guid: 317c358f0cedf4f729a412990fd31f91,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: OnUIAnswerButtonPressed
-      objectReference: {fileID: 0}
-    - target: {fileID: 3734300143598425018, guid: 317c358f0cedf4f729a412990fd31f91,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 3734300143598425018, guid: 317c358f0cedf4f729a412990fd31f91,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3734300143598425018, guid: 317c358f0cedf4f729a412990fd31f91,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
-      value: 
-      objectReference: {fileID: 1339976597}
-    - target: {fileID: 3734300143598425018, guid: 317c358f0cedf4f729a412990fd31f91,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: SetActive
-      objectReference: {fileID: 0}
-    - target: {fileID: 3734300143598425018, guid: 317c358f0cedf4f729a412990fd31f91,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
     - target: {fileID: 3734300144735559105, guid: 317c358f0cedf4f729a412990fd31f91,
         type: 3}
       propertyPath: m_havePropertiesChanged
@@ -3726,11 +3681,6 @@ PrefabInstance:
     - target: {fileID: 3734300144735559105, guid: 317c358f0cedf4f729a412990fd31f91,
         type: 3}
       propertyPath: m_isInputParsingRequired
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5114221241422805325, guid: 317c358f0cedf4f729a412990fd31f91,
-        type: 3}
-      propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []

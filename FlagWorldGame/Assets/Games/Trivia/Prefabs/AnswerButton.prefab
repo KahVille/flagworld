@@ -39,7 +39,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -270, y: 8}
-  m_SizeDelta: {x: 400, y: 200}
+  m_SizeDelta: {x: 595, y: 188}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3734300143598425016
 CanvasRenderer:
@@ -62,14 +62,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.8745099, g: 0.6431373, b: 0.15686275, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: cae4050b8048d4da686626465ccdf9b4, type: 3}
+  m_Sprite: {fileID: 21300000, guid: fea5ac9d64c5046afb5035e064e05441, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -163,7 +163,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   answerText: {fileID: 3734300144735559105}
-  defaultSprite: {fileID: 21300000, guid: cae4050b8048d4da686626465ccdf9b4, type: 3}
+  defaultSprite: {fileID: 21300000, guid: fea5ac9d64c5046afb5035e064e05441, type: 3}
 --- !u!1 &3734300144735559107
 GameObject:
   m_ObjectHideFlags: 0
