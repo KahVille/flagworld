@@ -100,12 +100,10 @@ public class TriviaManager : MonoBehaviour
         triviaCanvas.EnableEventSystem();
         if (!LoadNewQuestion())
         {
-            Debug.Log("end of round");
             //load end of trivia round canvas
+            Debug.Log("end of round");
             HideQuestionCanvas();
-            int roundScore = questionCanvas.GetScore();
-            int numberOfQuestions = questions.Length;
-            triviaCanvas.ShowContiueAndRestartCanvas(roundScore, numberOfQuestions);
+            triviaCanvas.ShowContiueAndRestartCanvas(questionCanvas.GetScore(), questions.Length);
         }
     }
 
@@ -135,7 +133,6 @@ public class TriviaManager : MonoBehaviour
         }
 
     }
-
 
     // for testing purposes only
     private QuestionData[] SetDummyRoundData()
