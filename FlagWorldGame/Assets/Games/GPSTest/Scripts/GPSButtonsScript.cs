@@ -6,6 +6,8 @@ using UnityEngine.UI;
 public class GPSButtonsScript : MonoBehaviour
 {
     public Button exitBtn;
+    public Button menuBackBtn;
+    public Button optionsBackBtn;
     public Button menuBtn;
     public GameObject[] buttons;
     [SerializeField]
@@ -51,25 +53,26 @@ public class GPSButtonsScript : MonoBehaviour
     // This happens when menu is shown.
     public void FromBackToMainMenuToCloseMenu()
     {
+        exitBtn.GetComponent<Animator>().SetBool("Show", false);
         cameraMovementScript.CanMove = false;
         exitBtn.onClick.RemoveAllListeners();
-        exitBtn.onClick.AddListener(delegate { exitBtn.GetComponent<UIExitBtnScript>().CloseMenu(menuAnim); });
+        menuBackBtn.onClick.AddListener(delegate { menuBackBtn.GetComponent<UIExitBtnScript>().CloseMenu(menuAnim); });
         menuAnim.SetBool("ShowPanel", true);
     }
 
     // Called when going back from submenu to menu
     public void FromSubToMain()
     {
-        exitBtn.onClick.RemoveAllListeners();
-        exitBtn.onClick.AddListener(delegate { exitBtn.GetComponent<UIExitBtnScript>().CloseMenu(menuAnim); });
+        optionsBackBtn.onClick.RemoveAllListeners();
+        menuBackBtn.onClick.AddListener(delegate { menuBackBtn.GetComponent<UIExitBtnScript>().CloseMenu(menuAnim); });
     }
 
 
     // Need to give the options-panel animator for the exitBtn.
     public void FromCloseMenuToCloseOptions()
     {
-        exitBtn.onClick.RemoveAllListeners();
-        exitBtn.onClick.AddListener(delegate { exitBtn.GetComponent<UIExitBtnScript>().CloseMenu(optionsAnim); });
+        menuBackBtn.onClick.RemoveAllListeners();
+        optionsBackBtn.onClick.AddListener(delegate { optionsBackBtn.GetComponent<UIExitBtnScript>().CloseMenu(optionsAnim); });
         optionsAnim.SetBool("ShowPanel", true);
     }
 

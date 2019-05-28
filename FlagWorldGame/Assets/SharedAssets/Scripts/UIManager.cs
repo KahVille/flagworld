@@ -20,6 +20,15 @@ public class UIManager : MonoBehaviour
         Application.Quit();
     }
 
+    // Delete all High score keys
+    public void DeleteAllHighscores()
+    {
+        PlayerPrefs.DeleteKey("GWTWHigh");
+        PlayerPrefs.DeleteKey("SortingHigh");
+        PlayerPrefs.DeleteKey("MemoryHigh");
+        PlayerPrefs.DeleteKey("ConnectHigh");
+    }
+
     // Delete gwtw playerpref key
     public void DeletThis()
     {

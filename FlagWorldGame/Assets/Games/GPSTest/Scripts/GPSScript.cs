@@ -73,6 +73,8 @@ public class GPSScript : MonoBehaviour
 
     //Reference the contact points that are downloaded from the locally stored database file.
      ContactPointCollection contactPoints = null;
+    // Panel for telling that the player is not in are
+    public GameObject notInAreaPanel;
 
     // Start is called before the first frame update
     IEnumerator Start()
@@ -318,8 +320,22 @@ public class GPSScript : MonoBehaviour
     // What happens when the player pushes the trivia button
     void PushTriviaBtn(int locIndex)
     {
-        SetCurrentContactPointForTrivia(locations[locIndex].name);
-        UnityEngine.SceneManagement.SceneManager.LoadScene("Trivia",UnityEngine.SceneManagement.LoadSceneMode.Single);
+        if(lastLocation.name == locations[locIndex].name && canOpenMenu)
+        {
+            SetCurrentContactPointForTrivia(locations[locIndex].name);
+            UnityEngine.SceneManagement.SceneManager.LoadScene("Trivia",UnityEngine.SceneManagement.LoadSceneMode.Single);
+        }
+        else
+        {
+            StartCoroutine(ShowNotInAreaPanel());
+        }
+    }
+
+    IEnumerator ShowNotInAreaPanel()
+    {
+        notInAreaPanel.SetActive(true);
+        yield return new WaitForSeconds(3f);
+        notInAreaPanel.SetActive(false);
     }
 
     // Hide the popup panel
