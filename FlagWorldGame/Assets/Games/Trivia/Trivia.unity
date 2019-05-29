@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.373132, g: 0.3807496, b: 0.3587258, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311947, g: 0.38074005, b: 0.35872722, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -672,7 +672,7 @@ PrefabInstance:
     - target: {fileID: 3734300143598425018, guid: 317c358f0cedf4f729a412990fd31f91,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
-      value: 6
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3734300143598425018, guid: 317c358f0cedf4f729a412990fd31f91,
         type: 3}
@@ -683,11 +683,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 1339976597}
+      objectReference: {fileID: 1701686455}
     - target: {fileID: 3734300143598425018, guid: 317c358f0cedf4f729a412990fd31f91,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: SetActive
+      value: DisableEventSystem
       objectReference: {fileID: 0}
     - target: {fileID: 3734300143598425018, guid: 317c358f0cedf4f729a412990fd31f91,
         type: 3}
@@ -1052,7 +1052,7 @@ PrefabInstance:
     - target: {fileID: 3734300143598425018, guid: 317c358f0cedf4f729a412990fd31f91,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
-      value: 6
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3734300143598425018, guid: 317c358f0cedf4f729a412990fd31f91,
         type: 3}
@@ -1063,11 +1063,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 1339976597}
+      objectReference: {fileID: 1701686455}
     - target: {fileID: 3734300143598425018, guid: 317c358f0cedf4f729a412990fd31f91,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: SetActive
+      value: DisableEventSystem
       objectReference: {fileID: 0}
     - target: {fileID: 3734300143598425018, guid: 317c358f0cedf4f729a412990fd31f91,
         type: 3}
@@ -1953,7 +1953,7 @@ PrefabInstance:
     - target: {fileID: 3734300143598425018, guid: 317c358f0cedf4f729a412990fd31f91,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
-      value: 6
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3734300143598425018, guid: 317c358f0cedf4f729a412990fd31f91,
         type: 3}
@@ -1964,11 +1964,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 1339976597}
+      objectReference: {fileID: 1701686455}
     - target: {fileID: 3734300143598425018, guid: 317c358f0cedf4f729a412990fd31f91,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: SetActive
+      value: DisableEventSystem
       objectReference: {fileID: 0}
     - target: {fileID: 3734300143598425018, guid: 317c358f0cedf4f729a412990fd31f91,
         type: 3}
@@ -3672,6 +3672,46 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3734300143598425018, guid: 317c358f0cedf4f729a412990fd31f91,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3734300143598425018, guid: 317c358f0cedf4f729a412990fd31f91,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1244766479}
+    - target: {fileID: 3734300143598425018, guid: 317c358f0cedf4f729a412990fd31f91,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnUIAnswerButtonPressed
+      objectReference: {fileID: 0}
+    - target: {fileID: 3734300143598425018, guid: 317c358f0cedf4f729a412990fd31f91,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3734300143598425018, guid: 317c358f0cedf4f729a412990fd31f91,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3734300143598425018, guid: 317c358f0cedf4f729a412990fd31f91,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 1701686455}
+    - target: {fileID: 3734300143598425018, guid: 317c358f0cedf4f729a412990fd31f91,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: DisableEventSystem
+      objectReference: {fileID: 0}
+    - target: {fileID: 3734300143598425018, guid: 317c358f0cedf4f729a412990fd31f91,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 3734300144735559105, guid: 317c358f0cedf4f729a412990fd31f91,
         type: 3}
