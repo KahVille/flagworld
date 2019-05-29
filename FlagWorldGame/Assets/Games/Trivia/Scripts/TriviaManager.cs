@@ -61,9 +61,15 @@ public class TriviaManager : MonoBehaviour
         contactPoints = TriviaSaveLoadSystem.LoadContactPoints();
         if (contactPoints == null)
         { 
+            //unity error
             triviaCanvas.DisableLoadIndicator();
-            //spawnDialog where user needs to go back to menu
-            ShowPanel("Error","contactPoint data is null");
+            Debug.LogWarning("you propably run in editor use place holder questions");
+            questions = SetDummyRoundData();
+            currentQuestion = questions[currentQuestionNumber];
+            EnableQuestionCanvas();
+            SetScoreText();
+            questionCanvas.setNewQuestionUI(currentQuestion);
+
         }
         else {
          triviaCanvas.DisableLoadIndicator();

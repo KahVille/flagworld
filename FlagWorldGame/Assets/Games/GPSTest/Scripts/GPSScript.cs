@@ -256,20 +256,19 @@ public class GPSScript : MonoBehaviour
 
         //load info from a file
         contactPoints = TriviaSaveLoadSystem.LoadContactPoints();
-        
+        ContactPoint currentLocationData = null;
         if (contactPoints == null)
         {
-            Debug.LogError("Contact points are null");
+            Debug.LogWarning("You propably run in editor. Contact points are null");
         }
-
-        ContactPoint currentLocationData=null;
-
+        else {
         for (int i = 0; i < contactPoints.points.Length; i++)
         {
             if( contactPoints.points[i].identifier.ToString() == locations[locationIndex].identifier) {
                 currentLocationData = contactPoints.points[i];
                 break;
             }
+        }
         }
         
         bool contactPointValidation = (contactPoints !=null && locationIndex <= contactPoints.points.Length && currentLocationData !=null);
