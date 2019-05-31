@@ -75,6 +75,7 @@ public class GPSScript : MonoBehaviour
      ContactPointCollection contactPoints = null;
     // Panel for telling that the player is not in are
     public GameObject notInAreaPanel;
+    CameraMovementGPS cameraMovementScript;
 
     // Start is called before the first frame update
     IEnumerator Start()
@@ -99,8 +100,10 @@ public class GPSScript : MonoBehaviour
         cameraStartPos.z = -10f;
         Camera.main.transform.position = cameraStartPos;
 
+        cameraMovementScript = FindObjectOfType<CameraMovementGPS>();
+
         // Set correct desiredPosition in camera movement script
-        FindObjectOfType<CameraMovementGPS>().SetStartDesiredPosition(cameraStartPos);
+        cameraMovementScript.SetStartDesiredPosition(cameraStartPos);
 
         // Get map image corners's world positions to mapCorners array
         mapImage.GetComponent<RectTransform>().GetWorldCorners(mapCorners);
@@ -255,6 +258,7 @@ public class GPSScript : MonoBehaviour
             Debug.Log("LAST LOCATION: " + lastLocation.name);
         Debug.Log("LOCINDEX LOCATION: " + locations[locationIndex].name);
 
+        cameraMovementScript.CanMove = false;
 
         //load info from a file
         contactPoints = TriviaSaveLoadSystem.LoadContactPoints();
@@ -453,6 +457,18 @@ public class GPSScript : MonoBehaviour
         }
     }
 
+    bool IsPlayerInsideMap()
+    {
+        if(longitude < bottomLeftLongitude || longitude > bottomRightLongitude || latitude > topRightLatitude || latitude < bottomLeftLatitude)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
+
     void UpdatePlayerIndicator()
     {
         double x1 = longitude - topLeftLongitude;
@@ -477,12 +493,17 @@ public class GPSScript : MonoBehaviour
         // logIndex = 0;
         while(tracking)
         {
+            if(!IsPlayerInsideMap())
+            {
+                // If the player isn't within map, disable GPS
+                //StopGPS();
+            }
             Debug.Log("UPDATELOC: " + isInitializing);
             #if (UNITY_ANDROID || UNITY_IOS) && !UNITY_EDITOR
             longitude = Input.location.lastData.longitude;
 			latitude = Input.location.lastData.latitude;
             CheckClosestLoc();
-            UpdatePlayerIndicator();
+            UpdatePlayerIndicator();  
 
             // DebugWriteMapData();
             // if(lastDistance < rangeDistance)
