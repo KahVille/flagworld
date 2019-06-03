@@ -12,7 +12,7 @@ public class UIManager : MonoBehaviour
     public void LoadMenu()
     {
         PlayerPrefs.SetInt("CurrentGameHigh", 0);
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene("GPSTest");
     }
 
     public void QuitGame()

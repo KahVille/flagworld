@@ -113,7 +113,7 @@ public class ConnectHUD : MonoBehaviour
     public void ClickContinue()
     {
         PlayerPrefs.SetInt(CurrentGameHigh, 0);
-        SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
+        SceneManager.LoadScene("GPSTest", LoadSceneMode.Single);
     }
 
     public void ClickStart()

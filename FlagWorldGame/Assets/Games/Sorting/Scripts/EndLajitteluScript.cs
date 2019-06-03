@@ -43,7 +43,7 @@ public class EndLajitteluScript : MonoBehaviour {
 
     public void ClickContinue()
     {
-        SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
+        SceneManager.LoadScene("GPSTest", LoadSceneMode.Single);
     }
 
     public void NewGame()

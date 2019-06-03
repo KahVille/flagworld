@@ -23,13 +23,13 @@ public class ReturnButtonScript : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape)) 
         {
-            if(SceneManager.GetActiveScene().name == "MainMenu")
+            if(SceneManager.GetActiveScene().name == "MainMenu" || SceneManager.GetActiveScene().name == "GPSTest")
             {
                 Application.Quit();
             }
             else
             {
-                SceneManager.LoadScene("MainMenu");
+                SceneManager.LoadScene("GPSTest");
             }
         }
     }
