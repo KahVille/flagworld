@@ -544,6 +544,7 @@ public class GPSScript : MonoBehaviour
         switch (currentLocationName)
         {
             case "Koulu":
+            PlayerPrefs.SetInt("TriviaAllRandom", 1);
             PlayerPrefs.SetInt("CurrentLocationIdentifier", 2);
             break;
             case "Suomenlipuntie":
