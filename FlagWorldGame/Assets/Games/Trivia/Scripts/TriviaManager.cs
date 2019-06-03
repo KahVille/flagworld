@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 public class TriviaManager : MonoBehaviour
 {
 
+    [SerializeField]
+    int maxQuestions = 2;
 
     [SerializeField]
     private UITriviaCanvas triviaCanvas = null;
@@ -94,10 +96,19 @@ public class TriviaManager : MonoBehaviour
     private void DisplayCurrentQuestionAndEnableCanvas()
     {
 
-
-
         questions = contactPoints.points[currentContactPointIndex].questions;
         SuffleQuestionOrder(ref questions);
+
+        //limit the questions to number of max questions
+        if(questions.Length > maxQuestions) {
+            QuestionData[] tmp = new QuestionData[3];
+            for (int i = 0; i < maxQuestions; i++)
+            {
+              tmp[i] = questions[i];  
+            }
+            questions = tmp;
+        }
+
         currentQuestion = questions[currentQuestionNumber];
         EnableQuestionCanvas();
         SetScoreText();
