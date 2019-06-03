@@ -237,4 +237,9 @@ public class CameraMovementGPS : MonoBehaviour
         yield return new WaitForSeconds(0.2f);
         canMove = true;
     }
+
+    public void SetCanMove(bool newCanMove)
+    {
+        canMove = newCanMove;
+    }
 }

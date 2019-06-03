@@ -11,6 +11,7 @@ public class ButtonImageToggle : MonoBehaviour
     public Sprite offImg;
     public Sprite onImg;
 
+    // This is used for mute button
     public void ToggleButtonImg()
     {
         if(changeImg.sprite == offImg)

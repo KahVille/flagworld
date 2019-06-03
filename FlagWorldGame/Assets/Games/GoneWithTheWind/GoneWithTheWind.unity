@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.373132, g: 0.3807496, b: 0.3587258, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311992, g: 0.38074034, b: 0.35872713, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3497,7 +3497,7 @@ MonoBehaviour:
   topOfPole: {fileID: 965997176}
   bottomOfPole: {fileID: 1604298029}
   smoothTime: 0.1
-  hpDecayMult: 50
+  hpDecayMult: 100
   flagHPSlider: {fileID: 1337859577}
   flagMat: {fileID: 0}
   windCol: {fileID: 33686056}
