@@ -130,7 +130,6 @@ public class PlayerStuffGWTW : MonoBehaviour
         score += Time.deltaTime;
         scoreText.text = score.ToString("F2");
 
-        // Move this to flagCollision
         if(windy)
         {
             if(flagMat.GetFloat("_WaveSpeed") < 100f)
