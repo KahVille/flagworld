@@ -7,6 +7,8 @@ TagManager:
   - Sortable
   - Tile
   - Bird
+  - Wind
+  - Exit
   layers:
   - Default
   - TransparentFX

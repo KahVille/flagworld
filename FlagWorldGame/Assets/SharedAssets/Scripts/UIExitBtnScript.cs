@@ -24,6 +24,7 @@ public class UIExitBtnScript : MonoBehaviour
         {
             FindObjectOfType<CameraMovementGPS>().CanMove = true;
             FindObjectOfType<GPSButtonsScript>().FromCloseMenuToBackToMainMenu();
+            GameObject.FindGameObjectWithTag("Exit").GetComponent<Animator>().SetBool("Show", true);
         }
         menu.SetBool("ShowPanel", false);
     }
