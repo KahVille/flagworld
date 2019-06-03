@@ -8,6 +8,8 @@ public class LajitteluSpawner : MonoBehaviour
 {
 
     public GameObject Thing;
+    private string Last = "LastNum";
+    private string LastShade = "LastShade";
     public float playTime = 30f;
 
     private bool Spawn = true;
@@ -29,6 +31,8 @@ public class LajitteluSpawner : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        PlayerPrefs.SetInt(Last, -1);
+        PlayerPrefs.SetInt(LastShade, -1);
         HUD = GameObject.Find("HUD");
         End = GameObject.Find("EndCanvas");
         Points = GameObject.Find("PointsText").GetComponent<TMP_Text>();
