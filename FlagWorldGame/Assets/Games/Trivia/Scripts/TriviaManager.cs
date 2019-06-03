@@ -72,6 +72,7 @@ public class TriviaManager : MonoBehaviour
             triviaCanvas.DisableLoadIndicator();
             Debug.LogWarning("you propably run in editor use place holder questions");
             questions = SetDummyRoundData();
+            SuffleQuestionOrder(ref questions);
             currentQuestion = questions[currentQuestionNumber];
             EnableQuestionCanvas();
             SetScoreText();
