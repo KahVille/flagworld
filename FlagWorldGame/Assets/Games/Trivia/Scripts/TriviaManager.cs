@@ -80,10 +80,24 @@ public class TriviaManager : MonoBehaviour
 
         yield return true;
     }
+    private void SuffleQuestionOrder(ref QuestionData[] questionData)
+    {
+        for (int t = 0; t < questionData.Length; t++) // Randomize the order of answers
+        {
+            QuestionData tmp = questionData[t];
+            int rand = UnityEngine.Random.Range(t, questionData.Length);
+            questionData[t] = questionData[rand];
+            questionData[rand] = tmp;
+        }
+    }
 
     private void DisplayCurrentQuestionAndEnableCanvas()
     {
+
+
+
         questions = contactPoints.points[currentContactPointIndex].questions;
+        SuffleQuestionOrder(ref questions);
         currentQuestion = questions[currentQuestionNumber];
         EnableQuestionCanvas();
         SetScoreText();
