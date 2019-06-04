@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.373132, g: 0.3807496, b: 0.3587258, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311947, g: 0.38074005, b: 0.35872722, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -327,8 +327,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0.65, y: 1.92}
+  m_SizeDelta: {x: -66.9, y: -85.68}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &420562111
 MonoBehaviour:
@@ -778,6 +778,16 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3734300144735559106, guid: 317c358f0cedf4f729a412990fd31f91,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 3.600006
+      objectReference: {fileID: 0}
+    - target: {fileID: 3734300144735559106, guid: 317c358f0cedf4f729a412990fd31f91,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.69999695
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 317c358f0cedf4f729a412990fd31f91, type: 3}
 --- !u!224 &654794213 stripped
@@ -1157,6 +1167,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3734300144735559106, guid: 317c358f0cedf4f729a412990fd31f91,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 3.600006
+      objectReference: {fileID: 0}
+    - target: {fileID: 3734300144735559106, guid: 317c358f0cedf4f729a412990fd31f91,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.69999695
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 317c358f0cedf4f729a412990fd31f91, type: 3}
@@ -2059,6 +2079,16 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3734300144735559106, guid: 317c358f0cedf4f729a412990fd31f91,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 3.600006
+      objectReference: {fileID: 0}
+    - target: {fileID: 3734300144735559106, guid: 317c358f0cedf4f729a412990fd31f91,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.69999695
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 317c358f0cedf4f729a412990fd31f91, type: 3}
 --- !u!224 &1302737022 stripped
@@ -2808,8 +2838,8 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: cae4050b8048d4da686626465ccdf9b4, type: 3}
-  m_Type: 0
+  m_Sprite: {fileID: 21300000, guid: fea5ac9d64c5046afb5035e064e05441, type: 3}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -3792,6 +3822,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_isInputParsingRequired
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3734300144735559106, guid: 317c358f0cedf4f729a412990fd31f91,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 3.600006
+      objectReference: {fileID: 0}
+    - target: {fileID: 3734300144735559106, guid: 317c358f0cedf4f729a412990fd31f91,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.69999695
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 317c358f0cedf4f729a412990fd31f91, type: 3}
