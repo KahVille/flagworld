@@ -43,6 +43,7 @@ public class CameraMovementGPS : MonoBehaviour
     Swipe swipe;                            // Swipe script for swipe stuff
     SuperSwipe ss;
     public TextMeshProUGUI debugText;
+    bool resetPosCooldown = false;
 
 
     // Start is called before the first frame update
@@ -153,11 +154,12 @@ public class CameraMovementGPS : MonoBehaviour
                 touchTimer = 0;
             }
 
-            if(touch.phase == TouchPhase.Ended && touchTimer < 0.1f)
+            if(touch.phase == TouchPhase.Ended && touchTimer < 0.1f && gpsScript.InMapArea)
             {
                 Vector3 newCamPos = gpsScript.GetUserIndicatorImg().transform.position;
                 newCamPos.z = -10f;
                 mainCam.transform.position = newCamPos;
+                StartCoroutine(ResetPosCooldownRoutine());
                 return;
             }
 
@@ -236,6 +238,13 @@ public class CameraMovementGPS : MonoBehaviour
         canMove = false;
         yield return new WaitForSeconds(0.2f);
         canMove = true;
+    }
+
+    IEnumerator ResetPosCooldownRoutine()
+    {
+        resetPosCooldown = true;
+        yield return new WaitForSeconds(1.0f);
+        resetPosCooldown = false;
     }
 
     public void SetCanMove(bool newCanMove)
