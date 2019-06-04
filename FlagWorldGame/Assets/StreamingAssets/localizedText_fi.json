@@ -54,6 +54,7 @@
         {"key":"you_opened","value":"Avasit"},
         {"key":"pairs_in","value":"paria"},
         {"key":"points_earned","value":"Ansaitsit"},
-        {"key":"new_best_time","value":"Uusi paras aika"}
+        {"key":"new_best_time","value":"Uusi paras aika"},
+        {"key":"credits","value":"Ohjaaja: \nSeppälä Eemi \n\nOhjelmointi: \nKähärä Ville \nTurku Teemu \nVäyrynen Heikki \n\nGraaffinensuunnittelu: \nMänty Katri \nVolanen Roosa"}
     ]
 }

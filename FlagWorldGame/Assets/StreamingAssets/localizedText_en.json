@@ -54,6 +54,7 @@
         {"key":"you_opened","value":"You opened"},
         {"key":"pairs_in","value":"pairs in"},
         {"key":"points_earned","value":"You scored"},
-        {"key":"new_best_time","value":"New Record"}
+        {"key":"new_best_time","value":"New Record"},
+        {"key":"credits","value":"Supervisor: \nSeppälä Eemi \n\nProgramming: \nKähärä Ville \nTurku Teemu \nVäyrynen Heikki \n\nGraphic design: \nMänty Katri \nVolanen Roosa"}
     ]
 }
