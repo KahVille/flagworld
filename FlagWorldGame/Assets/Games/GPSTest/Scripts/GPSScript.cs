@@ -75,6 +75,18 @@ public class GPSScript : MonoBehaviour
      ContactPointCollection contactPoints = null;
     // Panel for telling that the player is not in are
     public GameObject notInAreaPanel;
+    public bool InMapArea
+    {
+        get
+        {
+            return inMapArea;
+        }
+        set
+        {
+            inMapArea = value;
+        }
+    }
+    bool inMapArea;
     CameraMovementGPS cameraMovementScript;
 
     // Start is called before the first frame update
@@ -461,10 +473,12 @@ public class GPSScript : MonoBehaviour
     {
         if(longitude < bottomLeftLongitude || longitude > bottomRightLongitude || latitude > topRightLatitude || latitude < bottomLeftLatitude)
         {
+            inMapArea = false;
             return false;
         }
         else
         {
+            inMapArea = true;
             return true;
         }
     }
