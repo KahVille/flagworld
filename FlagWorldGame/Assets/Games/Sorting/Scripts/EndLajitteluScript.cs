@@ -22,7 +22,7 @@ public class EndLajitteluScript : MonoBehaviour {
     {
         Points = Spawner.GetComponent<LajitteluSpawner>().GetPoints();
                 string localized_youscored = (LocalizationManager.Instance != null) ?
-                                $"{LocalizationManager.Instance.GetLocalizedValue("points_earned")} {Points.ToString()} P \n"
+                                $"{LocalizationManager.Instance.GetLocalizedValue("points_earned")} {Points.ToString()} \n"
                                 : $"You scored {Points.ToString()} points \n";
         EndScore.GetComponent<TMP_Text>().text = localized_youscored;
         if(Points > PlayerPrefs.GetInt(SortingHigh))
@@ -34,7 +34,7 @@ public class EndLajitteluScript : MonoBehaviour {
         }
         else
         {
-            string localized_highscore = (LocalizationManager.Instance != null) ? $"{LocalizationManager.Instance.GetLocalizedValue("highscore_text")} {PlayerPrefs.GetInt(SortingHigh).ToString()} P \n"
+            string localized_highscore = (LocalizationManager.Instance != null) ? $"{LocalizationManager.Instance.GetLocalizedValue("highscore_text")} {PlayerPrefs.GetInt(SortingHigh).ToString()} \n"
                                     : $"Highscore {PlayerPrefs.GetInt(SortingHigh).ToString()}";
             EndScore.GetComponent<TMP_Text>().text += localized_highscore;
         }
