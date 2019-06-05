@@ -31,6 +31,7 @@ public class UIExitBtnScript : MonoBehaviour
 
     public void BackToMainMenu()
     {
-        SceneManager.LoadScene("MainMenu");
+        //SceneManager.LoadScene("MainMenu");
+        Application.Quit();
     }
 }
