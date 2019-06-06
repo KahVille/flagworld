@@ -9,6 +9,7 @@
         {"key":"gps_button","value":"GPS"},
         {"key":"language_button","value":"Kieli"},
         {"key":"remove_points_button","value":"Poista pistetiedot"},
+        {"key":"remove_points_title","value":"Haluatko varmasti poistaa pisteet?"},
         {"key":"help_button","value":"Apua"},
         {"key":"credits_button","value":"Tekijät"},
         {"key":"button_on","value":"Päällä"},

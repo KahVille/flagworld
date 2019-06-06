@@ -9,6 +9,7 @@
         {"key":"gps_button","value":"GPS"},
         {"key":"language_button","value":"Language"},
         {"key":"remove_points_button","value":"Reset highscores"},
+        {"key":"remove_points_title","value":"Are you sure you want to reset highscores?"},
         {"key":"help_button","value":"Help"},
         {"key":"credits_button","value":"Credits"},
         {"key":"button_on","value":"ON"},
