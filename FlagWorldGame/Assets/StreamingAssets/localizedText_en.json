@@ -4,6 +4,8 @@
         {"key":"tap_continue","value":"Tap to continue"},
         {"key":"settings_button","value":"Settings"},
         {"key":"sound_button","value":"Sound"},
+        {"key":"yes_button","value":"Yes"},
+        {"key":"no_button","value":"No"},
         {"key":"gps_button","value":"GPS"},
         {"key":"language_button","value":"Language"},
         {"key":"remove_points_button","value":"Reset highscores"},
