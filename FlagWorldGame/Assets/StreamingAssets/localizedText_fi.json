@@ -4,6 +4,8 @@
         {"key":"tap_continue","value":"Näpäytä jatkaaksesi"},
         {"key":"settings_button","value":"Asetukset"},
         {"key":"sound_button","value":"Äänet"},
+        {"key":"yes_button","value":"Kyllä"},
+        {"key":"no_button","value":"Ei"},
         {"key":"gps_button","value":"GPS"},
         {"key":"language_button","value":"Kieli"},
         {"key":"remove_points_button","value":"Poista pistetiedot"},
