@@ -58,7 +58,6 @@
         {"key":"pairs_in","value":"pairs in"},
         {"key":"points_earned","value":"You scored"},
         {"key":"new_best_time","value":"New Record"},
-        {"key":"credits","value":"<b>Supervisor:</b> \nSeppälä Eemi \n\n<b>Programming:</b> \nKähärä Ville \nTurku Teemu \nVäyrynen Heikki \n\n<b>Graphic design:</b> \nMänty Katri \nVolanen Roosa"},
-        {"key":"menu_text","value": "Menu"}
+        {"key":"credits","value":"<b>Supervisor:</b> \nSeppälä Eemi \n\n<b>Programming:</b> \nKähärä Ville \nTurku Teemu \nVäyrynen Heikki \n\n<b>Graphic design:</b> \nMänty Katri \nVolanen Roosa"}
     ]
 }
