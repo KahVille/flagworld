@@ -18,7 +18,7 @@ public class AudioManager : MonoBehaviour
         if(SceneManager.GetActiveScene().name == "GPSTest")
         {
             bool isMuted = PlayerPrefs.GetInt("Mute") > 0 ? true : false;
-            buttonImgToggles[0].SetImg(isMuted);
+            buttonImgToggles[0].SetImg(!isMuted);
             Mute(isMuted);
         }
         else
