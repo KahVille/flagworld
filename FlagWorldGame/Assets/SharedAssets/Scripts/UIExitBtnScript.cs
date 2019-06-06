@@ -23,8 +23,8 @@ public class UIExitBtnScript : MonoBehaviour
         else
         {
             FindObjectOfType<CameraMovementGPS>().CanMove = true;
-            //FindObjectOfType<GPSButtonsScript>().FromCloseMenuToBackToMainMenu();
-            //GameObject.FindGameObjectWithTag("Exit").GetComponent<Animator>().SetBool("Show", true);
+            FindObjectOfType<GPSButtonsScript>().FromCloseMenuToBackToMainMenu();
+            GameObject.FindGameObjectWithTag("Exit").GetComponent<Animator>().SetBool("Show", true);
         }
         menu.SetBool("ShowPanel", false);
     }
