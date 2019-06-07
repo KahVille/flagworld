@@ -50,7 +50,7 @@ public class LajitteluSpawner : MonoBehaviour
 
     private void SetPoints()
     {
-        Points.text = "P: " + P.ToString();
+        Points.text = P.ToString();
     }
 
     // Update is called once per frame

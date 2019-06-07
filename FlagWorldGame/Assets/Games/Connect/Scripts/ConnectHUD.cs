@@ -76,7 +76,7 @@ public class ConnectHUD : MonoBehaviour
 
     private void SetText()
     {
-        PointsT.text = "P: " + Points.ToString();
+        PointsT.text = Points.ToString();
     }
 
     public void SetPoints(int Add)
