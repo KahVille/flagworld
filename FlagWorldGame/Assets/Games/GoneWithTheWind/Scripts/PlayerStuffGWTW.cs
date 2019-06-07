@@ -312,23 +312,47 @@ public class PlayerStuffGWTW : MonoBehaviour
         spawnPos.x = -10f;
         while(!gameOver)
         {
-            birdTime = Random.Range(1f,3f);
+            birdTime = Random.Range(0.7f, 1.5f);
             yield return new WaitForSeconds(birdTime);
-            spawnPos.y = flag.transform.position.y + Random.Range(3f, 15f);
+            spawnPos.y = flag.transform.position.y + Random.Range(5f, 20f);
             Vector3 spawnPosInVP = Camera.main.WorldToViewportPoint(spawnPos);
-            spawnPosInVP.x = 0.2f;
-            spawnPosInVP = Camera.main.ViewportToWorldPoint(spawnPosInVP);
-            spawnPosInVP.z = -2f;
-            birdWarning.transform.position = spawnPosInVP;
-            birdWarning.SetActive(true);
-            yield return new WaitForSeconds(0.5f);
-            birdWarning.SetActive(false);
-            GameObject newBird = Instantiate(bird, spawnPos, Quaternion.identity);
-            
-            //newBird.GetComponent<Rigidbody2D>().velocity = Vector2.right * 5f;
-            float randSpeed = Random.Range(0.7f, 1.3f);
-            newBird.GetComponent<Rigidbody2D>().AddForce(Vector2.right * 5f * 70f * randSpeed);
-            Destroy(newBird, 7f);
+            // spawn left or right
+            bool goRight = Random.Range(0, 2) == 0 ? true : false;
+            if(goRight)
+            {
+                spawnPosInVP.x = 0.2f;
+                spawnPosInVP = Camera.main.ViewportToWorldPoint(spawnPosInVP);
+                spawnPosInVP.z = -2f;
+                birdWarning.transform.position = spawnPosInVP;
+                birdWarning.SetActive(true);
+                yield return new WaitForSeconds(0.5f);
+                birdWarning.SetActive(false);
+                spawnPos.x = -10f;
+                GameObject newBird = Instantiate(bird, spawnPos, Quaternion.identity);
+                float randSpeed = Random.Range(0.7f, 1.8f);
+                newBird.GetComponent<Rigidbody2D>().AddForce(Vector2.right * 5f * 70f * randSpeed);
+                Destroy(newBird, 7f);
+            }
+            else
+            {
+                spawnPosInVP.x = 0.8f;
+                spawnPosInVP = Camera.main.ViewportToWorldPoint(spawnPosInVP);
+                spawnPosInVP.z = -2f;
+                birdWarning.transform.position = spawnPosInVP;
+                birdWarning.SetActive(true);
+                yield return new WaitForSeconds(0.5f);
+                birdWarning.SetActive(false);
+                spawnPos.x = 10f;
+                GameObject newBird = Instantiate(bird, spawnPos, Quaternion.identity);
+                newBird.transform.localScale = new Vector3(
+                    -newBird.transform.localScale.x,
+                    newBird.transform.localScale.y,
+                    newBird.transform.localScale.z
+                    );
+                float randSpeed = Random.Range(0.7f, 1.8f);
+                newBird.GetComponent<Rigidbody2D>().AddForce(-Vector2.right * 5f * 70f * randSpeed);
+                Destroy(newBird, 7f);
+            }
         }
     }
 }
