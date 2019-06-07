@@ -35,6 +35,7 @@
         {"key":"points_text","value":"points"},
         {"key":"gwtw_game_over_title","value":"Flag flew away! "},
         {"key":"quit_button","value":"Back to map"},
+        {"key":"stop_game","value":"End game"},
         {"key":"loading_data_text","value":"Loading data"},
         {"key":"Network_error_short","value":"Network error"},
         {"key":"Network_error_long","value":"Please establish internet connection and try again"},

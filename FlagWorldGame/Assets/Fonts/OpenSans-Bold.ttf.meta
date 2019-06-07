@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 984f00dbd0e57439fab9d23eb724f2d4
+guid: aaa18e8502dc6364bbda86c4528cf62b
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -8,9 +8,9 @@ TrueTypeFontImporter:
   characterSpacing: 0
   characterPadding: 1
   includeFontData: 1
-  fontName: Open Sans ExtraBold
+  fontName: Open Sans
   fontNames:
-  - Open Sans ExtraBold
+  - Open Sans
   fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0

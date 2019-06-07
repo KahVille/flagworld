@@ -11,7 +11,8 @@ TrueTypeFontImporter:
   fontName: Open Sans
   fontNames:
   - Open Sans
-  fallbackFontReferences: []
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: aaa18e8502dc6364bbda86c4528cf62b, type: 3}
   customCharacters: 
   fontRenderingMode: 0
   ascentCalculationMode: 1
