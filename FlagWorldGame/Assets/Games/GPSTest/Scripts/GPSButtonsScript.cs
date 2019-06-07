@@ -20,7 +20,7 @@ public class GPSButtonsScript : MonoBehaviour
     private void Start()
     {
         // Delegate listener. BackToMainMenu() on exitBtn.
-        exitBtn.onClick.AddListener(delegate { exitBtn.GetComponent<UIExitBtnScript>().BackToMainMenu(); });
+        // exitBtn.onClick.AddListener(delegate { exitBtn.GetComponent<UIExitBtnScript>().BackToMainMenu(); });
         menuBtn.onClick.AddListener(delegate { FromBackToMainMenuToCloseMenu(); });
         cameraMovementScript = FindObjectOfType<CameraMovementGPS>();
     }
@@ -53,9 +53,9 @@ public class GPSButtonsScript : MonoBehaviour
     // This happens when menu is shown.
     public void FromBackToMainMenuToCloseMenu()
     {
-        exitBtn.GetComponent<Animator>().SetBool("Show", false);
+        //exitBtn.GetComponent<Animator>().SetBool("Show", false);
         cameraMovementScript.CanMove = false;
-        exitBtn.onClick.RemoveAllListeners();
+        //exitBtn.onClick.RemoveAllListeners();
         menuBackBtn.onClick.AddListener(delegate { menuBackBtn.GetComponent<UIExitBtnScript>().CloseMenu(menuAnim); });
         menuAnim.SetBool("ShowPanel", true);
     }
@@ -78,7 +78,7 @@ public class GPSButtonsScript : MonoBehaviour
 
     private void OnDisable() 
     {
-        exitBtn.onClick.RemoveAllListeners();
+        // exitBtn.onClick.RemoveAllListeners();
         menuBtn.onClick.RemoveAllListeners();
     }
 }
