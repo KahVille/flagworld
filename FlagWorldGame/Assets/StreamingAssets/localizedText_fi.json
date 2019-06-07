@@ -43,7 +43,7 @@
         {"key":"trivia_up_to_date","value":"Trivian tiedot ovat ajantasalla"},
         {"key":"trivia_data_long","value":"Trivian uusin versio on ladattu palvelimelta"},
         {"key":"select_language","value":"Ole hyvä ja valitse kieli"},
-        {"key":"menu_instruction_short","value":"Valitse Haminan kartalta Lippumaailman kohde, jonka pelejä haluat pelata. Voit pelata trivia peliä vain ollessasi valitsemallasi kohteella."},
+        {"key":"menu_instruction_short","value":"Valitse Haminan kartalta Lippumaailman kohde, jonka pelejä haluat pelata.\nVoit pelata trivia peliä vain ollessasi valitsemallasi kohteella."},
         {"key":"trivia_instruction_short","value":"Valitse oikeat vaihtoehdot seuraaviin kysymyksiin. Saat pisteen jokaisesta oikeasta vastauksesta."},
         {"key":"connect_instruction_short","value":"Vaihda vierekkäisten lippujen paikkoja ja muodosta vähintään kolmen lipun suoria saadaksesi pisteitä."},
         {"key":"memory_instruction_short","value":"Etsi lippuparit kääntämällä mahdollisimman vähän kortteja."},
