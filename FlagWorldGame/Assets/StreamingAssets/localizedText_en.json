@@ -9,7 +9,6 @@
         {"key":"gps_button","value":"GPS"},
         {"key":"language_button","value":"Language"},
         {"key":"remove_points_button","value":"Reset highscores"},
-        {"key":"remove_points_title","value":"Are you sure you want to reset highscores?"},
         {"key":"help_button","value":"Help"},
         {"key":"credits_button","value":"Credits"},
         {"key":"button_on","value":"ON"},
@@ -58,6 +57,7 @@
         {"key":"pairs_in","value":"pairs in"},
         {"key":"points_earned","value":"You scored"},
         {"key":"new_best_time","value":"New Record"},
-        {"key":"credits","value":"<b>Supervisor:</b> \nSeppälä Eemi \n\n<b>Programming:</b> \nKähärä Ville \nTurku Teemu \nVäyrynen Heikki \n\n<b>Graphic design:</b> \nMänty Katri \nVolanen Roosa"}
+        {"key":"credits","value":"<b>Supervisor:</b> \nSeppälä Eemi \n\n<b>Programming:</b> \nKähärä Ville \nTurku Teemu \nVäyrynen Heikki \n\n<b>Graphic design:</b> \nMänty Katri \nVolanen Roosa"},
+        {"key":"menu_text","value": "Menu"}
     ]
 }
