@@ -17,14 +17,24 @@ public class ObjectS : MonoBehaviour {
     public Sprite[] Down;
 
     //Name system for easy
+    int Language = 0;
     private TMP_Text Name;
+
+    //English name
     public string[] NRight;
     public string[] NLeft;
     public string[] NUp;
     public string[] NDown;
 
+    //Finnish name
+    public string[] FRight;
+    public string[] FLeft;
+    public string[] FUp;
+    public string[] FDown;
+
     private void Awake()
     {
+        Language = LanguageUtility.GetCurrentLanguage();
         if (GameObject.Find("Spawner").GetComponent<LajitteluSpawner>().GetHard())
         {
             Hard();
@@ -142,7 +152,14 @@ public class ObjectS : MonoBehaviour {
             }
             PlayerPrefs.SetInt(Last, r);
             SpriR.sprite = Right[r];
-            Name.text = NRight[r];
+            if (Language == 0)
+            {
+                Name.text = FRight[r];
+            }
+            else
+            {
+                Name.text = NRight[r];
+            }
         }
         else if (ShaderNum == 1)
         {
@@ -160,7 +177,14 @@ public class ObjectS : MonoBehaviour {
             }
             PlayerPrefs.SetInt(Last, r);
             SpriR.sprite = Left[r];
-            Name.text = NLeft[r];
+            if (Language == 0)
+            {
+                Name.text = FLeft[r];
+            }
+            else
+            {
+                Name.text = NLeft[r];
+            }
         }
         else if (ShaderNum == 2)
         {
@@ -178,7 +202,14 @@ public class ObjectS : MonoBehaviour {
             }
             PlayerPrefs.SetInt(Last, r);
             SpriR.sprite = Up[r];
-            Name.text = NUp[r];
+            if (Language == 0)
+            {
+                Name.text = FUp[r];
+            }
+            else
+            {
+                Name.text = NUp[r];
+            }
         }
         else
         {
@@ -196,7 +227,14 @@ public class ObjectS : MonoBehaviour {
             }
             PlayerPrefs.SetInt(Last, r);
             SpriR.sprite = Down[r];
-            Name.text = NDown[r];
+            if (Language == 0)
+            {
+                Name.text = FDown[r];
+            }
+            else
+            {
+                Name.text = NDown[r];
+            }
         }
         PlayerPrefs.SetInt(LastShade, ShaderNum);
     }

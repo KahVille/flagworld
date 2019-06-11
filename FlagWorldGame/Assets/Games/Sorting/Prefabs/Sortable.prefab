@@ -161,6 +161,26 @@ MonoBehaviour:
   - South Africa
   - Uganda
   - Egypt
+  FRight:
+  - Intia
+  - "Etel\xE4-Korea"
+  - Saudi-Arabia
+  - Kiina
+  FLeft:
+  - Kanada
+  - Argentiina
+  - Brasilia
+  - Yhdysvallat
+  FUp:
+  - Saksa
+  - Iso-Britannia
+  - Suomi
+  - Espanja
+  FDown:
+  - Kenia
+  - "Etel\xE4-Afrikka"
+  - Uganda
+  - Egypti
 --- !u!50 &8549035158506228342
 Rigidbody2D:
   serializedVersion: 4
