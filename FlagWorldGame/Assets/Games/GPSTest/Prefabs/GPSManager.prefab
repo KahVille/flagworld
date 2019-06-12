@@ -1,0 +1,130 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7654848784079995679
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7654848784079995665}
+  - component: {fileID: 7654848784079995664}
+  m_Layer: 0
+  m_Name: GPSManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7654848784079995665
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7654848784079995679}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7654848784079995664
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7654848784079995679}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8eaddab6e88a71f4793f0a4f7db172c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  longText: {fileID: 0}
+  latText: {fileID: 0}
+  debugText: {fileID: 0}
+  locationTitleText: {fileID: 0}
+  locationDescText: {fileID: 0}
+  autologImg: {fileID: 0}
+  locations:
+  - name: Suurlippu
+    longitude: 27.198610305786133
+    latitude: 60.56399917602539
+    rangeDistance: 0.07000000029802322
+    image: {fileID: 0}
+    identifier: 2
+    description: "Suuri siniristilippu on n\xE4ht\xE4vyys, joka korostaa Suomen kansan
+      erityisyytt\xE4, mutta topeliaanisessa hengess\xE4 arvostaen erilaisuutta ja
+      yhteis\xF6llisyytt\xE4."
+  - name: Lipputorni
+    longitude: 27.200040817260742
+    latitude: 60.569190979003906
+    rangeDistance: 0.0700000002980232
+    image: {fileID: 0}
+    identifier: 1
+    description: "Lipputornia kutsutaan my\xF6s Rauhantorniksi ja se sijaitsee Haminan
+      torin laidalla. Se rakennettiin vuonna 1790 linnoituksen komentajan lipputorniksi."
+  - name: Suomenlipuntie
+    longitude: 27.200550079345703
+    latitude: 60.568851470947266
+    rangeDistance: 0.120000001490116
+    image: {fileID: 0}
+    identifier: 0
+    description: "Suomen lipuntie -lipputeos avattiin RUK:n puistossa 28.5.2018.\r\n\r\nLipputeos
+      kertoo kansallisen tunnuksemme ainutlaatuisuudesta, mutta korostaa my\xF6s sen
+      historiallista kehityskaarta ja kansainv\xE4list\xE4 yhteytt\xE4. "
+  - name: Raatihuone
+    longitude: 27.197620391845703
+    latitude: 60.5696907043457
+    rangeDistance: 0.120000001490116
+    image: {fileID: 0}
+    identifier: 3
+    description: Yee haw
+  - name: Datariina
+    longitude: 26.9333532
+    latitude: 60.459388
+    rangeDistance: 0.0560000017285347
+    image: {fileID: 0}
+    identifier: 8
+    description: Learn to read and write in this fine establishment. Learn to read
+      and write in this fine establishment. Learn to read and write in this fine establishment.
+      Learn to read and write in this fine establishment. Learn to read and write
+      in this fine establishment. Learn to read and write in this fine establishment.
+      Learn to read and write in this fine establishment. Learn to read and write
+      in this fine establishment. Learn to read and write in this fine establishment.
+      Learn to read and write in this fine establishment. Learn to read and write
+      in this fine establishment.
+  - name: Koti
+    longitude: 26.888980865478516
+    latitude: 60.49559783935547
+    rangeDistance: 0.0560000017285347
+    image: {fileID: 0}
+    identifier: 2
+    description: I Sleep
+  playBtn: {fileID: 0}
+  triviaBtn: {fileID: 0}
+  infoPanelObj: {fileID: 0}
+  debugLongitude: 26.89232063293457
+  debugLatitude: 60.487770080566406
+  popupLocImg: {fileID: 0}
+  popupLocText: {fileID: 0}
+  mapImage: {fileID: 0}
+  mapCorners:
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  userIndicatorImg: {fileID: 0}
+  bottomLeftLongitude: 27.181063
+  bottomRightLongitude: 27.20758
+  topLeftLongitude: 27.181035
+  topRightLongitude: 27.207565
+  bottomLeftLatitude: 60.561908
+  bottomRightLatitude: 60.561712
+  topLeftLatitude: 60.575054
+  topRightLatitude: 60.573887
+  optionsGPSImg: {fileID: 0}
+  notInAreaPanel: {fileID: 0}

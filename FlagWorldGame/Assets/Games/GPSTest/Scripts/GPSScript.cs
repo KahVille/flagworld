@@ -14,7 +14,7 @@ public class GPSScript : MonoBehaviour
 {
     public TextMeshProUGUI longText;
     public TextMeshProUGUI latText;
-    public TextMeshProUGUI debugText;
+    //public TextMeshProUGUI debugText;
     public TextMeshProUGUI locationTitleText;
     public TextMeshProUGUI locationDescText;
     bool tracking;
@@ -93,7 +93,7 @@ public class GPSScript : MonoBehaviour
     IEnumerator Start()
     {
         isInitializing = true;
-        debugText.text = "Start";
+        // debugText.text = "Start";
         infoAnim = infoPanelObj.GetComponent<Animator>();
         gpsBtnScript = FindObjectOfType<GPSButtonsScript>();
         canOpenMenu = false;
@@ -130,14 +130,14 @@ public class GPSScript : MonoBehaviour
         #endif
 
         #if UNITY_ANDROID && !UNITY_EDITOR
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(0.1f);
 
         // Need to tell the user about everything!
 
         // First, check if user has location service enabled
         if (!Input.location.isEnabledByUser)
 		{
-			debugText.text = "Not Enabled";
+			// debugText.text = "Not Enabled";
             optionsGPSImg.SetImg(false);
             yield break;
 		}
@@ -157,7 +157,7 @@ public class GPSScript : MonoBehaviour
         // Service didn't initialize in 20 seconds
         if (maxWait < 1)
         {
-            debugText.text = "Timed out";
+            // debugText.text = "Timed out";
             optionsGPSImg.SetImg(false);
             yield break;
         }
@@ -165,15 +165,15 @@ public class GPSScript : MonoBehaviour
         // Connection has failed
         if (Input.location.status == LocationServiceStatus.Failed)
         {
-            debugText.text = "Unable to determine device location";
+            // debugText.text = "Unable to determine device location";
             optionsGPSImg.SetImg(false);
             yield break;
         }
         else
         {
             // Access granted and location value could be retrieved
-            //debugText.text = "Location: " + Input.location.lastData.latitude + " " + Input.location.lastData.longitude + " " + Input.location.lastData.altitude + " " + Input.location.lastData.horizontalAccuracy + " " + Input.location.lastData.timestamp;
-			debugText.text = "Working, yay!";
+            //// debugText.text = "Location: " + Input.location.lastData.latitude + " " + Input.location.lastData.longitude + " " + Input.location.lastData.altitude + " " + Input.location.lastData.horizontalAccuracy + " " + Input.location.lastData.timestamp;
+			// debugText.text = "Working, yay!";
             tracking = true;
             lastDistance = double.MaxValue;
             optionsGPSImg.SetImg(true);
@@ -187,7 +187,7 @@ public class GPSScript : MonoBehaviour
 
         #elif UNITY_EDITOR
         yield return null;
-        debugText.text = "Working, yay!";
+        // debugText.text = "Working, yay!";
         tracking = true;
         optionsGPSImg.SetImg(false);
         lastDistance = double.MaxValue;
@@ -214,14 +214,14 @@ public class GPSScript : MonoBehaviour
             Permission.RequestUserPermission(Permission.FineLocation);
         }
 
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(0.1f);
 
         // Need to tell the user about everything!
 
         // First, check if user has location service enabled
         if (!Input.location.isEnabledByUser)
 		{
-			debugText.text = "Not Enabled";
+			// debugText.text = "Not Enabled";
             yield break;
 		}
         // Start service before querying location
@@ -240,21 +240,21 @@ public class GPSScript : MonoBehaviour
         // Service didn't initialize in 20 seconds
         if (maxWait < 1)
         {
-            debugText.text = "Timed out";
+            // debugText.text = "Timed out";
             yield break;
         }
 
         // Connection has failed
         if (Input.location.status == LocationServiceStatus.Failed)
         {
-            debugText.text = "Unable to determine device location";
+            // debugText.text = "Unable to determine device location";
             yield break;
         }
         else
         {
             // Access granted and location value could be retrieved
-            //debugText.text = "Location: " + Input.location.lastData.latitude + " " + Input.location.lastData.longitude + " " + Input.location.lastData.altitude + " " + Input.location.lastData.horizontalAccuracy + " " + Input.location.lastData.timestamp;
-			debugText.text = "Working, yay!";
+            //// debugText.text = "Location: " + Input.location.lastData.latitude + " " + Input.location.lastData.longitude + " " + Input.location.lastData.altitude + " " + Input.location.lastData.horizontalAccuracy + " " + Input.location.lastData.timestamp;
+			// debugText.text = "Working, yay!";
             tracking = true;
             lastDistance = double.MaxValue;
             updateLocationCO = StartCoroutine(UpdateLocation());
@@ -370,7 +370,7 @@ public class GPSScript : MonoBehaviour
             tracking = false;
             Input.location.Stop();
             Debug.Log("NO: " + isInitializing);
-            debugText.text = "NO GPS!!!";
+            // debugText.text = "NO GPS!!!";
         }
         else
         {
@@ -384,7 +384,7 @@ public class GPSScript : MonoBehaviour
         tracking = false;
         Input.location.Stop();
         Debug.Log("NO: " + isInitializing);
-        debugText.text = "NO GPS!!!";
+        // debugText.text = "NO GPS!!!";
     }
 
     // Disable listeners
@@ -522,21 +522,21 @@ public class GPSScript : MonoBehaviour
             // DebugWriteMapData();
             // if(lastDistance < rangeDistance)
             // {
-            //     debugText.text = "IN " + lastLocation.name;
+            //     // debugText.text = "IN " + lastLocation.name;
             // }
             // else
             // {
-            //     debugText.text = "Dist: " + lastDistance;
+            //     // debugText.text = "Dist: " + lastDistance;
             // }
 
             // Debug location
             // if(lastDistance < lastLocation.rangeDistance)
             // {
-            //     debugText.text = "IN " + lastLocation.name;
+            //     // debugText.text = "IN " + lastLocation.name;
             // }
             // else
             // {
-            //     debugText.text = "Dist: " + lastDistance;
+            //     // debugText.text = "Dist: " + lastDistance;
             // }
 
             //longText.text = "Longitude: " + longitude.ToString();
@@ -550,7 +550,7 @@ public class GPSScript : MonoBehaviour
                 File.AppendAllText(Application.persistentDataPath + "/GPSDatas.txt", serializedData);
                 logIndex++;
             }
-            yield return new WaitForSeconds(3f);
+            yield return new WaitForSeconds(2f);
 
             #elif UNITY_EDITOR
             longitude = debugLongitude;
@@ -560,11 +560,11 @@ public class GPSScript : MonoBehaviour
             // Debug location
             // if(lastDistance < lastLocation.rangeDistance)
             // {
-            //     debugText.text = "IN " + lastLocation.name;
+            //     // debugText.text = "IN " + lastLocation.name;
             // }
             // else
             // {
-            //     debugText.text = "Dist: " + lastDistance;
+            //     // debugText.text = "Dist: " + lastDistance;
             // }
             yield return new WaitForSeconds(1f);
 

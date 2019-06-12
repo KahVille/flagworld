@@ -52,7 +52,7 @@ public class PlayerStuffGWTW : MonoBehaviour
     public BoxCollider2D windCol;
     public BoxCollider2D flagCol;
     bool gameOver;
-
+    bool isWin;
     public GameObject gameOverPanel;
     public GameObject victoryPanel;
     public Animator scorePanelAnim;
@@ -102,6 +102,7 @@ public class PlayerStuffGWTW : MonoBehaviour
         flagHP = 0f;
         windy = false;
         gameOver = false;
+        isWin = false;
         score = 0;
         windMat = windparticles.GetComponent<ParticleSystemRenderer>().material;
         windCol.enabled = false;
@@ -187,6 +188,10 @@ public class PlayerStuffGWTW : MonoBehaviour
 
     public void Damage(float howMuch)
     {
+        if(gameOver || isWin)
+        {
+            return;
+        }
         flagHP += howMuch;
         flagHPSlider.value = flagHP;
         if(flagHP >= 100f)
@@ -206,6 +211,7 @@ public class PlayerStuffGWTW : MonoBehaviour
     void Victory()
     {
         victoryCanvas.enabled = true;
+        isWin = true;
         //score += 50.0f;
         string localized_time = (LocalizationManager.Instance != null) ?
                                 $"{LocalizationManager.Instance.GetLocalizedValue("time_text")} {score.ToString()} \n"
