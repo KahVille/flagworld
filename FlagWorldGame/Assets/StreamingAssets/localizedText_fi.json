@@ -32,7 +32,7 @@
         {"key":"continent_europe_sorting","value":"Eurooppa"},
         {"key":"continent_america_sorting","value":"Amerikka"},
         {"key":"continent_africa_sorting","value":"Afrikka"},
-        {"key":"points_text","value":"pisteet"},
+        {"key":"points_text","value":"pistettä"},
         {"key":"gwtw_game_over_title","value":"Lippu karkasi! "},
         {"key":"quit_button","value":"Palaa takaisin karttaan"},
         {"key":"stop_game","value":"Lopeta peli"},
