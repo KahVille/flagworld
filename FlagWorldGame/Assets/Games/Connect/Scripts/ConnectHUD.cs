@@ -89,7 +89,7 @@ public class ConnectHUD : MonoBehaviour
     {
         EndP.GetComponent<RectTransform>().sizeDelta = new Vector2(Screen.width, Screen.height);
         string localized_youscored = (LocalizationManager.Instance != null) ?
-                                $"{LocalizationManager.Instance.GetLocalizedValue("points_earned")} {Points.ToString()} {LocalizationManager.Instance.GetLocalizedValue("points_text")}  \n"
+                                $"{LocalizationManager.Instance.GetLocalizedValue("points_earned")} \n {Points.ToString()} {LocalizationManager.Instance.GetLocalizedValue("points_text")}  \n"
                                 : $"You scored {Points.ToString()} points \n";
         EndP.text = localized_youscored;
         if(Points > PlayerPrefs.GetInt(ConnectHigh))
