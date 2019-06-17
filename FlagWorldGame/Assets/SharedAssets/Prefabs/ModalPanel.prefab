@@ -52,7 +52,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4974291884602055117}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
@@ -142,11 +142,11 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 0
+  m_havePropertiesChanged: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 0
+  m_isInputParsingRequired: 1
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_subTextObjects:
@@ -188,7 +188,7 @@ RectTransform:
   m_GameObject: {fileID: 4974291884788361351}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.6666667, y: 0.6666667, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 0}
   m_Children:
   - {fileID: 4974291885249668494}
   m_Father: {fileID: 0}
@@ -294,7 +294,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4974291885249668489}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
@@ -348,10 +348,10 @@ RectTransform:
   m_Father: {fileID: 4974291885249668494}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.018000001, y: 0.41418752}
-  m_AnchorMax: {x: 1, y: 0.59000003}
-  m_AnchoredPosition: {x: 0, y: -11.8}
-  m_SizeDelta: {x: -50, y: 35.6}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
+  m_AnchoredPosition: {x: -250, y: 100}
+  m_SizeDelta: {x: 300, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4974291885297903216
 CanvasRenderer:
@@ -410,7 +410,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 27.9
+  m_fontSize: 28.4
   m_fontSizeBase: 72
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -663,6 +663,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ModalDialogueButton1
       objectReference: {fileID: 0}
+    - target: {fileID: 1050071066570483414, guid: ecf4e091669d34d41955a09049e71e56,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1050071066570483409, guid: ecf4e091669d34d41955a09049e71e56,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -771,12 +776,12 @@ PrefabInstance:
     - target: {fileID: 1050071065442992165, guid: ecf4e091669d34d41955a09049e71e56,
         type: 3}
       propertyPath: m_havePropertiesChanged
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1050071065442992165, guid: ecf4e091669d34d41955a09049e71e56,
         type: 3}
       propertyPath: m_isInputParsingRequired
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1050071065442992165, guid: ecf4e091669d34d41955a09049e71e56,
         type: 3}
@@ -789,6 +794,11 @@ PrefabInstance:
       propertyPath: m_textInfo.lineCount
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1050071065442992165, guid: ecf4e091669d34d41955a09049e71e56,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1050071066570483411, guid: ecf4e091669d34d41955a09049e71e56,
         type: 3}
       propertyPath: m_Sprite
@@ -798,6 +808,11 @@ PrefabInstance:
     - target: {fileID: 1050071066570483411, guid: ecf4e091669d34d41955a09049e71e56,
         type: 3}
       propertyPath: m_Type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1050071066570483411, guid: ecf4e091669d34d41955a09049e71e56,
+        type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -827,7 +842,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 5447849284683306279}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
@@ -843,6 +858,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: ModalDialogueButton2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1050071066570483414, guid: ecf4e091669d34d41955a09049e71e56,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1050071066570483409, guid: ecf4e091669d34d41955a09049e71e56,
         type: 3}
@@ -952,12 +972,12 @@ PrefabInstance:
     - target: {fileID: 1050071065442992165, guid: ecf4e091669d34d41955a09049e71e56,
         type: 3}
       propertyPath: m_havePropertiesChanged
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1050071065442992165, guid: ecf4e091669d34d41955a09049e71e56,
         type: 3}
       propertyPath: m_isInputParsingRequired
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1050071065442992165, guid: ecf4e091669d34d41955a09049e71e56,
         type: 3}
@@ -970,6 +990,11 @@ PrefabInstance:
       propertyPath: m_textInfo.lineCount
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1050071065442992165, guid: ecf4e091669d34d41955a09049e71e56,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1050071066570483411, guid: ecf4e091669d34d41955a09049e71e56,
         type: 3}
       propertyPath: m_Sprite
@@ -979,6 +1004,11 @@ PrefabInstance:
     - target: {fileID: 1050071066570483411, guid: ecf4e091669d34d41955a09049e71e56,
         type: 3}
       propertyPath: m_Type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1050071066570483411, guid: ecf4e091669d34d41955a09049e71e56,
+        type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -1008,7 +1038,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 5570646811811823716}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
