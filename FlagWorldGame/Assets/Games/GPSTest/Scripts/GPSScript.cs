@@ -44,9 +44,16 @@ public class GPSScript : MonoBehaviour
     public Button playBtn;
     // Trivia-button in the pop-up menu
     public Button triviaBtn;
+    // Colors for inactive and active trivia btn
+    public Color inactiveColor;
+    // Active color is the color at the beginning
+    Color activeColor;
     double lastDistance;
     public GameObject infoPanelObj;
+    // Animator stuff so we can change the animation at runtime
     Animator infoAnim;
+    public GameObject triviaInactiveText;
+    public GameObject triviaActiveText;
     bool canOpenMenu;
     public double debugLongitude, debugLatitude;
     // Image, which shows are you close to the location on the pop-up panel
@@ -92,6 +99,7 @@ public class GPSScript : MonoBehaviour
     // Start is called before the first frame update
     IEnumerator Start()
     {
+        activeColor = triviaBtn.GetComponent<Image>().color;
         isInitializing = true;
         // debugText.text = "Start";
         infoAnim = infoPanelObj.GetComponent<Animator>();
@@ -279,21 +287,20 @@ public class GPSScript : MonoBehaviour
         {
             Debug.LogWarning("You propably run in editor. Contact points are null");
         }
-        else {
-        for (int i = 0; i < contactPoints.points.Length; i++)
+        else 
         {
-            if( contactPoints.points[i].identifier.ToString() == locations[locationIndex].identifier) {
-                currentLocationData = contactPoints.points[i];
-                break;
+            for (int i = 0; i < contactPoints.points.Length; i++)
+            {
+                if( contactPoints.points[i].identifier.ToString() == locations[locationIndex].identifier) {
+                    currentLocationData = contactPoints.points[i];
+                    break;
+                }
             }
-        }
         }
         
         bool contactPointValidation = (contactPoints !=null && locationIndex <= contactPoints.points.Length && currentLocationData !=null);
         string locationNameFromFile = (contactPointValidation) ? currentLocationData.name : locations[locationIndex].name;
-        string locationDescriptionFromFile = (contactPointValidation) ? currentLocationData.description : locations[locationIndex].description;
-
-        
+        string locationDescriptionFromFile = (contactPointValidation) ? currentLocationData.description : locations[locationIndex].description; 
 
         // Open pop-up and show correct info
         infoPanelObj.GetComponent<DisableScript>().enabled = false;
@@ -309,22 +316,30 @@ public class GPSScript : MonoBehaviour
 
         if(canOpenMenu && lastLocation != null && lastLocation.name == locations[locationIndex].name)
         {
-
+            triviaInactiveText.SetActive(false);
+            triviaActiveText.SetActive(true);
             // Example classify = (input >= 0) ? "nonnegative" : "negative";
-            string localizedLocation = (LocalizationManager.Instance !=null) ? LocalizationManager.Instance.GetLocalizedValue("location_proximity_in") : "Olet alueella" ;
-            popupLocText.text = localizedLocation;
-            popupLocImg.color = Color.green;
+            string localizedLocation = (LocalizationManager.Instance !=null) ? LocalizationManager.Instance.GetLocalizedValue("location_proximity_in") : "Trivia" ;
+            triviaBtn.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = localizedLocation;
+            //popupLocImg.color = Color.green;
+
+            triviaBtn.GetComponent<Image>().color = activeColor;
         }
         else
         {
+            triviaInactiveText.SetActive(true);
+            triviaActiveText.SetActive(false);
             // Example classify = (input >= 0) ? "nonnegative" : "negative";
             string localizedLocation = (LocalizationManager.Instance !=null) ? LocalizationManager.Instance.GetLocalizedValue("location_proximity_off") : " Et ole alueella" ;
-            popupLocText.text = localizedLocation;
-            popupLocImg.color = Color.red;
+            triviaBtn.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = localizedLocation;
+            //popupLocImg.color = Color.red;
+
+            triviaBtn.GetComponent<Image>().color = inactiveColor;
         }
     }
 
     // Possibly add checks to see if the player can play the game
+
 
     // What happens when the player pushes the play button
     void PushPlayBtn(string nameOfGame)
@@ -340,10 +355,10 @@ public class GPSScript : MonoBehaviour
             SetCurrentContactPointForTrivia(locations[locIndex].name);
             UnityEngine.SceneManagement.SceneManager.LoadScene("Trivia",UnityEngine.SceneManagement.LoadSceneMode.Single);
         }
-        else
-        {
-            StartCoroutine(ShowNotInAreaPanel());
-        }
+        // else
+        // {
+        //     StartCoroutine(ShowNotInAreaPanel());
+        // }
     }
 
     IEnumerator ShowNotInAreaPanel()
