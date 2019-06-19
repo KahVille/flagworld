@@ -95,6 +95,8 @@ public class GPSScript : MonoBehaviour
     }
     bool inMapArea;
     CameraMovementGPS cameraMovementScript;
+    private Color32 red = new Color32(255, 0, 0, 180);
+    private Color32 green = new Color32(0, 255, 0, 180);
 
     // Start is called before the first frame update
     IEnumerator Start()
@@ -468,14 +470,14 @@ public class GPSScript : MonoBehaviour
                 lastLocation = locations[i];
             }
             //Debug.Log(lastDistance);
-            locations[i].image.color = Color.red;
+            locations[i].image.color = red;
 
         }
 
         // Check if distance is within a locations range, if it is, change the image color.
         if(lastDistance < lastLocation.rangeDistance)
         {
-            lastLocation.image.color = Color.green;
+            lastLocation.image.color = green;
             canOpenMenu = true;
         }
         else
