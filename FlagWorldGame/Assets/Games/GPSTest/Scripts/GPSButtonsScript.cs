@@ -2,6 +2,7 @@
 
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GPSButtonsScript : MonoBehaviour
 {
@@ -80,5 +81,11 @@ public class GPSButtonsScript : MonoBehaviour
     {
         // exitBtn.onClick.RemoveAllListeners();
         menuBtn.onClick.RemoveAllListeners();
+    }
+
+    public void ClickTrivia()
+    {
+        PlayerPrefs.SetInt("TriviaAllRandom", 1);
+        SceneManager.LoadScene("Trivia");
     }
 }

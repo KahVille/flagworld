@@ -62,15 +62,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.8745099, g: 0.6431373, b: 0.15686275, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: fea5ac9d64c5046afb5035e064e05441, type: 3}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: fde099bd72553a640ace956191c95db5, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -163,7 +163,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   answerText: {fileID: 3734300144735559105}
-  defaultSprite: {fileID: 21300000, guid: fea5ac9d64c5046afb5035e064e05441, type: 3}
+  defaultSprite: {fileID: 21300000, guid: fde099bd72553a640ace956191c95db5, type: 3}
 --- !u!1 &3734300144735559107
 GameObject:
   m_ObjectHideFlags: 0
@@ -232,7 +232,7 @@ MonoBehaviour:
   m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: bf20c0526070649959391fc65e87420f, type: 2}
-  m_sharedMaterial: {fileID: 21090060465894442, guid: bf20c0526070649959391fc65e87420f,
+  m_sharedMaterial: {fileID: 21163113711722260, guid: bf20c0526070649959391fc65e87420f,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
