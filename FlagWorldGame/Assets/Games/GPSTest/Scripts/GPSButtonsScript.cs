@@ -10,6 +10,7 @@ public class GPSButtonsScript : MonoBehaviour
     public Button menuBackBtn;
     public Button optionsBackBtn;
     public Button menuBtn;
+    public Button triviaBtn;
     public GameObject[] buttons;
     [SerializeField]
     Animator menuAnim = null;
@@ -56,6 +57,7 @@ public class GPSButtonsScript : MonoBehaviour
     {
         //exitBtn.GetComponent<Animator>().SetBool("Show", false);
         cameraMovementScript.CanMove = false;
+        triviaBtn.gameObject.SetActive(false);
         //exitBtn.onClick.RemoveAllListeners();
         menuBackBtn.onClick.AddListener(delegate { menuBackBtn.GetComponent<UIExitBtnScript>().CloseMenu(menuAnim); });
         menuAnim.SetBool("ShowPanel", true);

@@ -2935,12 +2935,12 @@ PrefabInstance:
     - target: {fileID: 335906203659509840, guid: 2fff902d8aea39e44a6dcb8966cd1ba3,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 335906203659509840, guid: 2fff902d8aea39e44a6dcb8966cd1ba3,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 335906203659509840, guid: 2fff902d8aea39e44a6dcb8966cd1ba3,
         type: 3}
@@ -2955,12 +2955,12 @@ PrefabInstance:
     - target: {fileID: 335906203659509840, guid: 2fff902d8aea39e44a6dcb8966cd1ba3,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 335906203659509840, guid: 2fff902d8aea39e44a6dcb8966cd1ba3,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 335906203659509840, guid: 2fff902d8aea39e44a6dcb8966cd1ba3,
         type: 3}
@@ -3162,6 +3162,21 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8540094615499682749, guid: 2fff902d8aea39e44a6dcb8966cd1ba3,
+        type: 3}
+      propertyPath: buttons.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8540094615499682749, guid: 2fff902d8aea39e44a6dcb8966cd1ba3,
+        type: 3}
+      propertyPath: buttons.Array.data[1]
+      value: 
+      objectReference: {fileID: 1708111461}
+    - target: {fileID: 8540094615499682749, guid: 2fff902d8aea39e44a6dcb8966cd1ba3,
+        type: 3}
+      propertyPath: triviaBtn
+      value: 
+      objectReference: {fileID: 1708111463}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2fff902d8aea39e44a6dcb8966cd1ba3, type: 3}
 --- !u!1001 &7654848783507577704
