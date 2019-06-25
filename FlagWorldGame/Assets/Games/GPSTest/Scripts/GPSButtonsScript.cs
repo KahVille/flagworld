@@ -59,7 +59,7 @@ public class GPSButtonsScript : MonoBehaviour
         cameraMovementScript.CanMove = false;
         triviaBtn.gameObject.SetActive(false);
         //exitBtn.onClick.RemoveAllListeners();
-        menuBackBtn.onClick.AddListener(delegate { menuBackBtn.GetComponent<UIExitBtnScript>().CloseMenu(menuAnim); });
+        menuBackBtn.onClick.AddListener(delegate { menuBackBtn.GetComponent<UIExitBtnScript>().CloseMenu(menuAnim, triviaBtn); });
         menuAnim.SetBool("ShowPanel", true);
     }
 
@@ -67,7 +67,7 @@ public class GPSButtonsScript : MonoBehaviour
     public void FromSubToMain()
     {
         optionsBackBtn.onClick.RemoveAllListeners();
-        menuBackBtn.onClick.AddListener(delegate { menuBackBtn.GetComponent<UIExitBtnScript>().CloseMenu(menuAnim); });
+        menuBackBtn.onClick.AddListener(delegate { menuBackBtn.GetComponent<UIExitBtnScript>().CloseMenu(menuAnim, triviaBtn); });
     }
 
 
@@ -75,7 +75,7 @@ public class GPSButtonsScript : MonoBehaviour
     public void FromCloseMenuToCloseOptions()
     {
         menuBackBtn.onClick.RemoveAllListeners();
-        optionsBackBtn.onClick.AddListener(delegate { optionsBackBtn.GetComponent<UIExitBtnScript>().CloseMenu(optionsAnim); });
+        optionsBackBtn.onClick.AddListener(delegate { optionsBackBtn.GetComponent<UIExitBtnScript>().CloseMenu(optionsAnim, triviaBtn); });
         optionsAnim.SetBool("ShowPanel", true);
     }
 
@@ -83,6 +83,7 @@ public class GPSButtonsScript : MonoBehaviour
     {
         // exitBtn.onClick.RemoveAllListeners();
         menuBtn.onClick.RemoveAllListeners();
+
     }
 
     public void ClickTrivia()

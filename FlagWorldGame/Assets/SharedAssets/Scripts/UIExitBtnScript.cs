@@ -2,6 +2,7 @@
 // ReturnButtonScript.
 
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class UIExitBtnScript : MonoBehaviour
@@ -13,7 +14,7 @@ public class UIExitBtnScript : MonoBehaviour
     }
 
     // Closes the menu with closing animation.
-    public void CloseMenu(Animator menu)
+    public void CloseMenu(Animator menu, Button triviaBtn)
     {
         if(menu.name != "MenuPanel")
         {
@@ -23,6 +24,7 @@ public class UIExitBtnScript : MonoBehaviour
         else
         {
             FindObjectOfType<CameraMovementGPS>().CanMove = true;
+            triviaBtn.gameObject.SetActive(true);
             // FindObjectOfType<GPSButtonsScript>().FromCloseMenuToBackToMainMenu();
             // GameObject.FindGameObjectWithTag("Exit").GetComponent<Animator>().SetBool("Show", true);
         }
