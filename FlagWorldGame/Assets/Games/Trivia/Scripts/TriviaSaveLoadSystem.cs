@@ -17,7 +17,6 @@ public static class TriviaSaveLoadSystem
     }
 
     public static void SaveContactPoints(ContactPointCollection contactPoints) {
-        Debug.Log("saving collection points");
         BinaryFormatter formatter = new BinaryFormatter();
 
         string path = Application.persistentDataPath + "/collectionPointTest.dat";
@@ -29,26 +28,22 @@ public static class TriviaSaveLoadSystem
         formatter.Serialize(stream,data);
         stream.Close();
 
-        Debug.Log("collection points saved");
     }
 
     public static ContactPointCollection LoadContactPoints () {
         string path = Application.persistentDataPath + "/collectionPointTest.dat";
         if (File.Exists(path)) 
         {
-            Debug.Log("File load started");
             BinaryFormatter formatter = new BinaryFormatter();
             FileStream stream = new FileStream(path, FileMode.Open);
 
             ContactPointCollection data = formatter.Deserialize(stream) as ContactPointCollection;
             stream.Close();
-            Debug.Log("File loaded");
             return data;
 
         } 
         else 
         {
-            Debug.LogError("File not Found in " + path);
             return null;
         }
     } 

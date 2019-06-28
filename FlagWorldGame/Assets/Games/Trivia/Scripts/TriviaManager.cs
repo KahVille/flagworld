@@ -1,13 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System.Linq;
 
 public class TriviaManager : MonoBehaviour
 {
 
-    [SerializeField]
-    int maxQuestions = 3;
+    int maxQuestions = 5;
 
     [SerializeField]
     private UITriviaCanvas triviaCanvas = null;
@@ -32,6 +33,7 @@ public class TriviaManager : MonoBehaviour
     UIScoreText scoreText = null;
 
     private ModalPanel modalPanel;
+    public Text test;
 
     void Awake()
     {
@@ -70,7 +72,6 @@ public class TriviaManager : MonoBehaviour
         {
             //unity error
             triviaCanvas.DisableLoadIndicator();
-            Debug.LogWarning("you propably run in editor use place holder questions");
             questions = SetDummyRoundData();
             SuffleQuestionOrder(ref questions);
             currentQuestion = questions[currentQuestionNumber];
@@ -108,27 +109,33 @@ public class TriviaManager : MonoBehaviour
     //assign contact point first question set to the random pool
     void AllRandomAllQuestions()
     {
+        // Take all questions into a list 
+        List<QuestionData> QuestionsPool = new List<QuestionData>(); 
+        int size = 0;
 
-        SuffleContactPointOrder(ref contactPoints.points);
-        QuestionData[] randomQuestions = new QuestionData[maxQuestions];
-
-        if (contactPoints.points.Length > maxQuestions)
+        foreach(var point in contactPoints.points)
         {
-            ContactPoint[] tmp = new ContactPoint[maxQuestions];
-            for (int i = 0; i < maxQuestions; i++)
+            for (int i = 0; i < point.questions.Length; i++)
             {
-                tmp[i] = contactPoints.points[i];
+                QuestionsPool.Add(point.questions[i]);
+                size++;
             }
-            contactPoints.points = tmp;
         }
 
-        for (int j = 0; j < maxQuestions; j++)
+        // Suffle questions 
+        QuestionData[] AllRandomQuestions = new QuestionData[size];
+        AllRandomQuestions = QuestionsPool.ToArray();
+        SuffleQuestionOrder(ref AllRandomQuestions);
+
+        // Add first 5 questions to game
+        QuestionData[] tmp = new QuestionData[maxQuestions];
+
+        for(int i = 0; i < maxQuestions; i++)
         {
-            SuffleQuestionOrder(ref contactPoints.points[j].questions);
-            randomQuestions[j] = contactPoints.points[j].questions[0];
+            tmp[i] = AllRandomQuestions[i];
         }
 
-        questions = randomQuestions;
+        questions = tmp;
 
 
     }
@@ -147,12 +154,25 @@ public class TriviaManager : MonoBehaviour
 
     private void SuffleQuestionOrder(ref QuestionData[] questionData)
     {
-        for (int t = 0; t < questionData.Length; t++) // Randomize the order of answers
+        if (questionData.Length < maxQuestions)
         {
-            QuestionData tmp = questionData[t];
-            int rand = UnityEngine.Random.Range(t, questionData.Length);
-            questionData[t] = questionData[rand];
-            questionData[rand] = tmp;
+            for (int t = 0; t < questionData.Length; t++) // Randomize the order of answers
+            {
+                QuestionData tmp = questionData[t];
+                int rand = UnityEngine.Random.Range(t, questionData.Length);
+                questionData[t] = questionData[rand];
+                questionData[rand] = tmp;
+            }
+        }
+        else
+        {
+            for (int t = 0; t < maxQuestions; t++) // Randomize the order of answers
+            {
+                QuestionData tmp = questionData[t];
+                int rand = UnityEngine.Random.Range(t, questionData.Length);
+                questionData[t] = questionData[rand];
+                questionData[rand] = tmp;
+            }
         }
     }
 
@@ -197,7 +217,6 @@ public class TriviaManager : MonoBehaviour
         if (!LoadNewQuestion())
         {
             //load end of trivia round canvas
-            Debug.Log("end of round");
             HideQuestionCanvas();
             triviaCanvas.ShowContiueAndRestartCanvas(questionCanvas.GetScore(), questions.Length);
         }
