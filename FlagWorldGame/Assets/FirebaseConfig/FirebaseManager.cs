@@ -52,11 +52,13 @@ public class FirebaseManager : MonoBehaviour
     void ShowNetworkError()
     {
         string buttonRetryText = (LocalizationManager.Instance != null) ? LocalizationManager.Instance.GetLocalizedValue("try_again_button") : " Try Again";
+        string buttonContinueText = (LocalizationManager.Instance != null) ? LocalizationManager.Instance.GetLocalizedValue("continue_button") : " Continue";
         string networkTextShort = (LocalizationManager.Instance != null) ? LocalizationManager.Instance.GetLocalizedValue("Network_error_short") : " Network error";
         string networkTextLong = (LocalizationManager.Instance != null) ? LocalizationManager.Instance.GetLocalizedValue("Network_error_long") : " please enable network";
         DisableLoadingIndicator();
         EventButtonDetails button1Detail = new EventButtonDetails { buttonTitle = buttonRetryText, action = RetryConnection };
-        SpawnPanel(networkTextShort, networkTextLong, button1Detail, null, networkErrorSprite);
+        EventButtonDetails button2Detail = new EventButtonDetails { buttonTitle = buttonContinueText, action = ContinueSuccess };
+        SpawnPanel(networkTextShort, networkTextLong, button1Detail, button2Detail, networkErrorSprite);
     }
 
     void ShowFirebaseError()

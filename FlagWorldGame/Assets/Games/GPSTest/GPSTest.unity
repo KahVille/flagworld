@@ -1436,14 +1436,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 023d675213324b142aa053dfff81fe3d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6249fa3dfb13bd841884ddad5ad8f523, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2223,11 +2223,21 @@ PrefabInstance:
       propertyPath: m_Colors.m_NormalColor.a
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 2272490158753430584, guid: 2fff902d8aea39e44a6dcb8966cd1ba3,
+    - target: {fileID: 8540094615499682749, guid: 2fff902d8aea39e44a6dcb8966cd1ba3,
         type: 3}
-      propertyPath: m_IsActive
-      value: 0
+      propertyPath: buttons.Array.size
+      value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 8540094615499682749, guid: 2fff902d8aea39e44a6dcb8966cd1ba3,
+        type: 3}
+      propertyPath: buttons.Array.data[1]
+      value: 
+      objectReference: {fileID: 1708111461}
+    - target: {fileID: 8540094615499682749, guid: 2fff902d8aea39e44a6dcb8966cd1ba3,
+        type: 3}
+      propertyPath: triviaBtn
+      value: 
+      objectReference: {fileID: 1708111463}
     - target: {fileID: 8540094615499682746, guid: 2fff902d8aea39e44a6dcb8966cd1ba3,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2331,6 +2341,11 @@ PrefabInstance:
     - target: {fileID: 8540094615499682746, guid: 2fff902d8aea39e44a6dcb8966cd1ba3,
         type: 3}
       propertyPath: m_Pivot.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2272490158753430584, guid: 2fff902d8aea39e44a6dcb8966cd1ba3,
+        type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2272490158039416473, guid: 2fff902d8aea39e44a6dcb8966cd1ba3,
@@ -3065,7 +3080,7 @@ PrefabInstance:
     - target: {fileID: 2272490158083410712, guid: 2fff902d8aea39e44a6dcb8966cd1ba3,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.000091552734
+      value: 0.000045776367
       objectReference: {fileID: 0}
     - target: {fileID: 2272490157217273005, guid: 2fff902d8aea39e44a6dcb8966cd1ba3,
         type: 3}
@@ -3162,21 +3177,16 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8540094615499682749, guid: 2fff902d8aea39e44a6dcb8966cd1ba3,
+    - target: {fileID: 2272490159069927438, guid: 2fff902d8aea39e44a6dcb8966cd1ba3,
         type: 3}
-      propertyPath: buttons.Array.size
-      value: 2
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8540094615499682749, guid: 2fff902d8aea39e44a6dcb8966cd1ba3,
+    - target: {fileID: 2272490158753430587, guid: 2fff902d8aea39e44a6dcb8966cd1ba3,
         type: 3}
-      propertyPath: buttons.Array.data[1]
-      value: 
-      objectReference: {fileID: 1708111461}
-    - target: {fileID: 8540094615499682749, guid: 2fff902d8aea39e44a6dcb8966cd1ba3,
-        type: 3}
-      propertyPath: triviaBtn
-      value: 
-      objectReference: {fileID: 1708111463}
+      propertyPath: m_SizeDelta.y
+      value: 1520
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2fff902d8aea39e44a6dcb8966cd1ba3, type: 3}
 --- !u!1001 &7654848783507577704
