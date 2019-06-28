@@ -21,8 +21,12 @@ public class UIAnswerButton : MonoBehaviour
     {
         gameObject.SetActive(true);
         if (imageSprite != null)
+        {
             gameObject.GetComponent<Image>().sprite = imageSprite;
-        answerText.SetText($"{answer.answerText}");
+            answerText.SetText("");
+        }
+        else
+            answerText.SetText($"{answer.answerText}");
     }
 
     public void ClearButtonData()
