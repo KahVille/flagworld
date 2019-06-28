@@ -2914,7 +2914,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 1624219660}
   smoothSpeed: 5
-  offset: {x: 0, y: 0, z: -10}
+  offset: {x: 0, y: 1, z: -10}
 --- !u!1 &1075108430
 GameObject:
   m_ObjectHideFlags: 0
@@ -3452,6 +3452,7 @@ MonoBehaviour:
   victoryPointsTxt: {fileID: 330351292}
   loseCanvas: {fileID: 2108435536}
   losePointsTxt: {fileID: 1438067001}
+  flagStartPos: {x: 0, y: -1.39, z: 11.5}
   debugText: {fileID: 0}
 --- !u!4 &1331705603
 Transform:
