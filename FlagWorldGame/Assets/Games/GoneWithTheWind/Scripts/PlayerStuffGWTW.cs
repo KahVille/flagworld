@@ -70,6 +70,7 @@ public class PlayerStuffGWTW : MonoBehaviour
     public TextMeshProUGUI victoryPointsTxt;
     public Canvas loseCanvas;
     public TextMeshProUGUI losePointsTxt;
+    public Vector3 flagStartPos;
 
     //DEBUG
     public TextMeshProUGUI debugText;
@@ -83,9 +84,9 @@ public class PlayerStuffGWTW : MonoBehaviour
         {
             PlayerPrefs.SetFloat("GWTWHigh", 9999.0f);
         }
-        if(PlayerPrefs.GetInt("CurrentGameHigh") == 1) {
-            CallReStart();
-        }
+        // if(PlayerPrefs.GetInt("CurrentGameHigh") == 1) {
+        //     CallReStart();
+        // }
     }
 
     public void CallReStart()
@@ -98,6 +99,7 @@ public class PlayerStuffGWTW : MonoBehaviour
     {
         mainCam = Camera.main;
         flagMat = flag.GetComponent<Renderer>().material;
+        flag.transform.position = flagStartPos;
         desiredPos = flag.transform.position;
         flagHP = 0f;
         windy = false;
@@ -119,6 +121,8 @@ public class PlayerStuffGWTW : MonoBehaviour
         {
             return;
         }
+
+        Debug.Log(flag.transform.position.y);
 
         if(flag.transform.position.y >= topOfPole.position.y - 2f)
         {
