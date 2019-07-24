@@ -218,8 +218,8 @@ public class PlayerStuffGWTW : MonoBehaviour
         isWin = true;
         //score += 50.0f;
         string localized_time = (LocalizationManager.Instance != null) ?
-                                $"{LocalizationManager.Instance.GetLocalizedValue("time_text")} {score.ToString()} \n"
-                                : $"Time {score.ToString()} \n";
+                                $"{LocalizationManager.Instance.GetLocalizedValue("time_text")} {score.ToString("F2")} \n"
+                                : $"Time {score.ToString("F2")} \n";
         victoryPointsTxt.text = localized_time;
         if((score < PlayerPrefs.GetFloat("GWTWHigh")) || (PlayerPrefs.GetFloat("GWTWHigh") == 0))
         {
@@ -232,7 +232,7 @@ public class PlayerStuffGWTW : MonoBehaviour
         else
         {
             string localized_BestTime = (LocalizationManager.Instance != null) ?
-                                $"{LocalizationManager.Instance.GetLocalizedValue("best_time")} {PlayerPrefs.GetFloat("GWTWHigh").ToString()}"
+                                $"{LocalizationManager.Instance.GetLocalizedValue("best_time")} {PlayerPrefs.GetFloat("GWTWHigh").ToString("F2")}"
                                 : $"best time!";
             victoryPointsTxt.text += localized_BestTime;
         }
@@ -254,8 +254,8 @@ public class PlayerStuffGWTW : MonoBehaviour
         //gameOverPanel.SetActive(true);
         loseCanvas.enabled = true;
         string localized_time = (LocalizationManager.Instance != null) ?
-                                $"{LocalizationManager.Instance.GetLocalizedValue("time_text")} {score.ToString()} \n"
-                                : $"Time {score.ToString()} \n";
+                                $"{LocalizationManager.Instance.GetLocalizedValue("time_text")} {score.ToString("F2")} \n"
+                                : $"Time {score.ToString("F2")} \n";
         losePointsTxt.text = localized_time;
         // if(score > PlayerPrefs.GetFloat("GWTWHigh"))
         // {

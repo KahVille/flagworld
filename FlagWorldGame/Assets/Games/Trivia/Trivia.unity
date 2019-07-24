@@ -2276,7 +2276,7 @@ Canvas:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1018329245}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_RenderMode: 2
   m_Camera: {fileID: 0}
@@ -3218,7 +3218,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1dabe771c49f54b9ebe358e9ad9c77ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxQuestions: 3
   triviaCanvas: {fileID: 1701686455}
   questions: []
   questionCanvas: {fileID: 1244766479}
@@ -3999,6 +3998,27 @@ PrefabInstance:
       propertyPath: m_LocalScale.y
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4974291885692507394, guid: 980121c0a76284b7d98e8394a8b48ea7,
+        type: 3}
+      propertyPath: m_havePropertiesChanged
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4974291885692507394, guid: 980121c0a76284b7d98e8394a8b48ea7,
+        type: 3}
+      propertyPath: m_isInputParsingRequired
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4974291885692507394, guid: 980121c0a76284b7d98e8394a8b48ea7,
+        type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 18ac74dd9fbf59a4c9b3a965b1c258a7,
+        type: 2}
+    - target: {fileID: 4974291885692507394, guid: 980121c0a76284b7d98e8394a8b48ea7,
+        type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4974291885297903219, guid: 980121c0a76284b7d98e8394a8b48ea7,
         type: 3}
       propertyPath: m_havePropertiesChanged
@@ -4026,6 +4046,27 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: bf20c0526070649959391fc65e87420f,
         type: 2}
     - target: {fileID: 4974291884602055123, guid: 980121c0a76284b7d98e8394a8b48ea7,
+        type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4889910636090327105, guid: 980121c0a76284b7d98e8394a8b48ea7,
+        type: 3}
+      propertyPath: m_havePropertiesChanged
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4889910636090327105, guid: 980121c0a76284b7d98e8394a8b48ea7,
+        type: 3}
+      propertyPath: m_isInputParsingRequired
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4889910636090327105, guid: 980121c0a76284b7d98e8394a8b48ea7,
+        type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 18ac74dd9fbf59a4c9b3a965b1c258a7,
+        type: 2}
+    - target: {fileID: 4889910636090327105, guid: 980121c0a76284b7d98e8394a8b48ea7,
         type: 3}
       propertyPath: m_hasFontAssetChanged
       value: 1
@@ -4089,48 +4130,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_SizeDelta.x
       value: 600
-      objectReference: {fileID: 0}
-    - target: {fileID: 4889910636090327105, guid: 980121c0a76284b7d98e8394a8b48ea7,
-        type: 3}
-      propertyPath: m_havePropertiesChanged
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4889910636090327105, guid: 980121c0a76284b7d98e8394a8b48ea7,
-        type: 3}
-      propertyPath: m_isInputParsingRequired
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4889910636090327105, guid: 980121c0a76284b7d98e8394a8b48ea7,
-        type: 3}
-      propertyPath: m_fontAsset
-      value: 
-      objectReference: {fileID: 11400000, guid: 18ac74dd9fbf59a4c9b3a965b1c258a7,
-        type: 2}
-    - target: {fileID: 4889910636090327105, guid: 980121c0a76284b7d98e8394a8b48ea7,
-        type: 3}
-      propertyPath: m_hasFontAssetChanged
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4974291885692507394, guid: 980121c0a76284b7d98e8394a8b48ea7,
-        type: 3}
-      propertyPath: m_havePropertiesChanged
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4974291885692507394, guid: 980121c0a76284b7d98e8394a8b48ea7,
-        type: 3}
-      propertyPath: m_isInputParsingRequired
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4974291885692507394, guid: 980121c0a76284b7d98e8394a8b48ea7,
-        type: 3}
-      propertyPath: m_fontAsset
-      value: 
-      objectReference: {fileID: 11400000, guid: 18ac74dd9fbf59a4c9b3a965b1c258a7,
-        type: 2}
-    - target: {fileID: 4974291885692507394, guid: 980121c0a76284b7d98e8394a8b48ea7,
-        type: 3}
-      propertyPath: m_hasFontAssetChanged
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4974291885249668494, guid: 980121c0a76284b7d98e8394a8b48ea7,
         type: 3}
