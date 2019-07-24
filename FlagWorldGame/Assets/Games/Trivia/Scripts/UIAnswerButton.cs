@@ -11,6 +11,7 @@ public class UIAnswerButton : MonoBehaviour
     private Sprite defaultSprite = null;
     Animator animator = null;
     TriviaManager triviaManager = null;
+
     void Start()
     {
         animator = GetComponent<Animator>();
@@ -24,9 +25,13 @@ public class UIAnswerButton : MonoBehaviour
         {
             gameObject.GetComponent<Image>().sprite = imageSprite;
             answerText.SetText("");
+            GetComponent<RectTransform>().sizeDelta = new Vector2(600, 250);
         }
         else
+        {
             answerText.SetText($"{answer.answerText}");
+            GetComponent<RectTransform>().sizeDelta = new Vector2(800, 250);
+        }
     }
 
     public void ClearButtonData()
