@@ -25,7 +25,7 @@ public class UIAnswerButton : MonoBehaviour
         {
             gameObject.GetComponent<Image>().sprite = imageSprite;
             answerText.SetText("");
-            GetComponent<RectTransform>().sizeDelta = new Vector2(600, 250);
+            GetComponent<RectTransform>().sizeDelta = new Vector2(500, 250);
         }
         else
         {

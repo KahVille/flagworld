@@ -9,6 +9,7 @@ public class TriviaManager : MonoBehaviour
 {
 
     int maxQuestions = 5;
+    int maxRandomQs = 10;
 
     [SerializeField]
     private UITriviaCanvas triviaCanvas = null;
@@ -82,6 +83,7 @@ public class TriviaManager : MonoBehaviour
         }
         else
         {
+            int questionAmount = maxQuestions;
             triviaCanvas.DisableLoadIndicator();
             //id that is inside the contact point;contactpoint.identifier
 
@@ -90,6 +92,7 @@ public class TriviaManager : MonoBehaviour
                 //reset all random state
                 PlayerPrefs.SetInt("TriviaAllRandom", 0);
                 AllRandomAllQuestions();
+                questionAmount = maxRandomQs;
             }
             else
             {
@@ -97,7 +100,7 @@ public class TriviaManager : MonoBehaviour
                 questions = contactPoints.points[currentContactPointIndex].questions;
             }
 
-            DisplayCurrentQuestionAndEnableCanvas();
+            DisplayCurrentQuestionAndEnableCanvas(questionAmount);
         }
 
         yield return true;
@@ -128,9 +131,9 @@ public class TriviaManager : MonoBehaviour
         SuffleQuestionOrder(ref AllRandomQuestions);
 
         // Add first 5 questions to game
-        QuestionData[] tmp = new QuestionData[maxQuestions];
+        QuestionData[] tmp = new QuestionData[maxRandomQs];
 
-        for(int i = 0; i < maxQuestions; i++)
+        for(int i = 0; i < maxRandomQs; i++)
         {
             tmp[i] = AllRandomQuestions[i];
         }
@@ -176,16 +179,16 @@ public class TriviaManager : MonoBehaviour
         }
     }
 
-    private void DisplayCurrentQuestionAndEnableCanvas()
+    private void DisplayCurrentQuestionAndEnableCanvas(int questionAmount)
     {
 
         SuffleQuestionOrder(ref questions);
 
         //limit the questions to number of max questions
-        if (questions.Length > maxQuestions)
+        if (questions.Length > questionAmount)
         {
-            QuestionData[] tmp = new QuestionData[maxQuestions];
-            for (int i = 0; i < maxQuestions; i++)
+            QuestionData[] tmp = new QuestionData[questionAmount];
+            for (int i = 0; i < questionAmount; i++)
             {
                 tmp[i] = questions[i];
             }
