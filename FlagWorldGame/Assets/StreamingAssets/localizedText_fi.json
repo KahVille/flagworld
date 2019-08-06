@@ -59,6 +59,7 @@
         {"key":"points_earned","value":"Ansaitsit"},
         {"key":"new_best_time","value":"Uusi paras aika"},
         {"key":"credits","value":"<b>Ohjaaja:</b> \nSeppälä Eemi \n\n<b>Ohjelmointi:</b> \nKähärä Ville \nTurku Teemu \nVäyrynen Heikki \n\n<b>Graafinen suunnittelu:</b> \nMänty Katri \nVolanen Roosa"},
-        {"key":"menu_text","value": "Valikko"}
+        {"key":"menu_text","value": "Valikko"},
+        {"key":"are_sure", "value": "Haluatko varmasti poistaa pisteet?"}
     ]
 }
