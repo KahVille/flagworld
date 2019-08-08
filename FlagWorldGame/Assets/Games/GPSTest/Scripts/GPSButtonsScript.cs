@@ -91,4 +91,9 @@ public class GPSButtonsScript : MonoBehaviour
         PlayerPrefs.SetInt("TriviaAllRandom", 1);
         SceneManager.LoadScene("Trivia");
     }
+
+    public void ExitApp()
+    {
+        Application.Quit();
+    }
 }
