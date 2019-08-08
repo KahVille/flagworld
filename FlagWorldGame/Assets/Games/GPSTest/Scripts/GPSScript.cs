@@ -131,7 +131,7 @@ public class GPSScript : MonoBehaviour
         mapImage.GetComponent<RectTransform>().GetWorldCorners(mapCorners);
         
         // Android permissions
-        #if UNITY_ANDROID
+        #if UNITY_ANDROID || UNITY_IOS
         if(!Permission.HasUserAuthorizedPermission(Permission.FineLocation))
         {
             Permission.RequestUserPermission(Permission.FineLocation);
@@ -139,7 +139,7 @@ public class GPSScript : MonoBehaviour
 
         #endif
 
-        #if UNITY_ANDROID && !UNITY_EDITOR
+        #if UNITY_ANDROID && !UNITY_EDITOR || UNITY_IOS 
         yield return new WaitForSeconds(0.1f);
 
         // Need to tell the user about everything!
@@ -212,6 +212,7 @@ public class GPSScript : MonoBehaviour
             locBtns[i].onClick.AddListener(delegate {PushLocBtn(tmp);});
         }
         isInitializing = false;
+        yield return new WaitForSeconds(0.01f);
     }
 
     // For restarting the gps
