@@ -54,6 +54,7 @@
         {"key":"new_highscore_text","value":"New Highscore"},
         {"key":"you_made","value":"You made"},
         {"key":"moves_text","value":"moves"},
+        {"key":"moves_text_win","value":"moves"},
         {"key":"you_opened","value":"You opened"},
         {"key":"pairs_in","value":"pairs in"},
         {"key":"points_earned","value":"You scored"},

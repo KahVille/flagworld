@@ -31,7 +31,7 @@ public class MuistiCanvas : MonoBehaviour
         if (finished)
         {
             string localized_youmade = (LocalizationManager.Instance != null) ?
-                                $"{LocalizationManager.Instance.GetLocalizedValue("you_made")} {moves.ToString()} {LocalizationManager.Instance.GetLocalizedValue("moves_text")}  \n"
+                                $"{LocalizationManager.Instance.GetLocalizedValue("you_made")} {moves.ToString()} {LocalizationManager.Instance.GetLocalizedValue("moves_text_win")}  \n"
                                 : $"You made {moves.ToString()} moves  \n";
 
             GameObject.Find("Points").GetComponent<TMP_Text>().text = localized_youmade;
@@ -53,9 +53,15 @@ public class MuistiCanvas : MonoBehaviour
         {
             //is this condition true ? yes : no
             string localized_early_end = (LocalizationManager.Instance != null) ? 
-            $"{LocalizationManager.Instance.GetLocalizedValue("you_opened")} {pairs.ToString()} {LocalizationManager.Instance.GetLocalizedValue("pairs_in")} \n {moves.ToString()} {LocalizationManager.Instance.GetLocalizedValue("moves_text")}"
-                                : $"You opened {pairs.ToString()} pairs in {moves.ToString()} moves";
+            $"{LocalizationManager.Instance.GetLocalizedValue("you_opened")} {pairs.ToString()} {LocalizationManager.Instance.GetLocalizedValue("pairs_in")} \n {moves.ToString()} {LocalizationManager.Instance.GetLocalizedValue("moves_text")}   \n"
+                                : $"You opened {pairs.ToString()} pairs in {moves.ToString()} moves   \n";
             GameObject.Find("Points").GetComponent<TMP_Text>().text = localized_early_end;
+            if (PlayerPrefs.GetInt(MemoryHigh) != 0)
+            {
+                string localized_highscore = (LocalizationManager.Instance != null) ? $"{LocalizationManager.Instance.GetLocalizedValue("highscore_text")} {PlayerPrefs.GetInt(MemoryHigh).ToString()} \n"
+                        : $"Highscore {PlayerPrefs.GetInt(MemoryHigh).ToString()}";
+                GameObject.Find("Points").GetComponent<TMP_Text>().text += localized_highscore;
+            }
         }
 
         HUD.enabled = false;
