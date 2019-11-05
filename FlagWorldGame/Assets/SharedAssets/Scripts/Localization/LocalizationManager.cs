@@ -48,9 +48,11 @@ public class LocalizationManager : MonoBehaviour
     {
 
         localizedText = new Dictionary<string, string>();
-        string filePath = Path.Combine(Application.streamingAssetsPath, fileName);
+        string filePath;
 
-#if (UNITY_ANDROID || UNITY_IOS) && !UNITY_EDITOR
+#if (UNITY_ANDROID) && !UNITY_EDITOR
+        filePath = Path.Combine(Application.streamingAssetsPath, fileName);
+
         using (UnityWebRequest webRequest = UnityWebRequest.Get(filePath))
         {
 
@@ -73,8 +75,33 @@ public class LocalizationManager : MonoBehaviour
         }
 
         }
-        
+
+#elif (UNITY_IOS)
+        filePath = System.IO.Path.Combine(Application.streamingAssetsPath, fileName);
+
+        string result = "";
+        if (filePath.Contains("://"))
+        {
+            UnityEngine.Networking.UnityWebRequest www = UnityEngine.Networking.UnityWebRequest.Get(filePath);
+            yield return www.SendWebRequest();
+            result = www.downloadHandler.text;
+        }
+        else
+            result = System.IO.File.ReadAllText(filePath);
+
+        LocalizationData loadedData = JsonUtility.FromJson<LocalizationData>(result);
+        for (int i = 0; i < loadedData.items.Length; i++)
+        {
+            localizedText.Add(loadedData.items[i].key, loadedData.items[i].value);
+        }
+        Debug.Log("Data loaded, dictionary contains: " + localizedText.Count + " entries");
+        if (OnLanguageLocalization != null)
+        {
+            OnLanguageLocalization();
+        }
+
 #elif UNITY_EDITOR
+        filePath = Path.Combine(Application.streamingAssetsPath, fileName);
 
         if (File.Exists (filePath)) {
             string dataAsJson = File.ReadAllText (filePath);

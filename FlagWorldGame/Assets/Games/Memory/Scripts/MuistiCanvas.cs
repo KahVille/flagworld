@@ -13,10 +13,19 @@ public class MuistiCanvas : MonoBehaviour
     private string MemoryHigh = "MemoryHigh";
     private int points;
 
+    public GameObject textBG;
+    public GameObject EndtextBG;
+
     // Use this for initialization
     void Start()
     {
         Screen.orientation = ScreenOrientation.Portrait;
+        if (Screen.height / Screen.width <= 1.5f)
+        {
+            textBG.GetComponent<RectTransform>().anchoredPosition = new Vector3(0, 1150, 0);
+            EndtextBG.GetComponent<RectTransform>().anchoredPosition = new Vector3(0, 1200, 0);
+        }
+
         StartC = GameObject.Find("StartCanvas").GetComponent<Canvas>();
         HUD = GameObject.Find("HUD").GetComponent<Canvas>();
         End = GameObject.Find("EndCanvas").GetComponent<Canvas>();

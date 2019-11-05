@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311992, g: 0.38074034, b: 0.35872713, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074, b: 0.35872698, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -306,6 +306,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timerClockScript: {fileID: 1571037929}
+  textBG: {fileID: 261781703}
+  EndtextBG: {fileID: 587500817}
 --- !u!114 &212477170
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -474,7 +476,7 @@ GameObject:
   - component: {fileID: 261781706}
   - component: {fileID: 261781705}
   m_Layer: 5
-  m_Name: Image
+  m_Name: textBG
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

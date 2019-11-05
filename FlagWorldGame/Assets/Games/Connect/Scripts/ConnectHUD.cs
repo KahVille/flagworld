@@ -17,6 +17,8 @@ public class ConnectHUD : MonoBehaviour
     private bool TimeEnd = true;
     private BoardManager BM;
     public TimerClockScript timerClockScript;
+    public GameObject textBG;
+    public GameObject EndtextBG;
 
     private void Awake()
     {
@@ -29,6 +31,13 @@ public class ConnectHUD : MonoBehaviour
         {
             Camera.main.orthographicSize = 5.5f;
         }
+
+        if (Screen.height / Screen.width <= 1.5f)
+        {
+            textBG.GetComponent<RectTransform>().anchoredPosition = new Vector3(0, 1150, 0);
+            EndtextBG.GetComponent<RectTransform>().anchoredPosition = new Vector3(0, 1200, 0);
+        }
+
         BM = GameObject.Find("BoardManager").GetComponent<BoardManager>();
     }
 
