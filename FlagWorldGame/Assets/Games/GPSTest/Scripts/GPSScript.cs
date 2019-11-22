@@ -530,7 +530,7 @@ public class GPSScript : MonoBehaviour
                 // If the player isn't within map, disable GPS
                 //StopGPS();
             }
-            Debug.Log("UPDATELOC: " + isInitializing);
+            //Debug.Log("UPDATELOC: " + isInitializing);
             #if (UNITY_ANDROID || UNITY_IOS) && !UNITY_EDITOR
             longitude = Input.location.lastData.longitude;
 			latitude = Input.location.lastData.latitude;

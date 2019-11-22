@@ -93,4 +93,9 @@ LocalizationManager localeManager = null;
         PlayerPrefs.DeleteKey("database_version");
         firebase.CheckDatabaseVersion();
     }
+
+    public void EnableCanvas()
+    {
+        GetComponent<Canvas>().enabled = true;
+    }
 }

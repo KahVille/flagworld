@@ -112,7 +112,7 @@ public class LocalizationManager : MonoBehaviour
                 localizedText.Add (loadedData.items [i].key, loadedData.items [i].value);   
             }
 
-            Debug.Log ("Data loaded, dictionary contains: " + localizedText.Count + " entries");
+            //Debug.Log ("Data loaded, dictionary contains: " + localizedText.Count + " entries");
             if(OnLanguageLocalization !=null)
                 OnLanguageLocalization();
         } else 
