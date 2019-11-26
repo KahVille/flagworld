@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311992, g: 0.38074034, b: 0.35872713, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1346,6 +1346,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1190910530}
     m_Modifications:
+    - target: {fileID: 7417800173334442214, guid: 7a9990c6d2c928b419520ccb83d6f0b7,
+        type: 3}
+      propertyPath: m_Name
+      value: LanguageSelectionCanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 7417800173334442214, guid: 7a9990c6d2c928b419520ccb83d6f0b7,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7417800173334442233, guid: 7a9990c6d2c928b419520ccb83d6f0b7,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1464,16 +1474,6 @@ PrefabInstance:
     - target: {fileID: 7417800173334442233, guid: 7a9990c6d2c928b419520ccb83d6f0b7,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7417800173334442214, guid: 7a9990c6d2c928b419520ccb83d6f0b7,
-        type: 3}
-      propertyPath: m_Name
-      value: LanguageSelectionCanvas
-      objectReference: {fileID: 0}
-    - target: {fileID: 7417800173334442214, guid: 7a9990c6d2c928b419520ccb83d6f0b7,
-        type: 3}
-      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7417800173257161873, guid: 7a9990c6d2c928b419520ccb83d6f0b7,
@@ -1842,6 +1842,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7417800173334442214, guid: 7a9990c6d2c928b419520ccb83d6f0b7,
+        type: 3}
+      propertyPath: m_Name
+      value: LanguageSelectionCanvas
+      objectReference: {fileID: 0}
     - target: {fileID: 7417800173334442233, guid: 7a9990c6d2c928b419520ccb83d6f0b7,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1947,11 +1952,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7417800173334442214, guid: 7a9990c6d2c928b419520ccb83d6f0b7,
-        type: 3}
-      propertyPath: m_Name
-      value: LanguageSelectionCanvas
-      objectReference: {fileID: 0}
     - target: {fileID: 7417800173257161873, guid: 7a9990c6d2c928b419520ccb83d6f0b7,
         type: 3}
       propertyPath: m_havePropertiesChanged
@@ -1971,6 +1971,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_isInputParsingRequired
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7417800173334442234, guid: 7a9990c6d2c928b419520ccb83d6f0b7,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7a9990c6d2c928b419520ccb83d6f0b7, type: 3}
@@ -3881,6 +3886,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1190910530}
     m_Modifications:
+    - target: {fileID: 4974291884788361351, guid: 980121c0a76284b7d98e8394a8b48ea7,
+        type: 3}
+      propertyPath: m_Name
+      value: ModalPanel
+      objectReference: {fileID: 0}
+    - target: {fileID: 4974291884788361351, guid: 980121c0a76284b7d98e8394a8b48ea7,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4974291884788361348, guid: 980121c0a76284b7d98e8394a8b48ea7,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3985,16 +4000,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4974291884788361351, guid: 980121c0a76284b7d98e8394a8b48ea7,
-        type: 3}
-      propertyPath: m_Name
-      value: ModalPanel
-      objectReference: {fileID: 0}
-    - target: {fileID: 4974291884788361351, guid: 980121c0a76284b7d98e8394a8b48ea7,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4974291885297903219, guid: 980121c0a76284b7d98e8394a8b48ea7,
         type: 3}
