@@ -35,10 +35,17 @@ public class TriviaManager : MonoBehaviour
 
     private ModalPanel modalPanel;
     public Text test;
+    public RectTransform QuestionLabelB;
 
     void Awake()
     {
         modalPanel = ModalPanel.Instance();
+
+        if (Screen.height / Screen.width <= 1.5f)
+        {
+            QuestionLabelB.sizeDelta = new Vector2(1000, 300);
+            QuestionLabelB.anchoredPosition = new Vector3(0, 500, 0);
+        }
     }
 
     private void SetScoreText()
