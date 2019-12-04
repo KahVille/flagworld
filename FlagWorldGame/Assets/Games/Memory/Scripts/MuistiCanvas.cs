@@ -15,6 +15,7 @@ public class MuistiCanvas : MonoBehaviour
 
     public GameObject textBG;
     public GameObject EndtextBG;
+    public RectTransform StopButtonRT;
 
     // Use this for initialization
     void Start()
@@ -24,6 +25,8 @@ public class MuistiCanvas : MonoBehaviour
         {
             textBG.GetComponent<RectTransform>().anchoredPosition = new Vector3(0, 1150, 0);
             EndtextBG.GetComponent<RectTransform>().anchoredPosition = new Vector3(0, 1200, 0);
+            StopButtonRT.sizeDelta = new Vector2(800, 175);
+            StopButtonRT.anchoredPosition = new Vector3(0, 150, 0);
         }
 
         StartC = GameObject.Find("StartCanvas").GetComponent<Canvas>();
