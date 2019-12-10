@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3310,6 +3310,11 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2272490157486213680, guid: 2fff902d8aea39e44a6dcb8966cd1ba3,
+        type: 3}
+      propertyPath: m_padding
+      value: 1.25
+      objectReference: {fileID: 0}
     - target: {fileID: 2272490157538321259, guid: 2fff902d8aea39e44a6dcb8966cd1ba3,
         type: 3}
       propertyPath: m_sharedMaterial
@@ -3837,6 +3842,11 @@ PrefabInstance:
       propertyPath: m_sharedMaterial
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 2272490158459222871, guid: 2fff902d8aea39e44a6dcb8966cd1ba3,
+        type: 3}
+      propertyPath: m_padding
+      value: 1.25
+      objectReference: {fileID: 0}
     - target: {fileID: 2272490158465079153, guid: 2fff902d8aea39e44a6dcb8966cd1ba3,
         type: 3}
       propertyPath: m_AnchorMin.y
@@ -4145,6 +4155,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2272490158823334819, guid: 2fff902d8aea39e44a6dcb8966cd1ba3,
+        type: 3}
+      propertyPath: m_padding
+      value: 1.25
       objectReference: {fileID: 0}
     - target: {fileID: 2272490158884761654, guid: 2fff902d8aea39e44a6dcb8966cd1ba3,
         type: 3}
@@ -4586,22 +4601,22 @@ PrefabInstance:
     - target: {fileID: 7654848784079995664, guid: 5bf670a80f1526d4092af5abc203ae49,
         type: 3}
       propertyPath: locations.Array.data[2].latitude
-      value: 60.569131
+      value: 60.569126
       objectReference: {fileID: 0}
     - target: {fileID: 7654848784079995664, guid: 5bf670a80f1526d4092af5abc203ae49,
         type: 3}
       propertyPath: locations.Array.data[2].longitude
-      value: 27.200587
+      value: 27.200618
       objectReference: {fileID: 0}
     - target: {fileID: 7654848784079995664, guid: 5bf670a80f1526d4092af5abc203ae49,
         type: 3}
       propertyPath: locations.Array.data[1].latitude
-      value: 60.567709
+      value: 60.567637
       objectReference: {fileID: 0}
     - target: {fileID: 7654848784079995664, guid: 5bf670a80f1526d4092af5abc203ae49,
         type: 3}
       propertyPath: locations.Array.data[1].longitude
-      value: 27.192278
+      value: 27.192447
       objectReference: {fileID: 0}
     - target: {fileID: 7654848784079995664, guid: 5bf670a80f1526d4092af5abc203ae49,
         type: 3}
@@ -4622,6 +4637,66 @@ PrefabInstance:
         type: 3}
       propertyPath: locations.Array.data[0].rangeDistance
       value: 0.150000001490116
+      objectReference: {fileID: 0}
+    - target: {fileID: 7654848784079995664, guid: 5bf670a80f1526d4092af5abc203ae49,
+        type: 3}
+      propertyPath: topRightLongitude
+      value: 27.208237
+      objectReference: {fileID: 0}
+    - target: {fileID: 7654848784079995664, guid: 5bf670a80f1526d4092af5abc203ae49,
+        type: 3}
+      propertyPath: topRightLatitude
+      value: 60.574873
+      objectReference: {fileID: 0}
+    - target: {fileID: 7654848784079995664, guid: 5bf670a80f1526d4092af5abc203ae49,
+        type: 3}
+      propertyPath: topLeftLatitude
+      value: 60.574915
+      objectReference: {fileID: 0}
+    - target: {fileID: 7654848784079995664, guid: 5bf670a80f1526d4092af5abc203ae49,
+        type: 3}
+      propertyPath: topLeftLongitude
+      value: 27.180299
+      objectReference: {fileID: 0}
+    - target: {fileID: 7654848784079995664, guid: 5bf670a80f1526d4092af5abc203ae49,
+        type: 3}
+      propertyPath: bottomRightLatitude
+      value: 60.561335
+      objectReference: {fileID: 0}
+    - target: {fileID: 7654848784079995664, guid: 5bf670a80f1526d4092af5abc203ae49,
+        type: 3}
+      propertyPath: bottomRightLongitude
+      value: 27.208108
+      objectReference: {fileID: 0}
+    - target: {fileID: 7654848784079995664, guid: 5bf670a80f1526d4092af5abc203ae49,
+        type: 3}
+      propertyPath: bottomLeftLatitude
+      value: 60.561377
+      objectReference: {fileID: 0}
+    - target: {fileID: 7654848784079995664, guid: 5bf670a80f1526d4092af5abc203ae49,
+        type: 3}
+      propertyPath: bottomLeftLongitude
+      value: 27.180857
+      objectReference: {fileID: 0}
+    - target: {fileID: 7654848784079995664, guid: 5bf670a80f1526d4092af5abc203ae49,
+        type: 3}
+      propertyPath: locations.Array.data[3].latitude
+      value: 60.5696678
+      objectReference: {fileID: 0}
+    - target: {fileID: 7654848784079995664, guid: 5bf670a80f1526d4092af5abc203ae49,
+        type: 3}
+      propertyPath: locations.Array.data[3].longitude
+      value: 27.198002
+      objectReference: {fileID: 0}
+    - target: {fileID: 7654848784079995664, guid: 5bf670a80f1526d4092af5abc203ae49,
+        type: 3}
+      propertyPath: locations.Array.data[0].latitude
+      value: 60.56342
+      objectReference: {fileID: 0}
+    - target: {fileID: 7654848784079995664, guid: 5bf670a80f1526d4092af5abc203ae49,
+        type: 3}
+      propertyPath: locations.Array.data[0].longitude
+      value: 27.198654
       objectReference: {fileID: 0}
     - target: {fileID: 7654848784079995665, guid: 5bf670a80f1526d4092af5abc203ae49,
         type: 3}
